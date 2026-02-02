@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <resources>
+<resources>
     <string name="about_android">%1$s aplicación Android</string>
     <string name="about_title">Acerca de</string>
     <string name="about_version">versión %1$s</string>
@@ -529,6 +529,7 @@
     <string name="prefs_manage_accounts">Administrar cuentas</string>
     <string name="prefs_recommend">Recomendar a un amigo</string>
     <string name="prefs_show_hidden_files">Mostrar archivos ocultos</string>
+    <string name="prefs_show_recommendations">Mostrar recomendaciones</string>
     <string name="prefs_sourcecode">Obtener el código fuente</string>
     <string name="prefs_synced_folders_local_path_title">Carpeta local</string>
     <string name="prefs_synced_folders_remote_path_title">Carpeta remota</string>
@@ -730,4 +731,4 @@
     <string name="whats_new_title">Nuevo en %1$s</string>
     <string name="worker_download">Descargando archivos…</string>
     <string name="write_email">Enviar correo electrónico</string>
-    </resources>
+</resources>

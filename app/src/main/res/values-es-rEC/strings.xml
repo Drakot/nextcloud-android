@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <resources>
+<resources>
     <string name="about_android">%1$s aplicación Android</string>
     <string name="about_title">Acerca de</string>
     <string name="about_version">versión %1$s</string>
@@ -573,6 +573,7 @@
     <string name="prefs_remove_e2e">Eliminar encriptación localmente</string>
     <string name="prefs_setup_e2e">Configurar encriptación de extremo a extremo</string>
     <string name="prefs_show_hidden_files">Mostrar archivos ocultos</string>
+    <string name="prefs_show_recommendations">Mostrar recomendaciones</string>
     <string name="prefs_sourcecode">Obtener el código fuente</string>
     <string name="prefs_sycned_folders_summary">Administrar carpetas para carga automática</string>
     <string name="prefs_synced_folders_local_path_title">Carpeta local</string>
@@ -963,4 +964,4 @@
         <item quantity="many">%d seleccionado</item>
         <item quantity="other">%d seleccionado</item>
     </plurals>
-    </resources>
+</resources>

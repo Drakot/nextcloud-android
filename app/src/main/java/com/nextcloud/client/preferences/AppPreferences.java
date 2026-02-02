@@ -19,13 +19,13 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import kotlin.Unit;
 
 /**
  * This interface provides single point of entry for access to all application
  * preferences and allows clients to subscribe for specific configuration changes.
  */
 public interface AppPreferences {
-
     /**
      * Preferences listener. Callbacks should be invoked on main thread.
      * Maintainers should extend this interface with callbacks for specific events.
@@ -63,15 +63,18 @@ public interface AppPreferences {
 
     boolean isShowHiddenFilesEnabled();
     void setShowHiddenFilesEnabled(boolean enabled);
-    
+
     boolean isSortFoldersBeforeFiles();
     void setSortFoldersBeforeFiles(boolean enabled);
-    
+
     boolean isSortFavoritesFirst();
     void setSortFavoritesFirst(boolean enabled);
 
     boolean isShowEcosystemApps();
     void setShowEcosystemApps(boolean enabled);
+
+    boolean isRecommendationsEnabled();
+    void setRecommendationsEnabled(boolean enabled);
 
     /**
      * Gets the selected file extension position the user selected to do the

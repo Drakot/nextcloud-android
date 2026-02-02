@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <resources>
+<resources>
     <string name="about_android">%1$s aplicación Android</string>
     <string name="about_title">Acerca de</string>
     <string name="about_version">versión %1$s</string>
@@ -621,6 +621,7 @@
     <string name="prefs_show_ecosystem_apps">Mostrar el conmutador de aplicaciones</string>
     <string name="prefs_show_ecosystem_apps_summary">Sugerencias de aplicaciones de Nextcloud en el encabezado de navegación</string>
     <string name="prefs_show_hidden_files">Mostrar archivos ocultos</string>
+    <string name="prefs_show_recommendations">Mostrar recomendaciones</string>
     <string name="prefs_sourcecode">Obtener el código fuente</string>
     <string name="prefs_sycned_folders_summary">Administrar carpetas para carga automática</string>
     <string name="prefs_synced_folders_local_path_title">Carpeta local</string>
@@ -1049,4 +1050,4 @@
         <item quantity="many">%d seleccionados</item>
         <item quantity="other">%d seleccionados</item>
     </plurals>
-    </resources>
+</resources>

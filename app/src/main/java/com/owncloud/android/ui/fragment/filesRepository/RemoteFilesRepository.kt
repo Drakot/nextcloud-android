@@ -13,6 +13,7 @@ import com.nextcloud.android.lib.resources.recommendations.GetRecommendationsRem
 import com.nextcloud.android.lib.richWorkspace.RichWorkspaceDirectEditingRemoteOperation
 import com.nextcloud.client.database.entity.toEntity
 import com.nextcloud.client.database.entity.toOCFile
+import com.nextcloud.client.preferences.AppPreferences
 import com.nextcloud.repository.ClientRepository
 import com.owncloud.android.datamodel.FileDataStorageManager
 import com.owncloud.android.datamodel.OCFile
@@ -22,8 +23,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Suppress("TooGenericExceptionCaught")
-class RemoteFilesRepository(private val clientRepository: ClientRepository, lifecycleOwner: LifecycleOwner) :
-    FilesRepository {
+class RemoteFilesRepository(
+    private val clientRepository: ClientRepository,
+    private val preferences: AppPreferences,
+    lifecycleOwner: LifecycleOwner
+) : FilesRepository {
     private val tag = "FilesRepository"
     private val scope = lifecycleOwner.lifecycleScope
 
@@ -34,6 +38,13 @@ class RemoteFilesRepository(private val clientRepository: ClientRepository, life
     ): ArrayList<OCFile> = withContext(
         Dispatchers.IO
     ) {
+        val isRecommendationsEnabled = isRecommendationsEnabled()
+
+        if (!isRecommendationsEnabled) {
+            Log_OC.d(tag, "Recommendations are disabled. Returning empty list.")
+            return@withContext arrayListOf()
+        }
+
         val cachedRecommendations = storageManager.recommendedFileDao.getAll(accountName)
         if (cachedRecommendations.isNotEmpty() && !ignoreETag) {
             Log_OC.d(tag, "Returning cached recommendations.")
@@ -63,6 +74,8 @@ class RemoteFilesRepository(private val clientRepository: ClientRepository, life
             cachedRecommendations.toOCFile(storageManager)
         }
     }
+
+    private fun isRecommendationsEnabled(): Boolean = preferences.isRecommendationsEnabled()
 
     override fun createRichWorkspace(remotePath: String, onCompleted: (String) -> Unit, onError: () -> Unit) {
         scope.launch(Dispatchers.IO) {

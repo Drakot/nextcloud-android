@@ -38,6 +38,7 @@ import com.nextcloud.client.jobs.BackgroundJobManager;
 import com.nextcloud.client.jobs.download.FileDownloadWorker;
 import com.nextcloud.client.jobs.upload.FileUploadHelper;
 import com.nextcloud.client.network.ConnectivityService;
+import com.nextcloud.client.preferences.AppPreferences;
 import com.nextcloud.receiver.NetworkChangeListener;
 import com.nextcloud.receiver.NetworkChangeReceiver;
 import com.nextcloud.utils.EditorUtils;
@@ -88,7 +89,6 @@ import com.owncloud.android.ui.dialog.ShareLinkToDialog;
 import com.owncloud.android.ui.dialog.SslUntrustedCertDialog;
 import com.owncloud.android.ui.events.DialogEvent;
 import com.owncloud.android.ui.events.DialogEventType;
-import com.owncloud.android.ui.events.FavoriteEvent;
 import com.owncloud.android.ui.fragment.FileDetailFragment;
 import com.owncloud.android.ui.fragment.FileDetailSharingFragment;
 import com.owncloud.android.ui.fragment.OCFileListFragment;
@@ -154,13 +154,19 @@ public abstract class FileActivity extends DrawerActivity
     private static final String DIALOG_UNTRUSTED_CERT = "DIALOG_UNTRUSTED_CERT";
     private static final String DIALOG_CERT_NOT_SAVED = "DIALOG_CERT_NOT_SAVED";
 
-    /** Main {@link OCFile} handled by the activity.*/
+    /**
+     * Main {@link OCFile} handled by the activity.
+     */
     private OCFile mFile;
 
-    /** Flag to signal if the activity is launched by a notification */
+    /**
+     * Flag to signal if the activity is launched by a notification
+     */
     private boolean mFromNotification;
 
-    /** Messages handler associated to the main thread and the life cycle of the activity */
+    /**
+     * Messages handler associated to the main thread and the life cycle of the activity
+     */
     private Handler mHandler;
 
     private FileOperationsHelper mFileOperationsHelper;
@@ -196,6 +202,9 @@ public abstract class FileActivity extends DrawerActivity
 
     private FilesRepository filesRepository;
 
+    @Inject
+    AppPreferences preferences;
+
     private void registerNetworkChangeReceiver() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(networkChangeReceiver, filter);
@@ -214,11 +223,11 @@ public abstract class FileActivity extends DrawerActivity
     }
 
     /**
-     * Loads the ownCloud {@link Account} and main {@link OCFile} to be handled by the instance of
-     * the {@link FileActivity}.
-     *
-     * Grants that a valid ownCloud {@link Account} is associated to the instance, or that the user
-     * is requested to create a new one.
+     * Loads the ownCloud {@link Account} and main {@link OCFile} to be handled by the instance of the
+     * {@link FileActivity}.
+     * <p>
+     * Grants that a valid ownCloud {@link Account} is associated to the instance, or that the user is requested to
+     * create a new one.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -255,7 +264,7 @@ public abstract class FileActivity extends DrawerActivity
                     Context.BIND_AUTO_CREATE);
         registerNetworkChangeReceiver();
 
-        filesRepository = new RemoteFilesRepository(getClientRepository(), this);
+        filesRepository = new RemoteFilesRepository(getClientRepository(), preferences, this);
     }
 
     @Override
@@ -292,7 +301,7 @@ public abstract class FileActivity extends DrawerActivity
     }
 
     @Override
-    protected void onPause()  {
+    protected void onPause() {
         if (mOperationsServiceBinder != null) {
             mOperationsServiceBinder.removeOperationListener(this);
         }
@@ -322,7 +331,7 @@ public abstract class FileActivity extends DrawerActivity
 
         final var actionBar = getSupportActionBar();
 
-        if(actionBar != null) {
+        if (actionBar != null) {
             final var actionBarTitle = actionBar.getTitle();
             if (actionBarTitle != null) {
                 outState.putString(KEY_ACTION_BAR_TITLE, actionBarTitle.toString());
@@ -333,7 +342,7 @@ public abstract class FileActivity extends DrawerActivity
     /**
      * Getter for the main {@link OCFile} handled by the activity.
      *
-     * @return  Main {@link OCFile} handled by the activity.
+     * @return Main {@link OCFile} handled by the activity.
      */
     @Nullable
     public OCFile getFile() {
@@ -344,7 +353,7 @@ public abstract class FileActivity extends DrawerActivity
     /**
      * Setter for the main {@link OCFile} handled by the activity.
      *
-     * @param file  Main {@link OCFile} to be handled by the activity.
+     * @param file Main {@link OCFile} to be handled by the activity.
      */
     public void setFile(OCFile file) {
         mFile = file;
@@ -379,8 +388,8 @@ public abstract class FileActivity extends DrawerActivity
 
     /**
      *
-     * @param operation     Operation performed.
-     * @param result        Result of the removal.
+     * @param operation Operation performed.
+     * @param result    Result of the removal.
      */
     @Override
     public void onRemoteOperationFinish(RemoteOperation operation, RemoteOperationResult result) {
@@ -459,7 +468,7 @@ public abstract class FileActivity extends DrawerActivity
     /**
      * Invalidates the credentials stored for the current OC account and requests new credentials to the user,
      * navigating to {@link AuthenticatorActivity}
-     *
+     * <p>
      * Equivalent to call requestCredentialsUpdate(context, null);
      *
      */
@@ -468,11 +477,10 @@ public abstract class FileActivity extends DrawerActivity
     }
 
     /**
-     * Invalidates the credentials stored for the given OC account and requests new credentials to the user,
-     * navigating to {@link AuthenticatorActivity}
+     * Invalidates the credentials stored for the given OC account and requests new credentials to the user, navigating
+     * to {@link AuthenticatorActivity}
      *
-     * @param account   Stored OC account to request credentials update for. If null, current account will
-     *                  be used.
+     * @param account Stored OC account to request credentials update for. If null, current account will be used.
      */
     protected void requestCredentialsUpdate(Account account) {
         if (account == null) {
@@ -520,7 +528,7 @@ public abstract class FileActivity extends DrawerActivity
         // Show a dialog with the certificate info
         FragmentManager fm = getSupportFragmentManager();
         SslUntrustedCertDialog dialog = (SslUntrustedCertDialog) fm.findFragmentByTag(DIALOG_UNTRUSTED_CERT);
-        if(dialog == null) {
+        if (dialog == null) {
             dialog = SslUntrustedCertDialog.newInstanceForFullSslError(
                 (CertificateCombinedException) result.getException());
             FragmentTransaction ft = fm.beginTransaction();
@@ -550,7 +558,7 @@ public abstract class FileActivity extends DrawerActivity
         }
     }
 
-    protected void updateFileFromDB(){
+    protected void updateFileFromDB() {
         OCFile file = getFile();
         if (file != null) {
             file = getStorageManager().getFileByPath(file.getRemotePath());
@@ -623,9 +631,9 @@ public abstract class FileActivity extends DrawerActivity
         mOperationsServiceBinder.addOperationListener(this, mHandler);
         long waitingForOpId = mFileOperationsHelper.getOpIdWaitingFor();
         if (waitingForOpId <= Integer.MAX_VALUE) {
-            boolean wait = mOperationsServiceBinder.dispatchResultIfFinished((int)waitingForOpId,
+            boolean wait = mOperationsServiceBinder.dispatchResultIfFinished((int) waitingForOpId,
                                                                              this);
-            if (!wait ) {
+            if (!wait) {
                 dismissLoadingDialog();
             }
         }
@@ -993,6 +1001,7 @@ public abstract class FileActivity extends DrawerActivity
 
     /**
      * open the new sharing process to modify the created share
+     *
      * @param share
      * @param screenTypePermission
      * @param isReshareShown

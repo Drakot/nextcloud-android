@@ -73,6 +73,7 @@ public final class AppPreferencesImpl implements AppPreferences {
     private static final String PREF__SORT_FOLDERS_BEFORE_FILES = "sort_folders_before_files";
     private static final String PREF__SORT_FAVORITES_FIRST = "sort_favorites_first";
     private static final String PREF__SHOW_ECOSYSTEM_APPS = "show_ecosystem_apps";
+    private static final String PREF__SHOW_RECOMMENDATIONS = "show_recommendations";
     private static final String PREF__LEGACY_CLEAN = "legacyClean";
     private static final String PREF__KEYS_MIGRATION = "keysMigration";
     private static final String PREF__FIX_STORAGE_PATH = "storagePathFix";
@@ -106,7 +107,7 @@ public final class AppPreferencesImpl implements AppPreferences {
     private static final String PREF__TWO_WAY_SYNC_INTERVAL = "two_way_sync_interval";
 
     private static final String PREF__STOP_DOWNLOAD_JOBS_ON_START = "stop_download_jobs_on_start";
-    
+
     private static final String PREF__PASSCODE_DELAY_IN_SECONDS = "passcode_delay_in_seconds";
 
     private static final String PREF_LAST_DISPLAYED_ACCOUNT_NAME = "last_displayed_user";
@@ -256,6 +257,16 @@ public final class AppPreferencesImpl implements AppPreferences {
     @Override
     public void setShowEcosystemApps(boolean enabled) {
         preferences.edit().putBoolean(PREF__SHOW_ECOSYSTEM_APPS, enabled).apply();
+    }
+
+    @Override
+    public boolean isRecommendationsEnabled() {
+        return preferences.getBoolean(PREF__SHOW_RECOMMENDATIONS, true);
+    }
+
+    @Override
+    public void setRecommendationsEnabled(boolean enabled) {
+        preferences.edit().putBoolean(PREF__SHOW_RECOMMENDATIONS, enabled).apply();
     }
 
     @Override

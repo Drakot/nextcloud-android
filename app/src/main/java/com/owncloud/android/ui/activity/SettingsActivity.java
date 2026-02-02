@@ -687,6 +687,7 @@ public class SettingsActivity extends PreferenceActivity
         setupHiddenFilesPreference(preferenceCategoryDetails, fShowHiddenFilesEnabled);
         setupFoldersBeforeFilesPreference();
         setupSortFavoritesFirstPreference();
+        setupShowRecommendationsPreference();
     }
 
     private void setupShowMediaScanNotifications(PreferenceCategory preferenceCategoryDetails,
@@ -715,12 +716,20 @@ public class SettingsActivity extends PreferenceActivity
     private void setupFoldersBeforeFilesPreference() {
         ThemeableSwitchPreference preference = (ThemeableSwitchPreference) findPreference("sort_folders_before_files");
         preference.setOnPreferenceClickListener(p -> {
-                preferences.setSortFoldersBeforeFiles(preference.isChecked());
-                return true;
-            });
+            preferences.setSortFoldersBeforeFiles(preference.isChecked());
+            return true;
+        });
     }
 
     private void setupSortFavoritesFirstPreference() {
+        ThemeableSwitchPreference preference = (ThemeableSwitchPreference) findPreference("show_recommendations");
+        preference.setOnPreferenceClickListener(p -> {
+            preferences.setSortFavoritesFirst(preference.isChecked());
+            return true;
+        });
+    }
+
+    private void setupShowRecommendationsPreference() {
         ThemeableSwitchPreference preference = (ThemeableSwitchPreference) findPreference("sort_favorites_first");
         preference.setOnPreferenceClickListener(p -> {
             preferences.setSortFavoritesFirst(preference.isChecked());
