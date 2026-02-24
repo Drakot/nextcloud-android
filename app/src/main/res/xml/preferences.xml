@@ -51,7 +51,7 @@
 
         <com.owncloud.android.ui.ThemeableSwitchPreference
             android:defaultValue="true"
-            android:title="@string/show_recommendations"
+            android:title="@string/prefs_show_recommendations"
             android:key="show_recommendations" />
     </PreferenceCategory>
 
