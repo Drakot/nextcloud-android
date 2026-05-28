@@ -59,8 +59,9 @@ public class CreateFolderOperation extends SyncOperation implements OnRemoteOper
 
     protected String remotePath;
     private RemoteFile createdRemoteFolder;
-    private User user;
-    private Context context;
+    private volatile boolean encrypt = false;
+    private final User user;
+    private final Context context;
 
     /**
      * Constructor
@@ -71,6 +72,14 @@ public class CreateFolderOperation extends SyncOperation implements OnRemoteOper
         this.remotePath = remotePath;
         this.user = user;
         this.context = context;
+    }
+
+    public void setEncrypt(boolean value) {
+        encrypt = value;
+    }
+
+    public boolean shouldEncrypt() {
+        return encrypt;
     }
 
     @Override
@@ -128,7 +137,7 @@ public class CreateFolderOperation extends SyncOperation implements OnRemoteOper
 
         try {
             // lock folder
-            token = EncryptionUtils.lockFolder(parent, client);
+            token = EncryptionUtils.lockFolder(parent, client, EncryptionUtils.E2E_V1_INITIAL_COUNTER);
 
             // get metadata
             Pair<Boolean, DecryptedFolderMetadataFileV1> metadataPair = EncryptionUtils.retrieveMetadataV1(parent,
@@ -144,7 +153,7 @@ public class CreateFolderOperation extends SyncOperation implements OnRemoteOper
 
             // check if filename already exists
             if (isFileExisting(metadata, filename)) {
-                return new RemoteOperationResult(RemoteOperationResult.ResultCode.FOLDER_ALREADY_EXISTS);
+                return new RemoteOperationResult<>(RemoteOperationResult.ResultCode.FOLDER_ALREADY_EXISTS);
             }
 
             // generate new random file name, check if it exists in metadata
@@ -266,7 +275,7 @@ public class CreateFolderOperation extends SyncOperation implements OnRemoteOper
 
         try {
             // lock folder
-            token = EncryptionUtils.lockFolder(parent, client);
+            token = EncryptionUtils.lockFolder(parent, client, EncryptionUtils.E2E_V2_INITIAL_COUNTER);
 
             // get metadata
             EncryptionUtilsV2 encryptionUtilsV2 = new EncryptionUtilsV2();
@@ -490,14 +499,18 @@ public class CreateFolderOperation extends SyncOperation implements OnRemoteOper
         return encryptedFileName;
     }
 
-    private RemoteOperationResult normalCreate(OwnCloudClient client) {
-        RemoteOperationResult result = new CreateFolderRemoteOperation(remotePath, true).execute(client);
+    private RemoteOperationResult<?> normalCreate(OwnCloudClient client) {
+        final var result = new CreateFolderRemoteOperation(remotePath, true).execute(client);
 
         if (result.isSuccess()) {
-            RemoteOperationResult remoteFolderOperationResult = new ReadFolderRemoteOperation(remotePath)
+            final var remoteFolderOperationResult = new ReadFolderRemoteOperation(remotePath)
                 .execute(client);
 
-            createdRemoteFolder = (RemoteFile) remoteFolderOperationResult.getData().get(0);
+            if (remoteFolderOperationResult.isSuccess() &&
+                remoteFolderOperationResult.getData().get(0) instanceof RemoteFile remoteFile) {
+                createdRemoteFolder = remoteFile;
+            }
+
             saveFolderInDB();
         } else {
             Log_OC.e(TAG, remotePath + " hasn't been created");

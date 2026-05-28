@@ -265,7 +265,6 @@
     <string name="drawer_item_assistant">Asistent</string>
     <string name="drawer_item_favorites">Favorite</string>
     <string name="drawer_item_gallery">Media</string>
-    <string name="drawer_item_groupfolders">Gruparedirectoare</string>
     <string name="drawer_item_home">Acasă</string>
     <string name="drawer_item_notifications">Notificări</string>
     <string name="drawer_item_on_device">Pe dispozitiv</string>
@@ -370,6 +369,8 @@
     <string name="file_list_empty_local_search">Niciun fișier sau dosar care să corespundă căutării dvs</string>
     <string name="file_list_empty_moving">Nu este nimic aici. Poți adăuga un dosar.</string>
     <string name="file_list_empty_on_device">FIșierele și dosarele descărcate vor apărea aici</string>
+    <string name="file_list_empty_recent_files_description">Fișierele și dosarele modificate recent vor fi afișate aici</string>
+    <string name="file_list_empty_recent_files_headline">Niciun fișier modificat recent</string>
     <string name="file_list_empty_recently_modified">Nu au fost găsite fișiere modificate în ultimele 7 zile</string>
     <string name="file_list_empty_search">Poate că este într-un alt dosar?</string>
     <string name="file_list_empty_shared">FIșierele și dosarele partajate vor apărea aici</string>
@@ -523,6 +524,8 @@
     <string name="media_forward_description">Butonul pentru repede înainte</string>
     <string name="media_notif_ticker">%1$s</string>
     <string name="media_play_pause_description">Buton de play sau pauză </string>
+    <string name="media_player_pause">Pauză</string>
+    <string name="media_player_play">Start Joc</string>
     <string name="media_rewind_description">Butonul rewind</string>
     <string name="media_state_playing">%1$s (redare)</string>
     <string name="menu_item_sort_by_date_newest_first">Cel mai nou mai întâi</string>
@@ -909,9 +912,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Configurare</string>
     <string name="uploader_wrn_no_account_text">Nu există conturi %1$s pe dispozitivul tău. Te rugăm să configurezi unul mai întâi.</string>
     <string name="uploader_wrn_no_account_title">Nici un cont găsit</string>
+    <string name="uploads_view_group_completed_uploads">Terminat</string>
     <string name="uploads_view_group_current_uploads">Curent</string>
     <string name="uploads_view_group_failed_uploads">Repornire eșuată/în așteptare</string>
-    <string name="uploads_view_group_finished_uploads">Încărcat</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Anulat</string>
     <string name="uploads_view_later_waiting_to_upload">Se așteaptă încărcarea</string>
     <string name="uploads_view_title">Încărcări</string>
@@ -935,6 +938,7 @@
     <string name="user_icon">Utilizator</string>
     <string name="user_info_address">Adresă</string>
     <string name="user_info_email">E-mail</string>
+    <string name="user_info_groups">Grupuri</string>
     <string name="user_info_phone">Număr telefon</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Site web</string>

@@ -263,13 +263,6 @@ class SyncedFolderAdapter(
             holder.binding.run {
                 headerContainer.visibility = View.VISIBLE
 
-                if (section == 0) {
-                    autoUploadBatterySaverWarningCard.root.run {
-                        setVisibleIf(powerManagementService.isPowerSavingEnabled)
-                        viewThemeUtils.material.themeCardView(this)
-                    }
-                }
-
                 val syncedFolder = filteredSyncFolderItems[section]
 
                 title.text = syncedFolder.folderName
@@ -513,7 +506,7 @@ class SyncedFolderAdapter(
         get() = syncFolderItems.size - filteredSyncFolderItems.size
 
     interface ClickListener {
-        fun onSyncStatusToggleClick(section: Int, syncedFolderDisplayItem: SyncedFolderDisplayItem?)
+        fun onSyncStatusToggleClick(section: Int, item: SyncedFolderDisplayItem?)
         fun onSyncFolderSettingsClick(section: Int, syncedFolderDisplayItem: SyncedFolderDisplayItem?)
         fun onVisibilityToggleClick(section: Int, item: SyncedFolderDisplayItem?)
         fun showSubFolderWarningDialog()

@@ -247,7 +247,6 @@
     <string name="drawer_item_assistant">Skoazeller</string>
     <string name="drawer_item_favorites">Penndibaboù</string>
     <string name="drawer_item_gallery">Media</string>
-    <string name="drawer_item_groupfolders">Renkelloù ar strollad</string>
     <string name="drawer_item_home">Degemer</string>
     <string name="drawer_item_notifications">Kemennadennoù</string>
     <string name="drawer_item_on_device">War ar benveg</string>
@@ -447,6 +446,8 @@
     <string name="media_forward_description">Bouton mont war raok</string>
     <string name="media_notif_ticker">Lenner musik %1$s</string>
     <string name="media_play_pause_description">Bouton Lenn pe pose</string>
+    <string name="media_player_pause">Ehanañ</string>
+    <string name="media_player_play">C\'hoari</string>
     <string name="media_rewind_description">Bouton mont war gil</string>
     <string name="media_state_playing">%1$s (o lenn)</string>
     <string name="menu_item_sort_by_date_newest_first">An hini nevesañ da gentañ</string>
@@ -776,9 +777,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Neuziadur</string>
     <string name="uploader_wrn_no_account_text">N\'ez eus ket a gont %1$s war o ardivink. Lakait ar c\'hont evit kregiñ. </string>
     <string name="uploader_wrn_no_account_title">Kont ebet kavet</string>
+    <string name="uploads_view_group_completed_uploads">Echu</string>
     <string name="uploads_view_group_current_uploads">A red</string>
     <string name="uploads_view_group_failed_uploads">Adlakaat war dro c\'hwitet pe re hir</string>
-    <string name="uploads_view_group_finished_uploads">Pellkaset</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Nullet</string>
     <string name="uploads_view_later_waiting_to_upload">O gortoz ar pellkas</string>
     <string name="uploads_view_title">Pellkasadennoù</string>
@@ -801,7 +802,9 @@
     <string name="user_icon">Implijer</string>
     <string name="user_info_address">Chom-lec\'h</string>
     <string name="user_info_email">Postel</string>
+    <string name="user_info_groups">Strolladoù</string>
     <string name="user_info_phone">Niverenn bellgomz</string>
+    <string name="user_info_profile">Profil</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Lec\'hienn web</string>
     <string name="user_information_retrieval_error">Ur fazi a zo bet en ur adtapout tutourioù an implijer</string>

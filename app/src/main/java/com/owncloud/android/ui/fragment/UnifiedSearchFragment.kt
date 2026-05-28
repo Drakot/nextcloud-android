@@ -36,6 +36,7 @@ import com.nextcloud.client.di.Injectable
 import com.nextcloud.client.di.ViewModelFactory
 import com.nextcloud.client.network.ClientFactory
 import com.nextcloud.client.preferences.AppPreferences
+import com.nextcloud.common.NextcloudClient
 import com.nextcloud.utils.extensions.getTypedActivity
 import com.nextcloud.utils.extensions.searchFilesByName
 import com.nextcloud.utils.extensions.setVisibleIf
@@ -44,7 +45,6 @@ import com.owncloud.android.R
 import com.owncloud.android.databinding.ListFragmentBinding
 import com.owncloud.android.datamodel.FileDataStorageManager
 import com.owncloud.android.datamodel.OCFile
-import com.owncloud.android.datamodel.SyncedFolderProvider
 import com.owncloud.android.lib.common.SearchResultEntry
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.status.NextcloudVersion
@@ -62,6 +62,7 @@ import com.owncloud.android.ui.unifiedsearch.UnifiedSearchViewModel
 import com.owncloud.android.ui.unifiedsearch.filterOutHiddenFiles
 import com.owncloud.android.utils.DisplayUtils
 import com.owncloud.android.utils.PermissionUtil
+import com.owncloud.android.utils.overlay.OverlayManager
 import com.owncloud.android.utils.theme.ViewThemeUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -107,6 +108,9 @@ class UnifiedSearchFragment :
     }
 
     @Inject
+    lateinit var overlayManager: OverlayManager
+
+    @Inject
     lateinit var vmFactory: ViewModelFactory
 
     @Inject
@@ -132,6 +136,8 @@ class UnifiedSearchFragment :
 
     @Inject
     lateinit var clock: Clock
+
+    @Volatile private var client: NextcloudClient? = null
 
     private var listOfHiddenFiles = ArrayList<String>()
     private var showMoreActions = false
@@ -175,6 +181,7 @@ class UnifiedSearchFragment :
             setupToolbar()
             setMainFabVisible(false)
             updateActionBarTitleAndHomeButtonByString(null)
+            setDrawerIndicatorEnabled(false)
         }
     }
 
@@ -352,62 +359,56 @@ class UnifiedSearchFragment :
         }
     }
 
-    private fun showFile(file: OCFile, showFileActions: Boolean) {
-        activity.let {
-            if (activity is FileDisplayActivity) {
-                val fda = activity as FileDisplayActivity
-                fda.file = file
-
-                if (showFileActions) {
-                    fda.showFileActions(file)
-                } else {
-                    fda.showFile(file, "")
-                }
+    private fun showFile(file: OCFile, showFileActions: Boolean, updateCurrentFile: Boolean = true) {
+        (activity as? FileDisplayActivity)?.apply {
+            if (updateCurrentFile) {
+                this.file = file
             }
+
+            if (showFileActions) showFileActions(file) else showFile(file, "")
         }
     }
 
     private fun setupAdapter() {
-        val syncedFolderProvider = SyncedFolderProvider(requireContext().contentResolver, appPreferences, clock)
         val gridLayoutManager = GridLayoutManager(requireContext(), 1)
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            val client =
-                getTypedActivity(FileActivity::class.java)?.clientRepository?.getNextcloudClient() ?: return@launch
+        adapter = UnifiedSearchListAdapter(
+            supportsOpeningCalendarContactsLocally(),
+            storageManager,
+            this@UnifiedSearchFragment,
+            this@UnifiedSearchFragment,
+            currentAccountProvider.user,
+            requireContext(),
+            viewThemeUtils,
+            appPreferences,
+            this@UnifiedSearchFragment,
+            overlayManager
+        )
 
-            withContext(Dispatchers.Main) {
-                adapter = UnifiedSearchListAdapter(
-                    supportsOpeningCalendarContactsLocally(),
-                    storageManager,
-                    this@UnifiedSearchFragment,
-                    this@UnifiedSearchFragment,
-                    currentAccountProvider.user,
-                    requireContext(),
-                    viewThemeUtils,
-                    appPreferences,
-                    syncedFolderProvider,
-                    client,
-                    this@UnifiedSearchFragment
-                )
+        adapter.shouldShowFooters(true)
+        adapter.setLayoutManager(gridLayoutManager)
+        binding.listRoot.layoutManager = gridLayoutManager
+        binding.listRoot.adapter = adapter
+        searchInCurrentDirectory(initialQuery ?: "")
 
-                adapter.shouldShowFooters(true)
-                adapter.setLayoutManager(gridLayoutManager)
-                binding.listRoot.layoutManager = gridLayoutManager
-                binding.listRoot.adapter = adapter
-                searchInCurrentDirectory(initialQuery ?: "")
-
-                setUpViewModel()
-                if (!initialQuery.isNullOrEmpty()) {
-                    vm.setQuery(initialQuery!!)
-                    vm.initialQuery()
-                }
-            }
+        setUpViewModel()
+        if (!initialQuery.isNullOrEmpty()) {
+            vm.setQuery(initialQuery!!)
+            vm.initialQuery()
         }
     }
 
     override fun onSearchResultClicked(searchResultEntry: SearchResultEntry) {
         showMoreActions = false
-        vm.openResult(searchResultEntry)
+
+        val remotePath = searchResultEntry.remotePath() + OCFile.PATH_SEPARATOR
+        val file = storageManager.getFileByDecryptedRemotePath(remotePath)
+
+        if (file?.isEncrypted == true) {
+            showFile(file, showMoreActions, updateCurrentFile = false)
+        } else {
+            vm.openResult(searchResultEntry)
+        }
     }
 
     override fun onLoadMoreClicked(providerID: ProviderID) {
@@ -464,6 +465,26 @@ class UnifiedSearchFragment :
     override fun showFilesAction(searchResultEntry: SearchResultEntry) {
         showMoreActions = true
         vm.openResult(searchResultEntry)
+    }
+
+    override fun loadFileThumbnail(searchResultEntry: SearchResultEntry, onClientReady: (NextcloudClient) -> Unit) {
+        client?.let {
+            onClientReady(it)
+            return
+        }
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            val newClient = getTypedActivity(FileActivity::class.java)
+                ?.clientRepository
+                ?.getNextcloudClient()
+                ?: return@launch
+
+            client = newClient
+
+            withContext(Dispatchers.Main) {
+                onClientReady(newClient)
+            }
+        }
     }
 
     override fun openFile(remotePath: String, showMoreActions: Boolean) {

@@ -43,15 +43,18 @@
     <string name="app_config_proxy_host_title">Nom d\'hôte du proxy</string>
     <string name="app_config_proxy_port_title">Port Proxy</string>
     <string name="app_widget_description">Affiche un widget du tableau de bord</string>
-    <string name="appbar_search_in">Recherche dans %s</string>
+    <string name="appbar_search_in">Rechercher dans %s</string>
     <string name="appear_offline">Apparaître hors-ligne</string>
     <string name="assistant_output_generation_warning_text">Les résultats affichés ici sont générés par l\'IA. Veillez à toujours les vérifier.</string>
     <string name="assistant_screen_chat_create_error">Échec de l\'envoi du message</string>
     <string name="assistant_screen_chat_fetch_error">Impossible de récupérer les messages de conversation</string>
+    <string name="assistant_screen_chat_generate_error">Impossible de générer une réponse</string>
+    <string name="assistant_screen_conversations_go_back_to_assistant">Retour à la page de l\'assistant</string>
     <string name="assistant_screen_delete_task_alert_dialog_description">Êtes-vous sûr de vouloir supprimer cette tâche ?</string>
     <string name="assistant_screen_delete_task_alert_dialog_title">Supprimer la tâche</string>
     <string name="assistant_screen_empty_content_description">Essayez d\'envoyer un message pour déclencher une conversation.</string>
     <string name="assistant_screen_empty_content_title">Bonjour ! En quoi puis-je vous aider aujourd’hui ?</string>
+    <string name="assistant_screen_retry_response_generation">Réessayer la génération de réponse</string>
     <string name="assistant_screen_select_task">Veuillez sélectionner une tâche</string>
     <string name="assistant_screen_send_message">Envoyer un message</string>
     <string name="assistant_screen_task_bar_open_conversation_list">Ouvrir la liste des conversations</string>
@@ -111,6 +114,8 @@
     <string name="authenticator_activity_no_web_browser_found">Aucun navigateur n\'est disponible pour ouvrir ce lien.</string>
     <string name="authenticator_activity_please_complete_login_process">Veuillez finaliser la connexion dans votre navigateur</string>
     <string name="auto_upload_battery_saver_mode_warning">Le téléversement automatique est suspendu, car l\'économiseur de batterie est activé.</string>
+    <string name="auto_upload_delete_dialog_description">Cette action supprimera le dossier et la configuration de téléchargement automatique. Tout téléchargement inachevé sera annulé.</string>
+    <string name="auto_upload_delete_dialog_title">Supprimer le dossier de téléchargement automatique ?</string>
     <string name="auto_upload_file_behaviour_kept_in_folder">conservé dans le dossier original (puisqu\'il est en lecture seule)</string>
     <string name="auto_upload_low_battery_warning_info">Batterie faible, le téléversement peut prendre plus de temps</string>
     <string name="auto_upload_on_wifi">Téléverser par Wi-Fi uniquement</string>
@@ -242,9 +247,12 @@
     <string name="could_not_retrieve_url">Impossible de récupérer l\'URL</string>
     <string name="create">Créer</string>
     <string name="create_dir_fail_msg">Le dossier n\'a pas pu être créé</string>
+    <string name="create_end_to_end_encrypted_share">Lien de partage</string>
+    <string name="create_end_to_end_encrypted_share_title">Lien de partages chiffrés de bout en bout</string>
     <string name="create_link">Créer un lien</string>
     <string name="create_new">Nouveau</string>
     <string name="create_new_document">Nouveau document</string>
+    <string name="create_new_encrypted_folder">Nouveau dossier chiffré</string>
     <string name="create_new_folder">Nouveau dossier</string>
     <string name="create_new_presentation">Nouvelle présentation</string>
     <string name="create_new_spreadsheet">Nouvelle feuille de calcul</string>
@@ -310,11 +318,12 @@
     <string name="drawer_item_assistant">Assistant</string>
     <string name="drawer_item_favorites">Favoris</string>
     <string name="drawer_item_gallery">Médias</string>
-    <string name="drawer_item_groupfolders">Dossiers de groupe</string>
+    <string name="drawer_item_groupfolders">Dossiers d\'équipe</string>
     <string name="drawer_item_home">Accueil</string>
     <string name="drawer_item_notifications">Notifications</string>
     <string name="drawer_item_on_device">Sur l\'appareil</string>
     <string name="drawer_item_personal_files">Fichiers personnels</string>
+    <string name="drawer_item_recent_files">Fichiers récents</string>
     <string name="drawer_item_recently_modified">Modifiés récemment</string>
     <string name="drawer_item_shared">Partagé</string>
     <string name="drawer_item_trashbin">Fichiers supprimés</string>
@@ -333,7 +342,7 @@
     <string name="e2e_signature_is_empty">Impossible de vérifier les métadonnées, la signature est vide.</string>
     <string name="ecosystem_apps_display_assistant">Assistant</string>
     <string name="ecosystem_apps_display_more">Plus</string>
-    <string name="ecosystem_apps_more">Plus d\'applications Nextcloud</string>
+    <string name="ecosystem_apps_more">Plus d\'applis Nextcloud</string>
     <string name="editor_web_view_cannot_open_file">Impossible d\'ouvrir le sélecteur de fichiers</string>
     <string name="email_pick_failed">Le choix de l\'adresse e-mail a échoué.</string>
     <string name="encrypted">Définir comme chiffré</string>
@@ -366,7 +375,7 @@
     <string name="error_crash_title">%1$s a planté</string>
     <string name="error_creating_file_from_template">Erreur lors de la création du fichier à partir du modèle</string>
     <string name="error_fetching_sharees">Impossible de récupérer les partages.</string>
-    <string name="error_file_actions">Erreur d\'affichage des actions de fichier</string>
+    <string name="error_file_actions">Erreur d\'affichage des actions sur les fichiers</string>
     <string name="error_file_lock">Erreur lors de la modification de l\'état de verrouillage du fichier</string>
     <string name="error_report_issue_action">Signaler</string>
     <string name="error_report_issue_text">Signaler le problème au traqueur ? (nécessite un compte GitHub)</string>
@@ -401,9 +410,12 @@
     <string name="etm_transfer_type">Transfert</string>
     <string name="etm_transfer_type_download">Téléchargement</string>
     <string name="etm_transfer_type_upload">Téléverser</string>
+    <string name="export_in_progress">Exportation %1$d sur %2$d</string>
+    <string name="extension_cannot_be_changed">L\'extension ne peut pas être modifiée</string>
     <string name="extented_list_fragment_empty_list_message_no_write_permission">Vous n\'avez pas le droit de créer ou de téléverser des fichiers dans ce dossier.</string>
     <string name="external_shares">Partages externes</string>
     <string name="fab_label">Ajouter ou téléverser</string>
+    <string name="failed_to_create_conflict_dialog">Échec de la création de la boîte de dialogue de conflit</string>
     <string name="failed_to_download">Transmission du fichier au gestionnaire de téléchargement échoué</string>
     <string name="failed_to_print">Impossible d\'imprimer le fichier</string>
     <string name="failed_to_start_action">Impossible de lancer l\'action !</string>
@@ -431,6 +443,8 @@
     <string name="file_list_empty_local_search">Aucun fichier ou dossier ne correspond à votre recherche</string>
     <string name="file_list_empty_moving">Il n\'y a rien ici. Vous pouvez ajouter un dossier.</string>
     <string name="file_list_empty_on_device">Les fichiers/dossiers téléchargés apparaîtront ici.</string>
+    <string name="file_list_empty_recent_files_description">Les fichiers et dossiers que vous avez récemment modifiés apparaîtront ici</string>
+    <string name="file_list_empty_recent_files_headline">Pas de fichiers récemment modifiés</string>
     <string name="file_list_empty_recently_modified">Aucun fichier modifié n\'a été trouvé dans les 7 derniers jours</string>
     <string name="file_list_empty_search">Il se trouve peut-être dans un autre dossier ?</string>
     <string name="file_list_empty_shared">Les fichiers et dossiers que vous partagez apparaîtront ici.</string>
@@ -504,6 +518,7 @@
     <string name="folder_download_counter">%1$d de %2$d &#183; %3$s</string>
     <string name="folder_download_error_notification_title">Une erreur s\'est produite lors de la synchronisation du dossier %s</string>
     <string name="folder_download_insufficient_disk_space_notification_title">Espace disque insuffisant, synchronisation annulée</string>
+    <string name="folder_download_success_notification_title">Dossier %s synchronisé</string>
     <string name="folder_download_worker_ticker_id">Synchronisation en cours…</string>
     <string name="folder_list_empty_headline">Aucun dossier</string>
     <string name="folder_name_empty">Le nom du dossier ne peut être vide</string>
@@ -551,6 +566,8 @@
     <string name="instant_upload_existing">Téléverser aussi les fichiers existants</string>
     <string name="instant_upload_on_charging">Téléverser uniquement lors de la recharge</string>
     <string name="instant_upload_path">/InstantUpload</string>
+    <string name="internal_share_description_end_to_end_encrypted">Les destinataires du partage ont toujours accès à l\'intégralité du dossier chiffré. Le partage est uniquement possible pour les comptes ayant déjà configuré le chiffrement de bout en bout.</string>
+    <string name="internal_share_headline_end_to_end_encrypted">Partages chiffrés de bout en bout</string>
     <string name="internal_shares">Partages internes</string>
     <string name="internal_two_way_sync">Synchronisation interne bidirectionnelle</string>
     <string name="internal_two_way_sync_not_yet">Pas encore, bientôt synchronisé</string>
@@ -579,6 +596,7 @@
     <string name="login">Se connecter</string>
     <string name="login_url_helper_text">Adresse URL visible dans la barre d\'adresse de votre navigateur Web lorsque vous êtes connecté à %1$s.</string>
     <string name="logs_menu_delete">Supprimer les logs</string>
+    <string name="logs_menu_export">Exporter les logs</string>
     <string name="logs_menu_refresh">Actualiser</string>
     <string name="logs_menu_search">Chercher dans les logs</string>
     <string name="logs_menu_send">Envoyer logs par e-mail</string>
@@ -599,6 +617,11 @@
     <string name="media_forward_description">Bouton d\'avance rapide</string>
     <string name="media_notif_ticker">Lecteur de musique %1$s</string>
     <string name="media_play_pause_description">Bouton de lecture ou de pause</string>
+    <string name="media_player_pause">Pause</string>
+    <string name="media_player_play">Lire</string>
+    <string name="media_player_playing">Lecture du média</string>
+    <string name="media_player_seek_backward">Retour rapide</string>
+    <string name="media_player_seek_forward">Avance rapide</string>
     <string name="media_rewind_description">Bouton de retour arrière</string>
     <string name="media_state_playing">%1$s (lecture)</string>
     <string name="menu_item_sort_by_date_newest_first">Date : Récent en premier</string>
@@ -972,6 +995,7 @@
     <string name="sync">Synchroniser</string>
     <string name="sync_anyway">Synchroniser quand même</string>
     <string name="sync_conflict_notification_action_title">Résoudre les conflits</string>
+    <string name="sync_conflict_notification_description">Des conflits de téléversement ont été détectés. Ouvrez les téléversements pour les résoudre.</string>
     <string name="sync_conflict_notification_title">Conflits de téléversement de fichiers</string>
     <string name="sync_conflicts_in_favourites_ticker">Des conflits ont été trouvés</string>
     <string name="sync_current_folder_was_removed">Le dossier %1$s n\'existe plus</string>
@@ -1085,6 +1109,7 @@
     <string name="upload_missing_storage_permission_app_permissions">Autorisations de l\'application</string>
     <string name="upload_missing_storage_permission_description">Vos fichiers ne peuvent pas être téléversés sans accès au stockage local. Appuyez pour accorder l\'autorisation.</string>
     <string name="upload_missing_storage_permission_title">Envoi interrompu – Autorisation de stockage requise</string>
+    <string name="upload_notification_manager_content_intent_description">Vous pouvez le supprimer ou le relancer depuis Téléversements</string>
     <string name="upload_notification_manager_start_text">%1$d / %2$d - %3$s</string>
     <string name="upload_old_android">Le chiffrement n\'est disponible que pour les versions d\'Android&gt;= 5.0</string>
     <string name="upload_query_move_foreign_files">Il n\'y a pas assez d\'espace pour copier les fichiers sélectionnés dans le dossier %1$s. Souhaitez-vous plutôt les déplacer ?</string>
@@ -1122,9 +1147,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Configuration</string>
     <string name="uploader_wrn_no_account_text">Aucun compte %1$s sur l\'appareil. Veuillez configurer un compte au préalable.</string>
     <string name="uploader_wrn_no_account_title">Aucun compte n\'a été trouvé</string>
+    <string name="uploads_view_group_completed_uploads">Terminé</string>
     <string name="uploads_view_group_current_uploads">En cours</string>
     <string name="uploads_view_group_failed_uploads">Échec / En attente de reprise</string>
-    <string name="uploads_view_group_finished_uploads">Téléversé</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Annulé</string>
     <string name="uploads_view_later_waiting_to_upload">En attente de téléversement</string>
     <string name="uploads_view_title">Téléversements</string>
@@ -1151,7 +1176,9 @@
     <string name="user_icon">Utilisateur</string>
     <string name="user_info_address">Adresse</string>
     <string name="user_info_email">E-mail</string>
+    <string name="user_info_groups">Groupes</string>
     <string name="user_info_phone">Numéro de téléphone</string>
+    <string name="user_info_profile">Profil</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Site web</string>
     <string name="user_information_retrieval_error">Erreur de récupération des informations utilisateur</string>
@@ -1273,26 +1300,6 @@
         <item quantity="one">%d sélectionné</item>
         <item quantity="many">%d sélectionnés</item>
         <item quantity="other">%d sélectionnés</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="one">Retardé de %d seconde à cause de trop d\'essais infructueux</item>
-        <item quantity="many">Retardé de %d secondes à cause de trop d\'essais infructueux</item>
-        <item quantity="other">Retardé de %d secondes à cause d\'un nombre trop important d\'essais infructueux</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="one">Retardé de %d minute en raison d\'un trop grand nombre de tentatives infructueuses</item>
-        <item quantity="many">Retardé de %d minutes en raison d\'un trop grand nombre de tentatives infructueuses</item>
-        <item quantity="other">Retardé de %d minutes en raison d\'un trop grand nombre de tentatives infructueuses</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="one">Retardé de %d minute</item>
-        <item quantity="many">Retardé de %d minutes</item>
-        <item quantity="other">Retardé de %d minutes</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="one">%d seconde</item>
-        <item quantity="many">%d secondes</item>
-        <item quantity="other">%d secondes</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d téléchargement restant</item>

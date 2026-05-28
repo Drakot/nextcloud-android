@@ -218,6 +218,7 @@
     <string name="drawer_item_assistant">Асистент</string>
     <string name="drawer_item_favorites">Омилени</string>
     <string name="drawer_item_gallery">Медија</string>
+    <string name="drawer_item_groupfolders">Тимски папки</string>
     <string name="drawer_item_home">Дома</string>
     <string name="drawer_item_notifications">Известувања</string>
     <string name="drawer_item_on_device">На уредот</string>
@@ -296,6 +297,8 @@
     <string name="file_list_empty_headline_server_search">Нема резултати</string>
     <string name="file_list_empty_moving">Тука нема ништо. Можете да додадете папка!</string>
     <string name="file_list_empty_on_device">Преземените датотеки и папки  ќе се појават тука.</string>
+    <string name="file_list_empty_recent_files_description">Датотеките и папките кои скоро ќе ги измените ќе се појават тука.</string>
+    <string name="file_list_empty_recent_files_headline">Нема скоро изменети датотеки</string>
     <string name="file_list_empty_recently_modified">Нема пронајдено датотеки изменети во последните 7 дена.</string>
     <string name="file_list_empty_search">Можеби е во друга папка?</string>
     <string name="file_list_empty_shared">Датотеките и папките кои ги споделувате ќе се појават тука.</string>
@@ -405,6 +408,8 @@
     <string name="media_forward_description">Копче за брзо премотување</string>
     <string name="media_notif_ticker">%1$s пуштач на музика</string>
     <string name="media_play_pause_description">Копче за пуштање или пауза</string>
+    <string name="media_player_pause">Пауза</string>
+    <string name="media_player_play">Слајдшоу</string>
     <string name="media_rewind_description">Копче за премотување</string>
     <string name="media_state_playing">%1$s (свири)</string>
     <string name="menu_item_sort_by_date_newest_first">Новите прво</string>
@@ -583,7 +588,7 @@
     <string name="share_link_with_label">Сподели линк (%1$s)</string>
     <string name="share_no_expiration_date_label">Постави рок на траење</string>
     <string name="share_no_password_title">Поставете лозинка</string>
-    <string name="share_permission_can_edit">Може да се уредува</string>
+    <string name="share_permission_can_edit">Може да уредува</string>
     <string name="share_permission_file_request">Барање за датотека</string>
     <string name="share_permission_view_only">Само за гледање</string>
     <string name="share_re_share_permission">Сподели</string>
@@ -753,9 +758,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Нагодување</string>
     <string name="uploader_wrn_no_account_text">Нема %1$s сметка на твојот уред. Додадете сметка.</string>
     <string name="uploader_wrn_no_account_title">Не е пронајдена сметка</string>
+    <string name="uploads_view_group_completed_uploads">Завршено</string>
     <string name="uploads_view_group_current_uploads">Моменталлни</string>
     <string name="uploads_view_group_failed_uploads">Неуспешни/на чекање рестарт</string>
-    <string name="uploads_view_group_finished_uploads">Прикачено</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Откажано</string>
     <string name="uploads_view_later_waiting_to_upload">Чекање за прикачување</string>
     <string name="uploads_view_title">Прикачувања</string>
@@ -778,7 +783,9 @@
     <string name="user_icon">Корисник</string>
     <string name="user_info_address">Адреса</string>
     <string name="user_info_email">Е-пошта</string>
+    <string name="user_info_groups">Групи</string>
     <string name="user_info_phone">Телефонски број</string>
+    <string name="user_info_profile">Профил</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Веб страна</string>
     <string name="user_information_retrieval_error">Грешка при превземањето на информациите за корисникот</string>

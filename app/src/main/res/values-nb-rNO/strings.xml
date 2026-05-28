@@ -45,6 +45,7 @@
     <string name="assistant_screen_delete_task_alert_dialog_title">Slett oppgave</string>
     <string name="assistant_screen_empty_content_description">Prøv å sende en melding for å starte en samtale.</string>
     <string name="assistant_screen_empty_content_title">Hallo der! Hva kan jeg hjelpe deg med i dag?</string>
+    <string name="assistant_screen_retry_response_generation">Prøv å generere svar på nytt</string>
     <string name="assistant_screen_task_create_fail_message">Det oppstod en feil under oppretting av oppgaven</string>
     <string name="assistant_screen_task_create_success_message">Oppgave opprettet</string>
     <string name="assistant_screen_task_delete_fail_message">Det oppstod en feil under sletting av oppgaven</string>
@@ -269,7 +270,6 @@
     <string name="drawer_item_assistant">Assistent</string>
     <string name="drawer_item_favorites">Favoritter</string>
     <string name="drawer_item_gallery">Media</string>
-    <string name="drawer_item_groupfolders">Gruppemappe</string>
     <string name="drawer_item_home">Hjem</string>
     <string name="drawer_item_notifications">Varsler</string>
     <string name="drawer_item_on_device">På enheten</string>
@@ -373,6 +373,8 @@
     <string name="file_list_empty_local_search">Ingen fil eller mappe som samsvarer med søket ditt</string>
     <string name="file_list_empty_moving">Ingenting her. Du kan legge til en mappe!</string>
     <string name="file_list_empty_on_device">Nedlastede filer og mapper vil vises her.</string>
+    <string name="file_list_empty_recent_files_description">Filer og mapper du nylig har endret, vises her.</string>
+    <string name="file_list_empty_recent_files_headline">Ingen nylig endrede filer</string>
     <string name="file_list_empty_recently_modified">Fant ingen filer endret de siste 7 dagene</string>
     <string name="file_list_empty_search">Vil du prøve i en annen mappe?</string>
     <string name="file_list_empty_shared">Filer og mapper du deler vil dukke opp her.</string>
@@ -525,6 +527,8 @@
     <string name="media_forward_description">Spol fremover</string>
     <string name="media_notif_ticker">%1$s musikkspiller</string>
     <string name="media_play_pause_description">Spill eller pause</string>
+    <string name="media_player_pause">Pause</string>
+    <string name="media_player_play">Spill</string>
     <string name="media_rewind_description">Spol tilbake</string>
     <string name="media_state_playing">%1$s (spiller)</string>
     <string name="menu_item_sort_by_date_newest_first">Nyeste først</string>
@@ -976,9 +980,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Oppsett</string>
     <string name="uploader_wrn_no_account_text">Det finnes ingen %1$s-kontoer på enheten din. Sett opp en konto først.</string>
     <string name="uploader_wrn_no_account_title">Ingen konto funnet</string>
+    <string name="uploads_view_group_completed_uploads">Ferdig</string>
     <string name="uploads_view_group_current_uploads">Nåværende</string>
     <string name="uploads_view_group_failed_uploads">Mislyktes/venter omstart</string>
-    <string name="uploads_view_group_finished_uploads">Opplastet</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Avbrutt</string>
     <string name="uploads_view_later_waiting_to_upload">Venter på å laste opp</string>
     <string name="uploads_view_title">Opplastinger</string>
@@ -1003,7 +1007,9 @@
     <string name="user_icon">Bruker</string>
     <string name="user_info_address">Adresse</string>
     <string name="user_info_email">E-post</string>
+    <string name="user_info_groups">Grupper</string>
     <string name="user_info_phone">Telefonnummer</string>
+    <string name="user_info_profile">Profil</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Nettsted</string>
     <string name="user_information_retrieval_error">Feil ved innhenting av brukerinformasjon</string>

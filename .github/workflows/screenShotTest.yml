@@ -28,14 +28,14 @@ jobs:
             -   uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
             -   name: Gradle cache
-                uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+                uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
                 with:
                     path: |
                         ~/.gradle/caches
                         ~/.gradle/wrapper
                     key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
             -   name: AVD cache
-                uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+                uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
                 id: avd-cache
                 with:
                     path: |
@@ -56,7 +56,7 @@ jobs:
 
             -   name: create AVD and generate snapshot for caching
                 if: steps.avd-cache.outputs.cache-hit != 'true'
-                uses: reactivecircus/android-emulator-runner@b530d96654c385303d652368551fb075bc2f0b6b # v2.35.0
+                uses: reactivecircus/android-emulator-runner@e89f39f1abbbd05b1113a29cf4db69e7540cae5a # v2.37.0
                 with:
                     api-level: ${{ matrix.api-level }}
                     force-avd-creation: false
@@ -73,7 +73,6 @@ jobs:
                     echo "org.gradle.caching=true" >> $HOME/.gradle/gradle.properties
                     echo "org.gradle.parallel=true" >> $HOME/.gradle/gradle.properties
                     echo "org.gradle.configureondemand=true" >> $HOME/.gradle/gradle.properties
-                    echo "kapt.incremental.apt=true" >> $HOME/.gradle/gradle.properties
 
             -   name: Build generic flavor
                 run: ./gradlew assembleGenericDebug
@@ -87,7 +86,7 @@ jobs:
             -   name: Run screenshot tests
                 env:
                     SHOT_TEST: "true"
-                uses: reactivecircus/android-emulator-runner@b530d96654c385303d652368551fb075bc2f0b6b # v2.35.0
+                uses: reactivecircus/android-emulator-runner@e89f39f1abbbd05b1113a29cf4db69e7540cae5a # v2.37.0
                 with:
                     api-level: ${{ matrix.api-level }}
                     force-avd-creation: false
@@ -102,7 +101,7 @@ jobs:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 run: scripts/uploadReport.sh "${{ secrets.LOG_USERNAME }}" "${{ secrets.LOG_PASSWORD }}" ${{github.event.number}} "${{ matrix.color }}-${{ matrix.scheme }}" "Screenshot" ${{github.event.number}}
             -   name: Archive Espresso results
-                uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+                uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
                 if: ${{ always() }}
                 with:
                     name: Report-${{ matrix.color }}-${{ matrix.scheme }}

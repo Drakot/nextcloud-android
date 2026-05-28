@@ -1,6 +1,7 @@
 /*
  * Nextcloud - Android Client
  *
+ * SPDX-FileCopyrightText: 2026 Philipp Hasper <vcs@hasper.info>
  * SPDX-FileCopyrightText: 2023 Alper Ozturk <alper.ozturk@nextcloud.com>
  * SPDX-FileCopyrightText: 2018 Andy Scherzinger <info@andy-scherzinger.de>
  * SPDX-FileCopyrightText: 2018 Jessie Chatham Spencer <jessie@teainspace.com>
@@ -15,21 +16,25 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.ActionMode
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
+import com.nextcloud.client.account.UserAccountManager
 import com.nextcloud.client.di.Injectable
+import com.nextcloud.client.jobs.upload.FileUploadHelper
+import com.nextcloud.client.network.ConnectivityService
 import com.nextcloud.utils.extensions.getTypedActivity
+import com.nextcloud.utils.extensions.removeFiles
 import com.owncloud.android.R
 import com.owncloud.android.datamodel.FileDataStorageManager
 import com.owncloud.android.datamodel.OCFile
 import com.owncloud.android.ui.activity.FileActivity
-import com.owncloud.android.ui.activity.FileDisplayActivity
+import com.owncloud.android.ui.activity.OnFilesRemovedListener
 import com.owncloud.android.ui.dialog.ConfirmationDialogFragment.ConfirmationDialogFragmentListener
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-/**
- * Dialog requiring confirmation before removing a collection of given OCFiles.
- * Triggers the removal according to the user response.
- */
 class RemoveFilesDialogFragment :
     ConfirmationDialogFragment(),
     ConfirmationDialogFragmentListener,
@@ -39,6 +44,12 @@ class RemoveFilesDialogFragment :
 
     @Inject
     lateinit var fileDataStorageManager: FileDataStorageManager
+
+    @Inject
+    lateinit var connectivityService: ConnectivityService
+
+    @Inject
+    lateinit var userAccountManager: UserAccountManager
 
     private var positiveButton: MaterialButton? = null
 
@@ -88,43 +99,31 @@ class RemoveFilesDialogFragment :
     }
 
     private fun removeFiles(onlyLocalCopy: Boolean) {
-        val (offlineFiles, files) = mTargetFiles?.partition { it.isOfflineOperation } ?: Pair(emptyList(), emptyList())
+        val (offlineFiles, files) = mTargetFiles
+            ?.partition { it.isOfflineOperation }
+            ?: (emptyList<OCFile>() to emptyList())
 
-        offlineFiles.forEach {
-            fileDataStorageManager.deleteOfflineOperation(it)
-        }
+        offlineFiles.forEach(fileDataStorageManager::deleteOfflineOperation)
 
+        val listener = getTypedActivity(OnFilesRemovedListener::class.java)
         val fileActivity = getTypedActivity(FileActivity::class.java)
-        val fda = getTypedActivity(FileDisplayActivity::class.java)
-        fileActivity?.connectivityService?.isNetworkAndServerAvailable { result ->
-            if (result) {
-                fileActivity.showLoadingDialog(fileActivity.getString(R.string.wait_a_moment))
 
-                fda?.deleteBatchTracker?.startBatchDelete(files.size)
-
-                if (files.isNotEmpty()) {
-                    // Display the snackbar message only when a single file is deleted.
-                    val inBackground = (files.size != 1)
-                    fileActivity.fileOperationsHelper?.removeFiles(files, onlyLocalCopy, inBackground)
+        fileActivity?.lifecycleScope?.launch(Dispatchers.IO) {
+            val (autoUploadEntities, filesToRemove) =
+                FileUploadHelper.instance().splitFilesByAutoUpload(files, userAccountManager.user.accountName)
+            withContext(Dispatchers.Main) {
+                if (autoUploadEntities.isNotEmpty()) {
+                    listener?.onAutoUploadFolderRemoved(
+                        entities = autoUploadEntities,
+                        filesToRemove = files,
+                        onlyLocalCopy = onlyLocalCopy
+                    )
                 }
 
-                if (offlineFiles.isNotEmpty()) {
-                    fda?.refreshCurrentDirectory()
-                }
-
-                fileActivity.dismissLoadingDialog()
-            } else {
-                if (onlyLocalCopy) {
-                    fileActivity.fileOperationsHelper?.removeFiles(files, true, true)
-                } else {
-                    files.forEach { file ->
-                        fileDataStorageManager.addRemoveFileOfflineOperation(file)
-                    }
-                }
-
-                fda?.refreshCurrentDirectory()
+                fileActivity.removeFiles(offlineFiles, filesToRemove, onlyLocalCopy, listener)
+                finishActionMode()
             }
-
+        } ?: run {
             finishActionMode()
         }
     }
@@ -221,6 +220,7 @@ class RemoveFilesDialogFragment :
             val list = ArrayList<OCFile>().apply {
                 add(file)
             }
+
             return newInstance(list)
         }
     }

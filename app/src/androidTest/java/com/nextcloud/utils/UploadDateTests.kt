@@ -1,6 +1,7 @@
 /*
  * Nextcloud - Android Client
  *
+ * SPDX-FileCopyrightText: 2026 Philipp Hasper <vcs@hasper.info>
  * SPDX-FileCopyrightText: 2026 Alper Ozturk <alper.ozturk@nextcloud.com>
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
@@ -15,40 +16,31 @@ import com.nextcloud.client.database.entity.toOCUpload
 import com.nextcloud.client.database.entity.toUploadEntity
 import com.owncloud.android.R
 import com.owncloud.android.utils.DisplayUtils
-import io.mockk.MockKAnnotations
-import io.mockk.every
-import io.mockk.mockkStatic
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 
 class UploadDateTests {
 
     companion object {
-        private const val JANUARY_27_2026 = 1769505718000
-        private const val ONE_YEAR = 365L * 24 * 60 * 60 * 1000
-        private const val ONE_MONTH = 30L * 24 * 60 * 60 * 1000
-        private const val ONE_WEEK = 7 * 24 * 60 * 60 * 1000
-        private const val TWO_HOURS = 2 * 60 * 60 * 1000
-        private const val ONE_MINUTE = 60_000
-        private const val THIRTY_SECONDS = 30_000
+        private const val THIRTY_SECONDS = 30_000L
+        private const val ONE_MINUTE = 60_000L
+        private const val ONE_HOUR = 60 * ONE_MINUTE
+        private const val ONE_DAY = 24 * ONE_HOUR
 
-        private const val DATE_FORMATTER_PATTERN = "MMM dd, yyyy, hh:mm:ss a"
+        private const val ONE_YEAR = 365L * ONE_DAY
+        private const val ONE_MONTH = 30L * ONE_DAY
+        private const val ONE_WEEK = 7L * ONE_DAY
+        private const val TWO_HOURS = 2L * ONE_HOUR
     }
 
     private lateinit var context: Context
 
     @Before
     fun setup() {
-        context = InstrumentationRegistry.getInstrumentation().context
-        MockKAnnotations.init(this, relaxed = true)
-        mockkStatic(System::class)
-        every { System.currentTimeMillis() } returns JANUARY_27_2026
+        context = InstrumentationRegistry.getInstrumentation().targetContext
     }
 
     @Test
@@ -92,62 +84,185 @@ class UploadDateTests {
     fun getRelativeDateTimeStringReturnsSecondsAgoForRecentPast() {
         val result = DisplayUtils.getRelativeDateTimeString(
             context,
-            JANUARY_27_2026 - THIRTY_SECONDS,
-            DateUtils.SECOND_IN_MILLIS,
+            System.currentTimeMillis() - THIRTY_SECONDS,
+            DateUtils.MINUTE_IN_MILLIS,
             DateUtils.WEEK_IN_MILLIS,
             0
         )
-        assertTrue(result.toString() == context.getString(R.string.file_list_seconds_ago))
+        assertEquals(context.getString(R.string.file_list_seconds_ago), result.toString())
     }
 
     @Test
-    fun getRelativeDateTimeStringReturnsFutureAsHumanReadableWhenShowFutureIsFalse() {
-        val formatter = SimpleDateFormat(DATE_FORMATTER_PATTERN, Locale.US)
-        val time = JANUARY_27_2026 + ONE_MINUTE
-        val expected = formatter.format(Date(time))
+    fun getRelativeDateTimeStringReturnsFutureAsAbsoluteWhenShowFutureIsFalse() {
+        val time = System.currentTimeMillis() + ONE_MINUTE
+        val expected = java.text.DateFormat.getDateTimeInstance().format(Date(time))
+
+        val result = DisplayUtils.getRelativeDateTimeString(
+            context,
+            time,
+            DateUtils.SECOND_IN_MILLIS,
+            DateUtils.WEEK_IN_MILLIS,
+            0,
+            false
+        )
+        assertEquals(expected, result.toString())
+    }
+
+    @Test
+    fun getRelativeDateTimeStringReturnsFutureAsRelativeWhenShowFutureIsTrue() {
+        val expected = "In 1 minute"
+        val time = System.currentTimeMillis() + ONE_MINUTE
+
+        assertRelativeDateTimeString(time, expected, DateUtils.MINUTE_IN_MILLIS, showFuture = true)
+    }
+
+    @Test
+    fun getRelativeDateTimeStringReturnsRelativeStringForHoursAgo() {
+        val expected = "2 hours ago"
+        val time = System.currentTimeMillis() - TWO_HOURS
 
         assertRelativeDateTimeString(time, expected, DateUtils.SECOND_IN_MILLIS)
     }
 
     @Test
-    fun getRelativeDateTimeStringReturnsProperRelativeStringForHoursAgo() {
-        val expected = "2 hours ago"
-        val time = JANUARY_27_2026 - TWO_HOURS
-
-        assertRelativeDateTimeString(time, expected, DateUtils.MINUTE_IN_MILLIS)
-    }
-
-    @Test
-    fun getRelativeDateTimeStringReturnsRelativeStringForOneWeekAgo() {
-        val expected = "Jan 20"
-        val time = JANUARY_27_2026 - ONE_WEEK
+    fun getRelativeDateTimeStringReturnsAbbreviatedStringForOneWeekAgo() {
+        val time = System.currentTimeMillis() - ONE_WEEK
+        val expectedString = DateUtils.getRelativeDateTimeString(
+            context,
+            time,
+            DateUtils.MINUTE_IN_MILLIS,
+            DateUtils.WEEK_IN_MILLIS,
+            0
+        ).toString()
+        val parts = expectedString.split(",")
+        val expected = if (parts.size == 2) {
+            if (parts[1].contains(":") && !parts[0].contains(":")) parts[0].trim() else parts[1].trim()
+        } else {
+            expectedString
+        }
 
         assertRelativeDateTimeString(time, expected)
     }
 
     @Test
-    fun getRelativeDateTimeStringReturnsRelativeStringForOneMonthAgo() {
-        val expected = "12/28/2025"
-        val time = JANUARY_27_2026 - ONE_MONTH
+    fun getRelativeDateTimeStringReturnsAbbreviatedStringForOneMonthAgo() {
+        val time = System.currentTimeMillis() - ONE_MONTH
+        val expectedString = DateUtils.getRelativeDateTimeString(
+            context,
+            time,
+            DateUtils.SECOND_IN_MILLIS,
+            DateUtils.WEEK_IN_MILLIS,
+            0
+        ).toString()
+        val parts = expectedString.split(",")
+        val expected = if (parts.size == 2) {
+            if (parts[1].contains(":") && !parts[0].contains(":")) parts[0].trim() else parts[1].trim()
+        } else {
+            expectedString
+        }
 
-        assertRelativeDateTimeString(time, expected, DateUtils.DAY_IN_MILLIS)
+        assertRelativeDateTimeString(time, expected, DateUtils.SECOND_IN_MILLIS)
     }
 
     @Test
-    fun getRelativeDateTimeStringReturnsRelativeStringForOneYearAgo() {
-        val expected = "1/27/2025"
-        val time = JANUARY_27_2026 - ONE_YEAR
+    fun getRelativeDateTimeStringReturnsAbsoluteStringForOneYearAgo() {
+        val time = System.currentTimeMillis() - ONE_YEAR
+        val expectedString = DateUtils.getRelativeDateTimeString(
+            context,
+            time,
+            DateUtils.SECOND_IN_MILLIS,
+            DateUtils.WEEK_IN_MILLIS,
+            0
+        ).toString()
+        val parts = expectedString.split(",")
+        val expected = if (parts.size == 2) {
+            if (parts[1].contains(":") && !parts[0].contains(":")) parts[0].trim() else parts[1].trim()
+        } else {
+            expectedString
+        }
 
-        assertRelativeDateTimeString(time, expected, DateUtils.DAY_IN_MILLIS)
+        assertRelativeDateTimeString(time, expected, DateUtils.SECOND_IN_MILLIS)
+    }
+
+    @Suppress("MagicNumber")
+    @Test
+    fun getRelativeDateTimeStringReturnsDaysForDayInMillis() {
+        var testTimestamp = System.currentTimeMillis()
+        var expected = "Today"
+        var result = DisplayUtils.getRelativeDateTimeString(
+            context,
+            testTimestamp,
+            DateUtils.DAY_IN_MILLIS,
+            DateUtils.WEEK_IN_MILLIS,
+            0,
+            false
+        )
+        assertEquals(expected, result)
+
+        testTimestamp = System.currentTimeMillis() - DateUtils.DAY_IN_MILLIS
+        expected = "Yesterday"
+        result = DisplayUtils.getRelativeDateTimeString(
+            context,
+            testTimestamp,
+            DateUtils.DAY_IN_MILLIS,
+            DateUtils.WEEK_IN_MILLIS,
+            0,
+            false
+        )
+        assertEquals(expected, result)
+
+        testTimestamp = System.currentTimeMillis() - 2 * DateUtils.DAY_IN_MILLIS
+        expected = "2 days ago"
+        result = DisplayUtils.getRelativeDateTimeString(
+            context,
+            testTimestamp,
+            DateUtils.DAY_IN_MILLIS,
+            DateUtils.WEEK_IN_MILLIS,
+            0,
+            false
+        )
+        assertEquals(expected, result)
+
+        testTimestamp = System.currentTimeMillis() - 7 * DateUtils.DAY_IN_MILLIS
+        val expectedString = DateUtils.getRelativeDateTimeString(
+            context,
+            testTimestamp,
+            DateUtils.DAY_IN_MILLIS,
+            DateUtils.WEEK_IN_MILLIS,
+            0
+        ).toString()
+        val parts = expectedString.split(",")
+        expected = if (parts.size == 2) {
+            if (parts[1].contains(":") && !parts[0].contains(":")) parts[0].trim() else parts[1].trim()
+        } else {
+            expectedString
+        }
+        result = DisplayUtils.getRelativeDateTimeString(
+            context,
+            testTimestamp,
+            DateUtils.DAY_IN_MILLIS,
+            DateUtils.WEEK_IN_MILLIS,
+            0,
+            false
+        )
+        assertEquals(expected, result)
     }
 
     private fun assertRelativeDateTimeString(
         time: Long,
         expected: String,
         minResolution: Long = DateUtils.MINUTE_IN_MILLIS,
-        transitionResolution: Long = DateUtils.WEEK_IN_MILLIS
+        transitionResolution: Long = DateUtils.WEEK_IN_MILLIS,
+        showFuture: Boolean = false
     ) {
-        val result = DisplayUtils.getRelativeDateTimeString(context, time, minResolution, transitionResolution, 0)
+        val result = DisplayUtils.getRelativeDateTimeString(
+            context,
+            time,
+            minResolution,
+            transitionResolution,
+            0,
+            showFuture
+        )
         assertEquals(expected.normalizeResult(), result.toString().normalizeResult())
     }
 

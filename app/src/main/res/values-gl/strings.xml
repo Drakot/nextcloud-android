@@ -53,6 +53,7 @@
     <string name="assistant_screen_delete_task_alert_dialog_title">Eliminar tarefa</string>
     <string name="assistant_screen_empty_content_description">Probe a enviar unha mensaxe para iniciar unha conversa.</string>
     <string name="assistant_screen_empty_content_title">Ola! En que podo axudarlle hoxe?</string>
+    <string name="assistant_screen_retry_response_generation">Volver tentar a xeración de respostas</string>
     <string name="assistant_screen_select_task">Seleccione a tarefa</string>
     <string name="assistant_screen_send_message">Enviar a mensaxe</string>
     <string name="assistant_screen_task_bar_open_conversation_list">Lista de conversas abertas</string>
@@ -243,9 +244,12 @@
     <string name="could_not_retrieve_url">Non foi posíbel recuperar o URL</string>
     <string name="create">Crear</string>
     <string name="create_dir_fail_msg">Non foi posíbel crear o cartafol</string>
+    <string name="create_end_to_end_encrypted_share">Ligazón para compartir</string>
+    <string name="create_end_to_end_encrypted_share_title">Ligazóns para compartir cifradas de extremo a extremo</string>
     <string name="create_link">Crear ligazón</string>
     <string name="create_new">Novo</string>
     <string name="create_new_document">Novo documento</string>
+    <string name="create_new_encrypted_folder">Novo cartafol cifrado</string>
     <string name="create_new_folder">Novo cartafol</string>
     <string name="create_new_presentation">Nova presentación</string>
     <string name="create_new_spreadsheet">Nova folla de cálculo</string>
@@ -311,7 +315,7 @@
     <string name="drawer_item_assistant">Asistente</string>
     <string name="drawer_item_favorites">Favoritos</string>
     <string name="drawer_item_gallery">Multimedia</string>
-    <string name="drawer_item_groupfolders">Cartafoles de grupo</string>
+    <string name="drawer_item_groupfolders">Cartafoles de equipo</string>
     <string name="drawer_item_home">Inicio</string>
     <string name="drawer_item_notifications">Notificacións</string>
     <string name="drawer_item_on_device">No dispositivo</string>
@@ -402,6 +406,7 @@
     <string name="etm_transfer_type">Transferencia</string>
     <string name="etm_transfer_type_download">Descargar</string>
     <string name="etm_transfer_type_upload">Enviar</string>
+    <string name="extension_cannot_be_changed">Non é posíbel cambiar a extensión</string>
     <string name="extented_list_fragment_empty_list_message_no_write_permission">Non ten permiso para ou crear ou enviar os ficheiros neste cartafol.</string>
     <string name="external_shares">Comparticións externas</string>
     <string name="fab_label">Engadir ou enviar</string>
@@ -433,6 +438,8 @@
     <string name="file_list_empty_local_search">Non hai ningún ficheiro ou cartafol que coincida coa busca</string>
     <string name="file_list_empty_moving">Aquí non hai ren. Pode engadir un cartafol.</string>
     <string name="file_list_empty_on_device">Aquí amosaranse os ficheiros e cartafoles descargados</string>
+    <string name="file_list_empty_recent_files_description">Os ficheiros e cartafoles que modificou recentemente amosaranse aquí.</string>
+    <string name="file_list_empty_recent_files_headline">Non hai ficheiros modificados recentemente</string>
     <string name="file_list_empty_recently_modified">Non se atopou ningún ficheiro modificado nos últimos 7 días.</string>
     <string name="file_list_empty_search">Quizáis estea nun cartafol diferente?</string>
     <string name="file_list_empty_shared">Aquí amosaranse os ficheiros e cartafoles que comparta.</string>
@@ -554,6 +561,7 @@
     <string name="instant_upload_existing">Envíar tamén os ficheiros existentes</string>
     <string name="instant_upload_on_charging">Enviar só cando estea cargando</string>
     <string name="instant_upload_path">/EnvíoInstantáneo</string>
+    <string name="internal_share_headline_end_to_end_encrypted">Comparticións cifradas de extremo a extremo</string>
     <string name="internal_shares">Comparticións internas</string>
     <string name="internal_two_way_sync">Sincronización interna bidireccional</string>
     <string name="internal_two_way_sync_not_yet">Aínda non, pronto se sincronizará</string>
@@ -603,6 +611,8 @@
     <string name="media_forward_description">Botón de avance rápido</string>
     <string name="media_notif_ticker">Reprodutor de música %1$s</string>
     <string name="media_play_pause_description">Botón de reprodución ou pausa</string>
+    <string name="media_player_pause">Pausa</string>
+    <string name="media_player_play">Reproducir</string>
     <string name="media_rewind_description">Botón de retroceso</string>
     <string name="media_state_playing">%1$s (reproducindo)</string>
     <string name="menu_item_sort_by_date_newest_first">Os máis recentes primeiro</string>
@@ -1129,9 +1139,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Configuración</string>
     <string name="uploader_wrn_no_account_text">Non existen contas %1$s no seu dispositivo. Prepare antes unha conta.</string>
     <string name="uploader_wrn_no_account_title">Non se atopou a conta</string>
+    <string name="uploads_view_group_completed_uploads">Completado</string>
     <string name="uploads_view_group_current_uploads">Actual</string>
     <string name="uploads_view_group_failed_uploads">Produciuse un fallo / reinicio pendente</string>
-    <string name="uploads_view_group_finished_uploads">Enviado</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Cancelado</string>
     <string name="uploads_view_later_waiting_to_upload">Agardando para enviar</string>
     <string name="uploads_view_title">Envíos</string>
@@ -1158,7 +1168,9 @@
     <string name="user_icon">Usuario</string>
     <string name="user_info_address">Enderezo</string>
     <string name="user_info_email">Correo-e</string>
+    <string name="user_info_groups">Grupos</string>
     <string name="user_info_phone">Número de teléfono</string>
+    <string name="user_info_profile">Perfil</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Sitio web</string>
     <string name="user_information_retrieval_error">Produciuse un erro ao recuperar a información do usuario</string>
@@ -1260,22 +1272,6 @@
     <plurals name="items_selected_count">
         <item quantity="one">%d seleccionado</item>
         <item quantity="other">%d seleccionados</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="one">Atrasado %d segundo por mor de demasiados intentos errados</item>
-        <item quantity="other">Atrasado %d segundos por mor de demasiados intentos errados</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="one">Atrasado %d minuto por mor de demasiados intentos errados</item>
-        <item quantity="other">Atrasado %d minutos por mor de demasiados intentos errados</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="one">Atrasado %d minuto</item>
-        <item quantity="other">Atrasado %d minutos</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="one">%d segundo</item>
-        <item quantity="other">%d segundos</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d descarga restante</item>

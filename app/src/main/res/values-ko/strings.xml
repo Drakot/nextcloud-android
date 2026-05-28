@@ -49,6 +49,7 @@
     <string name="assistant_screen_delete_task_alert_dialog_title">결과 삭제</string>
     <string name="assistant_screen_empty_content_description">대화를 시작하기 위해 메시지를 보내보세요.</string>
     <string name="assistant_screen_empty_content_title">안녕하세요! 오늘은 무엇을 도와드릴까요?</string>
+    <string name="assistant_screen_retry_response_generation">응답 생성 재시도</string>
     <string name="assistant_screen_task_create_fail_message">작업을 생성하는 중에 오류가 발생했습니다.</string>
     <string name="assistant_screen_task_create_success_message">작업이 생성됨</string>
     <string name="assistant_screen_task_delete_fail_message">작업을 삭제하는 중에 오류가 발생했습니다.</string>
@@ -276,7 +277,6 @@
     <string name="drawer_item_assistant">어시스턴트</string>
     <string name="drawer_item_favorites">즐겨찾기</string>
     <string name="drawer_item_gallery">미디어</string>
-    <string name="drawer_item_groupfolders">그룹 폴더</string>
     <string name="drawer_item_home">홈</string>
     <string name="drawer_item_notifications">알림</string>
     <string name="drawer_item_on_device">장치</string>
@@ -387,6 +387,8 @@
     <string name="file_list_empty_local_search">검색 결과가 없습니다</string>
     <string name="file_list_empty_moving">항목이 없습니다. 폴더를 추가할 수 있습니다.</string>
     <string name="file_list_empty_on_device">다운로드 받은 파일과 폴더가 여기 나타날 것입니다.</string>
+    <string name="file_list_empty_recent_files_description">최근에 수정한 파일과 폴더가 이곳에 표시됩니다.</string>
+    <string name="file_list_empty_recent_files_headline">최근에 수정된 파일 없음</string>
     <string name="file_list_empty_recently_modified">검색 결과 지난 7일간 수정한 파일 없음</string>
     <string name="file_list_empty_search">다른 폴더에 있을 수도 있습니다.</string>
     <string name="file_list_empty_shared">당신이 공유한 파일과 폴더가 여기 나타날 것입니다.</string>
@@ -543,6 +545,8 @@
     <string name="media_forward_description">빨리감기 단추</string>
     <string name="media_notif_ticker">%1$s 음악 재생기</string>
     <string name="media_play_pause_description">재생 혹은 일시 정지 단추</string>
+    <string name="media_player_pause">일시 정지</string>
+    <string name="media_player_play">재생</string>
     <string name="media_rewind_description">되감기 단추</string>
     <string name="media_state_playing">%1$s(재생 중)</string>
     <string name="menu_item_sort_by_date_newest_first">최신 항목 먼저</string>
@@ -1010,9 +1014,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">설정</string>
     <string name="uploader_wrn_no_account_text">이 장치에 %1$s 계정이 없습니다. 먼저 계정을 설정하십시오.</string>
     <string name="uploader_wrn_no_account_title">계정 없음</string>
+    <string name="uploads_view_group_completed_uploads">완료됨</string>
     <string name="uploads_view_group_current_uploads">현재</string>
     <string name="uploads_view_group_failed_uploads">다시 시작 실패/대기 중</string>
-    <string name="uploads_view_group_finished_uploads">업로드됨</string>
     <string name="uploads_view_group_manually_cancelled_uploads">취소됨</string>
     <string name="uploads_view_later_waiting_to_upload">업로드 대기 중</string>
     <string name="uploads_view_title">업로드</string>
@@ -1037,7 +1041,9 @@
     <string name="user_icon">사용자</string>
     <string name="user_info_address">주소</string>
     <string name="user_info_email">이메일</string>
+    <string name="user_info_groups">그룹</string>
     <string name="user_info_phone">전화번호</string>
+    <string name="user_info_profile">프로필</string>
     <string name="user_info_twitter">트위터</string>
     <string name="user_info_website">웹사이트</string>
     <string name="user_information_retrieval_error">사용자 정보를 불러오는 중 오류 발생</string>
@@ -1107,18 +1113,6 @@
     </plurals>
     <plurals name="items_selected_count">
         <item quantity="other">%d개 선택됨</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="other">너무 많은 잘못된 시도로 %d초 지연</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="other">너무 많은 잘못된 시도로 %d분 지연</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="other">%d분 지연됨</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="other">%d초</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="other">%1$d 다운로드가 남았습니다</item>

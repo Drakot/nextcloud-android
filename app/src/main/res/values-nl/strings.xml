@@ -48,6 +48,8 @@
     <string name="assistant_screen_chat_fetch_error">Chat berichten ophalen is mislukt</string>
     <string name="assistant_screen_delete_task_alert_dialog_description">Bent u zeker dat u deze taak wilt verwijderen?</string>
     <string name="assistant_screen_delete_task_alert_dialog_title">Verwijder taak</string>
+    <string name="assistant_screen_empty_content_description">Probeer een bericht te versturen om het gesprek op te starten!</string>
+    <string name="assistant_screen_task_bar_open_conversation_list">Open gesprekslijst</string>
     <string name="assistant_screen_task_create_fail_message">Er is een fout opgetreden bij het aanmaken van de taak</string>
     <string name="assistant_screen_task_delete_fail_message">Er is een fout opgetreden bij het verwijderen van de taak</string>
     <string name="assistant_screen_task_list_error_state_message">Kan takenlijst niet ophalen. Controleer je internetverbinding.</string>
@@ -288,11 +290,12 @@
     <string name="drawer_item_assistant">Assistent</string>
     <string name="drawer_item_favorites">Favorieten</string>
     <string name="drawer_item_gallery">Media</string>
-    <string name="drawer_item_groupfolders">Groepfolders</string>
+    <string name="drawer_item_groupfolders">Teammappen</string>
     <string name="drawer_item_home">Thuis</string>
     <string name="drawer_item_notifications">Meldingen</string>
     <string name="drawer_item_on_device">Op het apparaat</string>
     <string name="drawer_item_personal_files">Persoonlijke bestanden</string>
+    <string name="drawer_item_recent_files">Recente bestanden</string>
     <string name="drawer_item_recently_modified">Recent gewijzigd</string>
     <string name="drawer_item_shared">Gedeeld</string>
     <string name="drawer_item_trashbin">Verwijderde bestanden</string>
@@ -406,6 +409,8 @@
     <string name="file_list_empty_local_search">Geen overeenkomstig bestand of map gevonden</string>
     <string name="file_list_empty_moving">Het is hier leeg. Je kan een map toevoegen!</string>
     <string name="file_list_empty_on_device">Gedownloade bestanden en mappen zie je hier.</string>
+    <string name="file_list_empty_recent_files_description">Bestanden en mappen die je recent gewijzigd hebt, worden hier getoond.</string>
+    <string name="file_list_empty_recent_files_headline">Geen recent gewijzigde bestanden</string>
     <string name="file_list_empty_recently_modified">Geen bestanden gevonden die de afgelopen 7 dagen zijn gewijzigd</string>
     <string name="file_list_empty_search">Misschien staat het in een andere map?</string>
     <string name="file_list_empty_shared">Bestanden en mappen die je deelt, worden hier getoond.</string>
@@ -571,6 +576,8 @@
     <string name="media_forward_description">Doorspoelknop</string>
     <string name="media_notif_ticker">%1$s muziekspeler</string>
     <string name="media_play_pause_description">Speel- of pauzeknop</string>
+    <string name="media_player_pause">Pauze</string>
+    <string name="media_player_play">Spelen</string>
     <string name="media_rewind_description">Terugspoelknop</string>
     <string name="media_state_playing">%1$s (speelt)</string>
     <string name="menu_item_sort_by_date_newest_first">Nieuwste eerst</string>
@@ -1034,6 +1041,7 @@
     <string name="upload_local_storage_not_copied">Bestand kan niet naar de lokale opschlag gekopieerd worden</string>
     <string name="upload_lock_failed">Vergrendeling van de map mislukt</string>
     <string name="upload_manually_cancelled">Upload was geannuleerd door de gebruiker</string>
+    <string name="upload_notification_manager_content_intent_description">Je kan het verwijderen of hervatten bij Uploads</string>
     <string name="upload_notification_manager_start_text">%1$d / %2$d - %3$s</string>
     <string name="upload_old_android">Encryptie kan alleen met &gt; >= Android 5.0</string>
     <string name="upload_query_move_foreign_files">Er is niet genoeg ruimte om de geselecteerde bestanden te kopiëren naar %1$s. Wil je ze in plaats daarvan verplaatsen?</string>
@@ -1071,9 +1079,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Configureren</string>
     <string name="uploader_wrn_no_account_text">Er zijn geen %1$s-accounts op dit apparaat. Stel eerst een account in.</string>
     <string name="uploader_wrn_no_account_title">Geen account gevonden</string>
+    <string name="uploads_view_group_completed_uploads">Voltooid</string>
     <string name="uploads_view_group_current_uploads">Huidige</string>
     <string name="uploads_view_group_failed_uploads">Mislukt/Wacht op herstart</string>
-    <string name="uploads_view_group_finished_uploads">Geüpload</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Geannuleerd</string>
     <string name="uploads_view_later_waiting_to_upload">Wachten om te uploaden</string>
     <string name="uploads_view_title">Uploads</string>
@@ -1100,7 +1108,9 @@
     <string name="user_icon">Gebruiker</string>
     <string name="user_info_address">Adres</string>
     <string name="user_info_email">E-mailadres</string>
+    <string name="user_info_groups">Groepen</string>
     <string name="user_info_phone">Telefoonnummer</string>
+    <string name="user_info_profile">Profiel</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Website</string>
     <string name="user_information_retrieval_error">Fout bij ophalen gebruikersinformatie</string>
@@ -1198,22 +1208,6 @@
     <plurals name="items_selected_count">
         <item quantity="one">%d geselecteerd</item>
         <item quantity="other">%d geselecteerd</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="one">%d seconde vertraagd vanwege te veel onjuiste pogingen</item>
-        <item quantity="other">%d seconden vertraagd vanwege te veel onjuiste pogingen</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="one">%d minuut vertraagt vanwege te veel onjuiste pogingen</item>
-        <item quantity="other">%d minuten vertraagd vanwege te veel onjuiste pogingen</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="one">%d minuut vertraagd</item>
-        <item quantity="other">%d minuten vertraagd</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="one">%d seconde</item>
-        <item quantity="other">%d seconden</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d download resterend</item>

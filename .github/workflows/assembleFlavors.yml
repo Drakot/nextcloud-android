@@ -28,12 +28,11 @@ jobs:
                 with:
                     distribution: "temurin"
                     java-version: 21
-            -   uses: gradle/actions/wrapper-validation@f29f5a9d7b09a7c6b29859002d29d24e1674c884 # v5.0.1
+            -   uses: gradle/actions/wrapper-validation@50e97c2cd7a37755bbfafc9c5b7cafaece252f6e # v6.1.0
             -   name: Build ${{ matrix.flavor }}
                 run: |
                     echo "org.gradle.jvmargs=-Xmx6g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:+UseParallelGC -XX:MaxMetaspaceSize=1g" >> gradle.properties
                     echo "org.gradle.caching=true" >> gradle.properties
                     echo "org.gradle.parallel=true" >> gradle.properties
                     echo "org.gradle.configureondemand=true" >> gradle.properties
-                    echo "kapt.incremental.apt=true" >> gradle.properties
                     ./gradlew assemble${{ matrix.flavor }}

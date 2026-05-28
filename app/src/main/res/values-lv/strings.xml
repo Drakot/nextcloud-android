@@ -9,7 +9,7 @@
     <string name="account_not_found">Konts nav atrasts!</string>
     <string name="action_edit">Labot</string>
     <string name="action_empty_notifications">Notīrīt visus paziņojumus</string>
-    <string name="action_empty_trashbin">Izdzēst miskastes saturu</string>
+    <string name="action_empty_trashbin">Iztīrīt atkritni</string>
     <string name="action_send_share">Nosūtīt/kopīgot</string>
     <string name="action_switch_grid_view">Režģa izkārtojums</string>
     <string name="action_switch_list_view">Saraksta izkārtojums</string>
@@ -132,7 +132,7 @@
     <string name="community_release_candidate_text">Šis laidiena kandidāts (RC) ir gaidāma laidiena momentuzņēmums, un tam vajadzētu būt noturīgam. Savas iestatnes pārbaudīšana varētu palīdzēt par to pārliecināties. Pārbaudīšanai var pieteikties Play veikalā vai pašrocīgi, apskatot F-Droid sadaļu \"Versija\". </string>
     <string name="community_testing_bug_text">Atradi kļūdu vai nepilnību?</string>
     <string name="community_testing_headline">Palīdzi testējot</string>
-    <string name="community_testing_report_text">Ziņojiet par problēmu Github</string>
+    <string name="community_testing_report_text">Ziņot par nepilnību Github</string>
     <string name="configure_new_media_folder_detection_notifications">Konfigurēt</string>
     <string name="confirmation_remove_file_alert">Vai tiešām izdzēst %1$s?</string>
     <string name="confirmation_remove_files_alert">Vai tiešām izdzēst atlasītos vienumus?</string>
@@ -241,6 +241,7 @@
     <string name="file_keep">Paturēt</string>
     <string name="file_list_empty">Augšupielādē kaut ko vai sinhronizē saturu ar savām ierīcēm!</string>
     <string name="file_list_empty_favorite_headline">Izlasē vēl nekā nav</string>
+    <string name="file_list_empty_favorites_filter_list">Datnes un mapes, ko pievienosi izlasei, tiks rādītas šeit.</string>
     <string name="file_list_empty_headline">Šeit nav datņu</string>
     <string name="file_list_empty_headline_search">Šajā mapē nav iznākuma</string>
     <string name="file_list_empty_headline_server_search">Nav iznākuma</string>
@@ -350,6 +351,8 @@
     <string name="media_forward_description">Patīšanas poga</string>
     <string name="media_notif_ticker">%1$s mūzikas atskaņotājs</string>
     <string name="media_play_pause_description">Atskaņot vai pauzēt</string>
+    <string name="media_player_pause">Pauzēt</string>
+    <string name="media_player_play">Atskaņot</string>
     <string name="media_rewind_description">Attīšanas poga</string>
     <string name="media_state_playing">%1$s (atskaņot)</string>
     <string name="menu_item_sort_by_date_newest_first">Jaunākie pirms</string>
@@ -463,7 +466,7 @@
     <string name="preview_image_description">Attēla priekšskatījums</string>
     <string name="preview_image_error_no_local_file">Nav vietējās datnes, ko priekšskatīt</string>
     <string name="preview_image_error_unknown_format">Nevar attēlot attēlu</string>
-    <string name="preview_sorry">Atvainojiet</string>
+    <string name="preview_sorry">Atvainojamies</string>
     <string name="privacy">Privātums</string>
     <string name="recommend_subject">Izmēģini %1$s savā ierīcē!</string>
     <string name="recommend_text">Izmanto %1$s lietotni arī Tu.\nLejuplādē to šeit: %2$s</string>
@@ -636,9 +639,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Iestatīt</string>
     <string name="uploader_wrn_no_account_text">Ierīcē nav neviena %1$s konta. Lūgums vispirms iestatīt kontu.</string>
     <string name="uploader_wrn_no_account_title">Nav atrastu kontu</string>
+    <string name="uploads_view_group_completed_uploads">Pabeigts</string>
     <string name="uploads_view_group_current_uploads">Pašreizējās</string>
     <string name="uploads_view_group_failed_uploads">Neizdevās/gaida atsākšanu</string>
-    <string name="uploads_view_group_finished_uploads">Augšupielādētas</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Atcelts</string>
     <string name="uploads_view_later_waiting_to_upload">Gaida augšupielādi</string>
     <string name="uploads_view_title">Augšupielādes</string>
@@ -662,7 +665,9 @@
     <string name="user_icon">Lietotājs</string>
     <string name="user_info_address">Adrese</string>
     <string name="user_info_email">E-pasts</string>
+    <string name="user_info_groups">Grupas</string>
     <string name="user_info_phone">Tālruņa numurs</string>
+    <string name="user_info_profile">Profils</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Mājaslapa</string>
     <string name="userinfo_no_info_headline">Personiskā informācija nav uzstādīta</string>

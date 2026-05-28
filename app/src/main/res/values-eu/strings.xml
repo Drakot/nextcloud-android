@@ -44,6 +44,10 @@
     <string name="app_widget_description">Paneleko trepeta bat erakusten du</string>
     <string name="appbar_search_in">Bilatu %s(e)n</string>
     <string name="appear_offline">Lineaz kanpo agertzen da</string>
+    <string name="assistant_screen_chat_create_error">Ezin izan da mezua bidali</string>
+    <string name="assistant_screen_chat_fetch_error">Ezin izan dira txat-mezuak eskuratu</string>
+    <string name="assistant_screen_chat_generate_error">Ezin izan da erantzuna sortu</string>
+    <string name="assistant_screen_conversations_go_back_to_assistant">Itzuli laguntza orrira</string>
     <string name="assistant_screen_delete_task_alert_dialog_description">Ziur zeregin hau ezabatu nahi duzula?</string>
     <string name="assistant_screen_delete_task_alert_dialog_title">Ezabatu zeregina</string>
     <string name="assistant_screen_task_create_fail_message">Errore bat gertatu da zeregina sortzean</string>
@@ -275,7 +279,6 @@
     <string name="drawer_item_assistant">Morroia</string>
     <string name="drawer_item_favorites">Gogokoak</string>
     <string name="drawer_item_gallery">Media</string>
-    <string name="drawer_item_groupfolders">Talde-karpetak</string>
     <string name="drawer_item_home">Etxea</string>
     <string name="drawer_item_notifications">Jakinarazpenak</string>
     <string name="drawer_item_on_device">Gailura</string>
@@ -389,6 +392,8 @@
     <string name="file_list_empty_local_search">Ez dago zure bilaketarekin bat datorren fitxategi edo karpetarik</string>
     <string name="file_list_empty_moving">Hemen ez dago ezer. Karpeta bat gehi dezakezu.</string>
     <string name="file_list_empty_on_device">Deskargaturiko fitxategiak eta karpetak hemen agertuko dira.</string>
+    <string name="file_list_empty_recent_files_description">Azkenaldian aldatu dituzun fitxategi eta karpetak hemen agertuko dira.</string>
+    <string name="file_list_empty_recent_files_headline">Ez dago azkenaldian aldatutako fitxategirik</string>
     <string name="file_list_empty_recently_modified">Ez da aurkitu azken 7 egunetan aldatu den fitxategirik</string>
     <string name="file_list_empty_search">Agian beste karpeta batean dago?</string>
     <string name="file_list_empty_shared">Partekatzen dituzun fitxategiak eta karpetak hemen agertuko dira.</string>
@@ -547,6 +552,8 @@
     <string name="media_forward_description">Bizkor aurreratu botoia</string>
     <string name="media_notif_ticker">%1$s musika erreproduzigailua</string>
     <string name="media_play_pause_description">Erreproduzitu edo pausatu botoia</string>
+    <string name="media_player_pause">Gelditu</string>
+    <string name="media_player_play">Jokatu</string>
     <string name="media_rewind_description">Birbobinatu botoia</string>
     <string name="media_state_playing">%1$s (erreproduzitzen)</string>
     <string name="menu_item_sort_by_date_newest_first">Berriena lehenengo</string>
@@ -1032,9 +1039,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Konfigurazioa</string>
     <string name="uploader_wrn_no_account_text">Ez dago %1$s konturik zure gailuan. Mesedez, konfiguratu kontu bat lehenbizi.</string>
     <string name="uploader_wrn_no_account_title">Ez da konturik aurkitu</string>
+    <string name="uploads_view_group_completed_uploads">Osatua</string>
     <string name="uploads_view_group_current_uploads">Unekoa</string>
     <string name="uploads_view_group_failed_uploads">Berrabiarazteko zain/huts egin du.</string>
-    <string name="uploads_view_group_finished_uploads">Igoa</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Ezeztatua</string>
     <string name="uploads_view_later_waiting_to_upload">Igotzeko itxoiten</string>
     <string name="uploads_view_title">Kargak</string>
@@ -1059,7 +1066,9 @@
     <string name="user_icon">Erabiltzailea</string>
     <string name="user_info_address">Helbidea</string>
     <string name="user_info_email">Posta elektronikoa</string>
+    <string name="user_info_groups">Taldeak</string>
     <string name="user_info_phone">Telefono zenbakia</string>
+    <string name="user_info_profile">Profila</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Webgunea</string>
     <string name="user_information_retrieval_error">Akatsa erabiltzailearen informazioa eskuratzerakoan</string>
@@ -1157,22 +1166,6 @@
     <plurals name="items_selected_count">
         <item quantity="one">aukeratuta %d</item>
         <item quantity="other">%d aukeratuta</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="one">Segundo %d-ez atzeratua saiakera oker gehiegi direla eta</item>
-        <item quantity="other">%dsegundoz atzeratua saiakera oker gehiegi direla eta</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="one">Segundo %d-ez atzeratua saiakera oker gehiegi direla eta</item>
-        <item quantity="other">%d segundoz atzeratua saiakera oker gehiegi direla eta</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="one">Minutu %d-ez atzeratua</item>
-        <item quantity="other">%d minutuz atzeratua</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="one">Segundo %d</item>
-        <item quantity="other">%d segundo</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">Deskarga %1$d falta da</item>

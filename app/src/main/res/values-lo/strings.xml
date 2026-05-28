@@ -49,6 +49,7 @@
     <string name="assistant_screen_delete_task_alert_dialog_title">Delete task</string>
     <string name="assistant_screen_empty_content_description">ລອງສົ່ງຂໍ້ຄວາມເພື່ອເລີ່ມການສົນທະນາ.</string>
     <string name="assistant_screen_empty_content_title">ສະບາຍດີ! ມີຫຍັງໃຫ້ຂ້ອຍຊ່ວຍມື້ນີ້ບໍ່?</string>
+    <string name="assistant_screen_retry_response_generation">ລອງສ້າງການຕອບກັບໃໝ່</string>
     <string name="assistant_screen_send_message">Send message</string>
     <string name="assistant_screen_task_create_fail_message">An error occurred while creating the task</string>
     <string name="assistant_screen_task_create_success_message">Task created</string>
@@ -229,6 +230,7 @@
     <string name="create_link">Create link</string>
     <string name="create_new">New</string>
     <string name="create_new_document">New document</string>
+    <string name="create_new_encrypted_folder">New encrypted folder</string>
     <string name="create_new_folder">ໂຟນເດີໃຫມ່</string>
     <string name="create_new_presentation">New presentation</string>
     <string name="create_new_spreadsheet">New spreadsheet</string>
@@ -294,7 +296,7 @@
     <string name="drawer_item_assistant">Assistant</string>
     <string name="drawer_item_favorites">ລາຍການທີ່ມັກ</string>
     <string name="drawer_item_gallery">ຊື່ມວນຊົນ</string>
-    <string name="drawer_item_groupfolders">Groupfolders</string>
+    <string name="drawer_item_groupfolders">Team folders</string>
     <string name="drawer_item_home">ໜ້າຫຼັກ</string>
     <string name="drawer_item_notifications">ການເເຈ້ງເຕືອນ</string>
     <string name="drawer_item_on_device">ເທິງອຸປະກອນ</string>
@@ -412,6 +414,8 @@
     <string name="file_list_empty_local_search">No file or folder matching your search</string>
     <string name="file_list_empty_moving">ບໍ່ມີຫຍັງໃນນີ້. ທ່ານສາມາດເພີ່ມໂຟນເດີໄດ້.</string>
     <string name="file_list_empty_on_device">ຟາຍແລະ ໂຟນ ເດີທີ່ດາວໂຫຼດ  ຈະສະແດງໃຫ້ເຫັນຢູ່ທີ່ນີ້ .</string>
+    <string name="file_list_empty_recent_files_description">Files and folders you recently modified will show up here.</string>
+    <string name="file_list_empty_recent_files_headline">No recently modified files</string>
     <string name="file_list_empty_recently_modified">ບໍ່ພົບຟາຍດັດແປງພາຍໃນ 7 ວັນລ່າສຸດ</string>
     <string name="file_list_empty_search">ບາງທີອາດຢູ່ໃນໂຟນເດີທີ່ແຕກຕ່າງກັນ?</string>
     <string name="file_list_empty_shared">ຟາຍ ແລະ ໂຟນເດີ ທີ່ ທ່ານແບ່ງປັນຈະສະແດງ ໃຫ້ເຫັນຢູ່ທີ່ນີ້</string>
@@ -580,6 +584,8 @@
     <string name="media_forward_description">ປຸ່ມກົດໄປຂ້າງຫນ້າ</string>
     <string name="media_notif_ticker">ເຄື່ອງຫຼິ້ນເພງ%1$s</string>
     <string name="media_play_pause_description">ປຸ່ມ ຫຼິ້ນ ຫຼື ຢຸດ</string>
+    <string name="media_player_pause">Pause</string>
+    <string name="media_player_play">Play</string>
     <string name="media_rewind_description">ປຸຸ່ມກັບຄືນ</string>
     <string name="media_state_playing"> (ຫຼິ້ນ)%1$s</string>
     <string name="menu_item_sort_by_date_newest_first">ໃໝ່ທີ່ສຸດກ່ອນ</string>
@@ -1086,9 +1092,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">ການຕັ້ງຄ່າ</string>
     <string name="uploader_wrn_no_account_text">ບໍ່ມີບັນຊີ%1$sໃນອຸປະກອນຂອງທ່ານ. ກະລຸນາຕັ້ງບັນຊີກ່ອນ.</string>
     <string name="uploader_wrn_no_account_title">ບໍ່ພົບບັນຊີ</string>
+    <string name="uploads_view_group_completed_uploads">ສຳເລັດ</string>
     <string name="uploads_view_group_current_uploads">ປັດຈຸບັນ</string>
     <string name="uploads_view_group_failed_uploads">ການເລີ່ມບໍ່ສຳເລັດ/ຄ້າງ</string>
-    <string name="uploads_view_group_finished_uploads">ອັບໂຫຼດແລ້ວ</string>
     <string name="uploads_view_group_manually_cancelled_uploads">ຍົກເລີກ</string>
     <string name="uploads_view_later_waiting_to_upload">ລໍຖ້າເພື່ອອັບໂຫຼດ</string>
     <string name="uploads_view_title">ອັບໂຫຼດ</string>
@@ -1115,7 +1121,9 @@
     <string name="user_icon">ຜູ້ໃຊ້</string>
     <string name="user_info_address">ທີ່ຢູ່</string>
     <string name="user_info_email">ອິເມວ</string>
+    <string name="user_info_groups">ກຸ່ມ</string>
     <string name="user_info_phone">ເບີໂທລະສັບ</string>
+    <string name="user_info_profile">Profile</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">ເວັບໄຊ</string>
     <string name="user_information_retrieval_error">ຂໍ້ຜິດພາດໃນດຶງຂໍ້ມູນຂອງຜູ້ໃຊ້</string>
@@ -1197,18 +1205,6 @@
     </plurals>
     <plurals name="items_selected_count">
         <item quantity="other">ເລືອກ%d</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="other">Delayed %d seconds due to too many wrong attempts</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="other">Delayed %d minutes due to too many wrong attempts</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="other">Delayed %d minutes</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="other">%d seconds</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="other">%1$d downloads remaining</item>

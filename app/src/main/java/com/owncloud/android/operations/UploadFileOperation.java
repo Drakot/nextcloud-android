@@ -25,6 +25,7 @@ import com.nextcloud.client.network.Connectivity;
 import com.nextcloud.client.network.ConnectivityService;
 import com.nextcloud.utils.autoRename.AutoRename;
 import com.nextcloud.utils.e2ee.E2EVersionHelper;
+import com.nextcloud.utils.extensions.RemoteOperationResultExtensionsKt;
 import com.owncloud.android.datamodel.ArbitraryDataProvider;
 import com.owncloud.android.datamodel.ArbitraryDataProviderImpl;
 import com.owncloud.android.datamodel.FileDataStorageManager;
@@ -913,7 +914,7 @@ public class UploadFileOperation extends SyncOperation {
     private void completeE2EUpload(RemoteOperationResult result, E2EFiles e2eFiles, OwnCloudClient client) {
         if (result.isSuccess()) {
             handleLocalBehaviour(e2eFiles.getTemporalFile(), e2eFiles.getExpectedFile(), e2eFiles.getOriginalFile(), client);
-        } else if (result.getCode() == ResultCode.SYNC_CONFLICT) {
+        } else if (RemoteOperationResultExtensionsKt.isConflict(result.getCode())) {
             getStorageManager().saveConflict(mFile, mFile.getEtagInConflict());
         }
 
@@ -1297,13 +1298,8 @@ public class UploadFileOperation extends SyncOperation {
                     // check if its real SYNC_CONFLICT
                     boolean isSameFileOnRemote = false;
                     if (mFile != null) {
-                        String localPath = mFile.getStoragePath();
-
-                        if (localPath != null) {
-                            File localFile = new File(localPath);
-                            isSameFileOnRemote = FileUploadHelper.Companion.instance()
-                                .isSameFileOnRemote(user, localFile, mRemotePath, mContext);
-                        }
+                        isSameFileOnRemote = FileUploadHelper.Companion.instance()
+                            .isSameFileOnRemote(user, mFile.getStoragePath(), mRemotePath, mContext);
                     }
 
                     if (isSameFileOnRemote) {
@@ -1514,6 +1510,8 @@ public class UploadFileOperation extends SyncOperation {
         int count = 2;
         boolean exists;
         String newPath;
+
+        // FIXME: Causing infinite loop during tests due to ExistenceCheckRemoteOperation result
         do {
             suffix = " (" + count + ")";
             newPath = extPos >= 0 ? remotePathWithoutExtension + suffix + "." + extension : remotePath + suffix;

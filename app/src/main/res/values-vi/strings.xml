@@ -312,6 +312,8 @@
     <string name="file_list_empty_headline_server_search">Không có kết quả</string>
     <string name="file_list_empty_moving">Không có gì ở đây. Bạn có thể thêm một thư mục</string>
     <string name="file_list_empty_on_device">Các tập tin và thư mục đã tải xuống sẽ hiển thị ở đây.</string>
+    <string name="file_list_empty_recent_files_description">Các tập tin và thư mục bạn sửa đổi gần đây sẽ hiển thị ở đây.</string>
+    <string name="file_list_empty_recent_files_headline">Không có tập tin được sửa đổi gần đây</string>
     <string name="file_list_empty_recently_modified">Không tìm thấy tệp nào được sửa đổi trong 7 ngày qua</string>
     <string name="file_list_empty_search">Có lẽ nó trong một thư mục khác?</string>
     <string name="file_list_empty_shared">Các tệp và thư mục bạn chia sẻ sẽ hiển thị ở đây.</string>
@@ -427,6 +429,8 @@
     <string name="media_forward_description">Nút đẩy nhanh tốc độ phát</string>
     <string name="media_notif_ticker">%1$s trình nghe nhạc</string>
     <string name="media_play_pause_description">Nút phát hoặc tạm dừng</string>
+    <string name="media_player_pause">Tạm dừng</string>
+    <string name="media_player_play">Phát</string>
     <string name="media_rewind_description">Nút chuyển lại</string>
     <string name="media_state_playing">%1$s (đang phát)</string>
     <string name="menu_item_sort_by_date_newest_first">Mới trước</string>
@@ -808,9 +812,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Cài đặt</string>
     <string name="uploader_wrn_no_account_text">Không có tài khoản %1$s trên thiết bị của bạn. Cần thiết lập tài khoản trước.</string>
     <string name="uploader_wrn_no_account_title">Không tìm thấy tài khoản</string>
+    <string name="uploads_view_group_completed_uploads">Hoàn thành</string>
     <string name="uploads_view_group_current_uploads">Hiện tại</string>
     <string name="uploads_view_group_failed_uploads">Không thành công/đang chờ khởi động lại</string>
-    <string name="uploads_view_group_finished_uploads">Đã tải lên</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Đã hủy</string>
     <string name="uploads_view_later_waiting_to_upload">Chờ tải lên</string>
     <string name="uploads_view_title">Tải lên</string>
@@ -834,7 +838,9 @@
     <string name="user_icon">Người dùng</string>
     <string name="user_info_address">Địa chỉ</string>
     <string name="user_info_email">Email</string>
+    <string name="user_info_groups">Nhóm</string>
     <string name="user_info_phone">Số điện thoại</string>
+    <string name="user_info_profile">Hồ sơ</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Website</string>
     <string name="user_information_retrieval_error">Lỗi khi truy xuất thông tin người dùng</string>

@@ -37,6 +37,7 @@
     <string name="assistant_screen_delete_task_alert_dialog_title">Διαγραφή εργασίας</string>
     <string name="assistant_screen_empty_content_description">Δοκιμάστε να στείλετε ένα μήνυμα για να ξεκινήσετε μια συνομιλία.</string>
     <string name="assistant_screen_empty_content_title">Γεια σας! Τι μπορώ να κάνω για σας σήμερα;</string>
+    <string name="assistant_screen_retry_response_generation">Επανάληψη δημιουργίας απάντησης</string>
     <string name="assistant_screen_task_create_success_message">Η εργασία δημιουργήθηκε</string>
     <string name="assistant_screen_top_bar_title">Βοηθός</string>
     <string name="assistant_task_detail_screen_input_button_title">Είσοδος</string>
@@ -245,7 +246,7 @@
     <string name="drawer_item_assistant">Βοηθός</string>
     <string name="drawer_item_favorites">Αγαπημένα</string>
     <string name="drawer_item_gallery">Πολυμέσα</string>
-    <string name="drawer_item_groupfolders">Ομαδικοί φάκελοι</string>
+    <string name="drawer_item_groupfolders">Φάκελοι ομάδας</string>
     <string name="drawer_item_home">Αρχική</string>
     <string name="drawer_item_notifications">Ειδοποιήσεις</string>
     <string name="drawer_item_on_device">Στην συσκευή</string>
@@ -342,6 +343,8 @@
     <string name="file_list_empty_headline_server_search">Κανένα αποτέλεσμα</string>
     <string name="file_list_empty_moving">Δεν υπάρχει τίποτα εδώ. Μπορείτε να προσθέσετε ένα φάκελο!</string>
     <string name="file_list_empty_on_device">Τα ληφθέντα αρχεία και φάκελοι θα εμφανίζονται εδώ.</string>
+    <string name="file_list_empty_recent_files_description">Εδώ θα εμφανίζονται τα αρχεία και οι φάκελοι που τροποποιήσατε πρόσφατα.</string>
+    <string name="file_list_empty_recent_files_headline">Δεν υπάρχουν πρόσφατα τροποποιημένα αρχεία</string>
     <string name="file_list_empty_recently_modified">Δεν βρέθηκαν τροποποιημένα αρχεία εντός των τελευταίων 7 ημερών</string>
     <string name="file_list_empty_search">Θα δοκιμάστε αναζήτηση και σε άλλο φάκελο;</string>
     <string name="file_list_empty_shared">Τα αρχεία και οι φάκελοι που διαμοιράζεστε θα εμφανίζονται εδώ.</string>
@@ -468,6 +471,8 @@
     <string name="media_forward_description">Κουμπί γρήγορης προώθησης</string>
     <string name="media_notif_ticker">%1$sαναπαραγωγή μουσικής</string>
     <string name="media_play_pause_description">Κουμπί αναπαραγωγής ή παύσης</string>
+    <string name="media_player_pause">Παύση</string>
+    <string name="media_player_play">Αναπαραγωγή</string>
     <string name="media_rewind_description">Κουμπί ταχείας κίνησης πίσω</string>
     <string name="media_state_playing">%1$s(αναπαραγωγή)</string>
     <string name="menu_item_sort_by_date_newest_first">Νεότερο πρώτα</string>
@@ -867,9 +872,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Ρύθμιση</string>
     <string name="uploader_wrn_no_account_text">Δεν υπάρχουν λογαριασμοί %1$s στη συσκευή σας. Παρακαλώ ρυθμίστε πρώτα ένα λογαριασμό.</string>
     <string name="uploader_wrn_no_account_title">Δεν βρέθηκε λογαριασμός</string>
+    <string name="uploads_view_group_completed_uploads">Ολοκληρωμένες</string>
     <string name="uploads_view_group_current_uploads">Τρέχουσα</string>
     <string name="uploads_view_group_failed_uploads">Αποτυχία/αναμονή επανεκκίνησης</string>
-    <string name="uploads_view_group_finished_uploads">Μεταφορτώθηκε</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Ακυρώθηκε</string>
     <string name="uploads_view_later_waiting_to_upload">Αναμονή για μεταφόρτωση</string>
     <string name="uploads_view_title">Μεταφορτώσεις</string>
@@ -893,7 +898,9 @@
     <string name="user_icon">Χρήστης</string>
     <string name="user_info_address">Διεύθυνση</string>
     <string name="user_info_email">Ηλεκτρονική αλληλογγραφία</string>
+    <string name="user_info_groups">Ομάδες</string>
     <string name="user_info_phone">Αριθμός τηλεφώνου</string>
+    <string name="user_info_profile">Προφίλ</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Ιστοσελίδα</string>
     <string name="user_information_retrieval_error">Σφάλμα ανάκτησης πληροφοριών χρήστη</string>

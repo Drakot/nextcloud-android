@@ -51,6 +51,7 @@
     <string name="assistant_screen_delete_task_alert_dialog_title">ۋەزىپىنى ئۆچۈرۈڭ</string>
     <string name="assistant_screen_empty_content_description">پاراڭلىشىش ئۈچۈن ئۇچۇر ئەۋەتىپ بېقىڭ.</string>
     <string name="assistant_screen_empty_content_title">ياخشىمۇسىز! بۈگۈن سىزگە نېمە ياردەم بېرەلەيمەن؟</string>
+    <string name="assistant_screen_retry_response_generation">قايتا-قايتا جاۋاب قايتۇرۇش</string>
     <string name="assistant_screen_send_message">ئۇچۇر ئەۋەتىڭ</string>
     <string name="assistant_screen_task_create_fail_message">ۋەزىپە قۇرغاندا خاتالىق كۆرۈلدى</string>
     <string name="assistant_screen_task_create_success_message">ۋەزىپە قۇرۇلدى</string>
@@ -235,6 +236,7 @@
     <string name="create_link">ئۇلىنىش قۇر</string>
     <string name="create_new">يېڭى</string>
     <string name="create_new_document">يېڭى ھۆججەت</string>
+    <string name="create_new_encrypted_folder">يېڭى شىفىرلانغان قىسقۇچ</string>
     <string name="create_new_folder">يېڭى ھۆججەت قىسقۇچ</string>
     <string name="create_new_presentation">يېڭى تونۇشتۇرۇش</string>
     <string name="create_new_spreadsheet">يېڭى ئېلېكترونلۇق جەدۋەل</string>
@@ -300,7 +302,7 @@
     <string name="drawer_item_assistant">ياردەمچى</string>
     <string name="drawer_item_favorites">ياقتۇرىدىغانلار</string>
     <string name="drawer_item_gallery">كۆپ-ۋاستە</string>
-    <string name="drawer_item_groupfolders">گۇرۇپپا ھۆججەتلىرى</string>
+    <string name="drawer_item_groupfolders">ئەتىرەت قىسقۇچى</string>
     <string name="drawer_item_home">ئۆي</string>
     <string name="drawer_item_notifications">ئۇقتۇرۇش</string>
     <string name="drawer_item_on_device">ئۈسكۈنىدە</string>
@@ -421,6 +423,8 @@
     <string name="file_list_empty_local_search">ئىزدىشىڭىزگە ماس كېلىدىغان ھۆججەت ياكى ھۆججەت قىسقۇچ يوق</string>
     <string name="file_list_empty_moving">بۇ يەردە ھېچنېمە يوق. قىسقۇچ قوشالايسىز.</string>
     <string name="file_list_empty_on_device">چۈشۈرۈلگەن ھۆججەت ۋە ھۆججەت قىسقۇچلار بۇ يەردە كۆرۈنىدۇ.</string>
+    <string name="file_list_empty_recent_files_description">سىز يېقىندا ئۆزگەرتكەن ھۆججەت ۋە ھۆججەت قىسقۇچلار بۇ يەردە كۆرۈنىدۇ.</string>
+    <string name="file_list_empty_recent_files_headline">يېقىندا ئۆزگەرتىلگەن ھۆججەت يوق</string>
     <string name="file_list_empty_recently_modified">يېقىنقى 7 كۈن ئىچىدە ئۆزگەرتىلگەن ھۆججەت تېپىلمىدى</string>
     <string name="file_list_empty_search">بەلكىم ئۇ باشقا ھۆججەت قىسقۇچتا بولۇشى مۇمكىن؟</string>
     <string name="file_list_empty_shared">سىز ئورتاقلاشقان ھۆججەت ۋە ھۆججەت قىسقۇچلار بۇ يەردە كۆرۈنىدۇ.</string>
@@ -541,6 +545,7 @@
     <string name="instant_upload_existing">مەۋجۇت ھۆججەتلەرنىمۇ يۈكلەڭ</string>
     <string name="instant_upload_on_charging">توك قاچىلىغاندا ئاندىن يۈكلەڭ</string>
     <string name="instant_upload_path">/ InstantUpload</string>
+    <string name="internal_share_headline_end_to_end_encrypted">باشتىن-ئاخىر شىفىرلانغان ھەمبەھىر</string>
     <string name="internal_shares">ئىچكى ھەمبەھىر</string>
     <string name="internal_two_way_sync">ئىچكى ئىككى خىل ماسقەدەملەش</string>
     <string name="internal_two_way_sync_not_yet">تېخى ئەمەس ، ئۇزۇن ئۆتمەي ماسقەدەملىنىدۇ</string>
@@ -589,6 +594,8 @@
     <string name="media_forward_description">تېز ئىلگىرىلەش كۇنۇپكىسى</string>
     <string name="media_notif_ticker">%1$s مۇزىكا قويغۇچ</string>
     <string name="media_play_pause_description">قويۇش ياكى توختىتىش كۇنۇپكىسى</string>
+    <string name="media_player_pause">توختات</string>
+    <string name="media_player_play">ئويناش</string>
     <string name="media_rewind_description">كەينىگە قايتۇرۇش كۇنۇپكىسى</string>
     <string name="media_state_playing">%1$s (ئويناش)</string>
     <string name="menu_item_sort_by_date_newest_first">ئەڭ يېڭى</string>
@@ -1103,9 +1110,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">تەڭشەك</string>
     <string name="uploader_wrn_no_account_text">ئۈسكۈنىڭىزدە%1$s ھېسابات يوق. ئالدى بىلەن ھېسابات قۇرۇڭ.</string>
     <string name="uploader_wrn_no_account_title">ھېسابات تېپىلمىدى</string>
+    <string name="uploads_view_group_completed_uploads">تاماملاندى</string>
     <string name="uploads_view_group_current_uploads">نۆۋەتتىكى</string>
     <string name="uploads_view_group_failed_uploads">قايتا قوزغىتىش مەغلۇب بولدى</string>
-    <string name="uploads_view_group_finished_uploads">يۈكلەندى</string>
     <string name="uploads_view_group_manually_cancelled_uploads">ئەمەلدىن قالدۇرۇلدى</string>
     <string name="uploads_view_later_waiting_to_upload">يوللاشنى ساقلاۋاتىدۇ</string>
     <string name="uploads_view_title">يۈكلەش</string>
@@ -1132,7 +1139,9 @@
     <string name="user_icon">ئىشلەتكۈچى</string>
     <string name="user_info_address">ئادرېس</string>
     <string name="user_info_email">ئېلخەت</string>
+    <string name="user_info_groups">گۇرۇپپىلار</string>
     <string name="user_info_phone">تېلېفون نومۇرى</string>
+    <string name="user_info_profile">ئارخىپ</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">تور بېكەت</string>
     <string name="user_information_retrieval_error">ئىشلەتكۈچى ئۇچۇرىنى ئەسلىگە كەلتۈرۈشتە خاتالىق</string>
@@ -1234,22 +1243,6 @@
     <plurals name="items_selected_count">
         <item quantity="one">%d تاللاندى</item>
         <item quantity="other">%d تاللاندى</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="one">بەك كۆپ خاتا ئۇرۇنۇش سەۋەبىدىن %d سىكۇنت كېچىكتۈرۈلدى</item>
-        <item quantity="other">بەك كۆپ خاتا ئۇرۇنۇش سەۋەبىدىن %d سىكۇنت كېچىكتۈرۈلدى</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="one">بەك كۆپ خاتا ئۇرۇنۇش سەۋەبىدىن %d مىنۇت كېچىكتۈرۈلدى</item>
-        <item quantity="other">بەك كۆپ خاتا ئۇرۇنۇش سەۋەبىدىن %d مىنۇت كېچىكتۈرۈلدى</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="one">%d مىنۇت كېچىكتۈرۈلدى</item>
-        <item quantity="other">%d مىنۇت كېچىكتۈرۈلدى</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="one">%d سېكۇنت</item>
-        <item quantity="other">%d سېكۇنت</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d چۈشۈرۈش قالدى</item>

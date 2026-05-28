@@ -49,6 +49,7 @@
     <string name="assistant_screen_delete_task_alert_dialog_title">Slet opgave</string>
     <string name="assistant_screen_empty_content_description">Prøv at sende en besked for at starte en samtale.</string>
     <string name="assistant_screen_empty_content_title">Hej! Hvad kan jeg hjælpe dig med i dag?</string>
+    <string name="assistant_screen_retry_response_generation">Forsøg responsgenerering igen</string>
     <string name="assistant_screen_task_create_fail_message">En fejl opstod under oprettelse af opgaven</string>
     <string name="assistant_screen_task_delete_fail_message">En fejl opstod under sletning af opgaven</string>
     <string name="assistant_screen_task_list_error_state_message">Kan ikke hente ophaveliste. Kontroller venligst din internetforbindelse.</string>
@@ -288,7 +289,7 @@
     <string name="drawer_item_assistant">Assistent</string>
     <string name="drawer_item_favorites">Favoritter</string>
     <string name="drawer_item_gallery">Medier</string>
-    <string name="drawer_item_groupfolders">Gruppemapper</string>
+    <string name="drawer_item_groupfolders">Teammapper</string>
     <string name="drawer_item_home">Hjem</string>
     <string name="drawer_item_notifications">Notifikationer</string>
     <string name="drawer_item_on_device">På enhed</string>
@@ -406,6 +407,8 @@
     <string name="file_list_empty_local_search">Ingen fil eller mappe matcher din søgning</string>
     <string name="file_list_empty_moving">Der er intet her. Du kan tilføje en mappe.</string>
     <string name="file_list_empty_on_device">Hentede filer og mapper vil blive vist her.</string>
+    <string name="file_list_empty_recent_files_description">Filer og mapper som du har ændret for nyligt, vil blive vist her.</string>
+    <string name="file_list_empty_recent_files_headline">Ingen filer er ændret for nyligt</string>
     <string name="file_list_empty_recently_modified">Fandt ikke nogen filer ændre inden for de sidste 7 dage</string>
     <string name="file_list_empty_search">Måske den er i en anden mappe?</string>
     <string name="file_list_empty_shared">Filer og mapper du deler vil blive vist her.</string>
@@ -570,6 +573,8 @@
     <string name="media_forward_description">Hurtigt fremad-knap</string>
     <string name="media_notif_ticker">%1$s musik afspiller</string>
     <string name="media_play_pause_description">Afspil eller pause knap</string>
+    <string name="media_player_pause">Pause</string>
+    <string name="media_player_play">Afspil</string>
     <string name="media_rewind_description">Tilbagespolingsknap</string>
     <string name="media_state_playing">%1$s (afspiller)</string>
     <string name="menu_item_sort_by_date_newest_first">Nyeste først</string>
@@ -1075,9 +1080,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Opsætning</string>
     <string name="uploader_wrn_no_account_text">Der er ingen %1$s-konti på din enhed. Angiv venligst en konto først.</string>
     <string name="uploader_wrn_no_account_title">Ingen konto fundet</string>
+    <string name="uploads_view_group_completed_uploads">Gennemført</string>
     <string name="uploads_view_group_current_uploads">Nuværende</string>
     <string name="uploads_view_group_failed_uploads">Fejl/venter på genstart</string>
-    <string name="uploads_view_group_finished_uploads">Sendt</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Annulleret</string>
     <string name="uploads_view_later_waiting_to_upload">Venter med upload</string>
     <string name="uploads_view_title">Uploadede filer</string>
@@ -1102,7 +1107,9 @@
     <string name="user_icon">Bruger</string>
     <string name="user_info_address">Adresse</string>
     <string name="user_info_email">Email</string>
+    <string name="user_info_groups">Grupper</string>
     <string name="user_info_phone">Telefonnummer</string>
+    <string name="user_info_profile">Profil</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Website</string>
     <string name="user_information_retrieval_error">Fejl ved indlæsning af brugeroplysninger</string>
@@ -1200,22 +1207,6 @@
     <plurals name="items_selected_count">
         <item quantity="one">%d valgt</item>
         <item quantity="other">%d valgt</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="one">Forsinket %d sekund på grund af for mange forkerte forsøg</item>
-        <item quantity="other">Forsinket %d sekunder på grund af for mange forkerte forsøg</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="one">Forsinket %d minut på grund af for mange forkerte forsøg</item>
-        <item quantity="other">Forsinket %d minutter på grund af for mange forkerte forsøg</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="one">Forsinket %d minut</item>
-        <item quantity="other">Forsinket %d minutter</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="one">%d sekund</item>
-        <item quantity="other">%d sekunder</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d resterende downloads</item>

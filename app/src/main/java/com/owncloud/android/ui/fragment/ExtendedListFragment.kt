@@ -103,7 +103,7 @@ open class ExtendedListFragment :
     protected var mRefreshListLayout: SwipeRefreshLayout? = null
 
     @JvmField
-    protected var mSortButton: MaterialButton? = null
+    public var mSortButton: MaterialButton? = null
 
     @JvmField
     protected var mSwitchGridViewButton: MaterialButton? = null
@@ -137,7 +137,7 @@ open class ExtendedListFragment :
         mRecyclerView?.setAdapter(recyclerViewAdapter)
     }
 
-    protected val recyclerView: RecyclerView?
+    public val recyclerView: RecyclerView?
         get() = mRecyclerView
 
     open fun setLoading(enabled: Boolean) {
@@ -626,11 +626,11 @@ open class ExtendedListFragment :
                 )
             }
 
-            SearchType.RECENTLY_MODIFIED_SEARCH -> {
+            SearchType.RECENT_FILES_SEARCH -> {
                 setMessageForEmptyList(
-                    R.string.file_list_empty_headline_server_search,
-                    R.string.file_list_empty_recently_modified,
-                    R.drawable.ic_list_empty_recent
+                    R.string.file_list_empty_recent_files_headline,
+                    R.string.file_list_empty_recent_files_description,
+                    R.drawable.nav_recently_outline
                 )
             }
 
@@ -784,7 +784,7 @@ open class ExtendedListFragment :
         setLayoutSwitchButton(isGridEnabled)
     }
 
-    protected fun setLayoutSwitchButton(isGrid: Boolean) {
+    fun setLayoutSwitchButton(isGrid: Boolean) {
         mSwitchGridViewButton?.let {
             if (isGrid) {
                 it.setContentDescription(getString(R.string.action_switch_list_view))

@@ -25,7 +25,7 @@
     <string name="actionbar_sort">Впорядкувати</string>
     <string name="active_user">Активний користувач</string>
     <string name="activities_no_results_headline">Поки що активність відсутня</string>
-    <string name="activities_no_results_message">Поки відсутні події, такі як створення, зміни, надання у спільний доступ.</string>
+    <string name="activities_no_results_message">Такі події, як створення, зміни, надання у спільний доступ, відсутні.</string>
     <string name="activity_chooser_send_file_title">Надіслати</string>
     <string name="activity_chooser_title">Надіслати посилання до…</string>
     <string name="activity_icon">Ваші дії</string>
@@ -48,11 +48,13 @@
     <string name="assistant_output_generation_warning_text">Показаний тут результат генерується штучним інтелектом. Обов\'язково перевіряйте його двічі.</string>
     <string name="assistant_screen_chat_create_error">Не вдалося надіслати повідомлення</string>
     <string name="assistant_screen_chat_fetch_error">Не вдалося отримати повідомлення чату</string>
+    <string name="assistant_screen_chat_generate_error">Не вдалося створити відповідь</string>
     <string name="assistant_screen_conversations_go_back_to_assistant">Перейти на сторінку асистента</string>
     <string name="assistant_screen_delete_task_alert_dialog_description">Дійсно вилучити це завдання?</string>
     <string name="assistant_screen_delete_task_alert_dialog_title">Вилучити завдання</string>
     <string name="assistant_screen_empty_content_description">Спробуйте надіслати повідомлення, щоб розпочати розмову.</string>
     <string name="assistant_screen_empty_content_title">Вітаю! Чим я можу вам сьогодні допомогти?</string>
+    <string name="assistant_screen_retry_response_generation">Повторна спроба генерації відповіді</string>
     <string name="assistant_screen_select_task">Виберіть завдання</string>
     <string name="assistant_screen_send_message">Надіслати повідомлення</string>
     <string name="assistant_screen_task_bar_open_conversation_list">Відкрити список розмов</string>
@@ -111,7 +113,13 @@
     <string name="authenticator_activity_login_error">Помилка під час обробки запиту на вхід. Спробуйте пізніше.</string>
     <string name="authenticator_activity_no_web_browser_found">Відсутній бравзер для відкриття цього посилання.</string>
     <string name="authenticator_activity_please_complete_login_process">Завершити авторизацію у бравзері</string>
+    <string name="auto_upload_background_activity_action">Дозволити фонову активність</string>
+    <string name="auto_upload_battery_optimization_reason">Фонова активність Nextcloud обмежено оптимізацією батареї</string>
+    <string name="auto_upload_battery_saver_action">Відкрити налаштування заощадження батареї</string>
     <string name="auto_upload_battery_saver_mode_warning">Автозавантаження призупинено, оскільки увімкнено заощадження батареї.</string>
+    <string name="auto_upload_battery_saver_reason">Увімкнено заощадження батареї, що може призвести до призупинення завантаження.</string>
+    <string name="auto_upload_delete_dialog_description">Таким чином буде вилучено каталог та налаштування автоматичного завантаження. Всі незавершені завантаження буде скасовано.</string>
+    <string name="auto_upload_delete_dialog_title">Вилучити каталог автозавантаження?</string>
     <string name="auto_upload_file_behaviour_kept_in_folder">залишено у вихідному каталозі, оскільки він доступний лише для читання</string>
     <string name="auto_upload_low_battery_warning_info">Низький заряд батареї, завантаження може тривати доше</string>
     <string name="auto_upload_on_wifi">Завантаження тільки через WiFi</string>
@@ -243,9 +251,12 @@
     <string name="could_not_retrieve_url">Неможливо отримати посилання</string>
     <string name="create">Створити</string>
     <string name="create_dir_fail_msg">Неможливо створити каталог</string>
+    <string name="create_end_to_end_encrypted_share">Спільне посилання</string>
+    <string name="create_end_to_end_encrypted_share_title">Наскрізно зашифровані спільні посилання</string>
     <string name="create_link">Створити посилання</string>
     <string name="create_new">Створити</string>
     <string name="create_new_document">Новий документ</string>
+    <string name="create_new_encrypted_folder">Новий зашифрований каталог</string>
     <string name="create_new_folder">Новий каталог</string>
     <string name="create_new_presentation">Нова презентація</string>
     <string name="create_new_spreadsheet">Нова електронна таблиця</string>
@@ -311,11 +322,12 @@
     <string name="drawer_item_assistant">Помічник</string>
     <string name="drawer_item_favorites">Із зірочкою</string>
     <string name="drawer_item_gallery">Зображення та відео</string>
-    <string name="drawer_item_groupfolders">Групові каталоги</string>
+    <string name="drawer_item_groupfolders">Каталоги команд</string>
     <string name="drawer_item_home">Старт</string>
     <string name="drawer_item_notifications">Сповіщення</string>
     <string name="drawer_item_on_device">На пристрої</string>
     <string name="drawer_item_personal_files">Мої документи</string>
+    <string name="drawer_item_recent_files">Нещодавні файли</string>
     <string name="drawer_item_recently_modified">Нещодавно змінені</string>
     <string name="drawer_item_shared">Спільні</string>
     <string name="drawer_item_trashbin">Кошик</string>
@@ -402,6 +414,8 @@
     <string name="etm_transfer_type">Передати</string>
     <string name="etm_transfer_type_download">Звантажити</string>
     <string name="etm_transfer_type_upload">Завантажити</string>
+    <string name="export_in_progress">Експорт %1$d із %2$d</string>
+    <string name="extension_cannot_be_changed">Неможливо змінити розширення</string>
     <string name="extented_list_fragment_empty_list_message_no_write_permission">У вас відсутній доступ на створення або завантаження файлів до цього каталогу.</string>
     <string name="external_shares">Зовнішні спільні ресурси</string>
     <string name="fab_label">Додати або завантажити</string>
@@ -433,6 +447,8 @@
     <string name="file_list_empty_local_search">Не знайдено файли або каталоги згідно із запитом</string>
     <string name="file_list_empty_moving">Тут нічого немає. Ви можете створити каталог.</string>
     <string name="file_list_empty_on_device">Тут ти можете знайти каталоги та файли, які було звантажено.</string>
+    <string name="file_list_empty_recent_files_description">Тут показуватимуться файли та каталоги, які було нещодавно змінено.</string>
+    <string name="file_list_empty_recent_files_headline">Відсутні файли, які було нещодавно змінено</string>
     <string name="file_list_empty_recently_modified">Відсутні зміни серед файлів за останні 7 днів</string>
     <string name="file_list_empty_search">Можливо, це інший каталог?</string>
     <string name="file_list_empty_shared">Тут можна буде знайти файли та каталоги, якими ви поділилися.</string>
@@ -554,6 +570,8 @@
     <string name="instant_upload_existing">Також завантажити існуючі файли</string>
     <string name="instant_upload_on_charging">Завантаження тільки під час заряджання</string>
     <string name="instant_upload_path">/InstantUpload</string>
+    <string name="internal_share_description_end_to_end_encrypted">Отримувачі спільних ресурсів завжди матимуть доступ до зашифрованого каталогу. Ним можна поділитися буде тільки з тими користувачами, які собі налаштували наскрізне шифрування.</string>
+    <string name="internal_share_headline_end_to_end_encrypted">Спільні ресурси з наскрізним шифруванням</string>
     <string name="internal_shares">Внутрішні спільні ресурси</string>
     <string name="internal_two_way_sync">Внутрішня двостороння синхронізація</string>
     <string name="internal_two_way_sync_not_yet">Поки не впроваджено</string>
@@ -603,6 +621,11 @@
     <string name="media_forward_description">Перемотка вперед</string>
     <string name="media_notif_ticker">%1$s музичний програвач</string>
     <string name="media_play_pause_description">Відтворення або пауза</string>
+    <string name="media_player_pause">Пауза</string>
+    <string name="media_player_play">Грати</string>
+    <string name="media_player_playing">Програвання</string>
+    <string name="media_player_seek_backward">Шукати назад</string>
+    <string name="media_player_seek_forward">Шукати вперед</string>
     <string name="media_rewind_description">Перемтка назад</string>
     <string name="media_state_playing">%1$s (програвання)</string>
     <string name="menu_item_sort_by_date_newest_first">Новіші спочатку</string>
@@ -667,7 +690,7 @@
     <string name="offline_mode">Відсутнє з\'єднання з мережею</string>
     <string name="offline_mode_info_description">Ви можете впорядковувати каталоги, створювати файли без наявного з\'єднання з мережею. Одразу після відновлення доступу завдання, що в очікуванні, буде автоматично виконано, а файли синхронізовано.</string>
     <string name="offline_mode_info_title">Ви користуєтеся застосунком без доступу до мережі</string>
-    <string name="offline_operations_file_does_not_exists_yet">Поки відсутні файли. Спочатку додайте їх.</string>
+    <string name="offline_operations_file_does_not_exists_yet">Файли відсутні. Спочатку додайте їх.</string>
     <string name="offline_operations_worker_notification_create_file_conflict_text">Не вдалося створити %s. Файл з таким ім\'ям вже присутній у хмарі.</string>
     <string name="offline_operations_worker_notification_create_folder_conflict_text">Не вдалося створити %s. Каталог з таким ім\'ям вже присутній у хмарі.</string>
     <string name="offline_operations_worker_notification_error_text">Неможливо виконати офлайнову операцію. %s</string>
@@ -757,6 +780,7 @@
     <string name="prefs_manage_accounts">Облікові записи</string>
     <string name="prefs_recommend">Рекомендувати застосунок</string>
     <string name="prefs_remove_e2e">Вилучити шифрування на пристрої</string>
+    <string name="prefs_remove_e2e_keys_and_files">Вилучити зашифровані файли та ключі шифрування</string>
     <string name="prefs_setup_e2e">Налаштувати наскрізне шифрування</string>
     <string name="prefs_show_ecosystem_apps">Показувати перемикач застосунків</string>
     <string name="prefs_show_ecosystem_apps_summary">Пропозиції застосунків Nextcloud у заголовку навігації</string>
@@ -779,6 +803,7 @@
     <string name="preview_image_file_is_not_downloaded">Файл не звантажено</string>
     <string name="preview_media_unhandled_http_code_message">Цей файл неможливо вилучити, оскільки його заблоковано іншим користувачем або процесом. Спробуйте пізніше.</string>
     <string name="preview_sorry">Перепрошуємо</string>
+    <string name="preview_text_string_fragment_open_rich_text_editor_error_message">Не вдалося відкрити текстовий редактор</string>
     <string name="privacy">Конфіденційність</string>
     <string name="push_notifications_not_implemented">Сповіщення push вимкнено через залежність від служби Google Play</string>
     <string name="push_notifications_old_login">Сповіщення push неактивні, оскільки час сесії вичерпано. Будь ласка, додайте наново ваш обліковий запис.</string>
@@ -795,6 +820,7 @@
     <string name="remote">(віддалено)</string>
     <string name="remote_file_fetch_failed">Не знайдено файл!</string>
     <string name="remove_e2e">Ви можете вилучити наскрізне шифрування на пристрої на цьому клієнті</string>
+    <string name="remove_e2e_keys_and_files_dialog_warning">У результаті цієї дії всі зашировані файли, приватні та публічні ключі буде вилучено. Продовжити?</string>
     <string name="remove_e2e_message">Ви можете вилучити наскрізне шифрування на пристрої на цьому клієнті. Зашифровані файли залишатимуться на сервері, але більше не синхронізуватимуться з цим комп\'ютером.</string>
     <string name="remove_fail_msg">Помилка під час вилучення</string>
     <string name="remove_local_account">Вилучити обліковий запис на пристрої</string>
@@ -1085,6 +1111,8 @@
     <string name="upload_local_storage_full">Локальне сховище заповнено</string>
     <string name="upload_local_storage_not_copied">Неможливо скопіювати файл до внутрішнього сховища</string>
     <string name="upload_lock_failed">Неможливо заблокувати каталог</string>
+    <string name="upload_locked_message">Сервер зайнятий. Повторна спроба...</string>
+    <string name="upload_locked_title">Триває завантаження</string>
     <string name="upload_manually_cancelled">Завантаження скасовано користувачем</string>
     <string name="upload_missing_storage_permission_allow_file_access">Дозволити повний доступ до файлів</string>
     <string name="upload_missing_storage_permission_app_permissions">Дозволи застосунків</string>
@@ -1097,6 +1125,11 @@
     <string name="upload_quota_exceeded">Перевищено дозволений обсяг даних для збереження</string>
     <string name="upload_scan_doc_upload">Сканувати документ з камери</string>
     <string name="upload_sync_conflict">Конфлікт синхронізації, будь ласка, вирішіть вручну</string>
+    <string name="upload_sync_conflict_check">Виявлено ймовірний конфлікти під час останнього завантаження. Клацніть, щоб перевірити.</string>
+    <string name="upload_sync_conflict_check_error">Не вдалося перевірити на конфлікти завантаження. Спробуйте ще раз.</string>
+    <string name="upload_sync_conflict_checking">Перевірка на конфлікти завантаження...</string>
+    <string name="upload_sync_conflict_not_exists"> Конфлікт розв\'язано.</string>
+    <string name="upload_sync_conflict_same_file">Відсутні конфлікти. Той саме файл.</string>
     <string name="upload_unknown_error">Невідома помилка</string>
     <string name="uploader_btn_alternative_text">Вибрати</string>
     <string name="uploader_btn_upload_text">Завантажити</string>
@@ -1128,9 +1161,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Налаштування</string>
     <string name="uploader_wrn_no_account_text">На вашому пристрої немає %1$s облікових записів. Будь ласка, спочатку створіть обліковий запис.</string>
     <string name="uploader_wrn_no_account_title">Не знайдено облікового запису</string>
+    <string name="uploads_view_group_completed_uploads">Виконано</string>
     <string name="uploads_view_group_current_uploads">Поточний</string>
     <string name="uploads_view_group_failed_uploads">Не вдалося/триває перезапуск</string>
-    <string name="uploads_view_group_finished_uploads">Завантажено</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Скасовано</string>
     <string name="uploads_view_later_waiting_to_upload">Очікування завантаження</string>
     <string name="uploads_view_title">Завантаження</string>
@@ -1157,7 +1190,9 @@
     <string name="user_icon">Користувач</string>
     <string name="user_info_address">Адреса</string>
     <string name="user_info_email">Електронна пошта</string>
+    <string name="user_info_groups">Групи</string>
     <string name="user_info_phone">Номер телефону</string>
+    <string name="user_info_profile">Профіль</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Вебсайт</string>
     <string name="user_information_retrieval_error">Помилка під час отримання інформації про користувача</string>
@@ -1300,29 +1335,23 @@
         <item quantity="many">%d вибрано</item>
         <item quantity="other">%d вибрано</item>
     </plurals>
-    <plurals name="delay_message">
-        <item quantity="one">Павза у %d секунду внаслідок багатьох неправильних спроб</item>
-        <item quantity="few">Павза у %d секунди внаслідок багатьох неправильних спроб</item>
-        <item quantity="many">Павза у %d секунд внаслідок багатьох неправильних спроб</item>
-        <item quantity="other">Павза у %d секунд внаслідок багатьох неправильних спроб</item>
+    <plurals name="passcode_delay_seconds">
+        <item quantity="one">Спробувати знову за %d секунду через багато невдалих спроб</item>
+        <item quantity="few">Спробувати знову за %d секунди через багато невдалих спроб</item>
+        <item quantity="many">Спробувати знову за %d секунд через багато невдалих спроб</item>
+        <item quantity="other">Спробувати знову за %d секунд через багато невдалих спроб</item>
     </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="one">Павза у %d хвилину внаслідок багатьох неправильних спроб</item>
-        <item quantity="few">Павза у %d хвилини внаслідок багатьох неправильних спроб</item>
-        <item quantity="many">Павза у %d хвилин внаслідок багатьох неправильних спроб</item>
-        <item quantity="other">Павза у %d хвилин внаслідок багатьох неправильних спроб</item>
+    <plurals name="passcode_delay_minutes">
+        <item quantity="one">Спробувати знову за %d хвилину через багато невдалих спроб</item>
+        <item quantity="few">Спробувати знову за %d хвилини через багато невдалих спроб</item>
+        <item quantity="many">Спробувати знову за %d хвилин через багато невдалих спроб</item>
+        <item quantity="other">Спробувати знову за %d хвилин через багато невдалих спроб</item>
     </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="one">Павза у %d хвилину</item>
-        <item quantity="few">Павза у %d хвилини</item>
-        <item quantity="many">Павза у %d хвилин</item>
-        <item quantity="other">Павза у %d хвилин</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="one">%d секунда</item>
-        <item quantity="few">%d секунди</item>
-        <item quantity="many">%d секунд</item>
-        <item quantity="other">%d секунд</item>
+    <plurals name="passcode_delay_minutes_seconds">
+        <item quantity="one">Спробувати знову за %1$d хвилину %2$d секунд через багато невдалих спроб</item>
+        <item quantity="few">Спробувати знову за %1$d хвилини %2$d секунд через багато невдалих спроб</item>
+        <item quantity="many">Спробувати знову за %1$d хвилин %2$d секунд через багато невдалих спроб</item>
+        <item quantity="other">Спробувати знову за %1$d хвилин %2$d секунд через багато невдалих спроб</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d залишилося завантажити</item>

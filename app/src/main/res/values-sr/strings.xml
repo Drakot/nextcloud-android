@@ -49,6 +49,7 @@
     <string name="assistant_screen_delete_task_alert_dialog_title">Обриши задатак</string>
     <string name="assistant_screen_empty_content_description">Покушајте да пошаљете поруку и тако започнете разговор.</string>
     <string name="assistant_screen_empty_content_title">Здраво! Како данас могу да вам помогнем?</string>
+    <string name="assistant_screen_retry_response_generation">Поново покушај генерисање одговора</string>
     <string name="assistant_screen_task_create_fail_message">Дошло је до грешке током креирања задатка</string>
     <string name="assistant_screen_task_create_success_message">Креиран је задатак</string>
     <string name="assistant_screen_task_delete_fail_message">Дошло је до грешке током брисања задатка</string>
@@ -292,7 +293,7 @@
     <string name="drawer_item_assistant">Асистент</string>
     <string name="drawer_item_favorites">Омиљено</string>
     <string name="drawer_item_gallery">Медији</string>
-    <string name="drawer_item_groupfolders">Фолдери групе</string>
+    <string name="drawer_item_groupfolders">Фолдери тима</string>
     <string name="drawer_item_home">Почетна</string>
     <string name="drawer_item_notifications">Обавештења</string>
     <string name="drawer_item_on_device">На уређају</string>
@@ -410,6 +411,8 @@
     <string name="file_list_empty_local_search">Ни један фајл или фолдер не одговара условима претраге</string>
     <string name="file_list_empty_moving">Овде нема ничег. Можете додати фасциклу.</string>
     <string name="file_list_empty_on_device">Преузети фајлови и фасцикле ће се појавити овде.</string>
+    <string name="file_list_empty_recent_files_description">Овде ће се појавити фајлови и фолдери које сте недавно изменили.</string>
+    <string name="file_list_empty_recent_files_headline">Нема недавно промењених фајлова</string>
     <string name="file_list_empty_recently_modified">Нема фајлова измењених у последњих 7 дана</string>
     <string name="file_list_empty_search">Можда су у некој другој фасцикли?</string>
     <string name="file_list_empty_shared">Фајлови и фасцикле које делите појавиће се овде.</string>
@@ -576,6 +579,8 @@
     <string name="media_forward_description">Унапред</string>
     <string name="media_notif_ticker">%1$s музички плејер</string>
     <string name="media_play_pause_description">Пуштање-пауза</string>
+    <string name="media_player_pause">Паузирај</string>
+    <string name="media_player_play">Пусти</string>
     <string name="media_rewind_description">Уназад</string>
     <string name="media_state_playing">%1$s (пушта)</string>
     <string name="menu_item_sort_by_date_newest_first">прво новије</string>
@@ -1081,9 +1086,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Подеси</string>
     <string name="uploader_wrn_no_account_text">Нема %1$s налога на вашем уређају. Најпре подесите налог.</string>
     <string name="uploader_wrn_no_account_title">Није пронађен налог</string>
+    <string name="uploads_view_group_completed_uploads">Завршено</string>
     <string name="uploads_view_group_current_uploads">Текуће</string>
     <string name="uploads_view_group_failed_uploads">Грешка/чекам на поновно покретање</string>
-    <string name="uploads_view_group_finished_uploads">Отпремљено</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Отказано</string>
     <string name="uploads_view_later_waiting_to_upload">Чекам отпремање</string>
     <string name="uploads_view_title">Отпремања</string>
@@ -1108,7 +1113,9 @@
     <string name="user_icon">Корисник </string>
     <string name="user_info_address">Адреса</string>
     <string name="user_info_email">Е-пошта</string>
+    <string name="user_info_groups">Групе</string>
     <string name="user_info_phone">Број телефона</string>
+    <string name="user_info_profile">Профил</string>
     <string name="user_info_twitter">Твитер</string>
     <string name="user_info_website">Веб страна</string>
     <string name="user_information_retrieval_error">Грешка при добављању корисничких података</string>
@@ -1225,26 +1232,6 @@
         <item quantity="one">%d одабран</item>
         <item quantity="few">%d одабрана</item>
         <item quantity="other">%d одабраних</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="one">Задржано %d секунду услед превише неуспелих покушаја</item>
-        <item quantity="few">Задржано %d секунде услед превише неуспелих покушаја</item>
-        <item quantity="other">Задржано %d секунди услед превише неуспелих покушаја</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="one">Задржано %d минут услед превише неуспелих покушаја</item>
-        <item quantity="few">Задржано %d минута услед превише неуспелих покушаја</item>
-        <item quantity="other">Задржано %d минута услед превише неуспелих покушаја</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="one">Задржано %d минут</item>
-        <item quantity="few">Задржано %d минута</item>
-        <item quantity="other">Задржано %d минута</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="one">%d секунда</item>
-        <item quantity="few">%d секунди</item>
-        <item quantity="other">%d секунди</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">преостаје још %1$d преузимање</item>

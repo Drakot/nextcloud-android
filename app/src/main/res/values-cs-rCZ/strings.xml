@@ -48,11 +48,13 @@
     <string name="assistant_output_generation_warning_text">Zde zobrazený výstup je vytvořen AI. Vždy si informace ověřujte.</string>
     <string name="assistant_screen_chat_create_error">Nepodařilo se odeslat zprávu</string>
     <string name="assistant_screen_chat_fetch_error">Nepodařilo se získat zprávy chatu</string>
+    <string name="assistant_screen_chat_generate_error">Nepodařilo se vytvořit odpověď</string>
     <string name="assistant_screen_conversations_go_back_to_assistant">Zpět na stránku asistenta</string>
     <string name="assistant_screen_delete_task_alert_dialog_description">Opravdu chcete tuto úlohu smazat?</string>
     <string name="assistant_screen_delete_task_alert_dialog_title">Smazat úkol</string>
     <string name="assistant_screen_empty_content_description">Zkuste poslat zprávu pro rozproudění konverzace.</string>
     <string name="assistant_screen_empty_content_title">Zdravím! Jak vám mohu pomoci?</string>
+    <string name="assistant_screen_retry_response_generation">Znovu zkusit vytvořit odpověď</string>
     <string name="assistant_screen_select_task">Vyberte úkol</string>
     <string name="assistant_screen_send_message">Poslat zprávu</string>
     <string name="assistant_screen_task_bar_open_conversation_list">Otevřít seznam konverzací</string>
@@ -243,9 +245,12 @@
     <string name="could_not_retrieve_url">Nepodařilo se získat URL</string>
     <string name="create">Vytvořit</string>
     <string name="create_dir_fail_msg">Nepodařilo se vytvořit složku</string>
+    <string name="create_end_to_end_encrypted_share">Sdílení odkazu</string>
+    <string name="create_end_to_end_encrypted_share_title">Sdílení odkazem, šifrovaná mezi koncovými body</string>
     <string name="create_link">Vytvořit odkaz</string>
     <string name="create_new">Nové</string>
     <string name="create_new_document">Nový dokument</string>
+    <string name="create_new_encrypted_folder">Nová šifrovaná složka</string>
     <string name="create_new_folder">Nová složka</string>
     <string name="create_new_presentation">Nová prezentace</string>
     <string name="create_new_spreadsheet">Nová tabulka</string>
@@ -311,11 +316,12 @@
     <string name="drawer_item_assistant">Asistent</string>
     <string name="drawer_item_favorites">Oblíbené</string>
     <string name="drawer_item_gallery">Média</string>
-    <string name="drawer_item_groupfolders">Skupinové složky</string>
+    <string name="drawer_item_groupfolders">Týmové složky</string>
     <string name="drawer_item_home">Domů</string>
     <string name="drawer_item_notifications">Upozornění</string>
     <string name="drawer_item_on_device">Na přístroji</string>
     <string name="drawer_item_personal_files">Osobní soubory</string>
+    <string name="drawer_item_recent_files">Nedávné soubory</string>
     <string name="drawer_item_recently_modified">Nedávno změněné</string>
     <string name="drawer_item_shared">Sdíleno</string>
     <string name="drawer_item_trashbin">Smazané soubory</string>
@@ -402,6 +408,7 @@
     <string name="etm_transfer_type">Přenos</string>
     <string name="etm_transfer_type_download">Stáhnout</string>
     <string name="etm_transfer_type_upload">Nahrát</string>
+    <string name="extension_cannot_be_changed">Příponu není možné změnit</string>
     <string name="extented_list_fragment_empty_list_message_no_write_permission">Nemáte oprávnění pro vytváření nebo nahrávání souborů v této složce.</string>
     <string name="external_shares">Externí sdílení</string>
     <string name="fab_label">Přidat nebo nahrát</string>
@@ -433,6 +440,8 @@
     <string name="file_list_empty_local_search">Vyhledávanému neodpovídá žádný soubor nebo složka</string>
     <string name="file_list_empty_moving">Nic tu není. Můžete přidat složku.</string>
     <string name="file_list_empty_on_device">Stažené soubory a složky se zobrazí zde.</string>
+    <string name="file_list_empty_recent_files_description">Zde budou zobrazeny soubory a složky, které jste nedávno změnili.</string>
+    <string name="file_list_empty_recent_files_headline">Žádné nedávno změněné soubory.</string>
     <string name="file_list_empty_recently_modified">Nenalezeny žádné soubory změněné za uplynulých 7 dnů</string>
     <string name="file_list_empty_search">Možná se nachází v jiné složce?</string>
     <string name="file_list_empty_shared">Zde budou zobrazeny vámi nasdílené soubory a složky.</string>
@@ -554,6 +563,7 @@
     <string name="instant_upload_existing">Také nahrát už existující soubory</string>
     <string name="instant_upload_on_charging">Nahrávat pouze při nabíjení</string>
     <string name="instant_upload_path">/InstantUpload</string>
+    <string name="internal_share_headline_end_to_end_encrypted">Sdílení šifrovaná mezi koncovými body</string>
     <string name="internal_shares">Vnitřní sdílení</string>
     <string name="internal_two_way_sync">Interní obousměrná synchronizace</string>
     <string name="internal_two_way_sync_not_yet">Zatím ještě ne, brzy bude synchronizováno</string>
@@ -603,6 +613,11 @@
     <string name="media_forward_description">Tlačítko Rychle vpřed</string>
     <string name="media_notif_ticker"> %1$s přehrávač hudby</string>
     <string name="media_play_pause_description">Tlačítko Přehrát/Pozastavit</string>
+    <string name="media_player_pause">Pozastavit</string>
+    <string name="media_player_play">Přehrát</string>
+    <string name="media_player_playing">Přehrávané médium</string>
+    <string name="media_player_seek_backward">Posunout nazpět</string>
+    <string name="media_player_seek_forward">Posunout vpřed</string>
     <string name="media_rewind_description">Tlačítko přeskočit na začátek/konec</string>
     <string name="media_state_playing">%1$s (přehrává)</string>
     <string name="menu_item_sort_by_date_newest_first">Nejnovější jako první</string>
@@ -1097,6 +1112,7 @@
     <string name="upload_quota_exceeded">Kvóta úložiště překročena</string>
     <string name="upload_scan_doc_upload">Naskenovat dokument kamerou</string>
     <string name="upload_sync_conflict">Konflikt synchronizace – vyřešte ručně</string>
+    <string name="upload_sync_conflict_not_exists">Konflikt vyřešen.</string>
     <string name="upload_unknown_error">Neznámá chyba</string>
     <string name="uploader_btn_alternative_text">Vybrat</string>
     <string name="uploader_btn_upload_text">Nahrát</string>
@@ -1128,9 +1144,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Nastavení</string>
     <string name="uploader_wrn_no_account_text">Na tomto přístroji nejsou žádné %1$s účty. Nejdříve takový zadejte.</string>
     <string name="uploader_wrn_no_account_title">Nenalezen žádný účet</string>
+    <string name="uploads_view_group_completed_uploads">Dokončeno</string>
     <string name="uploads_view_group_current_uploads">Stávající</string>
     <string name="uploads_view_group_failed_uploads">Neúspěšné / čekající na restart</string>
-    <string name="uploads_view_group_finished_uploads">Nahráno</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Zrušeno</string>
     <string name="uploads_view_later_waiting_to_upload">Čeká se na nahrání</string>
     <string name="uploads_view_title">Nahrání</string>
@@ -1157,7 +1173,9 @@
     <string name="user_icon">Uživatel</string>
     <string name="user_info_address">Adresa</string>
     <string name="user_info_email">E-mail</string>
+    <string name="user_info_groups">Skupiny</string>
     <string name="user_info_phone">Telefonní číslo</string>
+    <string name="user_info_profile">Profil</string>
     <string name="user_info_twitter">X (Twitter)</string>
     <string name="user_info_website">Webové stránky</string>
     <string name="user_information_retrieval_error">Chyba při načítání informací o uživateli</string>
@@ -1299,30 +1317,6 @@
         <item quantity="few">%d vybrány</item>
         <item quantity="many">%d vybraných</item>
         <item quantity="other">%d vybrané</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="one">Pozdrženo %d sekundu kvůli příliš mnoha chybným pokusům</item>
-        <item quantity="few">Pozdrženo %d sekundy kvůli příliš mnoha chybným pokusům</item>
-        <item quantity="many">Pozdrženo %d sekund kvůli příliš mnoha chybným pokusům</item>
-        <item quantity="other">Pozdrženo %d sekundy kvůli příliš mnoha chybným pokusům</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="one">Pozdrženo %d minutu kvůli příliš mnoha chybným pokusům</item>
-        <item quantity="few">Pozdrženo %d minut kvůli příliš mnoha chybným pokusům</item>
-        <item quantity="many">Pozdrženo %d minuty kvůli příliš mnoha chybným pokusům</item>
-        <item quantity="other">Pozdrženo %d minut kvůli příliš mnoha chybným pokusům</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="one">Odloženo o %d minutu</item>
-        <item quantity="few">Odloženo o %d minuty</item>
-        <item quantity="many">Odloženo o %d minut</item>
-        <item quantity="other">Odloženo o %d minuty</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="one">%d sekunda</item>
-        <item quantity="few">%d sekundy</item>
-        <item quantity="many">%d sekund</item>
-        <item quantity="other">%d sekundy</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">Zbývá %1$d stažení</item>

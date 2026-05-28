@@ -13,6 +13,7 @@
     <string name="action_send_share">送信/共有</string>
     <string name="action_switch_grid_view">グリッド表示</string>
     <string name="action_switch_list_view">リスト表示</string>
+    <string name="action_triggered">アクションをきっかけに</string>
     <string name="actionbar_calendar_contacts_restore">連絡先とカレンダーを復元する</string>
     <string name="actionbar_mkdir">新しいフォルダー</string>
     <string name="actionbar_move_or_copy">移動またはコピー</string>
@@ -45,10 +46,13 @@
     <string name="appbar_search_in">%s の中を検索</string>
     <string name="appear_offline">オフライン</string>
     <string name="assistant_output_generation_warning_text">ここに表示されている出力はAIによって生成されます。必ず二重チェックを行ってください。</string>
+    <string name="assistant_screen_chat_create_error">メッセージの送信に失敗しました:</string>
+    <string name="assistant_screen_chat_fetch_error">チャットメッセージの取得に失敗しました</string>
     <string name="assistant_screen_delete_task_alert_dialog_description">本当にこのタスクを削除しますか？</string>
     <string name="assistant_screen_delete_task_alert_dialog_title">タスクを削除</string>
     <string name="assistant_screen_empty_content_description">メッセージを送って会話を始めてみましょう。</string>
     <string name="assistant_screen_empty_content_title"> こんにちは！何かお手伝いできることはありますか？</string>
+    <string name="assistant_screen_retry_response_generation">応答の生成を再試行</string>
     <string name="assistant_screen_select_task">タスクを選択して下さい</string>
     <string name="assistant_screen_send_message">メッセージを送信する</string>
     <string name="assistant_screen_task_create_fail_message">タスクの作成中にエラーが発生しました。</string>
@@ -232,9 +236,12 @@
     <string name="could_not_retrieve_url">URL を取得できませんでした</string>
     <string name="create">作成</string>
     <string name="create_dir_fail_msg">フォルダーを作成できません</string>
+    <string name="create_end_to_end_encrypted_share">リンク共有</string>
+    <string name="create_end_to_end_encrypted_share_title">End-to-End暗号化リンク共有</string>
     <string name="create_link">リンクを作成する</string>
     <string name="create_new">新規作成</string>
     <string name="create_new_document">新規ドキュメント</string>
+    <string name="create_new_encrypted_folder">新しい暗号化フォルダー</string>
     <string name="create_new_folder">新しいフォルダー</string>
     <string name="create_new_presentation">新規プレゼンテーション</string>
     <string name="create_new_spreadsheet">新規スプレッドシート</string>
@@ -300,7 +307,7 @@
     <string name="drawer_item_assistant">アシスタント</string>
     <string name="drawer_item_favorites">お気に入り</string>
     <string name="drawer_item_gallery">メディア</string>
-    <string name="drawer_item_groupfolders">グループフォルダー</string>
+    <string name="drawer_item_groupfolders">チームフォルダー</string>
     <string name="drawer_item_home">ホーム</string>
     <string name="drawer_item_notifications">通知</string>
     <string name="drawer_item_on_device">デバイス上</string>
@@ -418,6 +425,8 @@
     <string name="file_list_empty_local_search">検索条件に一致するファイルやフォルダーがありません</string>
     <string name="file_list_empty_moving">何もありません。フォルダーを追加してください。</string>
     <string name="file_list_empty_on_device">ダウンロードされたファイルやフォルダーがここに表示されます。</string>
+    <string name="file_list_empty_recent_files_description">最近変更したファイルやフォルダーがここに表示されます。</string>
+    <string name="file_list_empty_recent_files_headline">最近更新されたファイルはありません</string>
     <string name="file_list_empty_recently_modified">ここ7日間に更新されたファイルが見つかりません</string>
     <string name="file_list_empty_search">別のフォルダーにありませんか？</string>
     <string name="file_list_empty_shared">共有したファイルやフォルダーがここに表示されます。</string>
@@ -535,6 +544,7 @@
     <string name="instant_upload_existing">既存のファイルもアップロード</string>
     <string name="instant_upload_on_charging">充電中のみアップロード</string>
     <string name="instant_upload_path">/InstantUpload</string>
+    <string name="internal_share_headline_end_to_end_encrypted">End-to-End暗号化共有</string>
     <string name="internal_shares">内部共有</string>
     <string name="internal_two_way_sync">内部的な双方向同期</string>
     <string name="internal_two_way_sync_not_yet">まだ同期されていませんが、間もなく同期されます</string>
@@ -583,6 +593,8 @@
     <string name="media_forward_description">早送りボタン</string>
     <string name="media_notif_ticker">%1$s ミュージックプレイヤー</string>
     <string name="media_play_pause_description">再生/一時停止ボタン</string>
+    <string name="media_player_pause">一時停止</string>
+    <string name="media_player_play">再生</string>
     <string name="media_rewind_description">巻き戻しボタン</string>
     <string name="media_state_playing">%1$s (再生中)</string>
     <string name="menu_item_sort_by_date_newest_first">日付（降順）</string>
@@ -1088,9 +1100,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">設定</string>
     <string name="uploader_wrn_no_account_text">端末に %1$s のアカウントがありません。まずアカウントを登録してください。</string>
     <string name="uploader_wrn_no_account_title">アカウントが見つかりません</string>
+    <string name="uploads_view_group_completed_uploads">完了</string>
     <string name="uploads_view_group_current_uploads">現在</string>
     <string name="uploads_view_group_failed_uploads">失敗/再開待ち</string>
-    <string name="uploads_view_group_finished_uploads">アップロード済み</string>
     <string name="uploads_view_group_manually_cancelled_uploads">キャンセル済</string>
     <string name="uploads_view_later_waiting_to_upload">アップロード待ち</string>
     <string name="uploads_view_title">アップロード</string>
@@ -1115,7 +1127,9 @@
     <string name="user_icon">ユーザー</string>
     <string name="user_info_address">住所</string>
     <string name="user_info_email">メール</string>
+    <string name="user_info_groups">グループ</string>
     <string name="user_info_phone">電話番号</string>
+    <string name="user_info_profile">プロフィール</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">ウェブサイト</string>
     <string name="user_information_retrieval_error">ユーザー情報を取得中にエラーが発生しました</string>
@@ -1194,18 +1208,6 @@
     </plurals>
     <plurals name="items_selected_count">
         <item quantity="other">%d 選択</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="other">失敗回数が多いため%d秒後にお試しください</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="other">失敗回数が多いため%d分後にお試しください</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="other">%d分後</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="other">%d秒</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="other">%1$dが未ダウンロード</item>

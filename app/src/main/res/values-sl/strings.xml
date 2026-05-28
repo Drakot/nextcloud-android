@@ -37,6 +37,7 @@
     <string name="appear_offline">Pokaže kot brez povezave</string>
     <string name="assistant_screen_delete_task_alert_dialog_title">Izbriši nalogo</string>
     <string name="assistant_screen_task_create_success_message">Naloga je ustvarjena</string>
+    <string name="assistant_screen_top_bar_title">Pomočnik</string>
     <string name="assistant_task_status_running">zagnano</string>
     <string name="assistant_task_status_unknown">neznano</string>
     <string name="associated_account_not_found">Povezanega računa ni mogoče najti!</string>
@@ -86,6 +87,7 @@
     <string name="battery_optimization_disable">Onemogoči</string>
     <string name="battery_optimization_message">Naprava ima najverjetneje omogočeno možnost optimizacije porabe baterije. Program AutoUpload pravilno deluje le, če je izvzet iz nje.</string>
     <string name="battery_optimization_title">Optimizacija baterije</string>
+    <string name="bottom_navigation_menu_assistant_label">Pomočnik</string>
     <string name="bottom_navigation_menu_favorites_label">Priljubljeno</string>
     <string name="bottom_navigation_menu_files_label">Vse datoteke</string>
     <string name="busy">Zasedeno</string>
@@ -170,8 +172,8 @@
     <string name="contacts_preferences_import_scheduled">Uvoz je načrtovan in se bo kmalu začel.</string>
     <string name="contacts_preferences_no_file_found">Ne najdem datoteke</string>
     <string name="contacts_preferences_something_strange_happened">Zadnje varnostne kopije ni mogoče najti!</string>
-    <string name="conversation_screen_delete_button_title">Razumem tveganje, izbriši pogovor</string>
-    <string name="conversation_screen_empty_content_title">Pogovora ni mogoče najti</string>
+    <string name="conversation_screen_delete_button_title">Izbriši pogovor</string>
+    <string name="conversation_screen_empty_content_title">Ni najdenih pogovorov</string>
     <string name="conversation_screen_empty_conversation_list_title">Ni še začetih pogovorov</string>
     <string name="conversation_screen_title">Pogovori</string>
     <string name="copied">Kopirano</string>
@@ -207,7 +209,7 @@
     <string name="dialog_close">Zapri</string>
     <string name="did_not_check_for_dupes">Ne preverjaj za podvojene.</string>
     <string name="digest_algorithm_not_available">Ta algoritem na tej napravi ni podprt.</string>
-    <string name="direct_login_failed">Prijava prek neposredne povezave je spodletela.</string>
+    <string name="direct_login_failed">Prijava po po povezavi je spodletela.</string>
     <string name="direct_login_text">Prijava z %1$s v %2$s</string>
     <string name="disable_new_media_folder_detection_notifications">Onemogoči</string>
     <string name="dismiss">Opusti</string>
@@ -239,9 +241,10 @@
     <string name="drawer_header_background">Slika ozadja glave bočnega okna</string>
     <string name="drawer_item_activities">Dejavnosti</string>
     <string name="drawer_item_all_files">Vse datoteke</string>
+    <string name="drawer_item_assistant">Pomočnik</string>
     <string name="drawer_item_favorites">Priljubljene</string>
     <string name="drawer_item_gallery">Predstavna vsebina</string>
-    <string name="drawer_item_groupfolders">Skupinske mape</string>
+    <string name="drawer_item_groupfolders">Skupne mape</string>
     <string name="drawer_item_home">Začetna stran</string>
     <string name="drawer_item_notifications">Obvestila</string>
     <string name="drawer_item_on_device">Na napravi</string>
@@ -257,6 +260,7 @@
     <string name="drawer_synced_folders">Samodejno pošiljanje</string>
     <string name="e2e_not_yet_setup">Celovito šifriranje E2E ni še nastavljeno.</string>
     <string name="e2e_offline">Opravila ni mogoče izvesti brez vzpostavljene internetne povezave</string>
+    <string name="ecosystem_apps_display_assistant">Pomočnik</string>
     <string name="ecosystem_apps_display_more">Več</string>
     <string name="ecosystem_apps_more">Več programov Nexcloud</string>
     <string name="email_pick_failed">Elektronskega naslova ni mogoče izbrati.</string>
@@ -336,6 +340,8 @@
     <string name="file_list_empty_headline_server_search">Ni rezultatov</string>
     <string name="file_list_empty_moving">Ni vsebine. Lahko ustvariš na primer mapo.</string>
     <string name="file_list_empty_on_device">Prejete datoteke in mape bodo zbrane na tem mestu.</string>
+    <string name="file_list_empty_recent_files_description">Nedavno spremenjene datoteke ali mape, bodo zbrane na tem mestu.</string>
+    <string name="file_list_empty_recent_files_headline">Ni nedavno spremenjenih datotek</string>
     <string name="file_list_empty_recently_modified">Ni datotek, spremenjenih v zadnjih 7. dneh</string>
     <string name="file_list_empty_search">Mogoče v drugi mapi?</string>
     <string name="file_list_empty_shared">Datoteke in mape v souporabi bodo zbrane na tem mestu.</string>
@@ -471,6 +477,8 @@
     <string name="media_forward_description">Gumb za hitro predvajanje naprej</string>
     <string name="media_notif_ticker">Predvajalnik glasbe %1$s</string>
     <string name="media_play_pause_description">Gumb za predvajanje in premor</string>
+    <string name="media_player_pause">Premor</string>
+    <string name="media_player_play">Predvajaj</string>
     <string name="media_rewind_description">Vrni nazaj</string>
     <string name="media_state_playing">%1$s (predvajanje)</string>
     <string name="menu_item_sort_by_date_newest_first">najprej najnovejše</string>
@@ -683,7 +691,7 @@
     <string name="share_no_expiration_date_label">Nastavi datum preteka</string>
     <string name="share_no_password_title">Nastavi geslo</string>
     <string name="share_permission_can_edit">Lahko ureja</string>
-    <string name="share_permission_secure_file_drop">Varno pošiljanje daottek</string>
+    <string name="share_permission_secure_file_drop">Varno pošiljanje datotek</string>
     <string name="share_permission_view_only">Le ogled</string>
     <string name="share_re_share_permission">Souporaba</string>
     <string name="share_read_permission">Branje</string>
@@ -877,9 +885,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Nastavi</string>
     <string name="uploader_wrn_no_account_text">Za %1$s ni določenega računa. Pred nadaljevanjem ga je treba ustvariti.</string>
     <string name="uploader_wrn_no_account_title">Ni najdenega nobenega računa</string>
+    <string name="uploads_view_group_completed_uploads">Končano</string>
     <string name="uploads_view_group_current_uploads">Trenutno</string>
     <string name="uploads_view_group_failed_uploads">Ponovno pošiljanje je spodletelo oziroma je na čakanju.</string>
-    <string name="uploads_view_group_finished_uploads">Poslano</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Preklicano</string>
     <string name="uploads_view_later_waiting_to_upload">Poteka čakanje na začetek pošiljanja …</string>
     <string name="uploads_view_title">Poslano</string>
@@ -903,7 +911,9 @@
     <string name="user_icon">Uporabnik</string>
     <string name="user_info_address">Naslov</string>
     <string name="user_info_email">Elektronski naslov</string>
+    <string name="user_info_groups">Skupine</string>
     <string name="user_info_phone">Telefonska številka</string>
+    <string name="user_info_profile">Profil</string>
     <string name="user_info_twitter">Račun Twitter</string>
     <string name="user_info_website">Spletna stran</string>
     <string name="user_information_retrieval_error">Napaka pridobivanja podatkov uporabnika</string>

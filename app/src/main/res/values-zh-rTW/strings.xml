@@ -48,11 +48,13 @@
     <string name="assistant_output_generation_warning_text">此處顯示的輸出是由人工智慧產生的。請務必仔細檢查。</string>
     <string name="assistant_screen_chat_create_error">傳送訊息失敗</string>
     <string name="assistant_screen_chat_fetch_error">擷取聊天訊息失敗</string>
+    <string name="assistant_screen_chat_generate_error">產生回應失敗</string>
     <string name="assistant_screen_conversations_go_back_to_assistant">回到小幫手頁面</string>
     <string name="assistant_screen_delete_task_alert_dialog_description">您確定要刪除此工作項目嗎？</string>
     <string name="assistant_screen_delete_task_alert_dialog_title">刪除工作項目</string>
     <string name="assistant_screen_empty_content_description">嘗試傳送訊息來引發對話。</string>
     <string name="assistant_screen_empty_content_title">嗨！我現在能怎麼協助您呢？</string>
+    <string name="assistant_screen_retry_response_generation">重試回應產生</string>
     <string name="assistant_screen_select_task">請選取任務</string>
     <string name="assistant_screen_send_message">傳送訊息</string>
     <string name="assistant_screen_task_bar_open_conversation_list">開啟對話清單</string>
@@ -111,7 +113,13 @@
     <string name="authenticator_activity_login_error">處理您的登入請求時出現問題。請稍後再試。</string>
     <string name="authenticator_activity_no_web_browser_found">沒有瀏覽器可以開啟此連結。</string>
     <string name="authenticator_activity_please_complete_login_process">請在瀏覽器中完成登入流程</string>
+    <string name="auto_upload_background_activity_action">允許背景活動</string>
+    <string name="auto_upload_battery_optimization_reason">Nextcloud 的背景活動受電池最佳化限制。</string>
+    <string name="auto_upload_battery_saver_action">開啟電池省電設定</string>
     <string name="auto_upload_battery_saver_mode_warning">因為省電模式已開啟，因此暫停自動上傳。</string>
+    <string name="auto_upload_battery_saver_reason">省電模式已啟用，可能會暫停上傳</string>
+    <string name="auto_upload_delete_dialog_description">此操作將刪除該資料夾及自動上傳設定。任何尚未完成的上傳作業都將被取消。</string>
+    <string name="auto_upload_delete_dialog_title">刪除自動上傳資料夾？</string>
     <string name="auto_upload_file_behaviour_kept_in_folder">以唯讀模式保留在原本的資料夾</string>
     <string name="auto_upload_low_battery_warning_info">低電量，上傳可能會需要較長時間</string>
     <string name="auto_upload_on_wifi">只在非計量收費的 Wi-Fi 上傳</string>
@@ -243,9 +251,12 @@
     <string name="could_not_retrieve_url">無法擷取 URL</string>
     <string name="create">建立</string>
     <string name="create_dir_fail_msg">無法建立資料夾</string>
+    <string name="create_end_to_end_encrypted_share">連結分享</string>
+    <string name="create_end_to_end_encrypted_share_title">端到端連結分享</string>
     <string name="create_link">建立連結</string>
     <string name="create_new">建立新的</string>
     <string name="create_new_document">新增文件</string>
+    <string name="create_new_encrypted_folder">新的加密資料夾</string>
     <string name="create_new_folder">新增資料夾</string>
     <string name="create_new_presentation">新增投影片</string>
     <string name="create_new_spreadsheet">新增試算表</string>
@@ -311,11 +322,12 @@
     <string name="drawer_item_assistant">助理</string>
     <string name="drawer_item_favorites">喜愛</string>
     <string name="drawer_item_gallery">媒體</string>
-    <string name="drawer_item_groupfolders">群組資料夾</string>
+    <string name="drawer_item_groupfolders">團隊資料夾</string>
     <string name="drawer_item_home">家目錄</string>
     <string name="drawer_item_notifications">通知</string>
     <string name="drawer_item_on_device">在裝置上</string>
     <string name="drawer_item_personal_files">個人檔案</string>
+    <string name="drawer_item_recent_files">近期檔案</string>
     <string name="drawer_item_recently_modified">最近修改</string>
     <string name="drawer_item_shared">已分享</string>
     <string name="drawer_item_trashbin">刪除的檔案</string>
@@ -402,6 +414,8 @@
     <string name="etm_transfer_type">傳輸</string>
     <string name="etm_transfer_type_download">下載</string>
     <string name="etm_transfer_type_upload">上傳</string>
+    <string name="export_in_progress">正在匯出第 %1$d 個（共 %2$d 個）</string>
+    <string name="extension_cannot_be_changed">無法變更副檔名</string>
     <string name="extented_list_fragment_empty_list_message_no_write_permission">您無權在此資料夾建立或上傳檔案。</string>
     <string name="external_shares">外部分享</string>
     <string name="fab_label">新增或上傳</string>
@@ -433,6 +447,8 @@
     <string name="file_list_empty_local_search">沒有檔案或資料夾符合您的搜尋</string>
     <string name="file_list_empty_moving">此處空無一物。您可以新增資料夾。</string>
     <string name="file_list_empty_on_device">已下載的檔案跟資料夾會顯示在這裡。</string>
+    <string name="file_list_empty_recent_files_description">您最近修改的檔案與資料夾將會顯示在此處。</string>
+    <string name="file_list_empty_recent_files_headline">最近無修改檔案</string>
     <string name="file_list_empty_recently_modified">沒有找到最近 7 天修改的檔案</string>
     <string name="file_list_empty_search">也許在其他資料夾中？</string>
     <string name="file_list_empty_shared">您分享的檔案跟資料夾會顯示在這裡。</string>
@@ -554,6 +570,8 @@
     <string name="instant_upload_existing">也同時上傳既有的檔案</string>
     <string name="instant_upload_on_charging">只在充電時上傳</string>
     <string name="instant_upload_path">/InstantUpload</string>
+    <string name="internal_share_description_end_to_end_encrypted">分享對象總是能存取完整的加密資料夾。僅能與已設定端到端加密的帳號進行分享。</string>
+    <string name="internal_share_headline_end_to_end_encrypted">端到端加密分享</string>
     <string name="internal_shares">內部分享</string>
     <string name="internal_two_way_sync">內部雙向同步</string>
     <string name="internal_two_way_sync_not_yet">還沒有，即將同步</string>
@@ -603,6 +621,11 @@
     <string name="media_forward_description">快轉按鈕</string>
     <string name="media_notif_ticker">%1$s 音樂播放器</string>
     <string name="media_play_pause_description">播放或暫停按鈕</string>
+    <string name="media_player_pause">暫停</string>
+    <string name="media_player_play">播放</string>
+    <string name="media_player_playing">正在播放媒體</string>
+    <string name="media_player_seek_backward">倒帶</string>
+    <string name="media_player_seek_forward">快轉</string>
     <string name="media_rewind_description">倒帶按鈕</string>
     <string name="media_state_playing">%1$s（播放中）</string>
     <string name="menu_item_sort_by_date_newest_first">新的在前</string>
@@ -757,6 +780,7 @@
     <string name="prefs_manage_accounts">管理帳號</string>
     <string name="prefs_recommend">推薦給朋友</string>
     <string name="prefs_remove_e2e">移除本機加密</string>
+    <string name="prefs_remove_e2e_keys_and_files">移除加密的檔案與金鑰</string>
     <string name="prefs_setup_e2e">設置端對端加密</string>
     <string name="prefs_show_ecosystem_apps">顯示應用程式切換器</string>
     <string name="prefs_show_ecosystem_apps_summary">導覽標頭中的 Nextcloud 應用程式建議</string>
@@ -779,6 +803,7 @@
     <string name="preview_image_file_is_not_downloaded">檔案未下載</string>
     <string name="preview_media_unhandled_http_code_message">檔案目前已被其他使用者或處理程序鎖定，因此無法刪除。請稍後再試。</string>
     <string name="preview_sorry">很抱歉</string>
+    <string name="preview_text_string_fragment_open_rich_text_editor_error_message">開啟文字編輯器失敗</string>
     <string name="privacy">隱私權</string>
     <string name="push_notifications_not_implemented">因為依賴於專有的 Google Play 服務的關係，所以推播通知已停用。</string>
     <string name="push_notifications_old_login">因為登入工作階段已過期，故無推播通知。請考慮重新加入您的帳號。</string>
@@ -795,6 +820,7 @@
     <string name="remote">（遠端）</string>
     <string name="remote_file_fetch_failed">找不到檔案！</string>
     <string name="remove_e2e">您可以在此客戶端上移除本機的端對端加密</string>
+    <string name="remove_e2e_keys_and_files_dialog_warning">此操作將會移除所有加密檔案、私鑰、公鑰。您確定嗎？</string>
     <string name="remove_e2e_message">您可以在此客戶端上移除本機的端對端加密。已加密的檔案將會保留在伺服器上，但不會再同步到此電腦。</string>
     <string name="remove_fail_msg">刪除失敗</string>
     <string name="remove_local_account">移除本機帳號</string>
@@ -1085,6 +1111,8 @@
     <string name="upload_local_storage_full">本機儲存空間已滿</string>
     <string name="upload_local_storage_not_copied">無法複製檔案到本機儲存空間</string>
     <string name="upload_lock_failed">鎖定資料夾失敗</string>
+    <string name="upload_locked_message">伺服器忙碌。正在重試……</string>
+    <string name="upload_locked_title">正在上傳</string>
     <string name="upload_manually_cancelled">使用者已取消上傳</string>
     <string name="upload_missing_storage_permission_allow_file_access">允許存取所有檔案</string>
     <string name="upload_missing_storage_permission_app_permissions">應用程式權限</string>
@@ -1097,6 +1125,11 @@
     <string name="upload_quota_exceeded">超過儲存空間容量限制</string>
     <string name="upload_scan_doc_upload">使用相機掃描文件</string>
     <string name="upload_sync_conflict">同步發生衝突，請手動解決</string>
+    <string name="upload_sync_conflict_check">您的上次上傳可能存在衝突。點擊檢查。</string>
+    <string name="upload_sync_conflict_check_error">無法檢查上傳衝突。請重試。</string>
+    <string name="upload_sync_conflict_checking">正在檢查上傳衝突……</string>
+    <string name="upload_sync_conflict_not_exists">衝突已解決。</string>
+    <string name="upload_sync_conflict_same_file">未偵測到衝突。相同的檔案。</string>
     <string name="upload_unknown_error">未知的錯誤</string>
     <string name="uploader_btn_alternative_text">選擇</string>
     <string name="uploader_btn_upload_text">上傳</string>
@@ -1128,9 +1161,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">設置</string>
     <string name="uploader_wrn_no_account_text">您的裝置上無 %1$s 帳號。請先設置帳號。</string>
     <string name="uploader_wrn_no_account_title">找不到帳號</string>
+    <string name="uploads_view_group_completed_uploads">已完成</string>
     <string name="uploads_view_group_current_uploads">目前</string>
     <string name="uploads_view_group_failed_uploads">失敗/等待重新開始</string>
-    <string name="uploads_view_group_finished_uploads">已上傳</string>
     <string name="uploads_view_group_manually_cancelled_uploads">已取消</string>
     <string name="uploads_view_later_waiting_to_upload">正等待上傳</string>
     <string name="uploads_view_title">上傳</string>
@@ -1157,7 +1190,9 @@
     <string name="user_icon">使用者</string>
     <string name="user_info_address">地址</string>
     <string name="user_info_email">電子郵件</string>
+    <string name="user_info_groups">群組</string>
     <string name="user_info_phone">電話號碼</string>
+    <string name="user_info_profile">個人檔案</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">網站</string>
     <string name="user_information_retrieval_error">擷取使用者資訊時發生錯誤</string>
@@ -1240,17 +1275,14 @@
     <plurals name="items_selected_count">
         <item quantity="other">已選取 %d 個</item>
     </plurals>
-    <plurals name="delay_message">
-        <item quantity="other">由於太多次錯誤嘗試而延遲%d秒</item>
+    <plurals name="passcode_delay_seconds">
+        <item quantity="other">由於錯誤嘗試次數過多，請於 %d 秒後再試。</item>
     </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="other">由於太多次錯誤嘗試而延遲%d分鐘</item>
+    <plurals name="passcode_delay_minutes">
+        <item quantity="other">由於錯誤嘗試次數過多，請於 %d 分鐘後再試。</item>
     </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="other">延遲%d分鐘</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="other">%d秒</item>
+    <plurals name="passcode_delay_minutes_seconds">
+        <item quantity="other">由於錯誤嘗試次數過多，請於 %1$d 分 %2$d 秒後再試。</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="other">剩 %1$d 個下載</item>

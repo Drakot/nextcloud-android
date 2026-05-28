@@ -48,11 +48,13 @@
     <string name="assistant_output_generation_warning_text">Is í an intleacht shaorga a ghineann an t-aschur a thaispeántar anseo. Déan cinnte go ndéanann tú seiceáil dhúbailte i gcónaí.</string>
     <string name="assistant_screen_chat_create_error">Theip ar theachtaireacht a sheoladh</string>
     <string name="assistant_screen_chat_fetch_error">Theip ar theachtaireachtaí comhrá a fháil</string>
+    <string name="assistant_screen_chat_generate_error">Theip ar fhreagra a ghiniúint</string>
     <string name="assistant_screen_conversations_go_back_to_assistant">Téigh ar ais chuig leathanach an chúntóra</string>
     <string name="assistant_screen_delete_task_alert_dialog_description">An bhfuil tú cinnte gur mhaith leat an tasc seo a scriosadh?</string>
     <string name="assistant_screen_delete_task_alert_dialog_title">Scrios tasc</string>
     <string name="assistant_screen_empty_content_description">Bain triail as teachtaireacht a sheoladh chun tús a chur le comhrá.</string>
     <string name="assistant_screen_empty_content_title">Dia duit ann! Cad is féidir liom cabhrú leat inniu?</string>
+    <string name="assistant_screen_retry_response_generation">Bain triail eile as giniúint freagartha</string>
     <string name="assistant_screen_select_task">Roghnaigh tasc le do thoil</string>
     <string name="assistant_screen_send_message">Seol teachtaireacht</string>
     <string name="assistant_screen_task_bar_open_conversation_list">Oscail an liosta comhrá</string>
@@ -111,7 +113,13 @@
     <string name="authenticator_activity_login_error">Bhí fadhb ann d\'iarratas logáil isteach a phróiseáil. Bain triail eile as ar ball le do thoil.</string>
     <string name="authenticator_activity_no_web_browser_found">Níl aon bhrabhsálaí ar fáil chun an nasc seo a oscailt.</string>
     <string name="authenticator_activity_please_complete_login_process">Críochnaigh an próiseas logáil isteach i do bhrabhsálaí le do thoil</string>
+    <string name="auto_upload_background_activity_action">Ceadaigh gníomhaíocht chúlra</string>
+    <string name="auto_upload_battery_optimization_reason">Tá gníomhaíocht chúlra Nextcloud teoranta ag optamú ceallraí.</string>
+    <string name="auto_upload_battery_saver_action">Oscail socruithe coigilte ceallraí</string>
     <string name="auto_upload_battery_saver_mode_warning">Tá an uaslódáil uathoibríoch ar sos mar go bhfuil Coigilteoir Ceallraí ar siúl.</string>
+    <string name="auto_upload_battery_saver_reason">Tá an coigilteoir ceallraí gníomhach agus d’fhéadfadh sé go gcuirfí sos ar uaslódálacha.</string>
+    <string name="auto_upload_delete_dialog_description">This will remove the folder and auto-upload configuration. Any unfinished uploads will be canceled.</string>
+    <string name="auto_upload_delete_dialog_title">Scrios an fillteán uath-uaslódála?</string>
     <string name="auto_upload_file_behaviour_kept_in_folder">coinnithe sa bhunfhillteán, mar atá sé inléite amháin</string>
     <string name="auto_upload_low_battery_warning_info">Ceallraí íseal, d\'fhéadfadh sé go dtógfadh an uaslódáil níos faide</string>
     <string name="auto_upload_on_wifi">Uaslódáil ar Wi-Fi neamh-mhéadraithe amháin</string>
@@ -243,9 +251,12 @@
     <string name="could_not_retrieve_url">Níorbh fhéidir an URL a aisghabháil</string>
     <string name="create">Cruthaigh</string>
     <string name="create_dir_fail_msg">Níorbh fhéidir fillteán a chruthú</string>
+    <string name="create_end_to_end_encrypted_share">Comhroinnt nasc</string>
+    <string name="create_end_to_end_encrypted_share_title">Comhroinnt nasc criptithe ó cheann ceann go ceann</string>
     <string name="create_link">Cruthaigh nasc</string>
     <string name="create_new">Nua</string>
     <string name="create_new_document">Doiciméad nua</string>
+    <string name="create_new_encrypted_folder">Fillteán criptithe nua</string>
     <string name="create_new_folder">Fillteán nua</string>
     <string name="create_new_presentation">Cur i láthair nua</string>
     <string name="create_new_spreadsheet">Scarbhileog nua</string>
@@ -311,11 +322,12 @@
     <string name="drawer_item_assistant">Cúntóir</string>
     <string name="drawer_item_favorites">Ceanáin</string>
     <string name="drawer_item_gallery">Meáin</string>
-    <string name="drawer_item_groupfolders">Fillteáin ghrúpa</string>
+    <string name="drawer_item_groupfolders">Fillteáin foirne</string>
     <string name="drawer_item_home">Baile</string>
     <string name="drawer_item_notifications">Fógraí</string>
     <string name="drawer_item_on_device">Ar gléas</string>
     <string name="drawer_item_personal_files">Comhaid phearsanta</string>
+    <string name="drawer_item_recent_files">Comhaid le déanaí</string>
     <string name="drawer_item_recently_modified">Athraithe le déanaí</string>
     <string name="drawer_item_shared">Roinnte</string>
     <string name="drawer_item_trashbin">Comhaid scriosta</string>
@@ -402,6 +414,8 @@
     <string name="etm_transfer_type">Aistriú</string>
     <string name="etm_transfer_type_download">Íoslódáil</string>
     <string name="etm_transfer_type_upload">Uaslódáil</string>
+    <string name="export_in_progress">Ag easpórtáil %1$d de %2$d</string>
+    <string name="extension_cannot_be_changed">Ní féidir an síneadh a athrú</string>
     <string name="extented_list_fragment_empty_list_message_no_write_permission">Níl cead agat comhaid a chruthú ná a uaslódáil sa fhillteán seo.</string>
     <string name="external_shares">Scaireanna seachtracha</string>
     <string name="fab_label">Cuir leis nó uaslódáil</string>
@@ -433,6 +447,8 @@
     <string name="file_list_empty_local_search">Níl aon chomhad nó fillteán ag teacht le do chuardach</string>
     <string name="file_list_empty_moving">Ní dhéanfaidh aon ní anseo. Is féidir leat fillteán a chur leis.</string>
     <string name="file_list_empty_on_device">Taispeánfar comhaid agus fillteáin íosluchtaithe anseo.</string>
+    <string name="file_list_empty_recent_files_description">Taispeánfar comhaid agus fillteáin a d\'athraigh tú le déanaí anseo.</string>
+    <string name="file_list_empty_recent_files_headline">Níl aon chomhaid athraithe le déanaí</string>
     <string name="file_list_empty_recently_modified">Níor aimsíodh aon chomhad a athraíodh le 7 lá anuas</string>
     <string name="file_list_empty_search">B\'fhéidir go bhfuil sé i bhfillteán eile?</string>
     <string name="file_list_empty_shared">Taispeánfar na comhaid agus na fillteáin a roinneann tú anseo.</string>
@@ -554,6 +570,8 @@
     <string name="instant_upload_existing">Uaslódáil comhaid atá ann cheana féin freisin</string>
     <string name="instant_upload_on_charging">Íoslódáil ach amháin nuair a mhuirearú</string>
     <string name="instant_upload_path">/Uaslódáil Meandaracha</string>
+    <string name="internal_share_description_end_to_end_encrypted">Share recipients always have access to the full encrypted folder. It is only possible to share with accounts that have already setup end-to-end encryption.</string>
+    <string name="internal_share_headline_end_to_end_encrypted">Scaireanna criptithe ó cheann ceann go ceann</string>
     <string name="internal_shares">Scaireanna inmheánacha</string>
     <string name="internal_two_way_sync">Sioncronú inmheánach dhá bhealach</string>
     <string name="internal_two_way_sync_not_yet">Níl go fóill, go luath le synced</string>
@@ -603,6 +621,11 @@
     <string name="media_forward_description">Cnaipe tapa ar aghaidh</string>
     <string name="media_notif_ticker">Seinnteoir ceoil %1$s</string>
     <string name="media_play_pause_description">Seinn nó cnaipe sos</string>
+    <string name="media_player_pause">Sos</string>
+    <string name="media_player_play">Imir</string>
+    <string name="media_player_playing">Ag seinm meán</string>
+    <string name="media_player_seek_backward">Cuardaigh siar</string>
+    <string name="media_player_seek_forward">Lorg ar aghaidh</string>
     <string name="media_rewind_description">Cnaipe athchasadh</string>
     <string name="media_state_playing">%1$s (ag imirt)</string>
     <string name="menu_item_sort_by_date_newest_first">Is nua ar dtús</string>
@@ -757,6 +780,7 @@
     <string name="prefs_manage_accounts">Bainistigh cuntais</string>
     <string name="prefs_recommend">Mol do chara</string>
     <string name="prefs_remove_e2e">Bain criptiú go háitiúil</string>
+    <string name="prefs_remove_e2e_keys_and_files">Bain comhaid agus eochracha criptithe</string>
     <string name="prefs_setup_e2e">Socraigh criptiú ceann go ceann</string>
     <string name="prefs_show_ecosystem_apps">Taispeáin athróir aip</string>
     <string name="prefs_show_ecosystem_apps_summary">Moltaí aip Nextcloud sa cheannteideal nascleanúna</string>
@@ -779,6 +803,7 @@
     <string name="preview_image_file_is_not_downloaded">Níl an comhad a íoslódáil</string>
     <string name="preview_media_unhandled_http_code_message">Tá an comhad faoi ghlas faoi láthair ag úsáideoir nó próiseas eile agus mar sin ní féidir é a scriosadh. Bain triail eile as ar ball le do thoil.</string>
     <string name="preview_sorry">Tá brón orm</string>
+    <string name="preview_text_string_fragment_open_rich_text_editor_error_message">Theip ar an eagarthóir téacs a oscailt</string>
     <string name="privacy">Príobháideacht</string>
     <string name="push_notifications_not_implemented">Díchumasaíodh fógraí brú de bharr spleáchais ar sheirbhísí dílseánaigh Google Play.</string>
     <string name="push_notifications_old_login">Níl aon bhrúfhógraí mar gheall ar sheisiún logáil isteach atá as dáta. Smaoinigh ar do chuntas a chur leis arís le do thoil.</string>
@@ -795,6 +820,7 @@
     <string name="remote">(iargúlta)</string>
     <string name="remote_file_fetch_failed">Theip ar an gcomhad a aimsiú!</string>
     <string name="remove_e2e">Is féidir leat criptiú ceann go ceann a bhaint go háitiúil ar an gcliant seo</string>
+    <string name="remove_e2e_keys_and_files_dialog_warning">Bainfear gach comhad criptithe, eochracha príobháideacha agus poiblí leis an oibríocht seo. An bhfuil tú cinnte?</string>
     <string name="remove_e2e_message">Is féidir leat criptiú ceann go ceann a bhaint go háitiúil ar an gcliant seo. Fanfaidh na comhaid criptithe ar an bhfreastalaí, ach ní shioncronófar iad leis an ríomhaire seo a thuilleadh.</string>
     <string name="remove_fail_msg">Theip ar an scriosadh</string>
     <string name="remove_local_account">Bain an cuntas áitiúil</string>
@@ -1085,6 +1111,8 @@
     <string name="upload_local_storage_full">Stóráil áitiúil lán</string>
     <string name="upload_local_storage_not_copied">Níorbh fhéidir an comhad a chóipeáil go dtí an stóras áitiúil</string>
     <string name="upload_lock_failed">Theip ar ghlasáil an fhillteáin</string>
+    <string name="upload_locked_message">Tá an freastalaí gnóthach. Ag iarraidh arís…</string>
+    <string name="upload_locked_title">Uaslódáil ar siúl</string>
     <string name="upload_manually_cancelled">Chuir an t-úsáideoir an uaslódáil ar ceal</string>
     <string name="upload_missing_storage_permission_allow_file_access">Ceadaigh rochtain ar chomhaid uile</string>
     <string name="upload_missing_storage_permission_app_permissions">Ceadanna aipeanna</string>
@@ -1097,6 +1125,11 @@
     <string name="upload_quota_exceeded">Sáraíodh an cuóta stórála</string>
     <string name="upload_scan_doc_upload">Doiciméad a scanadh ó ceamara</string>
     <string name="upload_sync_conflict">Sioncronaigh coinbhleacht, réitigh de láimh le do thoil</string>
+    <string name="upload_sync_conflict_check">B’fhéidir go bhfuil coimhlint ann idir é agus an uaslódáil dheireanach a rinne tú. Tapáil le seiceáil.</string>
+    <string name="upload_sync_conflict_check_error">Níorbh fhéidir seiceáil le haghaidh coinbhleachtaí uaslódála. Déan iarracht arís.</string>
+    <string name="upload_sync_conflict_checking">Ag seiceáil le haghaidh coinbhleachtaí uaslódála…</string>
+    <string name="upload_sync_conflict_not_exists">Coimhlint réitithe.</string>
+    <string name="upload_sync_conflict_same_file">Níor braitheadh ​​aon choimhlint. An comhad céanna.</string>
     <string name="upload_unknown_error">Earráid anaithnid</string>
     <string name="uploader_btn_alternative_text">Roghnaigh</string>
     <string name="uploader_btn_upload_text">Uaslódáil</string>
@@ -1128,9 +1161,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Socrú</string>
     <string name="uploader_wrn_no_account_text">Níl aon chuntas %1$s ar do ghléas. Socraigh cuntas ar dtús le do thoil.</string>
     <string name="uploader_wrn_no_account_title">Níor aimsíodh aon chuntas</string>
+    <string name="uploads_view_group_completed_uploads">Críochnaithe</string>
     <string name="uploads_view_group_current_uploads">Reatha</string>
     <string name="uploads_view_group_failed_uploads">Theip/ar feitheamh atosú</string>
-    <string name="uploads_view_group_finished_uploads">Uaslódáilte</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Ar ceal</string>
     <string name="uploads_view_later_waiting_to_upload">Ag fanacht le uaslódáil</string>
     <string name="uploads_view_title">uaslódálacha</string>
@@ -1157,7 +1190,9 @@
     <string name="user_icon">Úsáideoir</string>
     <string name="user_info_address">Seoladh</string>
     <string name="user_info_email">Ríomhphost</string>
+    <string name="user_info_groups">Grúpaí</string>
     <string name="user_info_phone">Uimhir teileafón</string>
+    <string name="user_info_profile">Próifíl</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Suíomh Gréasáin</string>
     <string name="user_information_retrieval_error">Earráid agus faisnéis úsáideora á fáil</string>
@@ -1320,33 +1355,26 @@
         <item quantity="many">%d roghnaithe</item>
         <item quantity="other">%d roghnaithe</item>
     </plurals>
-    <plurals name="delay_message">
-        <item quantity="one">Cuireadh moill %d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
-        <item quantity="two">Cuireadh moill %d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
-        <item quantity="few">Cuireadh moill %d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
-        <item quantity="many">Cuireadh moill %d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
-        <item quantity="other">Cuireadh moill %d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
+    <plurals name="passcode_delay_seconds">
+        <item quantity="one">Déan iarracht arís i %d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="two">Déan iarracht arís i %d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="few">Déan iarracht arís i %d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="many">Déan iarracht arís i %d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="other">Déan iarracht arís i %d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
     </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="one">Cuireadh moill %d nóiméad mar gheall ar an iomarca iarrachtaí míchearta</item>
-        <item quantity="two">Cuireadh moill %d nóiméad mar gheall ar an iomarca iarrachtaí míchearta</item>
-        <item quantity="few">Cuireadh moill %d nóiméad mar gheall ar an iomarca iarrachtaí míchearta</item>
-        <item quantity="many">Cuireadh moill %d nóiméad mar gheall ar an iomarca iarrachtaí míchearta</item>
-        <item quantity="other">Cuireadh moill %d nóiméad mar gheall ar an iomarca iarrachtaí míchearta</item>
+    <plurals name="passcode_delay_minutes">
+        <item quantity="one">Déan iarracht arís i %d nóiméad mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="two">Déan iarracht arís i %d nóiméad mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="few">Déan iarracht arís i %d nóiméad mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="many">Déan iarracht arís i %d nóiméad mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="other">Déan iarracht arís i %d nóiméad mar gheall ar an iomarca iarrachtaí míchearta</item>
     </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="one">Moill %d nóiméad</item>
-        <item quantity="two">Moill %d nóiméad</item>
-        <item quantity="few">Moill %d nóiméad</item>
-        <item quantity="many">Moill %d nóiméad</item>
-        <item quantity="other">Moill %d nóiméad</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="one">%d soicind</item>
-        <item quantity="two">%d soicind</item>
-        <item quantity="few">%d soicind</item>
-        <item quantity="many">%d soicind</item>
-        <item quantity="other">%d soicind</item>
+    <plurals name="passcode_delay_minutes_seconds">
+        <item quantity="one">Déan iarracht eile i %1$d nóiméad agus %2$d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="two">Déan iarracht eile i %1$d nóiméad agus %2$d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="few">Déan iarracht eile i %1$d nóiméad agus %2$d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="many">Déan iarracht eile i %1$d nóiméad agus %2$d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
+        <item quantity="other">Déan iarracht eile i %1$d nóiméad agus %2$d soicind mar gheall ar an iomarca iarrachtaí míchearta</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d íosluchtú fágtha</item>

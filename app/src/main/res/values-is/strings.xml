@@ -282,7 +282,6 @@
     <string name="drawer_item_assistant">Meðhjálpari</string>
     <string name="drawer_item_favorites">Eftirlæti</string>
     <string name="drawer_item_gallery">Margmiðlunargögn</string>
-    <string name="drawer_item_groupfolders">Hópamöppur</string>
     <string name="drawer_item_home">Heim</string>
     <string name="drawer_item_notifications">Tilkynningar</string>
     <string name="drawer_item_on_device">Á tækinu</string>
@@ -400,6 +399,8 @@
     <string name="file_list_empty_local_search">Engar skrár eða möppur samsvara þessari leit</string>
     <string name="file_list_empty_moving">Ekkert hér. Þú getur bætt við möppu.</string>
     <string name="file_list_empty_on_device">Skrár og möppur sem þú sækir birtast hér.</string>
+    <string name="file_list_empty_recent_files_description">Skrár og möppur sem þú breyttir nýlega birtast hér.</string>
+    <string name="file_list_empty_recent_files_headline">Engar nýlega breyttar skrár</string>
     <string name="file_list_empty_recently_modified">Fann engar skrár sem breytt hefur verið síðustu 7 daga</string>
     <string name="file_list_empty_search">Er þetta kannski í einhverri annarri möppu?</string>
     <string name="file_list_empty_shared">Skrár og möppur sem þú deilir birtast hér.</string>
@@ -562,6 +563,8 @@
     <string name="media_forward_description">Spóla-hratt-áfram hnappur</string>
     <string name="media_notif_ticker">%1$s tónlistarspilari</string>
     <string name="media_play_pause_description">Afspilun-eða-hlé hnappur</string>
+    <string name="media_player_pause">Í bið</string>
+    <string name="media_player_play">Spila</string>
     <string name="media_rewind_description">Spóla-til-baka hnappur</string>
     <string name="media_state_playing">%1$s (í spilun)</string>
     <string name="menu_item_sort_by_date_newest_first">Nýjast fyrst</string>
@@ -1063,9 +1066,9 @@
     <string name="uploader_wrn_no_account_setup_btn_text">Uppsetning</string>
     <string name="uploader_wrn_no_account_text">Það eru engir %1$s aðgangar á tækinu þínu. Settu fyrst upp notandaaðgang.</string>
     <string name="uploader_wrn_no_account_title">Enginn notandaaðgangur fannst</string>
+    <string name="uploads_view_group_completed_uploads">Lokið</string>
     <string name="uploads_view_group_current_uploads">Núverandi</string>
     <string name="uploads_view_group_failed_uploads">Mistókst/Bíður endurræsingar</string>
-    <string name="uploads_view_group_finished_uploads">Hlaðið inn</string>
     <string name="uploads_view_group_manually_cancelled_uploads">Hætt við</string>
     <string name="uploads_view_later_waiting_to_upload">Bíð eftir að senda inn</string>
     <string name="uploads_view_title">Innsendingar</string>
@@ -1090,6 +1093,7 @@
     <string name="user_icon">Notandi</string>
     <string name="user_info_address">Vistfang</string>
     <string name="user_info_email">Tölvupóstur</string>
+    <string name="user_info_groups">Hópar</string>
     <string name="user_info_phone">Símanúmer</string>
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Vefsvæði</string>
@@ -1188,22 +1192,6 @@
     <plurals name="items_selected_count">
         <item quantity="one">%d valið</item>
         <item quantity="other">%d valið</item>
-    </plurals>
-    <plurals name="delay_message">
-        <item quantity="one">Tafið um %d sekúndu vegna of margra rangra tilrauna</item>
-        <item quantity="other">Tafið um %d sekúndur vegna of margra rangra tilrauna</item>
-    </plurals>
-    <plurals name="delay_message_minutes">
-        <item quantity="one">Tafið um %d mínútu vegna of margra rangra tilrauna</item>
-        <item quantity="other">Tafið um %d mínútur vegna of margra rangra tilrauna</item>
-    </plurals>
-    <plurals name="delay_message_minutes_part">
-        <item quantity="one">Tafið um %d mínútu</item>
-        <item quantity="other">Tafið um %d mínútur</item>
-    </plurals>
-    <plurals name="delay_message_seconds_part">
-        <item quantity="one">%dsekúnda</item>
-        <item quantity="other">%d sekúndur </item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d niðurhal eftir</item>

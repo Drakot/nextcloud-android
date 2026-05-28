@@ -27,7 +27,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
@@ -55,6 +54,7 @@ import com.nextcloud.client.preferences.AppPreferencesImpl;
 import com.nextcloud.client.preferences.DarkMode;
 import com.nextcloud.utils.extensions.ContextExtensionsKt;
 import com.nextcloud.utils.mdm.MDMConfig;
+import com.owncloud.android.BuildConfig;
 import com.owncloud.android.MainApp;
 import com.owncloud.android.R;
 import com.owncloud.android.authentication.AuthenticatorActivity;
@@ -64,8 +64,8 @@ import com.owncloud.android.datamodel.ExternalLinksProvider;
 import com.owncloud.android.lib.common.ExternalLink;
 import com.owncloud.android.lib.common.ExternalLinkType;
 import com.owncloud.android.lib.common.utils.Log_OC;
+import com.owncloud.android.operations.e2e.E2EDeletionService;
 import com.owncloud.android.providers.DocumentsStorageProvider;
-import com.owncloud.android.ui.ListPreferenceDialog;
 import com.owncloud.android.ui.ThemeableSwitchPreference;
 import com.owncloud.android.ui.asynctasks.LoadingVersionNumberTask;
 import com.owncloud.android.ui.dialog.setupEncryption.SetupEncryptionDialogFragment;
@@ -80,7 +80,6 @@ import com.owncloud.android.utils.PermissionUtil;
 import com.owncloud.android.utils.theme.CapabilityUtils;
 import com.owncloud.android.utils.theme.ViewThemeUtils;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -92,6 +91,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
+import kotlin.Unit;
 
 import static com.owncloud.android.ui.activity.DrawerActivity.REQ_ALL_FILES_ACCESS;
 
@@ -129,7 +129,7 @@ public class SettingsActivity extends PreferenceActivity
 
     private Uri serverBaseUri;
 
-    private ListPreferenceDialog lock;
+    private Preference lock;
     private ThemeableSwitchPreference showHiddenFiles;
     private ThemeableSwitchPreference showEcosystemApps;
     private AppCompatDelegate delegate;
@@ -137,6 +137,8 @@ public class SettingsActivity extends PreferenceActivity
     private  Preference prefDataLoc;
     private String storagePath;
     private String pendingLock;
+
+    private E2EDeletionService e2EDeletionService;
 
     private User user;
     @Inject ArbitraryDataProvider arbitraryDataProvider;
@@ -164,6 +166,7 @@ public class SettingsActivity extends PreferenceActivity
         PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference("preference_screen");
 
         user = accountManager.getUser();
+        e2EDeletionService = new E2EDeletionService(clientFactory);
 
         // retrieve user's base uri
         setupBaseUri();
@@ -212,9 +215,8 @@ public class SettingsActivity extends PreferenceActivity
 
     private void showPasscodeDialogIfEnforceAppProtection() {
         if (MDMConfig.INSTANCE.enforceProtection(this) && Objects.equals(preferences.getLockPreference(), SettingsActivity.LOCK_NONE) && lock != null) {
-            lock.showDialog();
-            lock.dismissible(false);
-            lock.enableCancelButton(false);
+            Intent intent = ExtendedSettingsActivity.Companion.createIntent(this, ExtendedSettingsActivityDialog.AppPasscode, false);
+            startActivityForResult(intent, ExtendedSettingsActivityDialog.AppPasscode.getResultId());
         }
     }
 
@@ -368,6 +370,8 @@ public class SettingsActivity extends PreferenceActivity
         setupE2EMnemonicPreference(preferenceCategoryMore);
 
         removeE2E(preferenceCategoryMore);
+
+        removeE2EFilesAndKeys(preferenceCategoryMore);
 
         setupHelpPreference(preferenceCategoryMore);
 
@@ -536,6 +540,46 @@ public class SettingsActivity extends PreferenceActivity
                 });
             }
         }
+    }
+
+    private void removeE2EFilesAndKeys(PreferenceCategory preferenceCategoryMore) {
+        if (BuildConfig.DEBUG) {
+            Preference removeKeysAndFilesPreference = findPreference("remove_e2e_files_and_keys");
+            if (removeKeysAndFilesPreference != null) {
+                if (!FileOperationsHelper.isEndToEndEncryptionSetup(this, user)) {
+                    preferenceCategoryMore.removePreference(removeKeysAndFilesPreference);
+                } else {
+                    removeKeysAndFilesPreference.setOnPreferenceClickListener(p -> {
+                        showRemoveE2EKeysAndFilesAlertDialog(preferenceCategoryMore, removeKeysAndFilesPreference);
+                        return true;
+                    });
+                }
+            }
+        }
+    }
+
+    private void showRemoveE2EKeysAndFilesAlertDialog(PreferenceCategory preferenceCategoryMore, Preference preference) {
+        if (e2EDeletionService == null) {
+            return;
+        }
+
+        e2EDeletionService.showRemoveE2EKeysAndFilesAlertDialog(this, user, success -> {
+            if (success) {
+                EncryptionUtils.removeE2E(arbitraryDataProvider, user);
+                preferenceCategoryMore.removePreference(preference);
+
+                Preference pMnemonic = findPreference("mnemonic");
+                if (pMnemonic != null) {
+                    preferenceCategoryMore.removePreference(pMnemonic);
+                }
+
+                Preference pRemoveE2E = findPreference("remove_e2e");
+                if (pRemoveE2E != null) {
+                    preferenceCategoryMore.removePreference(pRemoveE2E);
+                }
+            }
+            return Unit.INSTANCE;
+        });
     }
 
     private void showRemoveE2EAlertDialog(PreferenceCategory preferenceCategoryMore, Preference preference) {
@@ -751,61 +795,31 @@ public class SettingsActivity extends PreferenceActivity
     private void setupLockPreference(PreferenceCategory preferenceCategoryDetails,
                                      boolean passCodeEnabled,
                                      boolean deviceCredentialsEnabled) {
-        boolean enforceProtection = MDMConfig.INSTANCE.enforceProtection(this);
-        lock = (ListPreferenceDialog) findPreference(PREFERENCE_LOCK);
-        int optionSize = 3;
-        if (enforceProtection) {
-            optionSize = 2;
-        }
-
+        lock = findPreference(PREFERENCE_LOCK);
         if (lock != null && (passCodeEnabled || deviceCredentialsEnabled)) {
-            ArrayList<String> lockEntries = new ArrayList<>(optionSize);
-            lockEntries.add(getString(R.string.prefs_lock_using_passcode));
-            lockEntries.add(getString(R.string.prefs_lock_using_device_credentials));
+            String currentLock = preferences.getLockPreference();
+            updateLockSummary(lock, currentLock);
 
-            ArrayList<String> lockValues = new ArrayList<>(optionSize);
-            lockValues.add(LOCK_PASSCODE);
-            lockValues.add(LOCK_DEVICE_CREDENTIALS);
-
-            if (!enforceProtection) {
-                lockEntries.add(getString(R.string.prefs_lock_none));
-                lockValues.add(LOCK_NONE);
-            }
-
-            if (!passCodeEnabled) {
-                lockEntries.remove(getString(R.string.prefs_lock_using_passcode));
-                lockValues.remove(LOCK_PASSCODE);
-            } else if (!deviceCredentialsEnabled || !DeviceCredentialUtils.areCredentialsAvailable(getApplicationContext())) {
-                lockEntries.remove(getString(R.string.prefs_lock_using_device_credentials));
-                lockValues.remove(LOCK_DEVICE_CREDENTIALS);
-            }
-
-            String[] lockEntriesArr = new String[lockEntries.size()];
-            lockEntriesArr = lockEntries.toArray(lockEntriesArr);
-            String[] lockValuesArr = new String[lockValues.size()];
-            lockValuesArr = lockValues.toArray(lockValuesArr);
-
-            lock.setEntries(lockEntriesArr);
-            lock.setEntryValues(lockValuesArr);
-            lock.setSummary(lock.getEntry());
-
-            lock.setOnPreferenceChangeListener((preference, o) -> {
-                pendingLock = LOCK_NONE;
-                String oldValue = ((ListPreference) preference).getValue();
-                String newValue = (String) o;
-                if (!oldValue.equals(newValue)) {
-                    if (LOCK_NONE.equals(oldValue)) {
-                        enableLock(newValue);
-                    } else {
-                        pendingLock = newValue;
-                        disableLock(oldValue);
-                    }
-                }
-                return false;
+            lock.setOnPreferenceClickListener(preference -> {
+                Intent intent = ExtendedSettingsActivity.Companion.createIntent(this, ExtendedSettingsActivityDialog.AppPasscode);
+                startActivityForResult(intent, ExtendedSettingsActivityDialog.AppPasscode.getResultId());
+                return true;
             });
         } else {
             preferenceCategoryDetails.removePreference(lock);
         }
+    }
+
+    private void updateLockSummary(Preference lockPreference, String lockValue) {
+        String summary;
+        if (LOCK_PASSCODE.equals(lockValue)) {
+            summary = getString(R.string.prefs_lock_using_passcode);
+        } else if (LOCK_DEVICE_CREDENTIALS.equals(lockValue)) {
+            summary = getString(R.string.prefs_lock_using_device_credentials);
+        } else {
+            summary = getString(R.string.prefs_lock_none);
+        }
+        lockPreference.setSummary(summary);
     }
 
     private void setupAutoUploadCategory(PreferenceScreen preferenceScreen) {
@@ -862,8 +876,10 @@ public class SettingsActivity extends PreferenceActivity
     }
 
     private void changeLockSetting(String value) {
-        lock.setValue(value);
-        lock.setSummary(lock.getEntry());
+        preferences.setLockPreference(value);
+        if (lock != null) {
+            updateLockSummary(lock, value);
+        }
         DocumentsStorageProvider.notifyRootsChanged(this);
     }
 
@@ -1076,6 +1092,19 @@ public class SettingsActivity extends PreferenceActivity
                 // needed for to change status bar color
                 recreate();
             }
+        } else if (requestCode == ExtendedSettingsActivityDialog.AppPasscode.getResultId() && data != null) {
+            String selectedLock = data.getStringExtra(ExtendedSettingsActivityDialog.AppPasscode.getKey());
+            if (selectedLock != null) {
+                String currentLock = preferences.getLockPreference();
+                if (!currentLock.equals(selectedLock)) {
+                    if (LOCK_NONE.equals(currentLock)) {
+                        enableLock(selectedLock);
+                    } else {
+                        pendingLock = selectedLock;
+                        disableLock(currentLock);
+                    }
+                }
+            }
         } else if (requestCode == REQ_ALL_FILES_ACCESS) {
             final PreferenceCategory preferenceCategorySync = (PreferenceCategory) findPreference("sync");
             setupAllFilesAccessPreference(preferenceCategorySync);
@@ -1184,14 +1213,16 @@ public class SettingsActivity extends PreferenceActivity
     }
 
     private void loadExternalSettingLinks(PreferenceCategory preferenceCategory) {
-        if (MDMConfig.INSTANCE.externalSiteSupport(this)) {
-            ExternalLinksProvider externalLinksProvider = new ExternalLinksProvider(getContentResolver());
+        if (!MDMConfig.INSTANCE.externalSiteSupport(this)) {
+            return;
+        }
 
-            for (final ExternalLink link : externalLinksProvider.getExternalLink(ExternalLinkType.SETTINGS)) {
-
+        ExternalLinksProvider externalLinksProvider = new ExternalLinksProvider(getContentResolver());
+        externalLinksProvider.getExternalLink(ExternalLinkType.SETTINGS, externalLinks -> {
+            for (final ExternalLink link : externalLinks) {
                 // only add if it does not exist, in case activity is reused
                 if (findPreference(String.valueOf(link.getId())) == null) {
-                    Preference p = new Preference(this);
+                    Preference p = new Preference(SettingsActivity.this);
                     p.setTitle(link.getName());
                     p.setKey(String.valueOf(link.getId()));
 
@@ -1208,7 +1239,9 @@ public class SettingsActivity extends PreferenceActivity
                     preferenceCategory.addPreference(p);
                 }
             }
-        }
+            return Unit.INSTANCE;
+        });
+        externalLinksProvider.cleanup();
     }
 
     /**

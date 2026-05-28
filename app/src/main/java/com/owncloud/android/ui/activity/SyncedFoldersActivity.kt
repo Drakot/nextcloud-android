@@ -33,6 +33,7 @@ import com.nextcloud.client.jobs.MediaFoldersDetectionWork
 import com.nextcloud.client.jobs.NotificationWork
 import com.nextcloud.client.jobs.upload.FileUploadWorker
 import com.nextcloud.client.preferences.SubFolderRule
+import com.nextcloud.ui.component.UploadWarningCard
 import com.nextcloud.utils.BatteryOptimizationHelper
 import com.nextcloud.utils.extensions.getParcelableArgument
 import com.nextcloud.utils.extensions.isDialogFragmentReady
@@ -152,6 +153,8 @@ class SyncedFoldersActivity :
     @Inject
     lateinit var appInfo: AppInfo
 
+    private var uploadWarningCard: UploadWarningCard? = null
+
     lateinit var binding: SyncedFoldersLayoutBinding
     lateinit var adapter: SyncedFolderAdapter
 
@@ -163,6 +166,7 @@ class SyncedFoldersActivity :
         super.onCreate(savedInstanceState)
         binding = SyncedFoldersLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        uploadWarningCard = UploadWarningCard(this, powerManagementService, viewThemeUtils)
         if (intent != null && intent.extras != null) {
             val accountName = intent.extras!!.getString(NotificationWork.KEY_NOTIFICATION_ACCOUNT)
             val optionalUser = user
@@ -207,6 +211,7 @@ class SyncedFoldersActivity :
     override fun onResume() {
         super.onResume()
         highlightNavigationViewItem(menuItemId)
+        uploadWarningCard?.bind(binding.autoUploadBatterySaverWarningCard)
     }
 
     fun setupStoragePermissionWarningBanner() {
@@ -256,6 +261,8 @@ class SyncedFoldersActivity :
             powerManagementService,
             connectivityService
         )
+        uploadWarningCard?.register(this, binding.autoUploadBatterySaverWarningCard)
+
         binding.emptyList.emptyListIcon.setImageResource(R.drawable.nav_synced_folders)
         viewThemeUtils.material.colorMaterialButtonPrimaryFilled(binding.emptyList.emptyListViewAction)
         val lm = GridLayoutManager(this, gridWidth)
@@ -273,6 +280,11 @@ class SyncedFoldersActivity :
             binding.emptyList.emptyListView.visibility = View.GONE
             binding.list.visibility = View.VISIBLE
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        uploadWarningCard?.unregister(this)
     }
 
     /**
@@ -569,26 +581,6 @@ class SyncedFoldersActivity :
         return result
     }
 
-    override fun onSyncStatusToggleClick(section: Int, syncedFolderDisplayItem: SyncedFolderDisplayItem?) {
-        if (syncedFolderDisplayItem == null) return
-
-        if (syncedFolderDisplayItem.id > SyncedFolder.UNPERSISTED_ID) {
-            syncedFolderProvider.updateSyncedFolderEnabled(
-                syncedFolderDisplayItem.id,
-                syncedFolderDisplayItem.isEnabled
-            )
-        } else {
-            val storedId = syncedFolderProvider.storeSyncedFolder(syncedFolderDisplayItem)
-            if (storedId != -1L) {
-                syncedFolderDisplayItem.id = storedId
-            }
-        }
-        if (syncedFolderDisplayItem.isEnabled) {
-            backgroundJobManager.startAutoUpload(syncedFolderDisplayItem, overridePowerSaving = false)
-            showBatteryOptimizationDialogIfNeeded()
-        }
-    }
-
     override fun onSyncFolderSettingsClick(section: Int, syncedFolderDisplayItem: SyncedFolderDisplayItem?) {
         check(Looper.getMainLooper().isCurrentThread) { "This must be called on the main thread!" }
 
@@ -776,13 +768,46 @@ class SyncedFoldersActivity :
         dialogFragment = null
     }
 
+    override fun onSyncStatusToggleClick(section: Int, item: SyncedFolderDisplayItem?) {
+        item ?: return
+
+        // Ensure the item is persisted
+        if (item.id <= SyncedFolder.UNPERSISTED_ID) {
+            syncedFolderProvider.storeSyncedFolder(item)
+                .takeIf { it != -1L }
+                ?.let { item.id = it }
+        } else {
+            syncedFolderProvider.updateSyncedFolderEnabled(item.id, item.isEnabled)
+        }
+
+        if (item.isEnabled) {
+            Log_OC.d(TAG, "auto-upload configuration sync status is enabled: " + item.remotePath)
+            backgroundJobManager.startAutoUpload(item, overridePowerSaving = false)
+            showBatteryOptimizationDialogIfNeeded()
+            return
+        }
+
+        Log_OC.d(TAG, "auto-upload configuration sync status is disabled: " + item.remotePath)
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            fileUploadHelper.removeEntityFromUploadEntities(item.id)
+        }
+    }
+
     override fun onDeleteSyncedFolderPreference(syncedFolder: SyncedFolderParcelable?) {
         if (syncedFolder == null) {
             return
         }
 
-        syncedFolderProvider.deleteSyncedFolder(syncedFolder.id)
-        adapter.removeItem(syncedFolder.section)
+        Log_OC.d(TAG, "deleting auto upload configuration: " + syncedFolder.remotePath)
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            fileUploadHelper.removeEntityFromUploadEntities(syncedFolder.id)
+            syncedFolderProvider.deleteSyncedFolder(syncedFolder.id)
+            withContext(Dispatchers.Main) {
+                adapter.removeItem(syncedFolder.section)
+            }
+        }
     }
 
     /**

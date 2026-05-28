@@ -10,16 +10,15 @@ package com.owncloud.android.ui.adapter
 import android.content.Context
 import android.view.View
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
-import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import com.nextcloud.client.account.User
 import com.nextcloud.client.preferences.AppPreferences
 import com.owncloud.android.databinding.UnifiedSearchCurrentDirectoryItemBinding
 import com.owncloud.android.datamodel.FileDataStorageManager
 import com.owncloud.android.datamodel.OCFile
-import com.owncloud.android.datamodel.SyncedFolderProvider
 import com.owncloud.android.ui.interfaces.UnifiedSearchCurrentDirItemAction
 import com.owncloud.android.utils.DisplayUtils
 import com.owncloud.android.utils.FileStorageUtils
+import com.owncloud.android.utils.overlay.OverlayManager
 import com.owncloud.android.utils.theme.ViewThemeUtils
 
 @Suppress("LongParameterList")
@@ -31,8 +30,8 @@ class UnifiedSearchCurrentDirItemViewHolder(
     private val isRTL: Boolean,
     private val user: User,
     private val appPreferences: AppPreferences,
-    private val syncedFolderProvider: SyncedFolderProvider,
-    private val action: UnifiedSearchCurrentDirItemAction
+    private val action: UnifiedSearchCurrentDirItemAction,
+    private val overlayManager: OverlayManager
 ) : SectionedViewHolder(binding.unifiedSearchCurrentDirItemLayout) {
 
     fun bind(file: OCFile) {
@@ -49,7 +48,6 @@ class UnifiedSearchCurrentDirItemViewHolder(
             binding.filename.text = filename
         }
 
-        viewThemeUtils.platform.colorImageView(binding.thumbnail, ColorRole.PRIMARY)
         DisplayUtils.setThumbnail(
             file,
             binding.thumbnail,
@@ -61,7 +59,7 @@ class UnifiedSearchCurrentDirItemViewHolder(
             binding.thumbnailShimmer,
             appPreferences,
             viewThemeUtils,
-            syncedFolderProvider
+            overlayManager
         )
 
         binding.more.setOnClickListener {

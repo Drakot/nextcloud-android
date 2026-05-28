@@ -6,7 +6,6 @@
  */
 @file:Suppress("UnstableApiUsage", "DEPRECATION")
 
-import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import com.github.spotbugs.snom.Confidence
 import com.github.spotbugs.snom.Effort
 import com.github.spotbugs.snom.SpotBugsTask
@@ -24,11 +23,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.spotless)
-    alias(libs.plugins.kapt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.spotbugs)
     alias(libs.plugins.detekt)
     // needed to make renovate run without shot, as shot requires Android SDK
@@ -63,7 +60,7 @@ configurations.configureEach {
 
 // semantic versioning for version code
 val versionMajor = 33
-val versionMinor = 1
+val versionMinor = 2
 val versionPatch = 0
 val versionBuild = 0 // 0-50=Alpha / 51-98=RC / 90-99=stable
 
@@ -84,8 +81,14 @@ val ncTestServerPassword = configProps["NC_TEST_SERVER_PASSWORD"]
 val ncTestServerBaseUrl = configProps["NC_TEST_SERVER_BASEURL"]
 
 android {
-    // install this NDK version and Cmake to produce smaller APKs. Build will still work if not installed
+    // install this NDK version and CMake to produce smaller APKs. Build will still work if not installed
     ndkVersion = "${ndkEnv["NDK_VERSION"]}"
+    externalNativeBuild {
+        cmake {
+            version = "${ndkEnv["CMAKE_VERSION"]}"
+            path = file("src/main/cpp/CMakeLists.txt")
+        }
+    }
 
     namespace = "com.owncloud.android"
     testNamespace = "${namespace}.test"
@@ -103,6 +106,10 @@ android {
         minSdk = 28
         targetSdk = 36
         compileSdk = 36
+
+        ndk {
+            abiFilters += listOf("arm64-v8a", "x86_64")
+        }
 
         buildConfigField("boolean", "CI", ciBuild.toString())
         buildConfigField("boolean", "RUNTIME_PERF_ANALYSIS", perfAnalysis.toString())
@@ -130,6 +137,7 @@ android {
 
             debug {
                 enableUnitTestCoverage = project.hasProperty("coverage")
+                enableAndroidTestCoverage = project.hasProperty("coverage")
                 resConfigs("xxxhdpi")
             }
         }
@@ -167,12 +175,6 @@ android {
         }
     }
 
-    applicationVariants.configureEach {
-        outputs.configureEach {
-            if (this is ApkVariantOutputImpl) this.outputFileName = "${this.baseName}-${this.versionCode}.apk"
-        }
-    }
-
     testOptions {
         unitTests.isReturnDefaultValues = true
         animationsDisabled = true
@@ -191,6 +193,7 @@ android {
         viewBinding = true
         aidl = true
         compose = true
+        prefab = true
     }
 
     compileOptions {
@@ -216,7 +219,9 @@ android {
                 "MissingQuantity",
                 "IconXmlAndPng",
                 "SelectedPhotoAccess",
-                "UnsafeIntentLaunch"
+                "UnsafeIntentLaunch",
+                "OldTargetApi",
+                "AndroidGradlePluginVersion"
             )
         )
         htmlOutput = layout.buildDirectory.file("reports/lint/lint.html").get().asFile
@@ -232,9 +237,10 @@ android {
 
 }
 
-kapt.useBuildCache = true
-
 ksp.arg("room.schemaLocation", "$projectDir/schemas")
+
+// Configure KSP for test variants
+ksp.arg("dagger.moduleName", project.name)
 
 kotlin.compilerOptions.jvmTarget.set(JvmTarget.JVM_21)
 
@@ -419,6 +425,7 @@ dependencies {
     // endregion
 
     // region AppScan, document scanner not available on FDroid (generic) due to OpenCV binaries
+    // To enable the feature for another variant, add it here.
     "gplayImplementation"(project(":appscan"))
     "huaweiImplementation"(project(":appscan"))
     "qaImplementation"(project(":appscan"))
@@ -435,10 +442,12 @@ dependencies {
     implementation(libs.dagger.android.support)
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.processor)
+    kspAndroidTest(libs.dagger.compiler)
     // endregion
 
     // region Crypto
     implementation(libs.conscrypt.android)
+    implementation(libs.openssl)
     // endregion
 
     // region Library
@@ -451,7 +460,6 @@ dependencies {
 
     // region Markdown rendering
     implementation(libs.bundles.markdown.rendering)
-    kapt(libs.prism4j.bundler)
     // endregion
 
     // region Image cropping / rotation
