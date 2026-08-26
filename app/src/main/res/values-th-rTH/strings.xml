@@ -48,7 +48,6 @@
     <string name="assistant_screen_empty_content_description">ลองส่งข้อความเพื่อเริ่มต้นบทสนทนาดูสิ</string>
     <string name="assistant_screen_empty_content_title">สวัสดี! วันนี้ฉันสามารถช่วยอะไรคุณได้บ้าง?</string>
     <string name="assistant_screen_retry_response_generation">ลองสร้างการตอบสนองใหม่อีกครั้ง</string>
-    <string name="assistant_screen_select_task">โปรดเลือกงาน</string>
     <string name="assistant_screen_send_message">ส่งข้อความ</string>
     <string name="assistant_task_status_unknown">ไม่รู้จัก</string>
     <string name="associated_account_not_found">ไม่พบบัญชีที่เกี่ยวข้อง!</string>
@@ -73,7 +72,6 @@
     <string name="auth_ssl_unverified_server_title">ไม่สามารถยืนยันตัวตนของเซิร์ฟเวอร์ SSL</string>
     <string name="auth_testing_connection">กำลังทดสอบการเชื่อมต่อ</string>
     <string name="auth_timeout_title">เซิร์ฟเวอร์ใช้เวลาตอบสนองนานเกินไป</string>
-    <string name="auth_trying_to_login">กำลังพยายามเข้าสู่ระบบ...</string>
     <string name="auth_unauthorized">ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</string>
     <string name="auth_unknown_error_exception_title">ข้อผิดพลาดที่ไม่รู้จัก: %1$s</string>
     <string name="auth_unknown_error_http_title">เกิดข้อผิดพลาด HTTP ที่ไม่รู้จัก!</string>
@@ -187,11 +185,15 @@
     <string name="could_not_retrieve_url">ไม่สามารถดึง URL</string>
     <string name="create">สร้าง</string>
     <string name="create_dir_fail_msg">ไม่สามารถสร้างโฟลเดอร์</string>
+    <string name="create_document">เอกสาร</string>
+    <string name="create_folder">โฟลเดอร์</string>
     <string name="create_new">ใหม่</string>
     <string name="create_new_document">สร้างเอกสาร odt ใหม่</string>
     <string name="create_new_folder">โฟลเดอร์ใหม่</string>
     <string name="create_new_presentation">สร้างงานนำเสนอ odp ใหม่</string>
     <string name="create_new_spreadsheet">สร้างตารางคำนวณ ods ใหม่</string>
+    <string name="create_presentation">งานนำเสนอ</string>
+    <string name="create_spreadsheet">สเปรดชีต</string>
     <string name="credentials_disabled">ข้อมูลประจำตัวถูกปิดใช้งาน</string>
     <string name="daily_backup">สำรองข้อมูลรายวัน</string>
     <string name="data_to_back_up">ข้อมูลที่จะสำรอง</string>
@@ -242,7 +244,6 @@
     <string name="drawer_item_notifications">การแจ้งเตือน</string>
     <string name="drawer_item_on_device">บนอุปกรณ์</string>
     <string name="drawer_item_personal_files">ไฟล์ส่วนตัว</string>
-    <string name="drawer_item_recently_modified">แก้ไขล่าสุด</string>
     <string name="drawer_item_shared">ถูกแชร์</string>
     <string name="drawer_item_trashbin">ไฟล์ที่ถูกลบ</string>
     <string name="drawer_item_uploads_list">อัปโหลด</string>
@@ -291,7 +292,6 @@
     <string name="file_list_empty_headline_server_search">ไม่มีผลลัพธ์</string>
     <string name="file_list_empty_moving">ไม่มีอะไรในนี้ คุณสามารถเพิ่มโฟลเดอร์ได้</string>
     <string name="file_list_empty_on_device">ไฟล์และโฟลเดอร์ที่ดาวน์โหลดจะปรากฏที่นี่</string>
-    <string name="file_list_empty_recently_modified">ไม่พบไฟล์ที่มีการแก้ไขในช่วง 7 วันที่ผ่านมา</string>
     <string name="file_list_empty_search">มันอาจจะอยู่ในโฟลเดอร์อื่น</string>
     <string name="file_list_empty_shared">ไฟล์และโฟลเดอร์ที่คุณแชร์จะปรากฏที่นี่</string>
     <string name="file_list_empty_shared_headline">ยังไม่มีการแชร์</string>
@@ -358,6 +358,7 @@
     <string name="foreign_files_remote_text">ระยะไกล: %1$s</string>
     <string name="forward">ส่งต่อ</string>
     <string name="fourHours">4 ชั่วโมง</string>
+    <string name="governance_no_label">ไม่มี</string>
     <string name="hidden_file_name_warning">ชื่อจะทำให้ไฟล์ถูกซ่อน</string>
     <string name="hint_name">ชื่อ</string>
     <string name="hint_note">โน้ต</string>
@@ -521,6 +522,7 @@
     <string name="share_read_permission">อ่าน</string>
     <string name="share_remote_clarification">%1$s (รีโมท)</string>
     <string name="share_settings">การตั้งค่า</string>
+    <string name="share_via_link_hide_download">Hide download</string>
     <string name="share_via_link_section_title">แชร์ลิงค์</string>
     <string name="shared_icon_share">แชร์</string>
     <string name="shared_icon_shared">แชร์แล้ว</string>
@@ -586,10 +588,10 @@
     <string name="thumbnail_for_existing_file_description">ภาพขนาดย่อสำหรับไฟล์ที่มีอยู่</string>
     <string name="thumbnail_for_new_file_desc">ภาพขนาดย่อสำหรับไฟล์ใหม่</string>
     <string name="today">วันนี้</string>
-    <string name="trashbin_activity_title">ไฟล์ที่ถูกลบ</string>
     <string name="trashbin_empty_headline">ไม่มีไฟล์ที่ถูกลบ</string>
     <string name="trashbin_file_remove">ลบแบบถาวร</string>
     <string name="unknown">ไม่ทราบ</string>
+    <string name="unlock_file">Unlock file</string>
     <string name="unset_favorite">เอาออกจากรายการโปรด</string>
     <string name="unshare_link_forbidden_permissions">เพื่อเลิกแชร์ไฟล์นี้</string>
     <string name="update_link_forbidden_permissions">เพื่ออัปเดตการแชร์นี้</string>
@@ -605,7 +607,6 @@
     <string name="upload_list_delete">ลบ</string>
     <string name="upload_local_storage_full">พื้นที่จัดเก็บข้อมูลภายในเครื่องเต็ม</string>
     <string name="upload_scan_doc_upload">แสกนเอกสารโดยใช้กล้อง</string>
-    <string name="upload_sync_conflict">เกิดข้อขัดแย้งของการซิงค์ โปรดแก้ไขด้วยตนเอง</string>
     <string name="upload_unknown_error">ข้อผิดพลาดที่ไม่รู้จัก</string>
     <string name="uploader_btn_alternative_text">เลือก</string>
     <string name="uploader_btn_upload_text">อัปโหลด</string>

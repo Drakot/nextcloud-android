@@ -10,6 +10,7 @@
     <string name="action_edit">Modifier</string>
     <string name="action_empty_notifications">Effacer toutes les notifications</string>
     <string name="action_empty_trashbin">Vider la corbeille</string>
+    <string name="action_open_in_web_editor">Ouvrir dans le navigateur</string>
     <string name="action_send_share">Envoyer / Partager</string>
     <string name="action_switch_grid_view">Vue en grille</string>
     <string name="action_switch_list_view">Vue en liste</string>
@@ -55,7 +56,6 @@
     <string name="assistant_screen_empty_content_description">Essayez d\'envoyer un message pour déclencher une conversation.</string>
     <string name="assistant_screen_empty_content_title">Bonjour ! En quoi puis-je vous aider aujourd’hui ?</string>
     <string name="assistant_screen_retry_response_generation">Réessayer la génération de réponse</string>
-    <string name="assistant_screen_select_task">Veuillez sélectionner une tâche</string>
     <string name="assistant_screen_send_message">Envoyer un message</string>
     <string name="assistant_screen_task_bar_open_conversation_list">Ouvrir la liste des conversations</string>
     <string name="assistant_screen_task_create_fail_message">Une erreur est survenue lors de la création de la tâche</string>
@@ -99,7 +99,6 @@
     <string name="auth_ssl_unverified_server_title">Impossible de vérifier l\'identité du serveur SSL</string>
     <string name="auth_testing_connection">Test de connexion en cours</string>
     <string name="auth_timeout_title">Le serveur a pris trop de temps à répondre</string>
-    <string name="auth_trying_to_login">Tentative de connexion…</string>
     <string name="auth_unauthorized">Nom d\'utilisateur ou mot de passe incorrect</string>
     <string name="auth_unknown_error_exception_title">Erreur inconnue : %1$s</string>
     <string name="auth_unknown_error_http_title">Une erreur HTTP inconnue est survenue !</string>
@@ -113,7 +112,10 @@
     <string name="authenticator_activity_login_error">Un problème est survenu lors du traitement de votre demande de connexion. Veuillez réessayer plus tard.</string>
     <string name="authenticator_activity_no_web_browser_found">Aucun navigateur n\'est disponible pour ouvrir ce lien.</string>
     <string name="authenticator_activity_please_complete_login_process">Veuillez finaliser la connexion dans votre navigateur</string>
-    <string name="auto_upload_battery_saver_mode_warning">Le téléversement automatique est suspendu, car l\'économiseur de batterie est activé.</string>
+    <string name="auto_upload_background_activity_action">Autoriser l’activité en arrière-plan</string>
+    <string name="auto_upload_battery_optimization_reason">L’activité en arrière-plan de Nextcloud est limitée par l’optimisation de la batterie.</string>
+    <string name="auto_upload_battery_saver_action">Ouvrir les paramètres d’économie de batterie</string>
+    <string name="auto_upload_battery_saver_reason">L’économiseur de batterie est activé et peut interrompre les téléversements.</string>
     <string name="auto_upload_delete_dialog_description">Cette action supprimera le dossier et la configuration de téléchargement automatique. Tout téléchargement inachevé sera annulé.</string>
     <string name="auto_upload_delete_dialog_title">Supprimer le dossier de téléchargement automatique ?</string>
     <string name="auto_upload_file_behaviour_kept_in_folder">conservé dans le dossier original (puisqu\'il est en lecture seule)</string>
@@ -130,8 +132,9 @@
     <string name="autoupload_hide_folder">Masquer le dossier</string>
     <string name="avatar">Avatar</string>
     <string name="away">Absent</string>
+    <string name="backup_list_adapter_local_contacts">Contacts locaux</string>
     <string name="backup_settings">Paramètres de sauvegarde</string>
-    <string name="backup_title">Sauvegarder les contacts et l\'agenda</string>
+    <string name="backup_title">Sauvegarde des contacts et de l\'agenda</string>
     <string name="battery_optimization_close">Fermer</string>
     <string name="battery_optimization_disable">Désactiver</string>
     <string name="battery_optimization_message">L\'optimisation de la batterie est peut-être active sur votre appareil. Le téléversement automatique ne fonctionne correctement que si vous excluez cette application de l\'optimisation.</string>
@@ -247,8 +250,11 @@
     <string name="could_not_retrieve_url">Impossible de récupérer l\'URL</string>
     <string name="create">Créer</string>
     <string name="create_dir_fail_msg">Le dossier n\'a pas pu être créé</string>
+    <string name="create_document">Document</string>
+    <string name="create_encrypted_folder">Dossier chiffré</string>
     <string name="create_end_to_end_encrypted_share">Lien de partage</string>
     <string name="create_end_to_end_encrypted_share_title">Lien de partages chiffrés de bout en bout</string>
+    <string name="create_folder">Dossier</string>
     <string name="create_link">Créer un lien</string>
     <string name="create_new">Nouveau</string>
     <string name="create_new_document">Nouveau document</string>
@@ -256,8 +262,9 @@
     <string name="create_new_folder">Nouveau dossier</string>
     <string name="create_new_presentation">Nouvelle présentation</string>
     <string name="create_new_spreadsheet">Nouvelle feuille de calcul</string>
+    <string name="create_presentation">Présentation</string>
     <string name="create_rich_workspace">Ajouter une description du dossier</string>
-    <string name="creates_rich_workspace">Ajoute une description du dossier</string>
+    <string name="create_spreadsheet">Feuille de calcul</string>
     <string name="credentials_disabled">Informations d\'identification désactivées</string>
     <string name="daily_backup">Sauvegarde journalière</string>
     <string name="data_to_back_up">Données à sauvegarder</string>
@@ -273,6 +280,8 @@
     <string name="dialog_close">Fermer</string>
     <string name="did_not_check_for_dupes">N\'a pas vérifié les doublons.</string>
     <string name="digest_algorithm_not_available">Cet algorithme de hachage n\'est pas disponible sur votre appareil.</string>
+    <string name="direct_login_confirm_message">Voulez-vous vous connecter avec %1$s à %2$s ?</string>
+    <string name="direct_login_confirm_title">Confirmer la connexion</string>
     <string name="direct_login_failed">Échec de la connexion par lien direct</string>
     <string name="direct_login_text">Se connecter avec %1$s à %2$s</string>
     <string name="disable_new_media_folder_detection_notifications">Désactiver</string>
@@ -324,7 +333,6 @@
     <string name="drawer_item_on_device">Sur l\'appareil</string>
     <string name="drawer_item_personal_files">Fichiers personnels</string>
     <string name="drawer_item_recent_files">Fichiers récents</string>
-    <string name="drawer_item_recently_modified">Modifiés récemment</string>
     <string name="drawer_item_shared">Partagé</string>
     <string name="drawer_item_trashbin">Fichiers supprimés</string>
     <string name="drawer_item_uploads_list">Téléversements</string>
@@ -333,7 +341,6 @@
     <string name="drawer_quota">%1$s utilisés sur %2$s</string>
     <string name="drawer_quota_unlimited">%1$s utilisé</string>
     <string name="drawer_synced_folders">Téléversement automatique</string>
-    <string name="due_to_too_many_wrong_attempts">%s à cause de trop de tentatives ratées</string>
     <string name="e2e_counter_too_old">Le compteur est trop vieux</string>
     <string name="e2e_hash_not_found">Hachage non trouvé</string>
     <string name="e2e_not_yet_setup">E2E pas encore configuré</string>
@@ -375,7 +382,7 @@
     <string name="error_crash_title">%1$s a planté</string>
     <string name="error_creating_file_from_template">Erreur lors de la création du fichier à partir du modèle</string>
     <string name="error_fetching_sharees">Impossible de récupérer les partages.</string>
-    <string name="error_file_actions">Erreur d\'affichage des actions sur les fichiers</string>
+    <string name="error_file_actions">Erreur d\'affichage des actions sur le fichier</string>
     <string name="error_file_lock">Erreur lors de la modification de l\'état de verrouillage du fichier</string>
     <string name="error_report_issue_action">Signaler</string>
     <string name="error_report_issue_text">Signaler le problème au traqueur ? (nécessite un compte GitHub)</string>
@@ -432,6 +439,8 @@
     <string name="file_detail_sharing_fragment_no_contact_app_message">Aucune application disponible pour sélectionner des contacts</string>
     <string name="file_details_no_content">Impossible de charger les détails</string>
     <string name="file_icon">Fichier</string>
+    <string name="file_info_governance_section_title">Gouvernance</string>
+    <string name="file_info_image_details_section_title">Détails de l\'image</string>
     <string name="file_keep">Conserver</string>
     <string name="file_list_empty">Déposez du contenu ou synchronisez vos appareils.</string>
     <string name="file_list_empty_favorite_headline">Aucun favori</string>
@@ -445,7 +454,6 @@
     <string name="file_list_empty_on_device">Les fichiers/dossiers téléchargés apparaîtront ici.</string>
     <string name="file_list_empty_recent_files_description">Les fichiers et dossiers que vous avez récemment modifiés apparaîtront ici</string>
     <string name="file_list_empty_recent_files_headline">Pas de fichiers récemment modifiés</string>
-    <string name="file_list_empty_recently_modified">Aucun fichier modifié n\'a été trouvé dans les 7 derniers jours</string>
     <string name="file_list_empty_search">Il se trouve peut-être dans un autre dossier ?</string>
     <string name="file_list_empty_shared">Les fichiers et dossiers que vous partagez apparaîtront ici.</string>
     <string name="file_list_empty_shared_headline">Aucun partage</string>
@@ -458,6 +466,7 @@
     <string name="file_list_live">EN DIRECT</string>
     <string name="file_list_loading">Chargement…</string>
     <string name="file_list_no_app_for_file_type">Aucune application trouvée pour ce type de fichier.</string>
+    <string name="file_list_out_of_memory_description">Impossible de charger le contenu</string>
     <string name="file_list_seconds_ago">à l\'instant</string>
     <string name="file_management_permission_optional">Autorisations d\'accès au stockage</string>
     <string name="file_management_permission_optional_text">%1$s fonctionne mieux avec les autorisations d\'accès au stockage. Vous pouvez choisir un accès complet à tous les fichiers ou un accès en lecture seule aux photos et vidéos.</string>
@@ -502,6 +511,7 @@
     <string name="filedetails_download">Télécharger</string>
     <string name="filedetails_export">Exporter</string>
     <string name="filedetails_renamed_in_upload_msg">Le fichier a été renommé en %1$s pendant le téléversement</string>
+    <string name="filedetails_sync_all_files">Tous synchroniser</string>
     <string name="filedetails_sync_file">Synchroniser</string>
     <string name="filedisplay_no_file_selected">Aucun fichier sélectionné</string>
     <string name="filename_empty">Le nom du fichier ne peut pas être vide</string>
@@ -539,6 +549,11 @@
     <string name="foreign_files_remote_text">Distant : %1$s</string>
     <string name="forward">Suivant</string>
     <string name="fourHours">4 heures</string>
+    <string name="governance_file_retention_label">Suppression programmée de fichiers</string>
+    <string name="governance_legal_hold_label">Conservation légale</string>
+    <string name="governance_no_label">Aucun</string>
+    <string name="governance_permission_denied">Vous n\'avez pas l\'autorisation de modifier cette étiquette</string>
+    <string name="governance_sensitivity_label">Étiquette de sensibilité</string>
     <string name="gplay_restriction">Google restreint le téléchargement des fichiers APK / AAB !</string>
     <string name="grid_file_features_live_photo_content_description">Cette icône indique la disponibilité de live photo</string>
     <string name="hidden_file_name_warning">Le nom résultera en un fichier caché</string>
@@ -631,6 +646,7 @@
     <string name="menu_item_sort_by_size_biggest_first">Taille : Grand en premier</string>
     <string name="menu_item_sort_by_size_smallest_first">Taille : Petit en premier</string>
     <string name="more">Plus</string>
+    <string name="more_documents">Plus de documents</string>
     <string name="move_file_error">Une erreur est survenue lors de la tentative de déplacement de ce fichier ou dossier</string>
     <string name="move_file_invalid_into_descendent">Il n\'est pas possible de déplacer un dossier vers un de ses descendants</string>
     <string name="move_file_invalid_overwrite">Le fichier existe déjà dans le dossier de destination</string>
@@ -744,7 +760,7 @@
     <string name="prefs_category_general">Général</string>
     <string name="prefs_category_more">Plus</string>
     <string name="prefs_category_sync">Synchroniser</string>
-    <string name="prefs_daily_backup_summary">Sauvegarde quotidienne de votre agenda et des contacts</string>
+    <string name="prefs_daily_backup_summary">Sauvegarde quotidienne de votre agenda et de vos contacts</string>
     <string name="prefs_daily_contact_backup_summary">Sauvegarde quotidienne de vos contacts</string>
     <string name="prefs_data_storage_location">Emplacement de stockage des données</string>
     <string name="prefs_data_storage_location_summary">Gérer l\'emplacement de stockage des données</string>
@@ -760,7 +776,7 @@
     <string name="prefs_instant_behaviour_dialogTitle">Le fichier original sera…</string>
     <string name="prefs_instant_behaviour_title">Le fichier original sera…</string>
     <string name="prefs_instant_upload_exclude_hidden_summary">Exclure les fichiers et dossiers cachés</string>
-    <string name="prefs_instant_upload_exclude_hidden_title">Exclure les cachés</string>
+    <string name="prefs_instant_upload_exclude_hidden_title">Exclure les éléments cachés</string>
     <string name="prefs_instant_upload_path_use_date_subfolders_summary">Stockage dans des sous-dossiers se basant sur la date</string>
     <string name="prefs_instant_upload_path_use_subfolders_title">Utiliser des sous-dossiers</string>
     <string name="prefs_instant_upload_subfolder_rule_title">Options du sous-dossier</string>
@@ -776,17 +792,19 @@
     <string name="prefs_manage_accounts">Gestion des comptes</string>
     <string name="prefs_recommend">Recommander à un ami</string>
     <string name="prefs_remove_e2e">Retirer le chiffrement localement</string>
+    <string name="prefs_remove_e2e_keys_and_files">Supprimer les fichiers chiffrés et les clés</string>
+    <string name="prefs_renew_e2e_certificate">Renouveler le certificat de chiffrement</string>
     <string name="prefs_setup_e2e">Configurer le chiffrement de bout en bout</string>
     <string name="prefs_show_ecosystem_apps">Afficher le sélecteur d\'applications</string>
     <string name="prefs_show_ecosystem_apps_summary">Suggestions d\'applications Nextcloud dans l\'en-tête de navigation</string>
-    <string name="prefs_show_hidden_files">Afficher les fichiers masqués</string>
+    <string name="prefs_show_hidden_files">Afficher les fichiers cachés</string>
     <string name="prefs_sourcecode">Obtenir le code source</string>
     <string name="prefs_sycned_folders_summary">Gérer les dossiers pour le téléversement automatique</string>
     <string name="prefs_synced_folders_local_path_title">Dossier local</string>
     <string name="prefs_synced_folders_remote_path_title">Dossier distant</string>
     <string name="prefs_theme_title">Thème</string>
     <string name="prefs_two_way_sync_interval">Intervalle</string>
-    <string name="prefs_two_way_sync_summary">Gestion les dossiers internes pour une synchronisation bidirectionnelle</string>
+    <string name="prefs_two_way_sync_summary">Gérer les dossiers internes pour la synchronisation bidirectionnelle</string>
     <string name="prefs_two_way_sync_title">Synchronisation bidirectionnelle</string>
     <string name="prefs_value_theme_dark">Sombre</string>
     <string name="prefs_value_theme_light">Clair</string>
@@ -798,6 +816,7 @@
     <string name="preview_image_file_is_not_downloaded">Le fichier n\'est pas téléchargé</string>
     <string name="preview_media_unhandled_http_code_message">Ce fichier est actuellement vérouillé par un autre utilisateur ou processus et ne peut donc pas être supprimé. Veuillez réessayer plus tard.</string>
     <string name="preview_sorry">Désolé</string>
+    <string name="preview_text_string_fragment_open_rich_text_editor_error_message">Impossible d’ouvrir l’éditeur de texte</string>
     <string name="privacy">Vie privée</string>
     <string name="push_notifications_not_implemented">L\'envoi de notifications push est désactivé à cause des dépendances propriétaires des services Google Play.</string>
     <string name="push_notifications_old_login">Aucune notification push à cause d\'une connexion expirée. Veuillez ajouter de nouveau votre compte. </string>
@@ -814,6 +833,7 @@
     <string name="remote">(distant)</string>
     <string name="remote_file_fetch_failed">Impossible de trouver le fichier</string>
     <string name="remove_e2e">Vous pouvez retirer le chiffrement de bout en bout localement sur ce client</string>
+    <string name="remove_e2e_keys_and_files_dialog_warning">Cette opération supprimera tous les fichiers chiffrés ainsi que les clés privées et publiques. Voulez-vous vraiment continuer ?</string>
     <string name="remove_e2e_message">Vous pouvez retirer le chiffrement de bout en bout localement sur ce client. Les fichiers chiffrés resteront sur le serveur, mais ne seront plus synchronisés avec cet ordinateur.</string>
     <string name="remove_fail_msg">Échec de la suppression</string>
     <string name="remove_local_account">Supprimer le compte local</string>
@@ -824,6 +844,12 @@
     <string name="rename_dialog_title">Entrez un nouveau nom</string>
     <string name="rename_local_fail_msg">Impossible de renommer la version locale; veuillez réessayer avec un nom différent</string>
     <string name="rename_server_fail_msg">Impossible de renommer, le nom est déjà utilisé</string>
+    <string name="renew_e2e_certificate_dialog_message">Cette opération renouvellera votre certificat de chiffrement de bout en bout. Vos clés existantes et vos fichiers chiffrés resteront inchangés. Continuer ?</string>
+    <string name="renew_e2e_certificate_error">Impossible de renouveler le certificat de chiffrement</string>
+    <string name="renew_e2e_certificate_private_key_missing">Clé privée de chiffrement introuvable</string>
+    <string name="renew_e2e_certificate_success">Certificat de chiffrement renouvelé</string>
+    <string name="renew_e2e_certificate_summary">Renouvelez votre certificat de chiffrement de bout en bout tout en conservant vos clés existantes</string>
+    <string name="renew_e2e_certificate_valid_until">Valide jusqu\'au %1$s. Touchez pour le renouveler tout en conservant vos clés existantes.</string>
     <string name="request_account_deletion">Demander la suppression du compte</string>
     <string name="request_account_deletion_button">Demander la suppression</string>
     <string name="request_account_deletion_details">Demander la suppression permanente du compte par le fournisseur de services</string>
@@ -860,7 +886,6 @@
     <string name="send">Envoyer</string>
     <string name="send_copy_to">Envoyer une copie à</string>
     <string name="send_share">Envoyer Partager</string>
-    <string name="sendbutton_description">Icône du bouton d\'envoi</string>
     <string name="server_not_reachable">Impossible de charger le contenu</string>
     <string name="server_not_reachable_content">Il semble que l\'appareil ne soit pas connecté à internet</string>
     <string name="set_as">Utiliser comme</string>
@@ -902,7 +927,6 @@
     <string name="share_option_required">Veuillez sélectionner au moins une option de partage avant de poursuivre.</string>
     <string name="share_permission_can_edit">Peut modifier</string>
     <string name="share_permission_file_request">Demande de fichier</string>
-    <string name="share_permission_secure_file_drop">Dépôt sécurisé de fichiers</string>
     <string name="share_permission_view_only">Afficher seulement</string>
     <string name="share_permissions">Autorisations pour le partage</string>
     <string name="share_re_share_permission">Partager</string>
@@ -993,6 +1017,8 @@
     <string name="subtitle_videos_only">Vidéos uniquement</string>
     <string name="suggest">Suggérer</string>
     <string name="sync">Synchroniser</string>
+    <string name="sync_all_action_dialog_description">Tous les fichiers et dossiers contenus seront téléchargés. Cette opération peut nécessiter un espace de stockage important et prendre un certain temps, selon votre connexion.</string>
+    <string name="sync_all_action_dialog_title">Synchroniser l’intégralité du dossier ?</string>
     <string name="sync_anyway">Synchroniser quand même</string>
     <string name="sync_conflict_notification_action_title">Résoudre les conflits</string>
     <string name="sync_conflict_notification_description">Des conflits de téléversement ont été détectés. Ouvrez les téléversements pour les résoudre.</string>
@@ -1041,7 +1067,6 @@
     <string name="translation_screen_start_to_translate_task">Appuyez sur le bouton pour traduire</string>
     <string name="translation_screen_task_processing">La traduction prend plus de temps que prévu.</string>
     <string name="translation_screen_translating">Traduction en cours...</string>
-    <string name="trashbin_activity_title">Fichiers supprimés</string>
     <string name="trashbin_empty_headline">Aucun fichier supprimé</string>
     <string name="trashbin_empty_message">Les fichiers supprimés s\'afficheront ici et vous pourrez les restaurer.</string>
     <string name="trashbin_file_not_deleted">Le fichier %1$s n\'a pas pu être supprimé !</string>
@@ -1058,6 +1083,7 @@
     <string name="unified_search_fragment_contact_not_found">Contact introuvable, vous pouvez toujours synchroniser pour mettre à jour. Redirection au web...</string>
     <string name="unified_search_fragment_permission_needed">Des permissions sont requises pour ouvrir le résultat de recherche, autrement ceci redirigera au web…</string>
     <string name="unified_search_fragment_search_in_this_folder">Dans ce dossier</string>
+    <string name="unified_search_fragment_search_takes_long">La recherche prend plus de temps que prévu. Les résultats seront affichés dès que le serveur répondra</string>
     <string name="unknown">Inconnu</string>
     <string name="unlock_file">Déverrouiller le fichier</string>
     <string name="unread_comments">Il y a des commentaire non lus</string>
@@ -1104,6 +1130,8 @@
     <string name="upload_local_storage_full">Stockage local plein</string>
     <string name="upload_local_storage_not_copied">Le fichier n\'a pas pu être copié sur le stockage local</string>
     <string name="upload_lock_failed">Impossible de verrouiller le dossier</string>
+    <string name="upload_locked_message">Le serveur est occupé. Nouvelle tentative…</string>
+    <string name="upload_locked_title">Téléversement en cours</string>
     <string name="upload_manually_cancelled">Le téléversement a été annulé par l\'utilisateur</string>
     <string name="upload_missing_storage_permission_allow_file_access">Autoriser l\'accès à tous les fichiers</string>
     <string name="upload_missing_storage_permission_app_permissions">Autorisations de l\'application</string>
@@ -1115,7 +1143,11 @@
     <string name="upload_query_move_foreign_files">Il n\'y a pas assez d\'espace pour copier les fichiers sélectionnés dans le dossier %1$s. Souhaitez-vous plutôt les déplacer ?</string>
     <string name="upload_quota_exceeded">Quota de stockage dépassé</string>
     <string name="upload_scan_doc_upload">Scanner un document depuis l\'appareil photo</string>
-    <string name="upload_sync_conflict">Conflit de synchronisation, veuillez le résoudre manuellement</string>
+    <string name="upload_sync_conflict_check">Un conflit a peut-être eu lieu lors de votre dernier téléversement. Appuyez pour vérifier.</string>
+    <string name="upload_sync_conflict_check_error">Impossible de vérifier les conflits de téléversement. Veuillez réessayer.</string>
+    <string name="upload_sync_conflict_checking">Vérification des conflits de téléversement…</string>
+    <string name="upload_sync_conflict_not_exists">Conflit résolu.</string>
+    <string name="upload_sync_conflict_same_file">Aucun conflit détecté. Il s’agit du même fichier.</string>
     <string name="upload_unknown_error">Erreur inconnue </string>
     <string name="uploader_btn_alternative_text">Sélectionner</string>
     <string name="uploader_btn_upload_text">Téléverser</string>
@@ -1162,7 +1194,6 @@
     <string name="uploads_view_upload_status_failed_localfile_error">Fichier local non trouvé</string>
     <string name="uploads_view_upload_status_failed_permission_error">Erreur de permissions</string>
     <string name="uploads_view_upload_status_failed_ssl_certificate_not_trusted">Certificat du serveur non approuvé</string>
-    <string name="uploads_view_upload_status_fetching_server_version">Récupération de la version serveur …</string>
     <string name="uploads_view_upload_status_service_interrupted">L\'application s\'est arrêtée</string>
     <string name="uploads_view_upload_status_skip">Ignoré</string>
     <string name="uploads_view_upload_status_skip_reason">Un fichier portant le même nom existe déjà.</string>
@@ -1182,6 +1213,7 @@
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Site web</string>
     <string name="user_information_retrieval_error">Erreur de récupération des informations utilisateur</string>
+    <string name="user_information_retrieval_error_message">Veuillez vérifier votre connexion internet ou l\'état du serveur</string>
     <string name="userinfo_no_info_headline">Aucunes informations personnelles renseignées</string>
     <string name="userinfo_no_info_text">Ajouter le nom, la photo et les coordonnées sur votre page de profil.</string>
     <string name="username">Nom d\'utilisateur</string>
@@ -1191,6 +1223,7 @@
     <string name="wait_checking_credentials">Vérification des identifiants enregistrés</string>
     <string name="wait_for_tmp_copy_from_private_storage">Copie du fichier depuis le stockage privé</string>
     <string name="warn_rename_extension">La modification de l\'extension peut entraîner l\'ouverture de ce fichier dans une application différente.</string>
+    <string name="webview_not_available">Android System WebView est manquant ou désactivé sur cet appareil</string>
     <string name="what_s_new_image">Image quoi de neuf</string>
     <string name="whats_new_skip">Ignorer</string>
     <string name="whats_new_title">Nouveautés dans %1$s</string>
@@ -1292,14 +1325,29 @@
         <item quantity="other">%1$d éléments</item>
     </plurals>
     <plurals name="synced_folders_show_hidden_folders">
-        <item quantity="one">%1$d dossier masqué affiché</item>
-        <item quantity="many">%1$d dossiers masqués affichés</item>
-        <item quantity="other">%1$d dossiers masqués affichés</item>
+        <item quantity="one">%1$d dossier caché affiché</item>
+        <item quantity="many">%1$d dossiers cachés affichés</item>
+        <item quantity="other">%1$d dossiers cachés affichés</item>
     </plurals>
     <plurals name="items_selected_count">
         <item quantity="one">%d sélectionné</item>
         <item quantity="many">%d sélectionnés</item>
         <item quantity="other">%d sélectionnés</item>
+    </plurals>
+    <plurals name="passcode_delay_seconds">
+        <item quantity="one">Réessayez dans %d seconde en raison d’un trop grand nombre de tentatives incorrectes.</item>
+        <item quantity="many">Réessayez dans %d secondes en raison d’un trop grand nombre de tentatives incorrectes.</item>
+        <item quantity="other">Réessayez dans %d secondes en raison d’un trop grand nombre de tentatives incorrectes.</item>
+    </plurals>
+    <plurals name="passcode_delay_minutes">
+        <item quantity="one">Réessayez dans %d minute en raison d’un trop grand nombre de tentatives incorrectes.</item>
+        <item quantity="many">Réessayez dans %d minutes en raison d’un trop grand nombre de tentatives incorrectes.</item>
+        <item quantity="other">Réessayez dans %d minutes en raison d’un trop grand nombre de tentatives incorrectes.</item>
+    </plurals>
+    <plurals name="passcode_delay_minutes_seconds">
+        <item quantity="one">Réessayez dans %1$d minute et %2$d secondes en raison d’un trop grand nombre de tentatives incorrectes.</item>
+        <item quantity="many">Réessayez dans %1$d minutes et %2$d secondes en raison d’un trop grand nombre de tentatives incorrectes.</item>
+        <item quantity="other">Réessayez dans %1$d minute et %2$d secondes en raison d’un trop grand nombre de tentatives incorrectes.</item>
     </plurals>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d téléchargement restant</item>

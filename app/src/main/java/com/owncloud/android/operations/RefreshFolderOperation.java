@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.nextcloud.android.lib.resources.directediting.DirectEditingObtainRemoteOperation;
 import com.nextcloud.client.account.User;
 import com.nextcloud.common.NextcloudClient;
+import com.nextcloud.utils.ResultParser;
 import com.nextcloud.utils.e2ee.E2EVersionHelper;
 import com.nextcloud.utils.extensions.StringExtensionsKt;
 import com.owncloud.android.datamodel.ArbitraryDataProvider;
@@ -133,6 +134,11 @@ public class RefreshFolderOperation extends RemoteOperation {
      * 'True' means that the remote folder changed and should be fetched
      */
     private boolean mRemoteFolderChanged;
+
+    /**
+     * 'True' means that the sharees of at least one child of the folder changed
+     */
+    private boolean sharesChanged;
 
     /**
      * 'True' means that Etag will be ignored
@@ -263,10 +269,10 @@ public class RefreshFolderOperation extends RemoteOperation {
             return new RemoteOperationResult<>(ResultCode.FILE_NOT_FOUND);
         }
 
-        if (OCFile.ROOT_PATH.equals(mLocalFolder.getRemotePath()) && !mSyncFullAccount && !mOnlyFileMetadata) {
-            updateOCVersion(client);
-            updateUserProfile();
-        }
+        // Account metadata is refreshed after the folder listing so that it never delays the file list. It is not
+        // needed to render the folder, and blocking on it adds several sequential requests before the first PROPFIND.
+        final boolean updateAccountMetadata =
+            OCFile.ROOT_PATH.equals(mLocalFolder.getRemotePath()) && !mSyncFullAccount && !mOnlyFileMetadata;
 
         result = checkForChanges(client);
 
@@ -298,20 +304,20 @@ public class RefreshFolderOperation extends RemoteOperation {
             sendLocalBroadcast(EVENT_SINGLE_FOLDER_CONTENTS_SYNCED, mLocalFolder.getRemotePath(), result);
         }
 
-        if (result.isSuccess() && result.getData() != null && !mSyncFullAccount && !mOnlyFileMetadata) {
-            final var remoteObject = result.getData();
-            final ArrayList<RemoteFile> remoteFiles = new ArrayList<>();
-            for (Object object: remoteObject) {
-                if (object instanceof RemoteFile remoteFile) {
-                    remoteFiles.add(remoteFile);
-                }
-            }
-
-            fileDataStorageManager.saveSharesFromRemoteFile(remoteFiles);
+        final var remoteFiles = ResultParser.list(result, RemoteFile.class);
+        if (!remoteFiles.isEmpty() && !mSyncFullAccount && !mOnlyFileMetadata) {
+            // this needed because if file has new share or share is removed, eTag is not changing.
+            // that's why another separate EVENT_SINGLE_FOLDER_SHARES_SYNCED introduced before.
+            sharesChanged = fileDataStorageManager.saveSharesFromRemoteFile(remoteFiles);
         }
 
-        if (!mSyncFullAccount && mLocalFolder != null && !isMetadataSyncWorkerRunning) {
+        if (!mSyncFullAccount && sharesChanged && mLocalFolder != null && !isMetadataSyncWorkerRunning) {
             sendLocalBroadcast(EVENT_SINGLE_FOLDER_SHARES_SYNCED, mLocalFolder.getRemotePath(), result);
+        }
+
+        if (updateAccountMetadata) {
+            updateOCVersion(client);
+            updateUserProfile();
         }
 
         return result;
@@ -549,17 +555,13 @@ public class RefreshFolderOperation extends RemoteOperation {
 
         // get current data about local contents of the folder to synchronize
         Map<String, OCFile> localFilesMap;
-        E2EVersion e2EVersion;
+        E2EVersion e2EVersion = fileDataStorageManager.getE2EEVersionObject(user);
         if (object instanceof DecryptedFolderMetadataFileV1 metadataFileV1) {
-            e2EVersion = E2EVersionHelper.INSTANCE.latestVersion(false);
             localFilesMap = prefillLocalFilesMap(metadataFileV1, fileDataStorageManager.getFolderContent(mLocalFolder, false));
         } else {
-            e2EVersion = E2EVersionHelper.INSTANCE.latestVersion(true);
             localFilesMap = prefillLocalFilesMap(object, fileDataStorageManager.getFolderContent(mLocalFolder, false));
-
-            // update counter
-            if (object != null) {
-                mLocalFolder.setE2eCounter(((DecryptedFolderMetadataFile) object).getMetadata().getCounter());
+            if (object instanceof DecryptedFolderMetadataFile metadataFile) {
+                mLocalFolder.setE2eCounter(metadataFile.getMetadata().getCounter());
             }
         }
 
@@ -601,14 +603,10 @@ public class RefreshFolderOperation extends RemoteOperation {
             FileStorageUtils.searchForLocalFileInDefaultPath(updatedFile, user.getAccountName());
 
             // update file name for encrypted files
-            if (e2EVersion == E2EVersionHelper.INSTANCE.latestVersion(false)) {
-                updateFileNameForEncryptedFileV1(fileDataStorageManager,
-                                                 (DecryptedFolderMetadataFileV1) object,
-                                                 updatedFile);
-            } else if (object != null) {
-                updateFileNameForEncryptedFile(fileDataStorageManager,
-                                               (DecryptedFolderMetadataFile) object,
-                                               updatedFile);
+            if (E2EVersionHelper.INSTANCE.isV1(e2EVersion) && object instanceof DecryptedFolderMetadataFileV1 metadata) {
+                updateFileNameForEncryptedFileV1(fileDataStorageManager, metadata, updatedFile);
+            } else if (object instanceof DecryptedFolderMetadataFile metadata) {
+                updateFileNameForEncryptedFile(fileDataStorageManager, metadata, updatedFile);
                 if (localFile != null) {
                     updatedFile.setE2eCounter(localFile.getE2eCounter());
                 }
@@ -624,15 +622,12 @@ public class RefreshFolderOperation extends RemoteOperation {
 
         // save updated contents in local database
         // update file name for encrypted files
-        if (e2EVersion == E2EVersionHelper.INSTANCE.latestVersion(false)) {
-            updateFileNameForEncryptedFileV1(fileDataStorageManager,
-                                             (DecryptedFolderMetadataFileV1) object,
-                                             mLocalFolder);
-        } else {
-            updateFileNameForEncryptedFile(fileDataStorageManager,
-                                           (DecryptedFolderMetadataFile) object,
-                                           mLocalFolder);
+        if (E2EVersionHelper.INSTANCE.isV1(e2EVersion) && object instanceof DecryptedFolderMetadataFileV1 metadata) {
+            updateFileNameForEncryptedFileV1(fileDataStorageManager, metadata, mLocalFolder);
+        } else if (object instanceof DecryptedFolderMetadataFile metadata) {
+            updateFileNameForEncryptedFile(fileDataStorageManager, metadata, mLocalFolder);
         }
+
         fileDataStorageManager.saveFolder(remoteFolder, updatedFiles, localFilesMap.values());
 
         mChildren = updatedFiles;

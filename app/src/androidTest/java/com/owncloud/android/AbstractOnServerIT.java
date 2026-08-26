@@ -19,8 +19,6 @@ import com.nextcloud.client.account.UserAccountManagerImpl;
 import com.nextcloud.client.device.BatteryStatus;
 import com.nextcloud.client.device.PowerManagementService;
 import com.nextcloud.client.jobs.upload.FileUploadWorker;
-import com.nextcloud.client.network.Connectivity;
-import com.nextcloud.client.network.ConnectivityService;
 import com.owncloud.android.datamodel.OCFile;
 import com.owncloud.android.datamodel.UploadsStorageManager;
 import com.owncloud.android.db.OCUpload;
@@ -158,6 +156,11 @@ public abstract class AbstractOnServerIT extends AbstractIT {
 
                     assertTrue(operationResult);
                 }
+                
+                if (remoteFile.getPermissions().contains("M")) {
+                    // skip Teamfolders
+                    continue;
+                }
 
                 boolean removeResult = false;
                 for (int i = 0; i < 5; i++) {
@@ -172,7 +175,7 @@ public abstract class AbstractOnServerIT extends AbstractIT {
                     shortSleep();
                 }
 
-                assertTrue(removeResult);
+                assertTrue("Remove of " + remoteFile.getRemotePath() + " failed", removeResult);
             }
         }
     }
@@ -202,28 +205,6 @@ public abstract class AbstractOnServerIT extends AbstractIT {
     }
 
     public void uploadOCUpload(OCUpload ocUpload, int localBehaviour) {
-        ConnectivityService connectivityServiceMock = new ConnectivityService() {
-            @Override
-            public void isNetworkAndServerAvailable(@NonNull GenericCallback<Boolean> callback) {
-                callback.onComplete(true);
-            }
-
-            @Override
-            public boolean isConnected() {
-                return true;
-            }
-
-            @Override
-            public boolean isInternetWalled() {
-                return false;
-            }
-
-            @Override
-            public Connectivity getConnectivity() {
-                return Connectivity.CONNECTED_WIFI;
-            }
-        };
-
         PowerManagementService powerManagementServiceMock = new PowerManagementService() {
             @Override
             public boolean isIgnoringOptimization() {

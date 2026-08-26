@@ -145,20 +145,6 @@
         <item name="textInputStyle">@style/Widget.App.TextInputLayout</item>
     </style>
 
-    <style name="ownCloud.Dialog" parent="Theme.Material3.DayNight.Dialog">
-        <item name="searchViewStyle">@style/ownCloud.SearchView</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="textInputStyle">@style/Widget.App.TextInputLayout</item>
-    </style>
-
-    <style name="ProgressDialogTheme" parent="ownCloud.Dialog">
-        <item name="colorAccent">@color/color_accent</item>
-        <item name="android:textColor">@color/login_text_color</item>
-        <item name="android:windowFrame">@color/transparent</item>
-        <item name="android:windowBackground">@color/transparent</item>
-        <item name="android:windowTitleBackgroundStyle">@drawable/process_dialog_background</item>
-    </style>
-
     <style name="ownCloud.SearchView" parent="Widget.AppCompat.SearchView">
         <!-- Close button icon -->
         <item name="closeIcon">@drawable/ic_close</item>
@@ -292,6 +278,13 @@
     <style name="Theme.ownCloud.Dialog.NoTitle" parent="@style/Theme.ownCloud.Dialog">
         <item name="windowNoTitle">true</item>
         <item name="colorAccent">@color/color_accent</item>
+    </style>
+
+    <style name="Theme.ownCloud.ShareDialog" parent="@style/Theme.ownCloud.Dialog.NoTitle">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
     </style>
 
     <style name="NavigationView_ItemTextAppearance">
@@ -441,6 +434,27 @@
         <item name="rippleColor">?attr/colorControlHighlight</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.App.Button.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Widget.App.Button.BottomSheetIcon" parent="Widget.Material3.Button.IconButton">
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.App.Button.Circle</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="rippleColor">?attr/colorControlHighlight</item>
+    </style>
+
+    <style name="Widget.App.Divider.BottomSheetDivider" parent="Widget.Material3.MaterialDivider">
+        <item name="android:layout_marginVertical">@dimen/standard_half_margin</item>
+        <item name="android:layout_marginHorizontal">@dimen/bottom_sheet_menu_item_divider_standard_margin</item>
+        <item name="dividerColor">@color/list_divider_background</item>
+    </style>
+
     <style name="ThemeOverlay.App.Button.BottomSheetItem" parent="Widget.Material3.Button.IconButton">
         <item name="materialButtonStyle">@style/Widget.App.Button.BottomSheetItem</item>
     </style>
@@ -496,5 +510,9 @@
     <style name="Dialog.FullscreenVideo" parent="android:Theme.Material.NoActionBar.Fullscreen">
         <item name="android:windowBackground">@android:color/black</item>
         <item name="android:colorControlHighlight">@color/primary</item>
+    </style>
+
+    <style name="ChipIncomingTextAppearance" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textColor">#de000000</item>
     </style>
 </resources>

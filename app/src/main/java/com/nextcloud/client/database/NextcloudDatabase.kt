@@ -1,6 +1,7 @@
 /*
  * Nextcloud - Android Client
  *
+ * SPDX-FileCopyrightText: 2026 Alper Ozturk <alper.ozturk@nextcloud.com>
  * SPDX-FileCopyrightText: 2022 Álvaro Brey <alvaro@alvarobrey.com>
  * SPDX-FileCopyrightText: 2022 Nextcloud GmbH
  * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
@@ -97,8 +98,10 @@ import com.owncloud.android.db.ProviderMeta
         AutoMigration(from = 95, to = 96),
         AutoMigration(from = 96, to = 97, spec = DatabaseMigrationUtil.ResetCapabilitiesPostMigration::class),
         // manual migration used for 97 to 98
-        AutoMigration(from = 98, to = 99)
+        AutoMigration(from = 98, to = 99),
         // manual migration used for 99 to 100
+        AutoMigration(from = 100, to = 101, spec = DatabaseMigrationUtil.ResetCapabilitiesPostMigration::class),
+        AutoMigration(from = 101, to = 102, spec = DatabaseMigrationUtil.ResetCapabilitiesPostMigration::class)
     ],
     exportSchema = true
 )

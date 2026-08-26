@@ -12,7 +12,6 @@
  */
 package com.owncloud.android.ui.preview
 
-import android.app.Activity
 import android.content.ComponentName
 import android.content.DialogInterface
 import android.content.Intent
@@ -61,6 +60,7 @@ import com.google.common.util.concurrent.MoreExecutors
 import com.nextcloud.client.account.User
 import com.nextcloud.client.di.Injectable
 import com.nextcloud.client.jobs.download.FileDownloadHelper
+import com.nextcloud.client.jobs.download.SendShareDownloader
 import com.nextcloud.client.media.BackgroundPlayerService
 import com.nextcloud.client.media.ErrorFormat
 import com.nextcloud.client.media.ExoplayerListener
@@ -73,6 +73,7 @@ import com.nextcloud.ui.fileactions.FileActionsBottomSheet.Companion.newInstance
 import com.nextcloud.ui.fileactions.FileActionsBottomSheet.ResultListener
 import com.nextcloud.utils.extensions.getParcelableArgument
 import com.nextcloud.utils.extensions.logFileSize
+import com.nextcloud.utils.extensions.setFullscreenButton
 import com.nextcloud.utils.extensions.setTitleColor
 import com.owncloud.android.R
 import com.owncloud.android.databinding.ActivityPreviewMediaBinding
@@ -92,7 +93,6 @@ import com.owncloud.android.ui.dialog.ConfirmationDialogFragment
 import com.owncloud.android.ui.dialog.RemoveFilesDialogFragment
 import com.owncloud.android.ui.dialog.SendShareDialog
 import com.owncloud.android.ui.fragment.FileFragment
-import com.owncloud.android.ui.fragment.OCFileListFragment
 import com.owncloud.android.utils.DisplayUtils
 import com.owncloud.android.utils.ErrorMessageAdapter
 import com.owncloud.android.utils.MimeTypeUtil
@@ -126,12 +126,19 @@ class PreviewMediaActivity :
     private var streamUri: Uri? = null
     private var nextcloudClient: NextcloudClient? = null
 
+    private val sendShareDownloader by lazy { SendShareDownloader(this) }
+
     private lateinit var binding: ActivityPreviewMediaBinding
+
+    private val exoplayerView: PlayerView
+        get() = binding.exoplayerView.root
+
     private var emptyListView: ViewGroup? = null
     private var videoPlayer: ExoPlayer? = null
     private var videoMediaSession: MediaSession? = null
     private var audioMediaController: MediaController? = null
     private var mediaControllerFuture: ListenableFuture<MediaController>? = null
+    private var fullscreenDialog: PreviewVideoFullscreenDialog? = null
     private lateinit var windowInsetsController: WindowInsetsControllerCompat
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,7 +150,6 @@ class PreviewMediaActivity :
         WindowCompat.setDecorFitsSystemWindows(window, false)
         applyWindowInsets()
         initArguments(savedInstanceState)
-
         if (MimeTypeUtil.isVideo(file)) {
             // release any background media session if exists
             sendAudioSessionReleaseBroadcast()
@@ -158,6 +164,10 @@ class PreviewMediaActivity :
         configureSystemBars()
         emptyListView = binding.emptyView.emptyListView
         showProgressLayout()
+
+        lifecycle.addObserver(sendShareDownloader)
+        sendShareDownloader.restoreState(savedInstanceState)
+
         if (file == null) {
             return
         }
@@ -206,7 +216,7 @@ class PreviewMediaActivity :
             return
         }
 
-        binding.exoplayerView.visibility = if (isFileVideo()) View.VISIBLE else View.GONE
+        exoplayerView.visibility = if (isFileVideo()) View.VISIBLE else View.GONE
         binding.imagePreview.visibility = if (isFileVideo()) View.GONE else View.VISIBLE
 
         if (isFileVideo()) {
@@ -287,6 +297,7 @@ class PreviewMediaActivity :
             bundle.putParcelable(EXTRA_USER, user)
             saveMediaInstanceState(bundle)
         }
+        sendShareDownloader.saveState(outState)
     }
 
     private fun saveMediaInstanceState(bundle: Bundle) {
@@ -309,13 +320,13 @@ class PreviewMediaActivity :
 
     override fun onStart() {
         super.onStart()
-
         Log_OC.v(TAG, "onStart")
-
-        if (MimeTypeUtil.isVideo(file)) {
+        if (MimeTypeUtil.isVideo(file) && videoPlayer == null) {
             initializeVideoPlayer()
         }
     }
+
+    private fun isFullscreenActive(): Boolean = fullscreenDialog?.isShowing == true
 
     private fun initializeVideoPlayer() {
         lifecycleScope.launch(Dispatchers.IO) {
@@ -333,7 +344,7 @@ class PreviewMediaActivity :
                     addListener(
                         ExoplayerListener(
                             this@PreviewMediaActivity,
-                            binding.exoplayerView,
+                            exoplayerView,
                             this
                         )
                     )
@@ -445,7 +456,7 @@ class PreviewMediaActivity :
     }
 
     private fun applyWindowInsets() {
-        val playerView = binding.exoplayerView
+        val playerView = exoplayerView
         val exoControls = playerView.findViewById<FrameLayout>(androidx.media3.ui.R.id.exo_bottom_bar)
         val exoProgress = playerView.findViewById<DefaultTimeBar>(androidx.media3.ui.R.id.exo_progress)
         val progressBottomMargin = exoProgress.marginBottom
@@ -475,7 +486,7 @@ class PreviewMediaActivity :
     private fun setupVideoView() {
         initWindowInsetsController()
         val type = WindowInsetsCompat.Type.systemBars()
-        binding.exoplayerView.let {
+        exoplayerView.let {
             it.setShowNextButton(false)
             it.setShowPreviousButton(false)
             it.setControllerVisibilityListener(
@@ -490,7 +501,7 @@ class PreviewMediaActivity :
                 }
             )
             it.player = videoPlayer
-            it.setFullscreenButtonClickListener { startFullScreenVideo() }
+            it.setFullscreenButton(isFullscreen = false) { startFullScreenVideo() }
         }
     }
 
@@ -501,14 +512,16 @@ class PreviewMediaActivity :
             this,
             client,
             player,
-            binding.exoplayerView
+            exoplayerView
         )
             .apply {
                 setOnDismissListener {
+                    fullscreenDialog = null
                     setupVideoView()
                 }
             }
 
+        fullscreenDialog = dialog
         dialog.show()
     }
 
@@ -584,7 +597,7 @@ class PreviewMediaActivity :
 
             R.id.action_sync_file -> {
                 showSyncLoadingDialog(file?.isFolder == true)
-                fileOperationsHelper.syncFile(file)
+                fileOperationsHelper.syncFileOrFolder(file)
             }
 
             R.id.action_cancel_sync -> {
@@ -607,7 +620,7 @@ class PreviewMediaActivity :
             }
 
             R.id.action_download_file -> {
-                requestForDownload(file, null)
+                requestForDownload(file)
             }
         }
     }
@@ -637,16 +650,11 @@ class PreviewMediaActivity :
         }
     }
 
-    override fun downloadFile(file: OCFile?, packageName: String?, activityName: String?) {
-        requestForDownload(file, OCFileListFragment.DOWNLOAD_SEND, packageName, activityName)
+    override fun downloadFile(file: OCFile, packageName: String, activityName: String) {
+        sendShareDownloader.downloadFile(file, packageName, activityName)
     }
 
-    private fun requestForDownload(
-        file: OCFile?,
-        downloadBehavior: String? = null,
-        packageName: String? = null,
-        activityName: String? = null
-    ) {
+    private fun requestForDownload(file: OCFile?) {
         val fileDownloadHelper = FileDownloadHelper.instance()
 
         if (fileDownloadHelper.isDownloading(user, file)) {
@@ -655,14 +663,7 @@ class PreviewMediaActivity :
 
         user?.let { user ->
             file?.let { file ->
-                fileDownloadHelper.downloadFile(
-                    user,
-                    file,
-                    downloadBehavior ?: "",
-                    DownloadType.DOWNLOAD,
-                    packageName ?: "",
-                    activityName ?: ""
-                )
+                fileDownloadHelper.downloadFile(user, file, downloadType = DownloadType.DOWNLOAD)
             }
         }
     }
@@ -772,6 +773,7 @@ class PreviewMediaActivity :
 
     override fun onDestroy() {
         mediaControllerFuture?.let { MediaController.releaseFuture(it) }
+        releaseVideoPlayer()
         super.onDestroy()
 
         Log_OC.v(TAG, "onDestroy")
@@ -779,8 +781,9 @@ class PreviewMediaActivity :
 
     override fun onStop() {
         Log_OC.v(TAG, "onStop")
-
-        releaseVideoPlayer()
+        if (!isFullscreenActive()) {
+            releaseVideoPlayer()
+        }
         super.onStop()
     }
 
@@ -799,13 +802,8 @@ class PreviewMediaActivity :
         showDetails(file)
     }
 
-    override fun onBrowsedDownTo(folder: OCFile?) {
-        // TODO Auto-generated method stub
-    }
-
-    override fun onTransferStateChanged(file: OCFile?, downloading: Boolean, uploading: Boolean) {
-        // TODO Auto-generated method stub
-    }
+    override fun onBrowsedDownTo(folder: OCFile?) = Unit
+    override fun onTransferStateChanged(file: OCFile?, downloading: Boolean, uploading: Boolean) = Unit
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
@@ -818,15 +816,12 @@ class PreviewMediaActivity :
         Log_OC.v(TAG, "onActivityResult $this")
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             savedPlaybackPosition = data?.getLongExtra(EXTRA_START_POSITION, 0) ?: 0
             autoplay = data?.getBooleanExtra(EXTRA_AUTOPLAY, false) ?: false
         }
     }
 
-    /**
-     * Opens the previewed file with an external application.
-     */
     private fun openFile() {
         stopPreview(true)
         fileOperationsHelper.openFile(file)
@@ -855,12 +850,6 @@ class PreviewMediaActivity :
         private const val PLAYBACK_POSITION = "PLAYBACK_POSITION"
         private const val AUTOPLAY = "AUTOPLAY"
 
-        /**
-         * Helper method to test if an [OCFile] can be passed to a [PreviewMediaActivity] to be previewed.
-         *
-         * @param file File to test if can be previewed.
-         * @return 'True' if the file can be handled by the activity.
-         */
         fun canBePreviewed(file: OCFile?): Boolean =
             file != null && (MimeTypeUtil.isAudio(file) || MimeTypeUtil.isVideo(file))
     }

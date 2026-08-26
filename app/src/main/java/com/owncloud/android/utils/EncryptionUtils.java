@@ -113,7 +113,11 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 public final class EncryptionUtils {
     private static final String TAG = EncryptionUtils.class.getSimpleName();
 
+    // PUBLIC_KEY actually represents certificate this confusion caused by
+    // backend APIs: GetPublicKeyRemoteOperation() -> returns certificate not public key
+    // later PUBLIC_KEY must rename to CERTIFICATE
     public static final String PUBLIC_KEY = "PUBLIC_KEY";
+
     public static final String PRIVATE_KEY = "PRIVATE_KEY";
     public static final String MNEMONIC = "MNEMONIC";
     public static final int ivLength = 16;
@@ -1184,12 +1188,13 @@ public final class EncryptionUtils {
      * @param parentFile file metadata should be retrieved for
      * @return Pair: boolean: true: metadata already exists, false: metadata new created
      */
-    public static Pair<Boolean, DecryptedFolderMetadataFileV1> retrieveMetadataV1(OCFile parentFile,
+    public static Pair<Boolean, DecryptedFolderMetadataFileV1> retrieveMetadataV1(ServerFileInterface parentFile,
                                                                                   OwnCloudClient client,
                                                                                   String privateKey,
                                                                                   String publicKey,
                                                                                   ArbitraryDataProvider arbitraryDataProvider,
-                                                                                  User user)
+                                                                                  User user,
+                                                                                  String e2eeVersion)
         throws UploadException,
         InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchPaddingException, BadPaddingException,
         IllegalBlockSizeException, InvalidKeyException, InvalidKeySpecException, CertificateException {
@@ -1220,10 +1225,7 @@ public final class EncryptionUtils {
             // new metadata
             metadata = new DecryptedFolderMetadataFileV1();
             metadata.setMetadata(new DecryptedMetadata());
-
-            final var latestV1E2EEVersion = E2EVersionHelper.INSTANCE.latestVersion(false);
-
-            metadata.getMetadata().setVersion(Double.parseDouble(latestV1E2EEVersion.getValue()));
+            metadata.getMetadata().setVersion(Double.parseDouble(e2eeVersion));
             metadata.getMetadata().setMetadataKeys(new HashMap<>());
             String metadataKey = EncryptionUtils.encodeBytesToBase64String(EncryptionUtils.generateKey());
             String encryptedMetadataKey = EncryptionUtils.encryptStringAsymmetric(metadataKey, publicKey);
@@ -1282,13 +1284,13 @@ public final class EncryptionUtils {
 
         } else if (getMetadataOperationResult.getHttpCode() == HttpStatus.SC_NOT_FOUND ||
             getMetadataOperationResult.getHttpCode() == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
-            final var latestE2EEV2Version = E2EVersionHelper.INSTANCE.latestVersion(true);
+            final var e2eeVersion = storageManager.getE2EEVersion(user);
 
             // new metadata
             metadata = new DecryptedFolderMetadataFile(new com.owncloud.android.datamodel.e2e.v2.decrypted.DecryptedMetadata(),
                                                        new ArrayList<>(),
                                                        new HashMap<>(),
-                                                       latestE2EEV2Version.getValue());
+                                                       e2eeVersion);
             metadata.getUsers().add(new DecryptedUser(client.getUserId(), publicKey, null));
             byte[] metadataKey = EncryptionUtils.generateKey();
 
@@ -1310,13 +1312,13 @@ public final class EncryptionUtils {
                                       String serializedFolderMetadata,
                                       String token,
                                       OwnCloudClient client,
-                                      boolean metadataExists,
+                                      boolean isV1MetadataExists,
                                       E2EVersion version,
                                       String signature,
                                       ArbitraryDataProvider arbitraryDataProvider,
                                       User user) throws UploadException {
         RemoteOperationResult<String> uploadMetadataOperationResult;
-        if (metadataExists) {
+        if (isV1MetadataExists) {
             // update metadata
             if (E2EVersionHelper.INSTANCE.isV2Plus(version)) {
                 uploadMetadataOperationResult = new UpdateMetadataV2RemoteOperation(

@@ -27,6 +27,7 @@ import com.owncloud.android.R;
 import com.owncloud.android.datamodel.OCFile;
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.ui.activity.FileActivity;
+import com.owncloud.android.ui.activity.TextEditorWebView;
 import com.owncloud.android.ui.dialog.ConfirmationDialogFragment;
 import com.owncloud.android.ui.dialog.RemoveFilesDialogFragment;
 import com.owncloud.android.utils.DisplayUtils;
@@ -306,11 +307,11 @@ public class PreviewTextFileFragment extends PreviewTextFragment {
             if (containerActivity instanceof FileActivity activity) {
                 activity.showSyncLoadingDialog(getFile().isFolder());
             }
-            containerActivity.getFileOperationsHelper().syncFile(getFile());
+            containerActivity.getFileOperationsHelper().syncFileOrFolder(getFile());
         } else if(itemId == R.id.action_cancel_sync){
             containerActivity.getFileOperationsHelper().cancelTransference(getFile());
         } else if (itemId == R.id.action_edit) {
-            containerActivity.getFileOperationsHelper().openFileWithTextEditor(getFile(), getContext());
+            TextEditorWebView.Companion.startTextEditor(getFile(), getContext());
         }
     }
 

@@ -14,7 +14,6 @@ import com.owncloud.android.db.UploadResult
 fun UploadResult.isNonRetryable(): Boolean = when (this) {
     UploadResult.FILE_NOT_FOUND,
     UploadResult.FILE_ERROR,
-    UploadResult.FOLDER_ERROR,
     UploadResult.CANNOT_CREATE_FILE,
     UploadResult.SYNC_CONFLICT,
     UploadResult.CONFLICT_ERROR,
@@ -23,7 +22,6 @@ fun UploadResult.isNonRetryable(): Boolean = when (this) {
     UploadResult.VIRUS_DETECTED,
     UploadResult.QUOTA_EXCEEDED,
     UploadResult.PRIVILEGES_ERROR,
-    UploadResult.CREDENTIAL_ERROR,
 
     // most cases covered and mapped from RemoteOperationResult. Most likely UploadResult.UNKNOWN this error will
     // occur again

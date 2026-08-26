@@ -16,6 +16,7 @@
     <dimen name="list_item_avatar_icon_radius">20dp</dimen>
     <dimen name="bottom_sheet_text_start_margin">40dp</dimen>
     <dimen name="bottom_sheet_item_height">56dp</dimen>
+    <dimen name="bottom_sheet_horizontal_item_height">96dp</dimen>
     <dimen name="bottom_sheet_menu_item_divider_standard_margin">56dp</dimen>
     <dimen name="file_icon_size">40dp</dimen>
     <dimen name="live_photo_indicator_margin">100dp</dimen>
@@ -31,6 +32,7 @@
     <dimen name="standard_half_padding">8dp</dimen>
     <dimen name="standard_quarter_padding">4dp</dimen>
     <dimen name="standard_icon_size">32dp</dimen>
+    <dimen name="governance_color_dot_size">12dp</dimen>
     <dimen name="standard_eight_padding">2dp</dimen>
     <dimen name="standard_margin">16dp</dimen>
     <dimen name="standard_double_margin">32dp</dimen>
@@ -38,7 +40,7 @@
     <dimen name="floating_action_button_bottom_margin">100dp</dimen>
     <dimen name="bottom_navigation_view_margin">100dp</dimen>
     <dimen name="standard_quarter_margin">4dp</dimen>
-
+    <dimen name="image_detail_map_height">300dp</dimen>
     <dimen name="synced_folders_title_margin">14dp</dimen>
 
     <dimen name="grid_recommended_item_reason_text_size">12sp</dimen>
@@ -51,7 +53,6 @@
     <dimen name="grid_checkbox_size">18dp</dimen>
     <dimen name="grid_checkbox_margin">6dp</dimen>
     <dimen name="grid_recommended_file_container_width">160dp</dimen>
-    <dimen name="grid_container_height">120dp</dimen>
     <dimen name="grid_container_default_max_file_name">80dp</dimen>
 
     <dimen name="button_width">140dp</dimen>
@@ -66,6 +67,7 @@
     <dimen name="live_photo_indicator_vertical_padding">3dp</dimen>
     <dimen name="live_photo_indicator_horizontal_padding">16dp</dimen>
     <dimen name="file_list_item_avatar_icon_radius">10dp</dimen>
+    <dimen name="avatar_icon_radius">12dp</dimen>
     <dimen name="account_action_layout_height">72dp</dimen>
     <dimen name="zero">0dp</dimen>
     <dimen name="iconized_single_line_item_layout_height">56dp</dimen>
@@ -110,7 +112,6 @@
     <dimen name="notification_icon_width">24dp</dimen>
     <dimen name="notification_icon_height">24dp</dimen>
     <dimen name="notification_icon_layout_right_end_margin">21dp</dimen>
-    <dimen name="notification_list_item_grid_layout_left_start_margin">-8dp</dimen>
     <dimen name="contactlist_item_icon_layout_width">40dp</dimen>
     <dimen name="contactlist_item_icon_layout_height">40dp</dimen>
     <dimen name="empty_list_icon_layout_width">72dp</dimen>
@@ -149,7 +150,6 @@
     <integer name="small_margin">5</integer>
     <integer name="zero">0</integer>
     <dimen name="txt_size_16sp">16sp</dimen>
-    <dimen name="txt_size_14sp">14sp</dimen>
     <!--Adaptive Icon size specified here:  https://developer.android.com/develop/ui/views/launch/icon_design_adaptive -->
     <dimen name="adaptive_icon_size">108dp</dimen>
     <dimen name="adaptive_icon_padding">18dp</dimen>

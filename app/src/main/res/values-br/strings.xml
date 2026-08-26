@@ -64,7 +64,6 @@
     <string name="auth_ssl_unverified_server_title">N\'eus ket bet gallet gwiriañ identelezh ar servijer SSL</string>
     <string name="auth_testing_connection">Oc\'h amprouiñ ar gevreadenn</string>
     <string name="auth_timeout_title">Re bell eo bet ar servijer o respont</string>
-    <string name="auth_trying_to_login">O klask kevreañ...</string>
     <string name="auth_unauthorized">Fall eo an anv-implijer pe ar ger-tremen</string>
     <string name="auth_unknown_error_exception_title">Fazi dianav : %1$s</string>
     <string name="auth_unknown_error_http_title">C\'hoarvezet ez eus ur fazi HTTP dianav !</string>
@@ -188,13 +187,14 @@
     <string name="could_not_retrieve_url">N\'eus ket bet gallet adkavout an URL</string>
     <string name="create">Krouiñ</string>
     <string name="create_dir_fail_msg">N\'eus ket bet gallet krouiñ an teuliad</string>
+    <string name="create_folder">Teuliad</string>
     <string name="create_new">Nevez</string>
     <string name="create_new_document">Teul nevez</string>
     <string name="create_new_folder">Renkell nevez</string>
     <string name="create_new_presentation">Kinnig nevez</string>
     <string name="create_new_spreadsheet">Taolenner nevez</string>
+    <string name="create_presentation">Kinnigadenn</string>
     <string name="create_rich_workspace">Ouzhpennañ un deskrivadur evit ar renkell</string>
-    <string name="creates_rich_workspace">Ouzhpennañ a ra un deskrivadur evit ar renkell</string>
     <string name="credentials_disabled">Diweredekaet eo ar c\'hredadurioù</string>
     <string name="daily_backup">Savete pemdeziek</string>
     <string name="data_to_back_up">Roadennoù da vezañ saveteet</string>
@@ -251,7 +251,6 @@
     <string name="drawer_item_notifications">Kemennadennoù</string>
     <string name="drawer_item_on_device">War ar benveg</string>
     <string name="drawer_item_personal_files">Restroù personel</string>
-    <string name="drawer_item_recently_modified">Kemmet da ziwezhañ</string>
     <string name="drawer_item_shared">Rannet</string>
     <string name="drawer_item_trashbin">Restroù dilamet</string>
     <string name="drawer_item_uploads_list">Enporzhiadennoù</string>
@@ -345,7 +344,6 @@
     <string name="file_list_empty_headline_server_search">Disoc\'h ebet</string>
     <string name="file_list_empty_moving">Netra amañ. Gallout a rit ouzhpennañ ur renkell.</string>
     <string name="file_list_empty_on_device">Amaén e vo kavet ar testroù ha renkelloù pellgarget.</string>
-    <string name="file_list_empty_recently_modified">N\'eus bet kavet restr ebet bet kemmet er 7 deiz divezhañ</string>
     <string name="file_list_empty_search">Mateze emañ en ur renkell all ?</string>
     <string name="file_list_empty_shared">Amañ e vo kavet ar restroù ha renkelloù rannet ganeoc\'h</string>
     <string name="file_list_empty_shared_headline">N\'eus bet rannet netra evit poent</string>
@@ -407,6 +405,8 @@
     <string name="foreign_files_move">Dblasañ pep tra</string>
     <string name="foreign_files_remote_text">Pell : %1$s</string>
     <string name="forward">War-raok</string>
+    <string name="governance_file_retention_label">Gwarn restr</string>
+    <string name="governance_no_label">Hini ebet</string>
     <string name="hint_name">Anv</string>
     <string name="hint_note">Notenn</string>
     <string name="hint_password">Ger-tremen</string>
@@ -591,7 +591,6 @@
     <string name="select_all">Dibab pep tra</string>
     <string name="select_template">Choaz ur stumm skouer</string>
     <string name="send">Kas</string>
-    <string name="sendbutton_description">Kas skeudenn ar bouton</string>
     <string name="set_as">Lakaat evel</string>
     <string name="set_picture_as">Implij skeudenn evel</string>
     <string name="share">Rannan</string>
@@ -706,7 +705,6 @@
     <string name="thumbnail_for_existing_file_description">Ivin ar restroù a vez kavet</string>
     <string name="thumbnail_for_new_file_desc">Ivin ar restroù nevez</string>
     <string name="today">Hiziv</string>
-    <string name="trashbin_activity_title">Restroù dilamet</string>
     <string name="trashbin_empty_headline">Restr dilamet ebet</string>
     <string name="trashbin_empty_message">Posupl eo deoc\'h adtapout ar restroù lamet adalek al lec\'h mañ</string>
     <string name="trashbin_file_not_deleted">Ar restr %1$s n\'eo ket evit bezhaãn lamet !</string>
@@ -748,7 +746,6 @@
     <string name="upload_lock_failed">C\'hwitet eo bet prenna an teuliad</string>
     <string name="upload_old_android">Ar sifrañ a zo posupl gant &gt; = Android 5.0 nemetken</string>
     <string name="upload_query_move_foreign_files">Re neubeut a blas evit eilan ar restr en teuliad %1$s. C\'hoant o peus diblasañ anezhan amañ kentoc\'h ?</string>
-    <string name="upload_sync_conflict">Stourm kemprenn, diskoulmit gant an dorn mar-plij.</string>
     <string name="upload_unknown_error">Fazi dizanv</string>
     <string name="uploader_btn_alternative_text">Dibab</string>
     <string name="uploader_btn_upload_text">Pellkas</string>
@@ -792,7 +789,6 @@
     <string name="uploads_view_upload_status_failed_localfile_error">N\'eo ket bet kavet ar restr diabarzh</string>
     <string name="uploads_view_upload_status_failed_permission_error">Fazi aotre</string>
     <string name="uploads_view_upload_status_failed_ssl_certificate_not_trusted">Sertifikad servijour difiziet</string>
-    <string name="uploads_view_upload_status_fetching_server_version">O tapoout stumm ar servijour...</string>
     <string name="uploads_view_upload_status_service_interrupted">Meziant achuet</string>
     <string name="uploads_view_upload_status_succeeded">Achuet</string>
     <string name="uploads_view_upload_status_unknown_fail">Fazi dianav</string>

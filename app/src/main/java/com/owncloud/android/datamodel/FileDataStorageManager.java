@@ -21,9 +21,9 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.media.MediaScannerConnection;
 import android.content.OperationApplicationException;
 import android.database.Cursor;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.provider.MediaStore;
@@ -47,10 +47,12 @@ import com.nextcloud.model.OfflineOperationRawType;
 import com.nextcloud.model.OfflineOperationType;
 import com.nextcloud.model.ShareeEntry;
 import com.nextcloud.utils.date.DateFormatPattern;
+import com.nextcloud.utils.e2ee.E2EVersionHelper;
 import com.nextcloud.utils.extensions.DateExtensionsKt;
+import com.nextcloud.utils.extensions.FileDataStorageManagerExtensionsKt;
 import com.nextcloud.utils.extensions.FileExtensionsKt;
-import com.nextcloud.utils.extensions.StringExtensionsKt;
 import com.owncloud.android.MainApp;
+import com.owncloud.android.datamodel.e2e.v2.decrypted.DecryptedFolderMetadataFile;
 import com.owncloud.android.db.ProviderMeta.ProviderTableMeta;
 import com.owncloud.android.lib.common.network.WebdavEntry;
 import com.owncloud.android.lib.common.utils.Log_OC;
@@ -518,6 +520,22 @@ public class FileDataStorageManager {
         }
 
         return imageList;
+    }
+
+    public List<OCFile> getFolderImagesAndVideos(OCFile folder, boolean onlyOnDevice) {
+        List<OCFile> mediaList = new ArrayList<>();
+
+        if (folder != null) {
+            List<OCFile> folderContent = getFolderContent(folder, onlyOnDevice);
+
+            for (OCFile ocFile : folderContent) {
+                if (MimeTypeUtil.isImageOrVideo(ocFile)) {
+                    mediaList.add(ocFile);
+                }
+            }
+        }
+
+        return mediaList;
     }
 
     public boolean saveFile(OCFile ocFile) {
@@ -1813,17 +1831,22 @@ public class FileDataStorageManager {
         }
     }
 
-    public void saveSharesFromRemoteFile(List<RemoteFile> shares) {
+    /**
+     * @return true if the sharees of any of the given files differ from what is currently stored locally.
+     */
+    public boolean saveSharesFromRemoteFile(List<RemoteFile> shares) {
         if (shares == null || shares.isEmpty()) {
-            return;
+            return false;
         }
 
-        // Prepare reset operations
         Set<String> uniquePaths = new HashSet<>();
         for (RemoteFile share : shares) {
             uniquePaths.add(share.getRemotePath());
         }
 
+        boolean sharesChanged = FileDataStorageManagerExtensionsKt.areShareesChanged(this, shares);
+
+        // Prepare reset operations
         ArrayList<ContentProviderOperation> resetOperations = new ArrayList<>();
         for (String path : uniquePaths) {
             resetShareFlagInAFile(path);
@@ -1841,6 +1864,8 @@ public class FileDataStorageManager {
         if (!insertOperations.isEmpty()) {
             applyBatch(insertOperations);
         }
+
+        return sharesChanged;
     }
 
     /**
@@ -2395,6 +2420,7 @@ public class FileDataStorageManager {
         contentValues.put(ProviderTableMeta.CAPABILITIES_GROUPFOLDERS, capability.getGroupfolders().getValue());
         contentValues.put(ProviderTableMeta.CAPABILITIES_DROP_ACCOUNT, capability.getDropAccount().getValue());
         contentValues.put(ProviderTableMeta.CAPABILITIES_SECURITY_GUARD, capability.getSecurityGuard().getValue());
+        contentValues.put(ProviderTableMeta.CAPABILITIES_GOVERNANCE, capability.getGovernance().getValue());
 
         contentValues.put(ProviderTableMeta.CAPABILITIES_FORBIDDEN_FILENAME_CHARACTERS, capability.getForbiddenFilenameCharactersJson());
         contentValues.put(ProviderTableMeta.CAPABILITIES_FORBIDDEN_FILENAMES, capability.getForbiddenFilenamesJson());
@@ -2413,6 +2439,8 @@ public class FileDataStorageManager {
         contentValues.put(ProviderTableMeta.CAPABILITIES_HAS_VALID_SUBSCRIPTION, capability.getHasValidSubscription().getValue());
 
         contentValues.put(ProviderTableMeta.CAPABILITIES_CLIENT_INTEGRATION_JSON, capability.getClientIntegrationJson());
+
+        contentValues.put(ProviderTableMeta.CAPABILITIES_MOD_REWRITE_WORKING, capability.getModRewriteWorking().getValue());
 
         return contentValues;
     }
@@ -2450,6 +2478,16 @@ public class FileDataStorageManager {
         }
 
         return cursor;
+    }
+
+    public String getE2EEVersion(@NonNull User user) {
+        return getE2EEVersionObject(user).getValue();
+    }
+
+    public E2EVersion getE2EEVersionObject(@NonNull User user) {
+        final var capabilities = getCapability(user);
+        final var serverE2EEVersion = capabilities.getEndToEndEncryptionApiVersion();
+        return E2EVersionHelper.INSTANCE.getMaxCompatibleE2EEVersion(serverE2EEVersion);
     }
 
     @NonNull
@@ -2584,6 +2622,7 @@ public class FileDataStorageManager {
             capability.setGroupfolders(getBoolean(cursor, ProviderTableMeta.CAPABILITIES_GROUPFOLDERS));
             capability.setDropAccount(getBoolean(cursor, ProviderTableMeta.CAPABILITIES_DROP_ACCOUNT));
             capability.setSecurityGuard(getBoolean(cursor, ProviderTableMeta.CAPABILITIES_SECURITY_GUARD));
+            capability.setGovernance(getBoolean(cursor, ProviderTableMeta.CAPABILITIES_GOVERNANCE));
 
             capability.setForbiddenFilenameCharactersJson(getString(cursor, ProviderTableMeta.CAPABILITIES_FORBIDDEN_FILENAME_CHARACTERS));
             capability.setForbiddenFilenamesJson(getString(cursor, ProviderTableMeta.CAPABILITIES_FORBIDDEN_FILENAMES));
@@ -2601,6 +2640,8 @@ public class FileDataStorageManager {
             capability.setHasValidSubscription(getBoolean(cursor, ProviderTableMeta.CAPABILITIES_HAS_VALID_SUBSCRIPTION));
 
             capability.setClientIntegrationJson(getString(cursor, ProviderTableMeta.CAPABILITIES_CLIENT_INTEGRATION_JSON));
+
+            capability.setModRewriteWorking(getBoolean(cursor, ProviderTableMeta.CAPABILITIES_MOD_REWRITE_WORKING));
         }
 
         return capability;
@@ -2885,5 +2926,15 @@ public class FileDataStorageManager {
 
     public void updateFileEntity(@NonNull FileEntity entity) {
         fileDao.update(entity);
+    }
+
+    public void updateE2EECounter(OCFile file, DecryptedFolderMetadataFile metadata) {
+        updateE2EECounter(file, metadata.getMetadata().getCounter());
+    }
+
+    public void updateE2EECounter(OCFile file, long counter) {
+        Log_OC.d(TAG, "e2ee counter stored: " + counter + " for " + file.getDecryptedRemotePath());
+        file.setE2eCounter(counter);
+        saveFile(file);
     }
 }

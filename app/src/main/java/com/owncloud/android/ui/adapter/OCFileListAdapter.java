@@ -1,6 +1,7 @@
 /*
  * Nextcloud - Android Client
  *
+ * SPDX-FileCopyrightText: 2026 Alper Ozturk <alper.ozturk@nextcloud.com>
  * SPDX-FileCopyrightText: 2023 TSI-mc
  * SPDX-FileCopyrightText: 2020 Chris Narkiewicz <hello@ezaquarii.com>
  * SPDX-FileCopyrightText: 2018 Tobias Kaminsky <tobias@kaminsky.me>
@@ -34,6 +35,7 @@ import com.nextcloud.client.jobs.upload.FileUploadHelper;
 import com.nextcloud.client.preferences.AppPreferences;
 import com.nextcloud.model.OfflineOperationType;
 import com.nextcloud.utils.e2ee.E2EVersionHelper;
+import com.nextcloud.utils.extensions.ImageViewExtensionsKt;
 import com.nextcloud.utils.extensions.ViewExtensionsKt;
 import com.nextcloud.utils.mdm.MDMConfig;
 import com.owncloud.android.MainApp;
@@ -50,8 +52,6 @@ import com.owncloud.android.datamodel.ThumbnailsCacheManager;
 import com.owncloud.android.datamodel.VirtualFolderType;
 import com.owncloud.android.lib.common.accounts.AccountUtils;
 import com.owncloud.android.lib.common.utils.Log_OC;
-import com.owncloud.android.lib.resources.shares.ShareType;
-import com.owncloud.android.lib.resources.shares.ShareeUser;
 import com.owncloud.android.lib.resources.status.OCCapability;
 import com.owncloud.android.lib.resources.tags.Tag;
 import com.owncloud.android.ui.activity.ComponentsGetter;
@@ -68,19 +68,19 @@ import com.owncloud.android.utils.EncryptionUtils;
 import com.owncloud.android.utils.FileSortOrder;
 import com.owncloud.android.utils.FileStorageUtils;
 import com.owncloud.android.utils.MimeTypeUtil;
-import com.owncloud.android.utils.overlay.OverlayManager;
+import com.nextcloud.utils.thumbnail.ThumbnailGenerator;
 import com.owncloud.android.utils.theme.CapabilityUtils;
 import com.owncloud.android.utils.theme.ViewThemeUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.IntStream;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -136,7 +136,7 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private List<OCFile> recommendedFiles = new ArrayList<>();
     private RecommendedFilesAdapter recommendedFilesAdapter;
     private final OCFileListAdapterHelper helper = new OCFileListAdapterHelper();
-    private final OverlayManager overlayManager;
+    private final ThumbnailGenerator thumbnailGenerator;
 
     public OCFileListAdapter(
         Activity activity,
@@ -148,8 +148,8 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         boolean argHideItemOptions,
         boolean gridView,
         final ViewThemeUtils viewThemeUtils,
-        OverlayManager overlayManager) {
-        this.overlayManager = overlayManager;
+        ThumbnailGenerator thumbnailGenerator) {
+        this.thumbnailGenerator = thumbnailGenerator;
         this.ocFileListFragmentInterface = ocFileListFragmentInterface;
         this.activity = activity;
         this.preferences = preferences;
@@ -180,7 +180,6 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                                                     user,
                                                     mStorageManager,
                                                     hideItemOptions,
-                                                    preferences,
                                                     gridView,
                                                     transferServiceGetter,
                                                     true,
@@ -304,8 +303,8 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     e2eCounter = EncryptionUtils.E2E_V2_INITIAL_COUNTER;
                 }
 
-                file.setE2eCounter(e2eCounter);
-                mStorageManager.saveFile(file);
+                mStorageManager.updateE2EECounter(file, e2eCounter);
+
                 int position = getItemPosition(file);
                 if (position != -1) {
                     notifyItemChanged(position);
@@ -495,7 +494,7 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     private void bindHolder(@NonNull RecyclerView.ViewHolder holder, ListViewHolder viewHolder, OCFile file) {
-        ocFileListDelegate.bindViewHolder(viewHolder, file, currentDirectory, searchType, overlayManager);
+        ocFileListDelegate.bindViewHolder(viewHolder, file, currentDirectory, searchType, thumbnailGenerator);
 
         if (holder instanceof ListItemViewHolder itemViewHolder) {
             bindListItemViewHolder(itemViewHolder, file);
@@ -546,19 +545,18 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private void setFilenameAndExtension(ListGridItemViewHolder holder, OCFile file) {
         final String filename = mStorageManager.getFilenameConsideringOfflineOperation(file);
         final var pair = FileStorageUtils.getFilenameAndExtension(filename, file.isFolder(), isRTL);
-        final boolean isFolder = file.isFolder();
 
         if (holder instanceof OCFileListGridItemViewHolder gridItemViewHolder) {
             handleGridMode(filename, gridItemViewHolder, pair, file);
         } else {
-            handleListMode(holder, pair, isFolder);
+            handleListMode(holder, filename, pair);
         }
     }
 
     private void handleGridMode(String filename, OCFileListGridItemViewHolder holder, Pair<String, String> filenamePair, OCFile file) {
         boolean containsBidiControlCharacters = FileStorageUtils.containsBidiControlCharacters(filename);
         ViewExtensionsKt.setVisibleIf(holder.getFileName(),!containsBidiControlCharacters);
-        ViewExtensionsKt.setVisibleIf(holder.getBinding().bidiFilenameContainer, containsBidiControlCharacters);
+        ViewExtensionsKt.setVisibleIf(holder.getBidiFilenameContainer(), containsBidiControlCharacters);
         final var extension = holder.getExtension();
 
         if (containsBidiControlCharacters) {
@@ -577,49 +575,46 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     private void handleListMode(ListGridItemViewHolder holder,
-                                Pair<String, String> filenamePair,
-                                boolean isFolder) {
-        holder.getFileName().setText(filenamePair.getFirst());
+                                String filename,
+                                Pair<String, String> filenamePair) {
+        final boolean containsBidiControlCharacters = FileStorageUtils.containsBidiControlCharacters(filename);
+        ViewExtensionsKt.setVisibleIf(holder.getFileName(), !containsBidiControlCharacters);
+        ViewExtensionsKt.setVisibleIf(holder.getBidiFilenameContainer(), containsBidiControlCharacters);
 
+        if (!containsBidiControlCharacters) {
+            holder.getFileName().setText(filename);
+            return;
+        }
+
+        holder.getBidiFilename().setText(filenamePair.getFirst());
         final var extension = holder.getExtension();
         if (extension != null) {
-            if (isFolder) {
-                extension.setVisibility(View.GONE);
-            } else {
-                extension.setVisibility(View.VISIBLE);
-                extension.setText(filenamePair.getSecond());
-            }
+            extension.setText(filenamePair.getSecond());
         }
     }
 
-    private void bindListItemViewHolder(ListItemViewHolder holder, OCFile file) {
-        if ((file.isSharedWithMe() || file.isSharedWithSharee()) && !isMultiSelect() && !gridView &&
-            !hideItemOptions) {
-            holder.getSharedAvatars().setVisibility(View.VISIBLE);
-            holder.getSharedAvatars().removeAllViews();
+    private void bindSharedAvatars(ListItemViewHolder holder, OCFile file) {
+        final var sharedAvatars = holder.getSharedAvatars();
 
-            String fileOwner = file.getOwnerId();
-            List<ShareeUser> sharees = file.getSharees();
-
-            // use fileOwner if not oneself, then add at first
-            ShareeUser fileOwnerSharee = new ShareeUser(fileOwner, file.getOwnerDisplayName(), ShareType.USER);
-            if (!TextUtils.isEmpty(fileOwner) &&
-                !fileOwner.equals(userId) &&
-                !sharees.contains(fileOwnerSharee)) {
-                sharees.add(fileOwnerSharee);
+        if (!(file.isSharedWithMe() || file.isSharedWithSharee()) || isMultiSelect() || gridView || hideItemOptions) {
+            sharedAvatars.setVisibility(View.GONE);
+            if (sharedAvatars.getChildCount() > 0) {
+                sharedAvatars.removeAllViews();
             }
-
-            Collections.reverse(sharees);
-
-            Log_OC.d(this, "sharees of " + file.getFileName() + ": " + sharees);
-
-            holder.getSharedAvatars().setAvatars(user, sharees, viewThemeUtils);
-            holder.getSharedAvatars().setOnClickListener(
-                view -> ocFileListFragmentInterface.onShareIconClick(file));
-        } else {
-            holder.getSharedAvatars().setVisibility(View.GONE);
-            holder.getSharedAvatars().removeAllViews();
+            return;
         }
+
+        sharedAvatars.setVisibility(View.VISIBLE);
+        if (sharedAvatars.getChildCount() > 0) {
+            sharedAvatars.removeAllViews();
+        }
+        final var avatars = helper.getAvatarSharees(file, userId);
+        sharedAvatars.setAvatars(user, avatars, viewThemeUtils);
+        sharedAvatars.setOnClickListener(view -> ocFileListFragmentInterface.onShareIconClick(file));
+    }
+
+    private void bindListItemViewHolder(ListItemViewHolder holder, OCFile file) {
+        bindSharedAvatars(holder, file);
 
         // tags
         if (file.getTags().isEmpty()) {
@@ -875,7 +870,9 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void updateAdapter(List<OCFile> newFiles, OCFile directory) {
         Log_OC.d(TAG, "updating the adapter");
 
-        mFiles = new ArrayList<>(newFiles);
+        mFiles.clear();
+        mFiles.addAll(newFiles);
+
         mFilesAll.clear();
         mFilesAll.addAll(mFiles);
 
@@ -982,18 +979,12 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    public void addVirtualFile(@NonNull OCFile file) {
-        if (mFiles.isEmpty() || !mFiles.contains(file)) {
-            mFiles.add(file);
-        }
-    }
-
     @Override
     public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
         super.onViewRecycled(holder);
         if (holder instanceof ListViewHolder listViewHolder) {
             LoaderImageView thumbnailShimmer = listViewHolder.getShimmerThumbnail();
-            DisplayUtils.stopShimmer(thumbnailShimmer,  listViewHolder.getThumbnail());
+            ImageViewExtensionsKt.stopShimmer(listViewHolder.getThumbnail(), thumbnailShimmer);
         }
     }
 
@@ -1020,7 +1011,7 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public void cancelAllPendingTasks() {
-        ocFileListDelegate.cancelAllPendingTasks();
+        thumbnailGenerator.getFileThumbnailGenerator().cancelPendingTasks();
     }
 
     public void setGridView(boolean bool) {
@@ -1112,4 +1103,67 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         mFilesAll.clear();
         notifyDataSetChanged();
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void removeFile(@NonNull OCFile file) {
+        int position = getItemPosition(file);
+
+        mFiles.remove(file);
+        mFilesAll.remove(file);
+
+        if (position != -1) {
+            notifyItemRemoved(position);
+        } else {
+            notifyDataSetChanged();
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateFile(@NonNull OCFile updatedFile) {
+        long fileId = updatedFile.getFileId();
+
+        IntStream.range(0, mFilesAll.size())
+            .filter(i -> mFilesAll.get(i).getFileId() == fileId)
+            .findFirst()
+            .ifPresent(i -> mFilesAll.set(i, updatedFile));
+
+        int oldIndex = IntStream.range(0, mFiles.size())
+            .filter(i -> mFiles.get(i).getFileId() == fileId)
+            .findFirst()
+            .orElse(-1);
+        if (oldIndex == -1) return;
+
+        mFiles.remove(oldIndex);
+        mFiles.add(updatedFile);
+
+        FileSortOrder currentSortOrder = preferences.getSortOrderByFolder(currentDirectory);
+        if (searchType == SearchType.SHARED_FILTER) {
+            mFiles.sort((o1, o2) -> Long.compare(o2.getFirstShareTimestamp(), o1.getFirstShareTimestamp()));
+        } else {
+            boolean foldersBeforeFiles = preferences.isSortFoldersBeforeFiles();
+            boolean favoritesFirst = preferences.isSortFavoritesFirst();
+            mFiles = currentSortOrder.sortCloudFiles(mFiles, foldersBeforeFiles, favoritesFirst);
+        }
+
+        int newIndex = mFiles.indexOf(updatedFile);
+        if (newIndex == -1) {
+            notifyDataSetChanged();
+            return;
+        }
+
+        int headerOffset = shouldShowHeader() ? 1 : 0;
+        int oldAdapterPos = oldIndex + headerOffset;
+        int newAdapterPos = newIndex + headerOffset;
+
+        if (oldAdapterPos != newAdapterPos) {
+            notifyItemMoved(oldAdapterPos, newAdapterPos);
+        }
+        notifyItemChanged(newAdapterPos);
+
+        if (shouldShowRecommendedFiles() && recommendedFilesAdapter != null && updatedFile.isRecommendedFile()) {
+            int pos = recommendedFilesAdapter.getItemPosition(updatedFile);
+            if (pos != -1) recommendedFilesAdapter.notifyItemChanged(pos);
+        }
+    }
+
 }

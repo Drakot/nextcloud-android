@@ -32,11 +32,9 @@ import com.nextcloud.client.jobs.upload.FileUploadHelper;
 import com.nextcloud.client.network.ClientFactory;
 import com.nextcloud.client.network.ConnectivityService;
 import com.nextcloud.client.preferences.AppPreferences;
-import com.nextcloud.model.WorkerState;
 import com.nextcloud.ui.fileactions.FileAction;
 import com.nextcloud.ui.fileactions.FileActionsBottomSheet;
 import com.nextcloud.utils.MenuUtils;
-import com.nextcloud.utils.extensions.ActivityExtensionsKt;
 import com.nextcloud.utils.extensions.BundleExtensionsKt;
 import com.nextcloud.utils.extensions.FileExtensionsKt;
 import com.nextcloud.utils.mdm.MDMConfig;
@@ -67,6 +65,7 @@ import com.owncloud.android.ui.events.FileDownloadProgressEvent;
 import com.owncloud.android.utils.DisplayUtils;
 import com.owncloud.android.utils.EncryptionUtils;
 import com.owncloud.android.utils.MimeTypeUtil;
+import com.owncloud.android.utils.theme.CapabilityUtils;
 import com.owncloud.android.utils.theme.ViewThemeUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -84,7 +83,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
-import kotlin.Unit;
 
 /**
  * This Fragment is used to display the details about a file.
@@ -319,8 +317,8 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.share_dialog_title).setIcon(R.drawable.selector_tab_share));
         }
 
-        if (MimeTypeUtil.isImage(getFile())) {
-            binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.filedetails_details).setIcon(R.drawable.selector_media));
+        if (showDetailsTab()) {
+            binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.filedetails_details).setIcon(R.drawable.info_24));
         }
 
         viewThemeUtils.material.themeTabLayout(binding.tabLayout);
@@ -328,7 +326,8 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
         final FileDetailTabAdapter adapter = new FileDetailTabAdapter(requireActivity(),
                                                                       getFile(),
                                                                       user,
-                                                                      showSharingTab());
+                                                                      showSharingTab(),
+                                                                      showDetailsTab());
         binding.pager.setAdapter(adapter);
 
         binding.pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -388,7 +387,6 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        FileExtensionsKt.logFileSize(getFile(), TAG);
         outState.putParcelable(ARG_FILE, getFile());
         outState.putParcelable(ARG_USER, user);
     }
@@ -469,7 +467,7 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
             if (containerActivity instanceof FileActivity activity) {
                 activity.showSyncLoadingDialog(getFile().isFolder());
             }
-            containerActivity.getFileOperationsHelper().syncFile(getFile());
+            containerActivity.getFileOperationsHelper().syncFileOrFolder(getFile());
         } else if (itemId == R.id.action_export_file) {
             ArrayList<OCFile> list = new ArrayList<>();
             list.add(getFile());
@@ -669,17 +667,14 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
         Bitmap resizedImage;
 
         if (toolbarActivity != null && MimeTypeUtil.isImage(file)) {
-            String tagId = ThumbnailsCacheManager.PREFIX_RESIZED_IMAGE + getFile().getRemoteId();
-            resizedImage = ThumbnailsCacheManager.getBitmapFromDiskCache(tagId);
+            resizedImage = FileExtensionsKt.getBigThumbnail(file);
 
             if (resizedImage != null && !file.isUpdateThumbnailNeeded()) {
                 toolbarActivity.setPreviewImageBitmap(resizedImage);
                 previewLoaded = true;
             } else {
                 // show thumbnail while loading resized image
-                Bitmap thumbnail = ThumbnailsCacheManager.getBitmapFromDiskCache(
-                    ThumbnailsCacheManager.PREFIX_THUMBNAIL + getFile().getRemoteId());
-
+                Bitmap thumbnail = FileExtensionsKt.getSmallThumbnail(file);
                 if (thumbnail != null) {
                     toolbarActivity.setPreviewImageBitmap(thumbnail);
                 } else {
@@ -903,5 +898,10 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
             // unencrypted files/folders
             return true;
         }
+    }
+
+    private boolean showDetailsTab() {
+        return CapabilityUtils.getCapability(getContext()).getGovernance().isTrue() ||
+            MimeTypeUtil.isMedia(getFile().getMimeType());
     }
 }

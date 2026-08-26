@@ -10,6 +10,7 @@
     <string name="action_edit">Düzenle</string>
     <string name="action_empty_notifications">Tüm bildirimleri temizle</string>
     <string name="action_empty_trashbin">Çöp kutusunu boşalt</string>
+    <string name="action_open_in_web_editor">İnternet düzenleyicisinde aç</string>
     <string name="action_send_share">Gönder/paylaş</string>
     <string name="action_switch_grid_view">Tablo görünümü</string>
     <string name="action_switch_list_view">Liste görünümü</string>
@@ -18,7 +19,7 @@
     <string name="actionbar_mkdir">Yeni klasör</string>
     <string name="actionbar_move_or_copy">Taşı ya da kopyala</string>
     <string name="actionbar_open_with">Birlikte aç</string>
-    <string name="actionbar_search">Arama</string>
+    <string name="actionbar_search">Ara</string>
     <string name="actionbar_see_details">Ayrıntılar</string>
     <string name="actionbar_send_file">Gönder</string>
     <string name="actionbar_settings">Ayarlar</string>
@@ -55,7 +56,6 @@
     <string name="assistant_screen_empty_content_description">Bir görüşme başlatacak bir ileti göndermeyi dene.</string>
     <string name="assistant_screen_empty_content_title">Merhaba! Bugün size nasıl yardımcı olabilirim?</string>
     <string name="assistant_screen_retry_response_generation">Yanıt oluşturmayı yeniden dene</string>
-    <string name="assistant_screen_select_task">Lütfen görevi seçin</string>
     <string name="assistant_screen_send_message">İleti gönder</string>
     <string name="assistant_screen_task_bar_open_conversation_list">Açık görüşmeler listesi</string>
     <string name="assistant_screen_task_create_fail_message">Görev oluşturulurken bir sorun çıktı</string>
@@ -99,7 +99,6 @@
     <string name="auth_ssl_unverified_server_title">SSL sunucusunun kimliği doğrulanamadı</string>
     <string name="auth_testing_connection">Bağlantı sınanıyor</string>
     <string name="auth_timeout_title">Sunucu çok geç yanıt veriyor</string>
-    <string name="auth_trying_to_login">Oturum açılmaya çalışılıyor …</string>
     <string name="auth_unauthorized">Kullanıcı adı ya da parola yanlış</string>
     <string name="auth_unknown_error_exception_title">Bilinmeyen sorun: %1$s</string>
     <string name="auth_unknown_error_http_title">Bilinmeyen bir HTTP sorunu çıktı!</string>
@@ -116,7 +115,6 @@
     <string name="auto_upload_background_activity_action">Arka planda işlem yapılabilsin</string>
     <string name="auto_upload_battery_optimization_reason">Nextcloud arka plan işlemleri pil optimizasyonu ile sınırlanır.</string>
     <string name="auto_upload_battery_saver_action">Pil koruma ayarlarını aç</string>
-    <string name="auto_upload_battery_saver_mode_warning">Pil koruma modu açık olduğundan otomatik yükleme duraklatıldı</string>
     <string name="auto_upload_battery_saver_reason">Pil koruması etkin ve yükleme işlemlerini duraklatabilir.</string>
     <string name="auto_upload_delete_dialog_description">Bu işlem, klasörü ve otomatik yükleme yapılandırmasını kaldırır. Tamamlanmamış yüklemeler iptal edilir.</string>
     <string name="auto_upload_delete_dialog_title">Otomatik yükleme klasörü silinsin mi?</string>
@@ -134,6 +132,7 @@
     <string name="autoupload_hide_folder">Klasörü gizle</string>
     <string name="avatar">Avatar</string>
     <string name="away">Uzakta</string>
+    <string name="backup_list_adapter_local_contacts">Yerel kişiler</string>
     <string name="backup_settings">Ayarları yedekle</string>
     <string name="backup_title">Kişiler ve takvim yedeği</string>
     <string name="battery_optimization_close">Kapat</string>
@@ -251,8 +250,11 @@
     <string name="could_not_retrieve_url">Adres alınamadı</string>
     <string name="create">Oluştur</string>
     <string name="create_dir_fail_msg">Klasör oluşturulamadı</string>
+    <string name="create_document">Belge</string>
+    <string name="create_encrypted_folder">Şifrelenmiş klasör</string>
     <string name="create_end_to_end_encrypted_share">Bağlantı paylaşımı</string>
     <string name="create_end_to_end_encrypted_share_title">Uçtan uca şifrelenmiş bağlantı paylaşımları</string>
+    <string name="create_folder">Klasör</string>
     <string name="create_link">Bağlantı oluştur</string>
     <string name="create_new">Yeni</string>
     <string name="create_new_document">Yeni belge</string>
@@ -260,8 +262,9 @@
     <string name="create_new_folder">Yeni klasör</string>
     <string name="create_new_presentation">Yeni sunum</string>
     <string name="create_new_spreadsheet">Yeni elektronik tablo</string>
+    <string name="create_presentation">Sunum</string>
     <string name="create_rich_workspace">Klasör açıklaması ekle</string>
-    <string name="creates_rich_workspace">Klasör açıklaması ekler</string>
+    <string name="create_spreadsheet">Elektronik tablo</string>
     <string name="credentials_disabled">Kimlik doğrulama bilgileri kullanılmıyor</string>
     <string name="daily_backup">Günlük yedek</string>
     <string name="data_to_back_up">Yedeklenecek veriler</string>
@@ -277,6 +280,8 @@
     <string name="dialog_close">Kapat</string>
     <string name="did_not_check_for_dupes">Çiftler denetlenmedi.</string>
     <string name="digest_algorithm_not_available">Telefonunuz için gerekli algoritma bulunamadı.</string>
+    <string name="direct_login_confirm_message">%1$s ile %2$s oturumu açmak ister misiniz?</string>
+    <string name="direct_login_confirm_title">Oturum açmayı onayla</string>
     <string name="direct_login_failed">Doğrudan bağlantı ile oturum açılamadı!</string>
     <string name="direct_login_text">%1$s ile %2$s üzerinde oturum aç</string>
     <string name="disable_new_media_folder_detection_notifications">Kullanımdan kaldır</string>
@@ -328,7 +333,6 @@
     <string name="drawer_item_on_device">Aygıt üzerinde</string>
     <string name="drawer_item_personal_files">Kişisel dosyalar</string>
     <string name="drawer_item_recent_files">Son dosyalar</string>
-    <string name="drawer_item_recently_modified">Son değiştirilenler</string>
     <string name="drawer_item_shared">Paylaşılan</string>
     <string name="drawer_item_trashbin">Silinmiş dosyalar</string>
     <string name="drawer_item_uploads_list">Yüklemeler</string>
@@ -337,7 +341,6 @@
     <string name="drawer_quota">%1$s / %2$s kullanıldı</string>
     <string name="drawer_quota_unlimited">%1$s kullanılıyor</string>
     <string name="drawer_synced_folders">Otomatik yükleme</string>
-    <string name="due_to_too_many_wrong_attempts">Çok sayıda hatalı deneme nedeniyle %s</string>
     <string name="e2e_counter_too_old">Sayaç çok eski</string>
     <string name="e2e_hash_not_found">Karma bulunamadı</string>
     <string name="e2e_not_yet_setup">Uçtan uca şifreleme henüz kurulmamış</string>
@@ -436,6 +439,8 @@
     <string name="file_detail_sharing_fragment_no_contact_app_message">Kişilerin seçilmesi için kullanılabilecek bir uygulama yok</string>
     <string name="file_details_no_content">Ayrıntılar yüklenemedi</string>
     <string name="file_icon">Dosya</string>
+    <string name="file_info_governance_section_title">Yönetişim</string>
+    <string name="file_info_image_details_section_title">Görsel ayrıntıları</string>
     <string name="file_keep">Tut</string>
     <string name="file_list_empty">Bazı içerikler yükleyin ya da aygıtlarınızla eşitleyin.</string>
     <string name="file_list_empty_favorite_headline">Henüz sık kullanılan bir öge yok</string>
@@ -449,7 +454,6 @@
     <string name="file_list_empty_on_device">İndirilmiş dosya ve klasörler burada görüntülenir.</string>
     <string name="file_list_empty_recent_files_description">Son zamanlarda değiştirdiğiniz dosya ve klasörler burada görüntülenir.</string>
     <string name="file_list_empty_recent_files_headline">Yakınlarda değiştirilmiş bir dosya yok</string>
-    <string name="file_list_empty_recently_modified">Son 7 gün içinde düzenlenmiş bir dosya bulunamadı</string>
     <string name="file_list_empty_search">Başka bir klasöre bakılmasını ister misiniz?</string>
     <string name="file_list_empty_shared">Paylaştığınız dosya ve klasörler burada görüntülenir.</string>
     <string name="file_list_empty_shared_headline">Henüz hiçbir şey paylaşılmamış</string>
@@ -462,6 +466,7 @@
     <string name="file_list_live">CANLI</string>
     <string name="file_list_loading">Yükleniyor …</string>
     <string name="file_list_no_app_for_file_type">Bu dosya türü için uygulama bulunamadı.</string>
+    <string name="file_list_out_of_memory_description">İçerik yüklenemedi</string>
     <string name="file_list_seconds_ago">saniye önce</string>
     <string name="file_management_permission_optional">Depolama izinleri</string>
     <string name="file_management_permission_optional_text">%1$s depolamaya erişim izinleriyle en iyi şekilde çalışır. Tüm dosyalara tam erişim ya da fotoğraf ve videolara salt okunur erişim vermeyi seçebilirsiniz.</string>
@@ -506,6 +511,7 @@
     <string name="filedetails_download">İndir</string>
     <string name="filedetails_export">Dışa aktar</string>
     <string name="filedetails_renamed_in_upload_msg">Dosya adı, yükleme sırasında %1$s olarak değiştirildi</string>
+    <string name="filedetails_sync_all_files">Tümünü eşitle</string>
     <string name="filedetails_sync_file">Eşitle</string>
     <string name="filedisplay_no_file_selected">Herhangi bir dosya seçilmemiş</string>
     <string name="filename_empty">Dosya adı boş olamaz</string>
@@ -543,6 +549,11 @@
     <string name="foreign_files_remote_text">Uzak: %1$s</string>
     <string name="forward">İlet</string>
     <string name="fourHours">4 saat</string>
+    <string name="governance_file_retention_label">Dosya saklama</string>
+    <string name="governance_legal_hold_label">Yasal saklama</string>
+    <string name="governance_no_label">Yok</string>
+    <string name="governance_permission_denied">Bu etiketi değiştirme izniniz yok</string>
+    <string name="governance_sensitivity_label">Duyarlılık etiketi</string>
     <string name="gplay_restriction">Google APK/AAB dosyalarının indirilmesini kısıtlıyor!</string>
     <string name="grid_file_features_live_photo_content_description">Bu simge Live photo kullanılabilirliğini gösterir</string>
     <string name="hidden_file_name_warning">Bu ad gizli bir dosya oluşturacak</string>
@@ -602,7 +613,7 @@
     <string name="logs_menu_delete">Günlükleri sil</string>
     <string name="logs_menu_export">Günlükleri dışa aktar</string>
     <string name="logs_menu_refresh">Yenile</string>
-    <string name="logs_menu_search">Günlük arama</string>
+    <string name="logs_menu_search">Günlük ara</string>
     <string name="logs_menu_send">Günlükler e-posta ile gönderilsin</string>
     <string name="logs_status_filtered">Günlük kayıtları: %1$d kB, Eşleşen kayıt: %2$d / %3$d, Süre: %4$d ms</string>
     <string name="logs_status_loading">Yükleniyor …</string>
@@ -635,6 +646,7 @@
     <string name="menu_item_sort_by_size_biggest_first">Büyükten küçüğe</string>
     <string name="menu_item_sort_by_size_smallest_first">Küçükten büyüğe</string>
     <string name="more">Diğer</string>
+    <string name="more_documents">Diğer belgeler</string>
     <string name="move_file_error">Bu dosya ya da klasör taşınmaya çalışılırken bir sorun çıktı</string>
     <string name="move_file_invalid_into_descendent">Bir klasör kendi alt klasörü olarak taşınamaz</string>
     <string name="move_file_invalid_overwrite">Dosya hedef klasörde zaten var</string>
@@ -719,7 +731,7 @@
     <string name="permission_deny">Reddet</string>
     <string name="pick_contact_to_share_with">Paylaşılacak kişiyi seçin</string>
     <string name="picture_set_as_no_app">Görselin ayarlanabileceği bir uygulama bulunamadı</string>
-    <string name="pin_home">Ana sayfaya sabitle</string>
+    <string name="pin_home">Girişe sabitle</string>
     <string name="pin_shortcut_label">%1$s aç</string>
     <string name="player_stop">durdur</string>
     <string name="player_toggle">değiştir</string>
@@ -781,6 +793,7 @@
     <string name="prefs_recommend">Arkadaşına öner</string>
     <string name="prefs_remove_e2e">Şifrelemeyi yerel olarak kaldır</string>
     <string name="prefs_remove_e2e_keys_and_files">Şifrelenmiş dosyaları ve anahtarları kaldırın</string>
+    <string name="prefs_renew_e2e_certificate">Şifreleme sertifikasını yenile</string>
     <string name="prefs_setup_e2e">Uçtan uca şifrelemeyi kur</string>
     <string name="prefs_show_ecosystem_apps">Uygulama değiştiriciyi görüntüle</string>
     <string name="prefs_show_ecosystem_apps_summary">Gezinme başlığında Nextcloud uygulama önerileri</string>
@@ -831,6 +844,12 @@
     <string name="rename_dialog_title">Yeni bir ad yazın</string>
     <string name="rename_local_fail_msg">Yerel kopyanın adı değiştirilemedi. Lütfen başka bir ad deneyin</string>
     <string name="rename_server_fail_msg">Ad zaten kullanıldığından yeniden adlandırılamadı</string>
+    <string name="renew_e2e_certificate_dialog_message">Bu işlem, uçtan uca şifreleme sertifikanızı yenileyecek. Var olan anahtarlarınız ve şifrelenmiş dosyalarınız değişmeden kalır. İlerlemek istiyor musunuz?</string>
+    <string name="renew_e2e_certificate_error">Şifreleme sertifikası yenilenemedi</string>
+    <string name="renew_e2e_certificate_private_key_missing">Kişisel şifreleme anahtarı bulunamadı</string>
+    <string name="renew_e2e_certificate_success">Şifreleme sertifikası yenilendi</string>
+    <string name="renew_e2e_certificate_summary">Var olan anahtarlarınızı koruyarak uçtan uca şifreleme sertifikanızı yenileyin</string>
+    <string name="renew_e2e_certificate_valid_until">%1$s zamanına kadar geçerli. Var olan anahtarlarınızı koruyarak yenilemek için dokunun.</string>
     <string name="request_account_deletion">Hesabınızın silinmesini isteyin</string>
     <string name="request_account_deletion_button">Silme isteğinde bulunun</string>
     <string name="request_account_deletion_details">Hesabın hizmet sağlayıcı tarafından kalıcı olarak silinmesini isteyin</string>
@@ -867,7 +886,6 @@
     <string name="send">Gönder</string>
     <string name="send_copy_to">Kopyasını şuraya gönder</string>
     <string name="send_share">Paylaşım gönder</string>
-    <string name="sendbutton_description">Gönderme düğmesi simgesi</string>
     <string name="server_not_reachable">İçerik yüklenemedi</string>
     <string name="server_not_reachable_content">Bu aygıtın internet bağlantısı yok gibi görünüyor</string>
     <string name="set_as">Farklı ayarla</string>
@@ -909,7 +927,6 @@
     <string name="share_option_required">İlerlemeden önce lütfen en az bir paylaşım seçeneği seçin.</string>
     <string name="share_permission_can_edit">Düzenleyebilir</string>
     <string name="share_permission_file_request">Dosya isteme</string>
-    <string name="share_permission_secure_file_drop">Güvenli dosya bırakma</string>
     <string name="share_permission_view_only">Yalnızca görüntüleme</string>
     <string name="share_permissions">Paylaşım izinleri</string>
     <string name="share_re_share_permission">Paylaşma</string>
@@ -1000,6 +1017,8 @@
     <string name="subtitle_videos_only">Yalnızca görüntüler</string>
     <string name="suggest">Öner</string>
     <string name="sync">Eşitle</string>
+    <string name="sync_all_action_dialog_description">İçindeki tüm dosya ve klasörler indirilecek. Bu işlem, bağlantı hızınıza bağlı olarak önemli miktarda depolama alanı gerektirebilir ve biraz zaman alabilir.</string>
+    <string name="sync_all_action_dialog_title">Tüm klasör eşitlensin mi?</string>
     <string name="sync_anyway">Yine de eşitle</string>
     <string name="sync_conflict_notification_action_title">Çakışmaları çözümle</string>
     <string name="sync_conflict_notification_description">Yükleme çakışmaları bulundu. Çözümlemek için yüklemeleri açın.</string>
@@ -1048,7 +1067,6 @@
     <string name="translation_screen_start_to_translate_task">Çevirmek için düğmeye tıklayın</string>
     <string name="translation_screen_task_processing">Çeviri beklenenden uzun sürüyor.</string>
     <string name="translation_screen_translating">Çevriliyor...</string>
-    <string name="trashbin_activity_title">Silinmiş dosyalar</string>
     <string name="trashbin_empty_headline">Silinmiş bir dosya yok</string>
     <string name="trashbin_empty_message">Silinmiş dosyalarınızı buradan geri yükleyebilirsiniz.</string>
     <string name="trashbin_file_not_deleted">%1$s dosyası silinemedi!</string>
@@ -1065,6 +1083,7 @@
     <string name="unified_search_fragment_contact_not_found">Kişi bulunamadı, güncellemek için eşitleyebilirsiniz. İnternet üzerine yönlendiriliyor…</string>
     <string name="unified_search_fragment_permission_needed">Arama sonuçlarını açmak için izinler gereklidir. Yoksa İnternet üzerine yönlendirilir…</string>
     <string name="unified_search_fragment_search_in_this_folder">Bu klasör içindeki</string>
+    <string name="unified_search_fragment_search_takes_long">Arama normalden daha uzun sürüyor. Sunucu yanıt verir vermez sonuçlar görüntülenecek</string>
     <string name="unknown">Bilinmiyor</string>
     <string name="unlock_file">Dosyanın kilidini aç</string>
     <string name="unread_comments">Okunmamış yorumlar var</string>
@@ -1124,7 +1143,6 @@
     <string name="upload_query_move_foreign_files">Seçilmiş dosyaları %1$s klasörüne kopyalamak için yeterli boş alan yok. Bu dosyaları kopyalamak yerine taşımak ister misiniz?</string>
     <string name="upload_quota_exceeded">Depolama sınırına ulaşıldı</string>
     <string name="upload_scan_doc_upload">Kamera ile belge tarama</string>
-    <string name="upload_sync_conflict">Eşitleme çakışması, lütfen sorunu el ile çözümleyin</string>
     <string name="upload_sync_conflict_check">Son yüklemenizden kaynaklanan bir çakışma olabilir. Kontrol etmek için dokunun.</string>
     <string name="upload_sync_conflict_check_error">Yükleme çakışmaları kontrol edilemedi. Lütfen yeniden deneyin.</string>
     <string name="upload_sync_conflict_checking">Yükleme çakışmaları kontrol ediliyor...</string>
@@ -1176,7 +1194,6 @@
     <string name="uploads_view_upload_status_failed_localfile_error">Yerel dosya bulunamadı</string>
     <string name="uploads_view_upload_status_failed_permission_error">İzin sorunu</string>
     <string name="uploads_view_upload_status_failed_ssl_certificate_not_trusted">Sunucu sertifikasına güvenilmiyor</string>
-    <string name="uploads_view_upload_status_fetching_server_version">Sunucu sürümü alınıyor…</string>
     <string name="uploads_view_upload_status_service_interrupted">Uygulama sonlandırıldı</string>
     <string name="uploads_view_upload_status_skip">Atlandı</string>
     <string name="uploads_view_upload_status_skip_reason">Aynı adlı bir dosya zaten var.</string>
@@ -1196,6 +1213,7 @@
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Site</string>
     <string name="user_information_retrieval_error">Kullanıcı bilgileri alınırken sorun çıktı</string>
+    <string name="user_information_retrieval_error_message">Lütfen internet bağlantınızı ve sunucu durumunu denetleyin</string>
     <string name="userinfo_no_info_headline">Herhangi bir kişisel bilgi ayarlanmamış</string>
     <string name="userinfo_no_info_text">Profil sayfanızdan ad, görsel ve iletişim bilgilerinizi ekleyin.</string>
     <string name="username">Kullanıcı adı</string>
@@ -1205,6 +1223,7 @@
     <string name="wait_checking_credentials">Kayıtlı kimlik bilgileri denetleniyor</string>
     <string name="wait_for_tmp_copy_from_private_storage">Dosya kişisel depolamadan kopyalanıyor</string>
     <string name="warn_rename_extension">Uzantının değiştirilmesi bu dosyanın başka bir uygulama ile açılmasına neden olabilir</string>
+    <string name="webview_not_available">Bu aygıtta Android Sistem WebView eksik ya da kapalı</string>
     <string name="what_s_new_image">Yenilikler görseli</string>
     <string name="whats_new_skip">Atla</string>
     <string name="whats_new_title">%1$s yenilikleri</string>

@@ -1,22 +1,20 @@
 /*
  * Nextcloud - Android Client
  *
+ * SPDX-FileCopyrightText: 2026 Alper Ozturk <alper.ozturk@nextcloud.com>
  * SPDX-FileCopyrightText: 2019 Tobias Kaminsky <tobias@kaminsky.me>
  * SPDX-FileCopyrightText: 2019 Nextcloud GmbH
  * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
  */
 package com.owncloud.android.ui.activity;
 
-import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Handler;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -27,6 +25,7 @@ import android.webkit.WebView;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.nextcloud.client.account.User;
+import com.nextcloud.utils.extensions.FileExtensionsKt;
 import com.nextcloud.utils.extensions.IntentExtensionsKt;
 import com.owncloud.android.R;
 import com.owncloud.android.databinding.RichdocumentsWebviewBinding;
@@ -37,6 +36,7 @@ import com.owncloud.android.datamodel.ThumbnailsCacheManager;
 import com.owncloud.android.ui.asynctasks.TextEditorLoadUrlTask;
 import com.owncloud.android.utils.DisplayUtils;
 import com.owncloud.android.utils.MimeTypeUtil;
+import com.owncloud.android.utils.RichDocumentDownloader;
 import com.owncloud.android.utils.WebViewUtil;
 
 import java.util.ArrayList;
@@ -225,7 +225,7 @@ public abstract class EditorWebView extends ExternalSiteWebView {
     }
 
     protected WebView getWebView() {
-        return binding.webView;
+        return binding == null ? null : binding.webView;
     }
 
     protected View getRootView() {
@@ -260,8 +260,7 @@ public abstract class EditorWebView extends ExternalSiteWebView {
         } else {
             if ((MimeTypeUtil.isImage(file) || MimeTypeUtil.isVideo(file)) && file.getRemoteId() != null) {
                 // Thumbnail in cache?
-                Bitmap thumbnail = ThumbnailsCacheManager.getBitmapFromDiskCache(
-                    ThumbnailsCacheManager.PREFIX_THUMBNAIL + file.getRemoteId());
+                Bitmap thumbnail = FileExtensionsKt.getSmallThumbnail(file);
 
                 if (thumbnail != null && !file.isUpdateThumbnailNeeded()) {
                     if (MimeTypeUtil.isVideo(file)) {
@@ -285,23 +284,13 @@ public abstract class EditorWebView extends ExternalSiteWebView {
         }
     }
 
-    protected void downloadFile(Uri url, String fileName) {
-        DownloadManager downloadmanager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-
-        if (downloadmanager == null) {
-            DisplayUtils.showSnackMessage(getWebView(), getString(R.string.failed_to_download));
-            return;
-        }
-
-        DownloadManager.Request request = new DownloadManager.Request(url);
-        request.allowScanningByMediaScanner();
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-
-        // change the name file and your current activity.
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-
-
-        downloadmanager.enqueue(request);
+    protected void downloadFile(Uri uri, String filename) {
+        // downloadAs is invoked from the WebView JavaScript bridge thread, but WebView methods
+        // (getSettings) must run on the main thread, so read the user agent there.
+        runOnUiThread(() -> {
+            String userAgent = getWebView().getSettings().getUserAgentString();
+            new RichDocumentDownloader(this).download(uri, filename, userAgent);
+        });
     }
 
     public void setLoadingSnackbar(Snackbar loadingSnackbar) {

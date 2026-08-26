@@ -85,7 +85,6 @@
     <string name="auth_ssl_unverified_server_title">ບໍ່ສາມາດຢັ້ງຢືນເຊີເວີ SSL ໄດ້</string>
     <string name="auth_testing_connection">ທົດລອງການເຊື່ອມຕໍ່</string>
     <string name="auth_timeout_title">ເຊີເວີໃຊ້ເວລາຕອບສະຫນອງດົນເກີນໄປ</string>
-    <string name="auth_trying_to_login">ພະຍາຍາມເຂົ້າສູ່ລະບົບ...</string>
     <string name="auth_unauthorized">ຊື່ຜູ້ໃຊ້ ຫຼື ລະຫັດຜ່ານຜິດ</string>
     <string name="auth_unknown_error_exception_title">ບໍ່ຮູ້ຈັກຂໍ້ຜິດພາດ:%1$s</string>
     <string name="auth_unknown_error_http_title">ເກີດຄວາມຜິດພາດ HTTP !</string>
@@ -99,7 +98,6 @@
     <string name="authenticator_activity_login_error">There was an issue processing your login request. Please try again later.</string>
     <string name="authenticator_activity_no_web_browser_found">No browser is available to open this link.</string>
     <string name="authenticator_activity_please_complete_login_process">Please complete login process in your browser</string>
-    <string name="auto_upload_battery_saver_mode_warning">Auto-upload is paused because Battery Saver is on.</string>
     <string name="auto_upload_file_behaviour_kept_in_folder">ເກັບໄວ້ໃນໂຟນເດີດັ້ງເດີມ, ເປັນຮຸບແບບອ່ານຢ່າງດຽວ</string>
     <string name="auto_upload_low_battery_warning_info">Low battery, upload might take longer</string>
     <string name="auto_upload_on_wifi">ພຽງແຕ່ອັບໂຫຼດໃນ Wi-Fi ເທົ່ານັ້ນ</string>
@@ -227,6 +225,8 @@
     <string name="could_not_retrieve_url">ບໍ່ສາມາດເກັບURL ໄດ້</string>
     <string name="create">ສ້າງ</string>
     <string name="create_dir_fail_msg">ບໍ່ສາມາດສ້າງໂຟນເດີໄດ້</string>
+    <string name="create_document">ເອກະສານ</string>
+    <string name="create_folder">Folder</string>
     <string name="create_link">Create link</string>
     <string name="create_new">New</string>
     <string name="create_new_document">New document</string>
@@ -234,8 +234,9 @@
     <string name="create_new_folder">ໂຟນເດີໃຫມ່</string>
     <string name="create_new_presentation">New presentation</string>
     <string name="create_new_spreadsheet">New spreadsheet</string>
+    <string name="create_presentation">ການນຳສະເໜີ</string>
     <string name="create_rich_workspace">Add folder description</string>
-    <string name="creates_rich_workspace">Adds folder description</string>
+    <string name="create_spreadsheet">ສະເປຣດຊີດ</string>
     <string name="credentials_disabled">ຂໍ້ມູນປະຈໍາຕົວຖືກປິດ</string>
     <string name="daily_backup">Daily backup</string>
     <string name="data_to_back_up">Data to back up</string>
@@ -301,7 +302,6 @@
     <string name="drawer_item_notifications">ການເເຈ້ງເຕືອນ</string>
     <string name="drawer_item_on_device">ເທິງອຸປະກອນ</string>
     <string name="drawer_item_personal_files">Personal files</string>
-    <string name="drawer_item_recently_modified">ແປງລ່າສຸດ</string>
     <string name="drawer_item_shared">ແບ່ງປັນ</string>
     <string name="drawer_item_trashbin">ລຶບຟາຍ</string>
     <string name="drawer_item_uploads_list">ອັບໂຫຼດ</string>
@@ -310,7 +310,6 @@
     <string name="drawer_quota">ນຳໃຊ້ %1$sຂອງ%2$s</string>
     <string name="drawer_quota_unlimited">ນຳໃຊ້%1$s</string>
     <string name="drawer_synced_folders">ອັບໂຫຼດອັດຕະໂນມັດ</string>
-    <string name="due_to_too_many_wrong_attempts">%s due to too many wrong attempts</string>
     <string name="e2e_counter_too_old">Counter is too old</string>
     <string name="e2e_hash_not_found">Hash not found</string>
     <string name="e2e_not_yet_setup">E2E not yet setup</string>
@@ -416,7 +415,6 @@
     <string name="file_list_empty_on_device">ຟາຍແລະ ໂຟນ ເດີທີ່ດາວໂຫຼດ  ຈະສະແດງໃຫ້ເຫັນຢູ່ທີ່ນີ້ .</string>
     <string name="file_list_empty_recent_files_description">Files and folders you recently modified will show up here.</string>
     <string name="file_list_empty_recent_files_headline">No recently modified files</string>
-    <string name="file_list_empty_recently_modified">ບໍ່ພົບຟາຍດັດແປງພາຍໃນ 7 ວັນລ່າສຸດ</string>
     <string name="file_list_empty_search">ບາງທີອາດຢູ່ໃນໂຟນເດີທີ່ແຕກຕ່າງກັນ?</string>
     <string name="file_list_empty_shared">ຟາຍ ແລະ ໂຟນເດີ ທີ່ ທ່ານແບ່ງປັນຈະສະແດງ ໃຫ້ເຫັນຢູ່ທີ່ນີ້</string>
     <string name="file_list_empty_shared_headline">ຍັງບໍ່ມີການແບ່ງປັນເທື່ອ</string>
@@ -429,6 +427,7 @@
     <string name="file_list_live">LIVE</string>
     <string name="file_list_loading">ກຳລັງໂຫຼດ</string>
     <string name="file_list_no_app_for_file_type">ບໍ່ມີແອັບພລິເຄຊັນທີ່ຕັ້ງໄວ້ເພື່ອຈັດການກັບຟາຍປະເພດນີ້.</string>
+    <string name="file_list_out_of_memory_description">Could not load content</string>
     <string name="file_list_seconds_ago">ວິນາທີຜ່ານມາ</string>
     <string name="file_management_permission_optional">Storage permissions</string>
     <string name="file_management_permission_optional_text">%1$s works best with permissions to access storage. You can choose full access to all files, or read-only access to photos and videos.</string>
@@ -509,6 +508,7 @@
     <string name="foreign_files_remote_text">ໄລຍະໄກ:%1$s</string>
     <string name="forward">ໄປຂ້າງຫນ້າ</string>
     <string name="fourHours">4 ຊົ່ວໂມງ</string>
+    <string name="governance_no_label">ບໍ່ມີ</string>
     <string name="gplay_restriction">Google restricted downloading APK/AAB files!</string>
     <string name="grid_file_features_live_photo_content_description">This icon indicates availability of live photo</string>
     <string name="hidden_file_name_warning">Name will result in a hidden file</string>
@@ -595,6 +595,7 @@
     <string name="menu_item_sort_by_size_biggest_first">ໃຫຍ່ທີ່ສຸດ</string>
     <string name="menu_item_sort_by_size_smallest_first">ນ້ອຍທີ່ສຸດ</string>
     <string name="more">ເພີ່ມເຕີມ</string>
+    <string name="more_documents">ເອກະສານເພີ່ມເຕີມ</string>
     <string name="move_file_error">ມີຂໍ້ຜິດພາດເກີດຂຶ້ນໃນຂະນະທີ່ພະຍາຍາມຍ້າຍຟາຍ ຫຼື ໂຟນເດີນີ້</string>
     <string name="move_file_invalid_into_descendent">ມັນເປັນໄປບໍ່ໄດ້ທີ່ຈະຍ້າຍໂຟນເດີເຂົ້າໄປໃນ ຫນຶ່ງໃນໂຟນເດີພື້ນຖານຂອງມັນເອງ</string>
     <string name="move_file_invalid_overwrite">ຟາຍແມ່ນມີຢູ່ແລ້ວໃນໂຟນເດີຈຸດຫມາຍປາຍທາງ</string>
@@ -819,7 +820,6 @@
     <string name="select_template">ເລືອກຕົວຢ່າງ</string>
     <string name="send">ສົ່ງ</string>
     <string name="send_share">Send share</string>
-    <string name="sendbutton_description">ສົ່ງປຸ່ມ icon</string>
     <string name="server_not_reachable">Could not load content</string>
     <string name="server_not_reachable_content">The device is likely not connected to the internet</string>
     <string name="set_as">ຕັ້ງຄ່າເປັນ</string>
@@ -861,7 +861,6 @@
     <string name="share_option_required">Please select at least one sharing option before continuing.</string>
     <string name="share_permission_can_edit">ແກ້ໄຂໄດ້</string>
     <string name="share_permission_file_request">ຄຳຂໍໄຟລ໌</string>
-    <string name="share_permission_secure_file_drop">Secure file drop</string>
     <string name="share_permission_view_only">ເບິ່ງເທົ່ານັ້ນ</string>
     <string name="share_permissions">Share permissions</string>
     <string name="share_re_share_permission">ແບ່ງປັນ</string>
@@ -987,7 +986,6 @@
     <string name="thumbnail_for_new_file_desc">ຮຸບຂະໜາດຫຍໍ້ຂອງຟາຍໃໝ່</string>
     <string name="timeout_richDocuments">Loading is taking longer than expected</string>
     <string name="today">ມື້ນີ້</string>
-    <string name="trashbin_activity_title">ຟາຍທີ່ ຖືກ ລຶບ</string>
     <string name="trashbin_empty_headline">ບໍ່ມີຟາຍທີ່ຖືກລຶບອອກ</string>
     <string name="trashbin_empty_message">ທ່ານຈະສາມາດກຸ້ຟາຍທີ່ຖືກລຶບອອກຈາກທີ່ນີ້.</string>
     <string name="trashbin_file_not_deleted">ຟາຍ%1$sບໍ່ສາມາດລຶບໄດ້!</string>
@@ -1060,7 +1058,6 @@
     <string name="upload_query_move_foreign_files">ພື້ນທີ່ບໍ່ພຽງພໍ ໃນການສໍາເນົາຟາຍທີ່ເລືອກເຂົ້າໄປໃນໂຟນເດີ %1$s. ທ່ານຕ້ອງຍ້າຍໄປຢູ່ຫັ້ນແທນບໍ?</string>
     <string name="upload_quota_exceeded">Storage quota exceeded</string>
     <string name="upload_scan_doc_upload">Scan document from camera</string>
-    <string name="upload_sync_conflict">Syncຜິດພາດ, ກະລຸນາແກ້ໄຂດ້ວຍມື</string>
     <string name="upload_unknown_error">ຜິດພາດທີ່ບໍ່ຮູ້ຈັກ</string>
     <string name="uploader_btn_alternative_text">ເລືອກ</string>
     <string name="uploader_btn_upload_text">ອັບໂຫຼດ</string>
@@ -1107,7 +1104,6 @@
     <string name="uploads_view_upload_status_failed_localfile_error">ບໍ່ພົບຟາຍ</string>
     <string name="uploads_view_upload_status_failed_permission_error">ການອະນຸຍາດຜິດພາດ</string>
     <string name="uploads_view_upload_status_failed_ssl_certificate_not_trusted">ໃບຢັ້ງຢືນເຊີເວີ ບໍ່ໜ້າເຊື່ອຖື</string>
-    <string name="uploads_view_upload_status_fetching_server_version">ກຳລັງນໍາເອົາເວີຊັ້ນເຊີເວີມາ</string>
     <string name="uploads_view_upload_status_service_interrupted">ແອັບ ໄດ້ຖືກຍົກເລີກ</string>
     <string name="uploads_view_upload_status_skip">Skipped</string>
     <string name="uploads_view_upload_status_skip_reason">A file with the same name already exists.</string>

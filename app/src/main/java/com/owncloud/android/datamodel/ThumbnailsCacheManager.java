@@ -38,6 +38,7 @@ import android.widget.ImageView;
 import com.nextcloud.client.account.User;
 import com.nextcloud.client.network.ConnectivityService;
 import com.nextcloud.utils.BitmapExtensionsKt;
+import com.nextcloud.utils.extensions.FileExtensionsKt;
 import com.nextcloud.utils.extensions.OCFileExtensionsKt;
 import com.nextcloud.utils.extensions.OwnCloudClientExtensionsKt;
 import com.owncloud.android.MainApp;
@@ -89,7 +90,10 @@ public final class ThumbnailsCacheManager {
     private static final int READ_TIMEOUT = 40000;
     private static final int CONNECTION_TIMEOUT = 5000;
 
+    /** Cache key prefix {@code <prefix><remoteId>}; sized from {@link #getScreenDimension()}. */
     public static final String PREFIX_RESIZED_IMAGE = "r";
+
+    /** Cache key prefix {@code <prefix><remoteId>}; square, sized from {@link #getThumbnailDimension()}. */
     public static final String PREFIX_THUMBNAIL = "t";
 
     private static final String TAG = ThumbnailsCacheManager.class.getSimpleName();
@@ -217,14 +221,12 @@ public final class ThumbnailsCacheManager {
             return;
         }
 
-        final var keys = new String[] { PREFIX_RESIZED_IMAGE + file.getRemoteId(), PREFIX_THUMBNAIL + file.getRemoteId() };
-
         synchronized (mThumbnailsDiskCacheLock) {
             if (mThumbnailCache == null) {
                 return;
             }
 
-            for (String key: keys) {
+            for (String key: FileExtensionsKt.getThumbnailKeys(file)) {
                 mThumbnailCache.removeKey(key);
             }
         }
@@ -575,7 +577,7 @@ public final class ThumbnailsCacheManager {
         private Bitmap doThumbnailFromOCFileInBackground() {
             Bitmap thumbnail;
             ServerFileInterface file = (ServerFileInterface) mFile;
-            String imageKey = PREFIX_THUMBNAIL + file.getRemoteId();
+            String imageKey = FileExtensionsKt.getSmallThumbnailKey(file);
 
             boolean updateEnforced = (file instanceof OCFile && ((OCFile) file).isUpdateThumbnailNeeded());
 
@@ -622,7 +624,7 @@ public final class ThumbnailsCacheManager {
 
             // Check resized version in disk cache if still null
             if (thumbnail == null) {
-                String resizedImageKey = PREFIX_RESIZED_IMAGE + file.getRemoteId();
+                String resizedImageKey = FileExtensionsKt.getBigThumbnailKey(file);
                 Bitmap resizedImage = null;
 
                 if (!updateEnforced) {
@@ -637,8 +639,14 @@ public final class ThumbnailsCacheManager {
                 }
             }
 
+            boolean serverHasPreview = !(file instanceof OCFile) || ((OCFile) file).isPreviewAvailable();
+
+            if (thumbnail == null && !serverHasPreview) {
+                Log_OC.d(TAG, "Server reports no preview for file: " + file.getFileName());
+            }
+
             // Download thumbnail from server if still null
-            if (thumbnail == null && mClient != null) {
+            if (thumbnail == null && mClient != null && serverHasPreview) {
                 Log_OC.d(TAG, "Attempting to download thumbnail from server for file: " + file.getFileName());
                 GetMethod getMethod = null;
 
@@ -718,7 +726,7 @@ public final class ThumbnailsCacheManager {
             final String imageKey = Objects.requireNonNullElseGet(mImageKey, () -> String.valueOf(file.hashCode()));
 
             // local file should always generate a thumbnail
-            mImageKey = PREFIX_THUMBNAIL + mImageKey;
+            mImageKey = FileExtensionsKt.getSmallThumbnailKey(file);
 
             // Check disk cache in background thread
             Bitmap thumbnail = getBitmapFromDiskCache(imageKey);
@@ -844,14 +852,7 @@ public final class ThumbnailsCacheManager {
                         thumbnail = addThumbnailToCache(imageKey, bitmap, file.getPath(), px, px);
                     }
                 } else if (Type.VIDEO == type) {
-                    try (MediaMetadataRetriever retriever = new MediaMetadataRetriever()) {
-                        retriever.setDataSource(file.getAbsolutePath());
-                        thumbnail = retriever.getFrameAtTime(-1);
-                    } catch (Exception ex) {
-                        // can't create a bitmap
-                        Log_OC.w(TAG, "Failed to create bitmap from video " + file.getAbsolutePath());
-                    }
-
+                    thumbnail = getThumbnailFromMediaRetriever(file);
                     if (thumbnail != null) {
                         // Scale down bitmap if too large.
                         int px = getThumbnailDimension();
@@ -867,6 +868,28 @@ public final class ThumbnailsCacheManager {
             }
 
             return thumbnail;
+        }
+
+        private Bitmap getThumbnailFromMediaRetriever(File file) {
+            if (file == null || !file.exists()) {
+                Log_OC.w(TAG, "Cannot extract thumbnail: file is null or does not exist");
+                return null;
+            }
+
+            var retriever = new MediaMetadataRetriever();
+            try {
+                retriever.setDataSource(file.getAbsolutePath());
+                return retriever.getFrameAtTime(-1);
+            } catch (Throwable t) {
+                Log_OC.w(TAG, "Failed to create bitmap from video " + file.getAbsolutePath());
+                return null;
+            } finally {
+                try {
+                    retriever.release();
+                } catch (Throwable t) {
+                    Log_OC.w(TAG, "Failed to release retriever");
+                }
+            }
         }
     }
 
@@ -1175,7 +1198,7 @@ public final class ThumbnailsCacheManager {
         Point p = getScreenDimension();
         int pxW = p.x;
         int pxH = p.y;
-        String imageKey = PREFIX_RESIZED_IMAGE + file.getRemoteId();
+        String imageKey = FileExtensionsKt.getBigThumbnailKey(file);
 
         Bitmap bitmap = BitmapUtils.decodeSampledBitmapFromFile(file.getStoragePath(), pxW, pxH);
 
@@ -1193,7 +1216,7 @@ public final class ThumbnailsCacheManager {
         int pxW;
         int pxH;
         pxW = pxH = getThumbnailDimension();
-        String imageKey = PREFIX_THUMBNAIL + file.getRemoteId();
+        String imageKey = FileExtensionsKt.getSmallThumbnailKey(file);
 
         GetMethod getMethod = null;
 
@@ -1260,7 +1283,7 @@ public final class ThumbnailsCacheManager {
 
     public static Bitmap doResizedImageInBackground(OCFile file, FileDataStorageManager storageManager) {
         Bitmap thumbnail;
-        String imageKey = PREFIX_RESIZED_IMAGE + file.getRemoteId();
+        String imageKey = FileExtensionsKt.getBigThumbnailKey(file);
 
         // Check disk cache in background thread
         thumbnail = getBitmapFromDiskCache(imageKey);
@@ -1286,7 +1309,7 @@ public final class ThumbnailsCacheManager {
             GetMethod getMethod = null;
 
             try {
-                String uri = OwnCloudClientExtensionsKt.getPreviewEndpoint(mClient, file.getRemoteId(), pxW, pxH);
+                String uri = OwnCloudClientExtensionsKt.getPreviewEndpoint(mClient, file.getLocalId(), pxW, pxH);
                 Log_OC.d(TAG, "generating resized image: " + file.getFileName() + " URI: " + uri);
 
                 getMethod = new GetMethod(uri);

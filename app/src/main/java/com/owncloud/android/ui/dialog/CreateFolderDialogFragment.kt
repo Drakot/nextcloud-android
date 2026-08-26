@@ -19,6 +19,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.common.collect.Sets
@@ -40,6 +41,9 @@ import com.owncloud.android.ui.activity.FileDisplayActivity
 import com.owncloud.android.utils.DisplayUtils
 import com.owncloud.android.utils.KeyboardUtils
 import com.owncloud.android.utils.theme.ViewThemeUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -190,18 +194,25 @@ class CreateFolderDialogFragment :
             newFolderName = AutoRename.rename(newFolderName, capabilities, isFolderPath = true)
 
             val path = parentFolder?.decryptedRemotePath + newFolderName + OCFile.PATH_SEPARATOR
-            connectivityService.isNetworkAndServerAvailable { result ->
-                if (result) {
-                    typedActivity<ComponentsGetter>()?.fileOperationsHelper?.createFolder(path, encrypted)
+
+            val componentGetter = typedActivity<ComponentsGetter>()
+            val fda = typedActivity<FileDisplayActivity>()
+            connectivityService.isNetworkAndServerAvailable {
+                if (it) {
+                    componentGetter?.fileOperationsHelper?.createFolder(path, encrypted)
                 } else {
                     Log_OC.d(TAG, "Network not available, creating offline operation")
-                    fileDataStorageManager.addCreateFolderOfflineOperation(
-                        path,
-                        newFolderName,
-                        parentFolder?.fileId
-                    )
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        fileDataStorageManager.addCreateFolderOfflineOperation(
+                            path,
+                            newFolderName,
+                            parentFolder?.fileId
+                        )
 
-                    typedActivity<FileDisplayActivity>()?.refreshCurrentDirectory()
+                        withContext(Dispatchers.Main) {
+                            fda?.refreshCurrentDirectory()
+                        }
+                    }
                 }
             }
         }

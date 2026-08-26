@@ -1,6 +1,7 @@
 /*
  * Nextcloud - Android Client
  *
+ * SPDX-FileCopyrightText: 2026 Alper Ozturk <alper.ozturk@nextcloud.com>
  * SPDX-FileCopyrightText: 2023 Tobias Kaminsky <tobias@kaminsky.me>
  * SPDX-FileCopyrightText: 2023 Nextcloud GmbH
  * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
@@ -40,6 +41,7 @@ import com.owncloud.android.lib.resources.e2ee.GetMetadataRemoteOperation
 import com.owncloud.android.lib.resources.e2ee.MetadataResponse
 import com.owncloud.android.lib.resources.e2ee.StoreMetadataV2RemoteOperation
 import com.owncloud.android.lib.resources.e2ee.UpdateMetadataV2RemoteOperation
+import com.owncloud.android.lib.resources.status.E2EVersion
 import com.owncloud.android.operations.UploadException
 import org.apache.commons.httpclient.HttpStatus
 import org.bouncycastle.asn1.ASN1Sequence
@@ -135,27 +137,9 @@ class EncryptionUtilsV2 {
         return EncryptedFolderMetadataFile(
             encryptedMetadata,
             encryptedUsers,
-            mutableMapOf()
+            mutableMapOf(),
+            storageManager.getE2EEVersion(user)
         )
-
-        // if (metadataFile.users.isEmpty()) {
-        //     // we are in a subfolder, re-use users array
-        //     retrieveTopMostMetadata(
-        //         ocFile,
-        //         storageManager,
-        //         client
-        //     )
-        // } else {
-        //    val encryptedUsers = metadataFile.users.map {
-        //         encryptUser(it, metadataFile.metadata.metadataKey)
-        //     }
-        //
-        //     return EncryptedFolderMetadataFile(
-        //         encryptedMetadata,
-        //         encryptedUsers,
-        //         emptyMap()
-        //     )
-        // }
     }
 
     @Throws(IllegalStateException::class, UploadException::class, Throwable::class)
@@ -167,7 +151,7 @@ class EncryptionUtilsV2 {
         ocFile: OCFile,
         storageManager: FileDataStorageManager,
         client: OwnCloudClient,
-        oldCounter: Long,
+        counterInDatabase: Long,
         signature: String,
         user: User,
         context: Context,
@@ -204,7 +188,8 @@ class EncryptionUtilsV2 {
                 decryptedMetadata,
                 // subfolder do not store user array
                 mutableListOf(),
-                mutableMapOf()
+                mutableMapOf(),
+                storageManager.getE2EEVersion(user)
             )
         } else {
             // Top folder
@@ -246,11 +231,12 @@ class EncryptionUtilsV2 {
             DecryptedFolderMetadataFile(
                 decryptedMetadata,
                 users,
-                mutableMapOf()
+                mutableMapOf(),
+                storageManager.getE2EEVersion(user)
             )
         }
 
-        if (!verifyMetadata(metadataFile, decryptedFolderMetadataFile, oldCounter, signature)) {
+        if (!verifyMetadata(metadataFile, decryptedFolderMetadataFile, counterInDatabase, signature)) {
             throw IllegalStateException("Metadata is corrupt!")
         }
 
@@ -488,8 +474,7 @@ class EncryptionUtilsV2 {
         initializationVector: ByteArray,
         authenticationTag: String,
         key: ByteArray,
-        metadataFile: DecryptedFolderMetadataFile,
-        fileDataStorageManager: FileDataStorageManager
+        metadataFile: DecryptedFolderMetadataFile
     ): DecryptedFolderMetadataFile {
         val decryptedFile = DecryptedFile(
             ocFile.decryptedFileName,
@@ -501,8 +486,6 @@ class EncryptionUtilsV2 {
 
         metadataFile.metadata.files[encryptedFileName] = decryptedFile
         metadataFile.metadata.counter++
-        ocFile.setE2eCounter(metadataFile.metadata.counter)
-        fileDataStorageManager.saveFile(ocFile)
 
         return metadataFile
     }
@@ -510,14 +493,10 @@ class EncryptionUtilsV2 {
     fun addFolderToMetadata(
         encryptedFileName: String,
         fileName: String,
-        metadataFile: DecryptedFolderMetadataFile,
-        ocFile: OCFile,
-        fileDataStorageManager: FileDataStorageManager
+        metadataFile: DecryptedFolderMetadataFile
     ): DecryptedFolderMetadataFile {
         metadataFile.metadata.folders[encryptedFileName] = fileName
         metadataFile.metadata.counter++
-        ocFile.setE2eCounter(metadataFile.metadata.counter)
-        fileDataStorageManager.saveFile(ocFile)
 
         return metadataFile
     }
@@ -572,16 +551,16 @@ class EncryptionUtilsV2 {
             // check parent folder
             val parentFolder = FileDataStorageManager(user, context.contentResolver).getFileById(folder.parentId)
                 ?: throw IllegalStateException("Cannot retrieve metadata!")
+            val storageManager = FileDataStorageManager(user, context.contentResolver)
 
             val metadata = if (parentFolder.isEncrypted) {
                 // new metadata but without sharing part
-                createDecryptedFolderMetadataFile()
+                createDecryptedFolderMetadataFile(storageManager.getE2EEVersion(user))
             } else {
                 // new metadata
                 val arbitraryDataProvider: ArbitraryDataProvider = ArbitraryDataProviderImpl(context)
                 val publicKey: String = arbitraryDataProvider.getValue(user.accountName, EncryptionUtils.PUBLIC_KEY)
-
-                createDecryptedFolderMetadataFile().apply {
+                createDecryptedFolderMetadataFile(storageManager.getE2EEVersion(user)).apply {
                     users = mutableListOf(DecryptedUser(client.userId, publicKey, null))
                 }
             }
@@ -611,7 +590,7 @@ class EncryptionUtilsV2 {
             object : TypeToken<EncryptedFolderMetadataFile>() {}
         )
 
-        val e2eeVersion = E2EVersionHelper.fromVersionString(v2.version)
+        val e2eeVersion = E2EVersion.fromValue(v2.version)
 
         val decryptedFolderMetadata = if (E2EVersionHelper.isV2Plus(e2eeVersion)) {
             val userId = AccountManager.get(context).getUserData(
@@ -693,6 +672,7 @@ class EncryptionUtilsV2 {
         val newMetadata = migrateV1ToV2(
             v1,
             userId,
+            user,
             cert,
             folder,
             storageManager
@@ -722,6 +702,7 @@ class EncryptionUtilsV2 {
     fun migrateV1ToV2(
         v1: DecryptedFolderMetadataFileV1,
         userId: String,
+        user: User,
         cert: String,
         folder: OCFile,
         storageManager: FileDataStorageManager
@@ -761,7 +742,7 @@ class EncryptionUtilsV2 {
         // TODO
         val filedrop = mutableMapOf<String, DecryptedFile>()
 
-        val newMetadata = DecryptedFolderMetadataFile(metadataV2, users, filedrop)
+        val newMetadata = DecryptedFolderMetadataFile(metadataV2, users, filedrop, storageManager.getE2EEVersion(user))
         val metadataKey = EncryptionUtils.generateKey() ?: throw UploadException("Could not encrypt folder!")
 
         newMetadata.metadata.metadataKey = metadataKey
@@ -870,10 +851,12 @@ class EncryptionUtilsV2 {
     fun verifyMetadata(
         encryptedFolderMetadataFile: EncryptedFolderMetadataFile,
         decryptedFolderMetadataFile: DecryptedFolderMetadataFile,
-        oldCounter: Long,
+        counterInDatabase: Long,
         signature: String
     ): Boolean {
-        if (decryptedFolderMetadataFile.metadata.counter < oldCounter) {
+        val counterInServer = decryptedFolderMetadataFile.metadata.counter
+        if (counterInServer < counterInDatabase) {
+            Log_OC.e(TAG, "counter in: $counterInDatabase, metadata counter $counterInServer")
             MainApp.showMessage(R.string.e2e_counter_too_old)
             return false
         }
@@ -1002,12 +985,12 @@ class EncryptionUtilsV2 {
         return EncryptionUtils.encodeBytesToBase64String(ans)
     }
 
-    fun createDecryptedFolderMetadataFile(): DecryptedFolderMetadataFile {
+    fun createDecryptedFolderMetadataFile(e2eeVersion: String): DecryptedFolderMetadataFile {
         val metadata = DecryptedMetadata().apply {
             keyChecksums.add(hashMetadataKey(metadataKey))
         }
 
-        return DecryptedFolderMetadataFile(metadata)
+        return DecryptedFolderMetadataFile(metadata, mutableListOf(), hashMapOf(), e2eeVersion)
     }
 
     fun hashMetadataKey(metadataKey: ByteArray): String = MessageDigest

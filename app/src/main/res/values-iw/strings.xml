@@ -58,7 +58,6 @@
     <string name="auth_ssl_unverified_server_title">לא ניתן לאמת את זהות שרת ה־SSL</string>
     <string name="auth_testing_connection">בדיקת חיבור</string>
     <string name="auth_timeout_title">לשרת לקח יותר מדי זמן להגיב</string>
-    <string name="auth_trying_to_login">מנסה להתחבר…</string>
     <string name="auth_unauthorized">שם משתמש או סימא שגויים</string>
     <string name="auth_unknown_error_exception_title">שגיאה לא ידועה: %1$s</string>
     <string name="auth_unknown_error_http_title">אירעה שגיאת HTTP לא ידועה!</string>
@@ -171,11 +170,15 @@
     <string name="could_not_retrieve_url">לא ניתן לקבל כתובת</string>
     <string name="create">יצירה</string>
     <string name="create_dir_fail_msg">לא ניתן ליצור תיקייה</string>
+    <string name="create_document">מסמך</string>
+    <string name="create_folder">תיקייה</string>
     <string name="create_new">חדש</string>
     <string name="create_new_document">מסמך חדש</string>
     <string name="create_new_folder">תיקייה חדשה</string>
     <string name="create_new_presentation">מצגת חדשה</string>
     <string name="create_new_spreadsheet">גיליון נתונים חדש</string>
+    <string name="create_presentation">מצגת</string>
+    <string name="create_spreadsheet">גיליון נתונים</string>
     <string name="credentials_disabled">פרטי גישה מושבתים</string>
     <string name="daily_backup">גיבוי יומי</string>
     <string name="data_to_back_up">נתונים לגיבוי</string>
@@ -218,7 +221,6 @@
     <string name="drawer_item_home">בית</string>
     <string name="drawer_item_notifications">התרעות</string>
     <string name="drawer_item_on_device">בהתקן</string>
-    <string name="drawer_item_recently_modified">השתנו לאחרונה</string>
     <string name="drawer_item_shared">שותף</string>
     <string name="drawer_item_trashbin">קבצים שנמחקו</string>
     <string name="drawer_item_uploads_list">העלאות</string>
@@ -289,7 +291,6 @@
     <string name="file_list_empty_headline_search">לא נמצאו תוצאות בתקיה זו</string>
     <string name="file_list_empty_headline_server_search">לא נמצאו תוצאות</string>
     <string name="file_list_empty_moving">אין כאן כלום. ניתן להוסיף תיקייה.</string>
-    <string name="file_list_empty_recently_modified">לא נמצאו קבצים שנערכו בשבוע החולף</string>
     <string name="file_list_empty_search">יכול להיות שזה בתיקייה אחרת?</string>
     <string name="file_list_empty_shared_headline">שום דבר לא שותף עדיין</string>
     <string name="file_list_folder">תקיה</string>
@@ -352,6 +353,8 @@
     <string name="foreign_files_remote_text">מרוחק: %1$s</string>
     <string name="forward">העברה</string>
     <string name="fourHours">4 שעות</string>
+    <string name="governance_file_retention_label">שמירת קבצים</string>
+    <string name="governance_no_label">ללא</string>
     <string name="hint_name">שם</string>
     <string name="hint_note">מסר</string>
     <string name="hint_password">ססמה</string>
@@ -537,7 +540,6 @@
     <string name="select_all">בחר הכל</string>
     <string name="select_template">בחירת תבנית</string>
     <string name="send">שליחה</string>
-    <string name="sendbutton_description">סמל כפתור שליחה</string>
     <string name="set_as">הגדרה בתור</string>
     <string name="set_online_status">מצב מקוון</string>
     <string name="set_picture_as">שימוש בתמונה בתור</string>
@@ -665,7 +667,6 @@
     <string name="thumbnail_for_existing_file_description">תמונה ממוזערת לקובץ קיים</string>
     <string name="thumbnail_for_new_file_desc">תמונה ממוזערת לקובץ חדש</string>
     <string name="today">היום</string>
-    <string name="trashbin_activity_title">קבצים שנמחקו</string>
     <string name="trashbin_empty_headline">אין קבצים שנמחקו</string>
     <string name="trashbin_empty_message">תהיה לך אפשרות לשחזר קבצים שנמחקו דרך כאן.</string>
     <string name="trashbin_file_not_deleted">לא ניתן למחוק את הקובץ %1$s!</string>
@@ -706,7 +707,6 @@
     <string name="upload_lock_failed">נעילת התיקייה נכשלה</string>
     <string name="upload_old_android">הצפנה אפשרית רק עם &gt;= Android 5.0</string>
     <string name="upload_query_move_foreign_files">מחסור במקום מונע את העתקת הקבצים הנבחרים לתוך התיקייה %1$s. להעביר אותם לשם במקום?</string>
-    <string name="upload_sync_conflict">סתירת סנכרון, נא לפתור ידנית</string>
     <string name="upload_unknown_error">שגיאה בלתי ידועה</string>
     <string name="uploader_btn_alternative_text">בחר</string>
     <string name="uploader_btn_upload_text">העלאה</string>
@@ -750,7 +750,6 @@
     <string name="uploads_view_upload_status_failed_localfile_error">קובץ מקומי לא נמצא</string>
     <string name="uploads_view_upload_status_failed_permission_error">שגיאת הרשאה</string>
     <string name="uploads_view_upload_status_failed_ssl_certificate_not_trusted">אישור השרת אינו מהימן</string>
-    <string name="uploads_view_upload_status_fetching_server_version">גרסת השרת מתושאלת…</string>
     <string name="uploads_view_upload_status_service_interrupted">היישומון הופסק</string>
     <string name="uploads_view_upload_status_succeeded">הושלם</string>
     <string name="uploads_view_upload_status_unknown_fail">שגיאה בלתי ידועה</string>

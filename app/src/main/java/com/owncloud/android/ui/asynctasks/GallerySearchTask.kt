@@ -47,7 +47,7 @@ class GallerySearchTask(
         val result = performSearch(context)
 
         withContext(Dispatchers.Main) {
-            fragment.searchCompleted(result.emptySearch, result.lastTimestamp)
+            fragment.searchCompleted(result)
         }
     }
 
@@ -62,7 +62,7 @@ class GallerySearchTask(
         return if (operationResult.isSuccess) {
             handleSuccess(operationResult)
         } else {
-            Result(false, false, NO_TIMESTAMP)
+            Result(operationResult.code, false, NO_TIMESTAMP)
         }
     }
 
@@ -70,10 +70,11 @@ class GallerySearchTask(
         ocCapability: com.owncloud.android.lib.resources.status.OCCapability
     ): SearchRemoteOperation =
         SearchRemoteOperation("", SearchRemoteOperation.SearchType.GALLERY_SEARCH, false, ocCapability).apply {
-            setLimit(limit)
-            setEndDate(endDate)
+            limit = this@GallerySearchTask.limit
+            endDate = this@GallerySearchTask.endDate
+
             // workaround to keep SearchRemoteOperation functioning correctly even if we don't actively use startDate
-            setStartDate(0L)
+            startDate = 0L
         }
 
     private fun logSearchStart() {
@@ -89,7 +90,7 @@ class GallerySearchTask(
         val remoteFiles = operationResult.data.filterIsInstance<RemoteFile>()
         val lastTimestamp = findLastTimestamp(remoteFiles)
         val emptySearch = parseMedia(lastTimestamp, endDate, remoteFiles)
-        return Result(true, emptySearch, lastTimestamp)
+        return Result(operationResult.code, emptySearch, lastTimestamp)
     }
 
     private fun findLastTimestamp(remoteFiles: List<RemoteFile>): Long =
@@ -185,5 +186,9 @@ class GallerySearchTask(
         )
     }
 
-    data class Result(val success: Boolean, val emptySearch: Boolean, val lastTimestamp: Long)
+    data class Result(
+        val resultCode: RemoteOperationResult.ResultCode,
+        val emptySearch: Boolean,
+        val lastTimestamp: Long
+    )
 }

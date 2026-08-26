@@ -10,6 +10,7 @@
     <string name="action_edit">編輯</string>
     <string name="action_empty_notifications">清除所有通知訊息</string>
     <string name="action_empty_trashbin">清空回收桶</string>
+    <string name="action_open_in_web_editor">在網路編輯器中開啟</string>
     <string name="action_send_share">傳送/分享</string>
     <string name="action_switch_grid_view">網格檢視</string>
     <string name="action_switch_list_view">清單檢視</string>
@@ -55,7 +56,6 @@
     <string name="assistant_screen_empty_content_description">試著發送一條訊息來引發對話。</string>
     <string name="assistant_screen_empty_content_title">你好！今天我能幫你什麼忙呢？</string>
     <string name="assistant_screen_retry_response_generation">請重試回應生成</string>
-    <string name="assistant_screen_select_task">請選擇任務</string>
     <string name="assistant_screen_send_message">傳送訊息</string>
     <string name="assistant_screen_task_bar_open_conversation_list">打開對話清單</string>
     <string name="assistant_screen_task_create_fail_message">建立任務項目時發生錯誤</string>
@@ -99,7 +99,6 @@
     <string name="auth_ssl_unverified_server_title">無法有效驗證 SSL 伺服器的身分</string>
     <string name="auth_testing_connection">測試連線</string>
     <string name="auth_timeout_title">伺服器回應逾時</string>
-    <string name="auth_trying_to_login">正在嘗試登入…</string>
     <string name="auth_unauthorized">錯誤的用戶名或密碼</string>
     <string name="auth_unknown_error_exception_title">錯誤不詳：%1$s</string>
     <string name="auth_unknown_error_http_title">發生未知的HTTP錯誤！</string>
@@ -116,7 +115,6 @@
     <string name="auto_upload_background_activity_action">允許背景活動</string>
     <string name="auto_upload_battery_optimization_reason">Nextcloud 的背景活動受到電池優化限制。</string>
     <string name="auto_upload_battery_saver_action">開啟省電模式設定</string>
-    <string name="auto_upload_battery_saver_mode_warning">因為省電模式已開啟，因此暫停自動上傳。</string>
     <string name="auto_upload_battery_saver_reason">省電模式已啟用，可能會暫停上傳。</string>
     <string name="auto_upload_delete_dialog_description">此操作將刪除該資料夾及自動上傳設定。任何尚未完成的上傳作業都將被取消。</string>
     <string name="auto_upload_delete_dialog_title">刪除自動上傳資料夾？</string>
@@ -134,6 +132,7 @@
     <string name="autoupload_hide_folder">隱藏資料夾</string>
     <string name="avatar">虛擬化身</string>
     <string name="away">不在</string>
+    <string name="backup_list_adapter_local_contacts">本機聯絡人</string>
     <string name="backup_settings">備份設定</string>
     <string name="backup_title">通訊錄與日曆備份</string>
     <string name="battery_optimization_close">關閉</string>
@@ -251,8 +250,11 @@
     <string name="could_not_retrieve_url">不能取得網址</string>
     <string name="create">建立</string>
     <string name="create_dir_fail_msg">無法新增資料夾</string>
+    <string name="create_document">文件</string>
+    <string name="create_encrypted_folder">已加密資料夾</string>
     <string name="create_end_to_end_encrypted_share">連結分享</string>
     <string name="create_end_to_end_encrypted_share_title">端到端加密的連結分享</string>
+    <string name="create_folder">資料夾</string>
     <string name="create_link">創建連結</string>
     <string name="create_new">新</string>
     <string name="create_new_document">新文件</string>
@@ -260,8 +262,9 @@
     <string name="create_new_folder">新資料夾</string>
     <string name="create_new_presentation">新簡報</string>
     <string name="create_new_spreadsheet">新試算表</string>
+    <string name="create_presentation">簡報</string>
     <string name="create_rich_workspace">添加資料夾描述</string>
-    <string name="creates_rich_workspace">添加資料夾描述</string>
+    <string name="create_spreadsheet">試算表</string>
     <string name="credentials_disabled">認證方式已取消</string>
     <string name="daily_backup">每日備份</string>
     <string name="data_to_back_up">要備份的數據</string>
@@ -277,6 +280,8 @@
     <string name="dialog_close">關閉</string>
     <string name="did_not_check_for_dupes">沒有檢查重複項。</string>
     <string name="digest_algorithm_not_available">這種加密算法在您的手機上無法使用。</string>
+    <string name="direct_login_confirm_message">您想要使用 %1$s 登入到 %2$s 嗎？</string>
+    <string name="direct_login_confirm_title">確認登入</string>
     <string name="direct_login_failed">透過直接連結登入失敗！</string>
     <string name="direct_login_text">使用 %1$s 登入至 %2$s</string>
     <string name="disable_new_media_folder_detection_notifications">停用</string>
@@ -286,7 +291,7 @@
     <string name="dnd">請勿打擾</string>
     <string name="document_scan_export_dialog_images">多個圖像</string>
     <string name="document_scan_export_dialog_pdf">PDF 檔案</string>
-    <string name="document_scan_export_dialog_title">選擇導出類型</string>
+    <string name="document_scan_export_dialog_title">選擇匯出類型</string>
     <string name="document_scan_pdf_generation_failed">PDF 産生失敗</string>
     <string name="document_scan_pdf_generation_in_progress">正在產生 PDF …</string>
     <string name="document_storage_provider_cannot_create_file_and_folder">無法在此建立項目：缺少建立權限。</string>
@@ -328,7 +333,6 @@
     <string name="drawer_item_on_device">在裝置上</string>
     <string name="drawer_item_personal_files">個人檔案</string>
     <string name="drawer_item_recent_files">最近的檔案</string>
-    <string name="drawer_item_recently_modified">最近修改</string>
     <string name="drawer_item_shared">已分享</string>
     <string name="drawer_item_trashbin">回收桶</string>
     <string name="drawer_item_uploads_list">上傳</string>
@@ -337,7 +341,6 @@
     <string name="drawer_quota">已用 %2$s 中的 %1$s</string>
     <string name="drawer_quota_unlimited">使用了 %1$s 的存儲空間</string>
     <string name="drawer_synced_folders">自動上傳</string>
-    <string name="due_to_too_many_wrong_attempts">由於嘗試過多而 %s</string>
     <string name="e2e_counter_too_old">計數器太舊</string>
     <string name="e2e_hash_not_found">未找到哈希值</string>
     <string name="e2e_not_yet_setup">尚未設定端到端加密</string>
@@ -436,6 +439,8 @@
     <string name="file_detail_sharing_fragment_no_contact_app_message">沒有應用程式可選取聯絡人</string>
     <string name="file_details_no_content">載入詳細資訊失敗</string>
     <string name="file_icon">檔案</string>
+    <string name="file_info_governance_section_title">管治</string>
+    <string name="file_info_image_details_section_title">圖像細節</string>
     <string name="file_keep">保留</string>
     <string name="file_list_empty">上傳一些項目或與你的設備同步！</string>
     <string name="file_list_empty_favorite_headline">目前沒有我的最愛</string>
@@ -449,7 +454,6 @@
     <string name="file_list_empty_on_device">下載的檔案跟資料夾會顯示這裡。</string>
     <string name="file_list_empty_recent_files_description">您最近修改的檔案和資料夾將顯示在此處。</string>
     <string name="file_list_empty_recent_files_headline">近期無修改檔案</string>
-    <string name="file_list_empty_recently_modified">沒有找到最近 7 日修改的檔案</string>
     <string name="file_list_empty_search">說不定它在其他的資料夾?</string>
     <string name="file_list_empty_shared">您分享的檔案跟資料夾會顯示在這裡。</string>
     <string name="file_list_empty_shared_headline">還沒有分享任何資料</string>
@@ -462,6 +466,7 @@
     <string name="file_list_live">直播</string>
     <string name="file_list_loading">載入中…</string>
     <string name="file_list_no_app_for_file_type">未設定處理此檔案類型適用的APP</string>
+    <string name="file_list_out_of_memory_description">無法載入內容</string>
     <string name="file_list_seconds_ago">秒前</string>
     <string name="file_management_permission_optional">儲存空間權限</string>
     <string name="file_management_permission_optional_text">%1$s 在有存取儲存空間的權限時運作得最好。您可以選擇完整存取所有檔案，或是對照片及影片的唯讀存取。</string>
@@ -504,8 +509,9 @@
     <string name="file_version_restored_error">還原檔案版本失敗！</string>
     <string name="filedetails_details">細節</string>
     <string name="filedetails_download">下載</string>
-    <string name="filedetails_export">導出</string>
+    <string name="filedetails_export">匯出</string>
     <string name="filedetails_renamed_in_upload_msg">檔案%1$s在上傳過程中被重新命名</string>
+    <string name="filedetails_sync_all_files">同步全部</string>
     <string name="filedetails_sync_file">同步</string>
     <string name="filedisplay_no_file_selected">未選擇任何檔案</string>
     <string name="filename_empty">檔案名不可為空白</string>
@@ -543,6 +549,11 @@
     <string name="foreign_files_remote_text">遠端： %1$s</string>
     <string name="forward">向前</string>
     <string name="fourHours">4 小時</string>
+    <string name="governance_file_retention_label">保留檔案</string>
+    <string name="governance_legal_hold_label">法律保留</string>
+    <string name="governance_no_label">無</string>
+    <string name="governance_permission_denied">您沒有權限更改此標籤</string>
+    <string name="governance_sensitivity_label">敏感度標籤</string>
     <string name="gplay_restriction">Google 限制 APK/AAB 檔案下載！</string>
     <string name="grid_file_features_live_photo_content_description">此圖示表示原況照片的可得性</string>
     <string name="hidden_file_name_warning">此名稱會將檔案變成隱藏檔案</string>
@@ -600,7 +611,7 @@
     <string name="login">登入</string>
     <string name="login_url_helper_text">在瀏覽器中打開 %1$s 網絡界面的連結。</string>
     <string name="logs_menu_delete">刪除紀錄檔案</string>
-    <string name="logs_menu_export">導出記錄</string>
+    <string name="logs_menu_export">匯出記錄</string>
     <string name="logs_menu_refresh">重整</string>
     <string name="logs_menu_search">搜尋紀錄檔案</string>
     <string name="logs_menu_send">通過電郵發送紀錄</string>
@@ -635,6 +646,7 @@
     <string name="menu_item_sort_by_size_biggest_first">最大</string>
     <string name="menu_item_sort_by_size_smallest_first">最小</string>
     <string name="more">更多</string>
+    <string name="more_documents">更多文件</string>
     <string name="move_file_error">在移動檔案或資料夾時發生了錯誤</string>
     <string name="move_file_invalid_into_descendent">無法將資料夾移動到自己的子資料夾中。</string>
     <string name="move_file_invalid_overwrite">此檔案目前已存在於目標資料夾中。</string>
@@ -781,6 +793,7 @@
     <string name="prefs_recommend">向朋友推薦</string>
     <string name="prefs_remove_e2e">移除近端加密</string>
     <string name="prefs_remove_e2e_keys_and_files">移除已加密檔案和密鑰</string>
+    <string name="prefs_renew_e2e_certificate">更新加密憑證</string>
     <string name="prefs_setup_e2e">設置端對端加密</string>
     <string name="prefs_show_ecosystem_apps">顯示應用程式切換器</string>
     <string name="prefs_show_ecosystem_apps_summary">導覽列中的 Nextcloud 應用程式建議</string>
@@ -831,6 +844,12 @@
     <string name="rename_dialog_title">輸入新名稱</string>
     <string name="rename_local_fail_msg">無法重新命名近端複本，請試用不同名稱</string>
     <string name="rename_server_fail_msg">不可重新命名，名稱已存在</string>
+    <string name="renew_e2e_certificate_dialog_message">此操作將更新您的端到端加密憑證。您的現有金鑰與加密檔案將維持不變。要繼續嗎？</string>
+    <string name="renew_e2e_certificate_error">無法更新加密憑證</string>
+    <string name="renew_e2e_certificate_private_key_missing">找不到加密私鑰</string>
+    <string name="renew_e2e_certificate_success">已更新加密憑證</string>
+    <string name="renew_e2e_certificate_summary">在保留既有金鑰的同時，更新您的端到端加密憑證</string>
+    <string name="renew_e2e_certificate_valid_until">有效期至 %1$s。輕點以在保留既有金鑰的同時更新。</string>
     <string name="request_account_deletion">請求帳戶刪除</string>
     <string name="request_account_deletion_button">請求刪除</string>
     <string name="request_account_deletion_details">請求服務提供者永久刪除帳戶</string>
@@ -867,7 +886,6 @@
     <string name="send">傳送</string>
     <string name="send_copy_to">傳送副本至</string>
     <string name="send_share">傳送分享</string>
-    <string name="sendbutton_description">傳送按鈕圖示</string>
     <string name="server_not_reachable">無法載入內容</string>
     <string name="server_not_reachable_content">裝置似乎無法連線至互聯網</string>
     <string name="set_as">設定為</string>
@@ -909,14 +927,13 @@
     <string name="share_option_required">請在繼續之前至少選擇一個分享選項。</string>
     <string name="share_permission_can_edit">可編輯</string>
     <string name="share_permission_file_request">檔案請求</string>
-    <string name="share_permission_secure_file_drop">安全檔案投放</string>
     <string name="share_permission_view_only">僅檢視</string>
     <string name="share_permissions">分享權限</string>
     <string name="share_re_share_permission">分享</string>
     <string name="share_read_permission">讀取</string>
     <string name="share_remote_clarification">%1$s（遠端）</string>
     <string name="share_room_clarification">%1$s﹙對話﹚</string>
-    <string name="share_search">名稱、聯合雲端 ID 或電郵地址 …</string>
+    <string name="share_search">名稱、聯邦雲端 ID 或電郵地址 …</string>
     <string name="share_search_internal">添加用戶與團隊</string>
     <string name="share_send_new_email">傳送新電子郵件</string>
     <string name="share_send_note">給接收者的訊息</string>
@@ -1000,6 +1017,8 @@
     <string name="subtitle_videos_only">僅限視像</string>
     <string name="suggest">建議</string>
     <string name="sync">同步</string>
+    <string name="sync_all_action_dialog_description">將會下載所有包含的檔案和資料夾。這可能會佔用大量儲存空間，並根據您的網路連線速度而耗費一些時間。</string>
+    <string name="sync_all_action_dialog_title">同步整個資料夾？</string>
     <string name="sync_anyway">仍然同步</string>
     <string name="sync_conflict_notification_action_title">解決抵觸</string>
     <string name="sync_conflict_notification_description">偵測到上載衝突。請開啟上載項目以解決問題。</string>
@@ -1048,7 +1067,6 @@
     <string name="translation_screen_start_to_translate_task">按下按鈕翻譯</string>
     <string name="translation_screen_task_processing">翻譯時間比預期長。</string>
     <string name="translation_screen_translating">正在翻譯 ...</string>
-    <string name="trashbin_activity_title">已刪除檔案</string>
     <string name="trashbin_empty_headline">無已刪除檔案</string>
     <string name="trashbin_empty_message">您可以從這裡還原已刪除的檔案</string>
     <string name="trashbin_file_not_deleted">檔案 %1$s 無法被刪除！</string>
@@ -1065,6 +1083,7 @@
     <string name="unified_search_fragment_contact_not_found">找不到聯絡人，您隨時可以同步更新。正在重新導向至網路 …</string>
     <string name="unified_search_fragment_permission_needed">開啟搜尋結果需要權限，否則其將會重新導向至網路 …</string>
     <string name="unified_search_fragment_search_in_this_folder">在此資料夾</string>
+    <string name="unified_search_fragment_search_takes_long">搜尋時間比平常更長。伺服器一回應，結果就會顯示出來</string>
     <string name="unknown">不詳</string>
     <string name="unlock_file">解鎖檔案</string>
     <string name="unread_comments">有未讀留言</string>
@@ -1124,7 +1143,6 @@
     <string name="upload_query_move_foreign_files">空間不足導致無法將所選檔案複製到 %1$s 資料夾中。您想改為將檔案移到那裡嗎？</string>
     <string name="upload_quota_exceeded">超過儲存空間配額</string>
     <string name="upload_scan_doc_upload">使用相機掃描文件</string>
-    <string name="upload_sync_conflict">同步發生抵觸，請手動處理</string>
     <string name="upload_sync_conflict_check">您的上次上傳可能存在衝突。點擊檢查。</string>
     <string name="upload_sync_conflict_check_error">無法檢查上傳衝突。請重試。</string>
     <string name="upload_sync_conflict_checking">正在檢查上傳衝突……</string>
@@ -1176,7 +1194,6 @@
     <string name="uploads_view_upload_status_failed_localfile_error">找不到近端的檔案</string>
     <string name="uploads_view_upload_status_failed_permission_error">權限錯誤</string>
     <string name="uploads_view_upload_status_failed_ssl_certificate_not_trusted">不信任的伺服器憑證</string>
-    <string name="uploads_view_upload_status_fetching_server_version">取得伺服器的版本中...</string>
     <string name="uploads_view_upload_status_service_interrupted">App 中斷運作</string>
     <string name="uploads_view_upload_status_skip">略過</string>
     <string name="uploads_view_upload_status_skip_reason">已存在同名檔案。</string>
@@ -1196,6 +1213,7 @@
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">網站</string>
     <string name="user_information_retrieval_error">檢索用戶信息時發生錯誤</string>
+    <string name="user_information_retrieval_error_message">請再次確認您的網路連線，或檢查伺服器狀態</string>
     <string name="userinfo_no_info_headline">未設定個人資訊</string>
     <string name="userinfo_no_info_text">在您的個人檔案中新增名字、頭像和聯絡資訊</string>
     <string name="username">用戶名稱</string>
@@ -1205,6 +1223,7 @@
     <string name="wait_checking_credentials">檢查儲存的身分驗證</string>
     <string name="wait_for_tmp_copy_from_private_storage">從私有儲存空間複製檔案中</string>
     <string name="warn_rename_extension">更改擴展名可能會導致此檔案在不同的應用程式中打開</string>
+    <string name="webview_not_available">此裝置缺少 Android System WebView 或其已被停用</string>
     <string name="what_s_new_image">有什麼新圖像？</string>
     <string name="whats_new_skip">略過</string>
     <string name="whats_new_title">新增到 %1$s </string>
@@ -1249,13 +1268,13 @@
         <item quantity="other">找到 %d 個重複項。</item>
     </plurals>
     <plurals name="export_successful">
-        <item quantity="other">導出 %d 個檔案</item>
+        <item quantity="other">匯出 %d 個檔案</item>
     </plurals>
     <plurals name="export_failed">
-        <item quantity="other">導出 %d 個檔案失敗</item>
+        <item quantity="other">匯出 %d 個檔案失敗</item>
     </plurals>
     <plurals name="export_partially_failed">
-        <item quantity="other">導出%d 個檔案，由於錯誤而跳過了其餘部分</item>
+        <item quantity="other">匯出%d 個檔案，由於錯誤而跳過了其餘部分</item>
     </plurals>
     <plurals name="file_upload_limit_message">
         <item quantity="other">您一次最多可以上傳 %d 個檔案。</item>

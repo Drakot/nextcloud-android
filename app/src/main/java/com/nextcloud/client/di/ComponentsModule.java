@@ -26,10 +26,9 @@ import com.nextcloud.client.onboarding.WhatsNewActivity;
 import com.nextcloud.client.widget.DashboardWidgetConfigurationActivity;
 import com.nextcloud.client.widget.DashboardWidgetProvider;
 import com.nextcloud.client.widget.DashboardWidgetService;
-import com.nextcloud.receiver.NetworkChangeReceiver;
 import com.nextcloud.ui.ChooseAccountDialogFragment;
 import com.nextcloud.ui.ChooseStorageLocationDialogFragment;
-import com.nextcloud.ui.ImageDetailFragment;
+import com.nextcloud.ui.fileInfo.FileInfoFragment;
 import com.nextcloud.ui.SetOnlineStatusBottomSheet;
 import com.nextcloud.ui.SetStatusMessageBottomSheet;
 import com.nextcloud.ui.composeActivity.ComposeActivity;
@@ -109,7 +108,7 @@ import com.owncloud.android.ui.fragment.FileDetailsSharingProcessFragment;
 import com.owncloud.android.ui.fragment.GalleryFragment;
 import com.owncloud.android.ui.fragment.GalleryFragmentBottomSheetDialog;
 import com.owncloud.android.ui.fragment.GroupfolderListFragment;
-import com.owncloud.android.ui.fragment.LocalFileListFragment;
+import com.owncloud.android.ui.fragment.localfilelist.LocalFileListFragment;
 import com.owncloud.android.ui.fragment.OCFileListBottomSheetDialog;
 import com.owncloud.android.ui.fragment.OCFileListFragment;
 import com.owncloud.android.ui.fragment.SharedListFragment;
@@ -325,9 +324,6 @@ abstract class ComponentsModule {
     abstract BootupBroadcastReceiver bootupBroadcastReceiver();
 
     @ContributesAndroidInjector
-    abstract NetworkChangeReceiver networkChangeReceiver();
-
-    @ContributesAndroidInjector
     abstract NotificationWork.NotificationReceiver notificationWorkBroadcastReceiver();
 
     @ContributesAndroidInjector
@@ -487,7 +483,7 @@ abstract class ComponentsModule {
     abstract EditImageActivity editImageActivity();
 
     @ContributesAndroidInjector
-    abstract ImageDetailFragment imageDetailFragment();
+    abstract FileInfoFragment fileInfoFragment();
 
     @ContributesAndroidInjector
     abstract EtmBackgroundJobsFragment etmBackgroundJobsFragment();

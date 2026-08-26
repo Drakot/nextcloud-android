@@ -1,6 +1,7 @@
 /*
  * Nextcloud - Android Client
  *
+ * SPDX-FileCopyrightText: 2026 Alper Ozturk <alper.ozturk@nextcloud.com>
  * SPDX-FileCopyrightText: 2022 Álvaro Brey  <alvaro@alvarobrey.com>
  * SPDX-FileCopyrightText: 2016-2021 Tobias Kaminsky <tobias@kaminsky.me>
  * SPDX-FileCopyrightText: 2016 ownCloud Inc.
@@ -23,7 +24,7 @@ import java.util.List;
  */
 public class ProviderMeta {
     public static final String DB_NAME = "filelist";
-    public static final int DB_VERSION = 100;
+    public static final int DB_VERSION = 102;
 
     private ProviderMeta() {
         // No instance
@@ -282,6 +283,7 @@ public class ProviderMeta {
         public static final String CAPABILITIES_GROUPFOLDERS = "groupfolders";
         public static final String CAPABILITIES_DROP_ACCOUNT = "drop_account";
         public static final String CAPABILITIES_SECURITY_GUARD = "security_guard";
+        public static final String CAPABILITIES_GOVERNANCE = "governance";
         public static final String CAPABILITIES_FORBIDDEN_FILENAME_CHARACTERS = "forbidden_filename_characters";
         public static final String CAPABILITIES_FORBIDDEN_FILENAMES = "forbidden_filenames";
         public static final String CAPABILITIES_FORBIDDEN_FORBIDDEN_FILENAME_EXTENSIONS = "forbidden_filename_extensions";
@@ -293,6 +295,7 @@ public class ProviderMeta {
         public static final String CAPABILITIES_DEFAULT_PERMISSIONS = "default_permissions";
         public static final String CAPABILITIES_HAS_VALID_SUBSCRIPTION = "has_valid_subscription";
         public static final String CAPABILITIES_CLIENT_INTEGRATION_JSON = "client_integration_json";
+        public static final String CAPABILITIES_MOD_REWRITE_WORKING = "mod_rewrite_working";
 
         //Columns of Uploads table
         public static final String UPLOADS_LOCAL_PATH = "local_path";

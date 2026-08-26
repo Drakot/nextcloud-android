@@ -26,15 +26,17 @@ import com.nextcloud.client.network.ConnectivityService
 import com.nextcloud.client.preferences.AppPreferences
 import com.nextcloud.utils.ForegroundServiceHelper
 import com.nextcloud.utils.extensions.getPercent
+import com.nextcloud.utils.extensions.isNonRetryable
 import com.nextcloud.utils.extensions.toFile
-import com.nextcloud.utils.extensions.updateStatus
 import com.owncloud.android.R
 import com.owncloud.android.datamodel.ForegroundServiceType
 import com.owncloud.android.datamodel.SyncedFolder
 import com.owncloud.android.datamodel.SyncedFolderProvider
 import com.owncloud.android.datamodel.ThumbnailsCacheManager
 import com.owncloud.android.datamodel.UploadsStorageManager
+import com.owncloud.android.datamodel.UploadsStorageManager.UploadStatus
 import com.owncloud.android.db.OCUpload
+import com.owncloud.android.db.UploadResult
 import com.owncloud.android.lib.common.OwnCloudAccount
 import com.owncloud.android.lib.common.OwnCloudClient
 import com.owncloud.android.lib.common.OwnCloudClientManagerFactory
@@ -53,6 +55,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.milliseconds
 
 @Suppress("LongParameterList", "TooGenericExceptionCaught")
 class FileUploadWorker(
@@ -205,6 +208,18 @@ class FileUploadWorker(
             .setSilent(true)
             .build()
 
+    private enum class UploadFilesResult {
+        Success,
+        Error,
+        Retry;
+
+        fun toWorkerResult(): Result = when (this) {
+            Success -> Result.success()
+            Error -> Result.failure()
+            Retry -> Result.retry()
+        }
+    }
+
     @Suppress("ReturnCount", "LongMethod", "DEPRECATION")
     private suspend fun uploadFiles(): Result = withContext(Dispatchers.IO) {
         val accountName = inputData.getString(ACCOUNT)
@@ -247,11 +262,22 @@ class FileUploadWorker(
         val client = OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount, context)
         val syncFolderHelper = SyncFolderHelper(context)
         val syncedFolders = syncedFolderProvider.syncedFolders
+        var hasRetryableFailure = false
+        var hasNonRetryableFailure = false
 
         for ((index, upload) in uploads.withIndex()) {
             ensureActive()
 
-            delay(retryPolicy.getDelay())
+            if (skip(upload)) {
+                Log_OC.d(
+                    TAG,
+                    "skipping already settled upload: ${upload.remotePath}, " +
+                        "status: ${upload.uploadStatus}, result: ${upload.lastResult}"
+                )
+                continue
+            }
+
+            delay(retryPolicy.getDelay().milliseconds)
 
             if (!skipAutoUploadCheck && isBelongToAnySyncedFolder(upload, syncFolderHelper, syncedFolders)) {
                 Log_OC.d(TAG, "skipping upload, will be handled by AutoUploadWorker: ${upload.localPath}")
@@ -272,7 +298,7 @@ class FileUploadWorker(
 
             if (canExitEarly()) {
                 notificationManager.showConnectionErrorNotification()
-                return@withContext Result.failure()
+                return@withContext Result.retry()
             }
 
             fileUploadEventBroadcaster.sendUploadEnqueued(context)
@@ -289,20 +315,49 @@ class FileUploadWorker(
             )
 
             val result = withContext(Dispatchers.IO) {
-                upload(upload, operation, user, client)
+                upload(operation, user, client)
             }
             activeOperations.remove(upload.uploadId)
 
+            // check quota first
             if (result.code == ResultCode.QUOTA_EXCEEDED) {
                 Log_OC.w(TAG, "Quota exceeded, stopping uploads")
                 notificationManager.showQuotaExceedNotification(operation)
                 break
             }
 
+            // check upload result for worker
+            val uploadResult = UploadResult.fromOperationResult(result)
+            if (!result.isSuccess) {
+                Log_OC.e(TAG, "upload failed for ${upload.remotePath}: ${result.code}")
+                if (uploadResult.isNonRetryable()) {
+                    hasNonRetryableFailure = true
+                } else {
+                    hasRetryableFailure = true
+                }
+            }
+
             sendUploadFinishEvent(totalUploadSize, currentUploadIndex, operation, result)
+
+            if (result.code == ResultCode.UNAUTHORIZED) {
+                Log_OC.e(TAG, "credentials are no longer valid, stopping uploads")
+                break
+            }
         }
 
-        return@withContext Result.success()
+        val uploadFilesResult = when {
+            hasRetryableFailure -> UploadFilesResult.Retry
+            hasNonRetryableFailure -> UploadFilesResult.Error
+            else -> UploadFilesResult.Success
+        }
+
+        return@withContext uploadFilesResult.toWorkerResult()
+    }
+
+    private fun skip(upload: OCUpload): Boolean = when (upload.uploadStatus) {
+        UploadStatus.UPLOAD_SUCCEEDED -> true
+        UploadStatus.UPLOAD_FAILED -> upload.lastResult.isNonRetryable()
+        else -> false
     }
 
     @Suppress("ReturnCount")
@@ -343,7 +398,7 @@ class FileUploadWorker(
 
     private fun canExitEarly(): Boolean {
         val result = !connectivityService.isConnected ||
-            connectivityService.isInternetWalled ||
+            connectivityService.isInternetWalled() ||
             isStopped
 
         if (result) {
@@ -357,31 +412,26 @@ class FileUploadWorker(
 
     @Suppress("TooGenericExceptionCaught", "DEPRECATION")
     private suspend fun upload(
-        upload: OCUpload,
         operation: UploadFileOperation,
         user: User,
         client: OwnCloudClient
     ): RemoteOperationResult<Any?> = withContext(Dispatchers.IO) {
-        lateinit var result: RemoteOperationResult<Any?>
+        var result: RemoteOperationResult<Any?>
 
         try {
             val storageManager = operation.storageManager
-            result = operation.execute(client)
-            val task = ThumbnailsCacheManager.ThumbnailGenerationTask(storageManager, user)
-            val file = File(operation.originalStoragePath)
-            val remoteId: String? = operation.file.remoteId
-            task.execute(ThumbnailsCacheManager.ThumbnailGenerationTaskObject(file, remoteId))
             fileUploadEventBroadcaster.sendUploadStarted(operation, context)
+            result = operation.execute(client)
+
+            // only generate a thumbnail if the upload actually succeeded
+            if (result.isSuccess) {
+                val task = ThumbnailsCacheManager.ThumbnailGenerationTask(storageManager, user)
+                val file = File(operation.originalStoragePath)
+                val remoteId: String? = operation.file.remoteId
+                task.execute(ThumbnailsCacheManager.ThumbnailGenerationTaskObject(file, remoteId))
+            }
         } catch (e: Exception) {
             Log_OC.e(TAG, "Error uploading", e)
-            uploadsStorageManager.run {
-                uploadDao.getUploadById(upload.uploadId, user.accountName)?.let { entity ->
-                    updateStatus(
-                        entity,
-                        UploadsStorageManager.UploadStatus.UPLOAD_FAILED
-                    )
-                }
-            }
             result = RemoteOperationResult(e)
         }
 
@@ -414,7 +464,7 @@ class FileUploadWorker(
     private var lastUpdateTime = 0L
 
     /**
-     * Receives from [com.owncloud.android.operations.UploadFileOperation.normalUpload]
+     * Receives from [UploadFileOperation.normalUpload]
      */
     @Suppress("MagicNumber")
     override fun onTransferProgress(

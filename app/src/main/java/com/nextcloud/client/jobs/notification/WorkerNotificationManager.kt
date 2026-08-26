@@ -23,7 +23,7 @@ import com.owncloud.android.utils.theme.ViewThemeUtils
 open class WorkerNotificationManager(
     private val id: Int,
     private val context: Context,
-    viewThemeUtils: ViewThemeUtils,
+    viewThemeUtils: ViewThemeUtils?,
     private val tickerId: Int,
     channelId: String
 ) {
@@ -42,7 +42,7 @@ open class WorkerNotificationManager(
             setVibrate(null)
             setOnlyAlertOnce(true)
             setSilent(true)
-            viewThemeUtils.androidx.themeNotificationCompatBuilder(context, this)
+            viewThemeUtils?.androidx?.themeNotificationCompatBuilder(context, this)
         }
 
     fun showNotification() {
@@ -82,6 +82,11 @@ open class WorkerNotificationManager(
     fun getId(): Int = id
 
     fun getNotification(): Notification = notificationBuilder.build()
+
+    fun getNotification(title: String): Notification {
+        notificationBuilder.setContentTitle(title)
+        return notificationBuilder.build()
+    }
 
     fun getForegroundInfo(notification: Notification): ForegroundInfo =
         ForegroundServiceHelper.createWorkerForegroundInfo(

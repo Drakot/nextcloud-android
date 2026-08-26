@@ -41,7 +41,20 @@
     <string name="app_config_proxy_port_title">Порт на прокси сървъра</string>
     <string name="app_widget_description">Показва един изпълним модул от таблото за управление</string>
     <string name="appbar_search_in">Търсене в %s</string>
+    <string name="assistant_screen_chat_create_error">Неуспешно изпращане на съобщение</string>
+    <string name="assistant_screen_chat_fetch_error">Неуспешно извличане на съобщение от чата</string>
+    <string name="assistant_screen_chat_generate_error">Неуспешно съставяне на отговор</string>
+    <string name="assistant_screen_conversations_go_back_to_assistant">Назад към помощна страница</string>
+    <string name="assistant_screen_delete_task_alert_dialog_description">Сигурни ли сте, че искате да изтриете тази задача?</string>
     <string name="assistant_screen_delete_task_alert_dialog_title">Изтрива задача</string>
+    <string name="assistant_screen_empty_content_description">Изпратете съобщение за да започнете разговор.</string>
+    <string name="assistant_screen_empty_content_title">Здравейте! С какво да ви помогна днес?</string>
+    <string name="assistant_screen_retry_response_generation">Опитай отново със съставяне на отговор</string>
+    <string name="assistant_screen_send_message">Изпрати съобщение</string>
+    <string name="assistant_screen_task_bar_open_conversation_list">Отвори списък с разговори</string>
+    <string name="assistant_screen_task_create_fail_message">Възникна грешка при създаването на задача</string>
+    <string name="assistant_screen_task_create_success_message">Задачата е създадена</string>
+    <string name="assistant_screen_task_delete_fail_message">Възникна грешка при изтриването на задача</string>
     <string name="assistant_screen_top_bar_title">Асистент</string>
     <string name="assistant_task_status_running">в процес</string>
     <string name="assistant_task_status_unknown">неясна</string>
@@ -67,7 +80,6 @@
     <string name="auth_ssl_unverified_server_title">Идентичността на SSL сървъра не може да бъде потвърдена</string>
     <string name="auth_testing_connection">Проверка на връзката</string>
     <string name="auth_timeout_title">Сървърът се забави прекалено много с отговора</string>
-    <string name="auth_trying_to_login">Опит за вписване…</string>
     <string name="auth_unauthorized">Грешно потребителско име или парола</string>
     <string name="auth_unknown_error_exception_title">Неизвестна грешка: %1$s</string>
     <string name="auth_unknown_error_http_title">Възникна неизвестна HTTP грешка!</string>
@@ -190,12 +202,15 @@
     <string name="could_not_retrieve_url">URL адресът не може да бъде извлечен</string>
     <string name="create">Създай</string>
     <string name="create_dir_fail_msg">Не може да се създаде папка</string>
+    <string name="create_document">Документ</string>
+    <string name="create_folder">Папка</string>
     <string name="create_link">Създаване на връзка</string>
     <string name="create_new">Нов</string>
     <string name="create_new_document">Нов документ</string>
     <string name="create_new_folder">Нова папка</string>
     <string name="create_new_presentation">Нова презентация</string>
     <string name="create_new_spreadsheet">Нова електронна таблица</string>
+    <string name="create_presentation">Презентация</string>
     <string name="credentials_disabled">Потребителските данни са спрени</string>
     <string name="daily_backup">Ежедневно архивиране</string>
     <string name="data_to_back_up">Данни за архивиране</string>
@@ -249,7 +264,6 @@
     <string name="drawer_item_notifications">Известия</string>
     <string name="drawer_item_on_device">На устройството</string>
     <string name="drawer_item_personal_files">Лични файлове</string>
-    <string name="drawer_item_recently_modified">Последно преработени</string>
     <string name="drawer_item_shared">Споделени</string>
     <string name="drawer_item_trashbin">Изтрити файлове</string>
     <string name="drawer_item_uploads_list">Качени</string>
@@ -340,7 +354,6 @@
     <string name="file_list_empty_on_device">Свалените файлове и папки ще се показват тук.</string>
     <string name="file_list_empty_recent_files_description">Файловете и папките, които наскоро сте променили, ще се покажат тук.</string>
     <string name="file_list_empty_recent_files_headline">Няма наскоро модифицирани файлове</string>
-    <string name="file_list_empty_recently_modified">Няма модифицирани файлове през последните 7 дни</string>
     <string name="file_list_empty_search">Вероятно е в друга директория?</string>
     <string name="file_list_empty_shared">Споделените файлове и папки ще се показват тук.</string>
     <string name="file_list_empty_shared_headline">Все още нищо не е споделено</string>
@@ -407,6 +420,8 @@
     <string name="foreign_files_remote_text">Отдалечен: %1$s</string>
     <string name="forward">Напред</string>
     <string name="fourHours">4 чàса</string>
+    <string name="governance_file_retention_label">Запазване на файлове</string>
+    <string name="governance_no_label">Няма</string>
     <string name="grid_file_features_live_photo_content_description">Иконата служи за индикация дали \"live photo\" е налична</string>
     <string name="hidden_file_name_warning">Името ще доведе до скрит файл</string>
     <string name="hint_name">Име</string>
@@ -640,7 +655,6 @@
     <string name="select_one_template">Моля, изберете един шаблон </string>
     <string name="select_template">Изберете шаблон</string>
     <string name="send">Изпрати</string>
-    <string name="sendbutton_description">Икона на бутон за изпращане</string>
     <string name="set_as">Задай като</string>
     <string name="set_online_status">Състояние</string>
     <string name="set_picture_as">Задай като</string>
@@ -670,7 +684,6 @@
     <string name="share_no_expiration_date_label">Срок на валидност</string>
     <string name="share_no_password_title">Задайте парола</string>
     <string name="share_permission_can_edit">Може да редактира</string>
-    <string name="share_permission_secure_file_drop">Защитено пускане на файлове</string>
     <string name="share_permission_view_only">Само изглед</string>
     <string name="share_re_share_permission">Споделяне</string>
     <string name="share_read_permission">Прочитане</string>
@@ -783,7 +796,6 @@
     <string name="thumbnail_for_existing_file_description">Миниатюра за съществуващ файл</string>
     <string name="thumbnail_for_new_file_desc">Миниатюра за нов файл</string>
     <string name="today">Днес</string>
-    <string name="trashbin_activity_title">Изтрити файлове</string>
     <string name="trashbin_empty_headline">Няма изтрити файлове</string>
     <string name="trashbin_empty_message">Ще можете да възстановите изтритите файлове от тук.</string>
     <string name="trashbin_file_not_deleted">Файлът %1$s не може да бъде изтрит!</string>
@@ -831,7 +843,6 @@
     <string name="upload_old_android">Шифроването е възможно само с > = Android 5.0</string>
     <string name="upload_query_move_foreign_files">В папка %1$s няма достатъчно място за копиране на избраните файлове. Желаете ли да бъдат преместени?</string>
     <string name="upload_scan_doc_upload">Сканиране на документ от камера</string>
-    <string name="upload_sync_conflict">Конфликт при синхронизирането, необходимо е да го отстраните ръчно</string>
     <string name="upload_unknown_error">Неизвестна грешка</string>
     <string name="uploader_btn_alternative_text">Избиране</string>
     <string name="uploader_btn_upload_text">Качване</string>
@@ -876,7 +887,6 @@
     <string name="uploads_view_upload_status_failed_localfile_error">Локалният фаил не е намерен</string>
     <string name="uploads_view_upload_status_failed_permission_error">Грешка в правата</string>
     <string name="uploads_view_upload_status_failed_ssl_certificate_not_trusted">Недоверен сървърен сертификат</string>
-    <string name="uploads_view_upload_status_fetching_server_version">Извлича се версията на сървъра ...</string>
     <string name="uploads_view_upload_status_service_interrupted">Приложението бе терминирано</string>
     <string name="uploads_view_upload_status_succeeded">Завършено</string>
     <string name="uploads_view_upload_status_unknown_fail">Неизвестна грешка</string>

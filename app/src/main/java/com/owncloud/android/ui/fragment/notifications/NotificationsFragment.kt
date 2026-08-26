@@ -230,7 +230,7 @@ class NotificationsFragment :
                     if (item.itemId != R.id.action_empty_notifications) return false
                     lifecycleScope.launch(Dispatchers.IO) {
                         val result = DeleteAllNotificationsRemoteOperation().execute(client)
-                        withContext(Dispatchers.Main) { onRemovedAllNotifications(result.isSuccess) }
+                        withContext(Dispatchers.Main) { removeAllNotifications(result.isSuccess) }
                     }
                     return true
                 }
@@ -271,7 +271,6 @@ class NotificationsFragment :
     // region Data loading
     private fun fetchAndSetData(client: NextcloudClient) {
         lifecycleScope.launch(Dispatchers.IO) {
-            initializeAdapter()
             val result = GetNotificationsRemoteOperation().execute(client)
             withContext(Dispatchers.Main) {
                 state = when {
@@ -303,7 +302,7 @@ class NotificationsFragment :
 
     private fun initializeAdapter() {
         if (adapter == null) {
-            adapter = NotificationListAdapter(this@NotificationsFragment, viewThemeUtils, this)
+            adapter = NotificationListAdapter(this@NotificationsFragment, viewThemeUtils, this, accountManager)
             binding?.list?.adapter = adapter
         }
     }
@@ -316,28 +315,27 @@ class NotificationsFragment :
 
     @VisibleForTesting
     fun initForTesting(state: NotificationsUIState) {
-        adapter = NotificationListAdapter(this@NotificationsFragment, viewThemeUtils, this)
+        adapter = NotificationListAdapter(this@NotificationsFragment, viewThemeUtils, this, accountManager)
         binding?.list?.adapter = adapter
         binding?.list?.layoutManager = LinearLayoutManager(requireContext())
         this.state = state
     }
 
     // region Callbacks
-    override fun onRemovedNotification(isSuccess: Boolean, client: NextcloudClient) {
-        if (!isSuccess) {
+    override fun removeNotification(id: Int, success: Boolean, client: NextcloudClient) {
+        if (success) {
+            adapter?.removeNotification(id)
+            if (adapter?.itemCount == 0) {
+                state = NotificationsUIState.Empty
+            }
+        } else {
             DisplayUtils.showSnackMessage(requireActivity(), getString(R.string.remove_notification_failed))
-            fetchAndSetData(client)
         }
+
+        fetchAndSetData(client)
     }
 
-    override fun removeNotification(holder: NotificationListAdapter.NotificationViewHolder) {
-        adapter?.removeNotification(holder)
-        if (adapter?.itemCount == 0) {
-            state = NotificationsUIState.Empty
-        }
-    }
-
-    override fun onRemovedAllNotifications(isSuccess: Boolean) {
+    override fun removeAllNotifications(isSuccess: Boolean) {
         if (isSuccess) {
             adapter?.removeAllNotifications()
             state = NotificationsUIState.Empty
@@ -346,13 +344,14 @@ class NotificationsFragment :
         }
     }
 
-    override fun onActionCallback(
+    override fun onNotificationActionCompletion(
         isSuccess: Boolean,
         notification: Notification,
         holder: NotificationListAdapter.NotificationViewHolder
     ) {
+        // after any action successfully completed remove the notification
         if (isSuccess) {
-            adapter?.removeNotification(holder)
+            adapter?.removeNotification(notification.notificationId)
         } else {
             adapter?.bindButtons(holder, notification)
             DisplayUtils.showSnackMessage(requireActivity(), getString(R.string.notification_action_failed))
@@ -360,13 +359,13 @@ class NotificationsFragment :
     }
 
     override fun onBindIcon(imageView: ImageView, url: String) {
-        GlideHelper.loadIntoImageView(
+        GlideHelper.loadTintableIconIntoImageView(
             requireContext(),
             client,
             url,
             imageView,
             R.drawable.ic_notification,
-            false
+            resources.getDimensionPixelSize(R.dimen.notification_icon_width)
         )
     }
 
@@ -379,7 +378,7 @@ class NotificationsFragment :
         lifecycleScope.launch(Dispatchers.IO) {
             val result = DeleteNotificationRemoteOperation(id).execute(client)
             withContext(Dispatchers.Main) {
-                onRemovedNotification(result?.isSuccess == true, client)
+                removeNotification(id, success = (result?.isSuccess == true), client)
             }
         }
     }

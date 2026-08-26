@@ -14,29 +14,28 @@ package com.owncloud.android.ui.adapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Typeface
-import android.text.Spannable
 import android.text.SpannableStringBuilder
-import android.text.TextUtils
-import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
 import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
+import com.nextcloud.client.account.CurrentAccountProvider
 import com.nextcloud.utils.extensions.setVisibleIf
+import com.nextcloud.utils.text.RichSubjectFormatter
+import com.nextcloud.utils.text.RichSubjectParam
 import com.owncloud.android.R
 import com.owncloud.android.databinding.NotificationListItemBinding
 import com.owncloud.android.lib.resources.notifications.models.Action
 import com.owncloud.android.lib.resources.notifications.models.Notification
+import com.owncloud.android.lib.resources.notifications.models.RichObject
 import com.owncloud.android.ui.activity.FileDisplayActivity
 import com.owncloud.android.ui.fragment.notifications.NotificationsAdapterItemClick
 import com.owncloud.android.ui.fragment.notifications.NotificationsFragment
@@ -47,14 +46,14 @@ import com.owncloud.android.utils.theme.ViewThemeUtils
 class NotificationListAdapter(
     private val fragment: NotificationsFragment,
     private val viewThemeUtils: ViewThemeUtils,
-    private val itemClick: NotificationsAdapterItemClick
+    private val itemClick: NotificationsAdapterItemClick,
+    private val accountManager: CurrentAccountProvider
 ) : RecyclerView.Adapter<NotificationListAdapter.NotificationViewHolder>() {
 
-    private val styleSpanBold = StyleSpan(Typeface.BOLD)
-    private val foregroundColorSpanBlack = ForegroundColorSpan(
-        ContextCompat.getColor(fragment.requireContext(), R.color.text_color)
-    )
     private val notificationsList = ArrayList<Notification>()
+    private val richSubjectFormatter by lazy {
+        RichSubjectFormatter(fragment.requireContext(), accountManager)
+    }
 
     // region Adapter overrides
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NotificationViewHolder(
@@ -91,7 +90,7 @@ class NotificationListAdapter(
 
     private fun bindSubject(holder: NotificationViewHolder, notification: Notification) {
         val file = notification.subjectRichParameters[FILE]
-        if (file == null && !TextUtils.isEmpty(notification.getLink())) {
+        if (file == null && !notification.getLink().isNullOrEmpty()) {
             val subject = "${notification.getSubject()} ↗"
             holder.binding.subject.run {
                 setTypeface(typeface, Typeface.BOLD)
@@ -102,22 +101,35 @@ class NotificationListAdapter(
             }
         } else {
             holder.binding.subject.run {
-                text = if (!TextUtils.isEmpty(notification.subjectRich)) {
-                    makeSpecialPartsBold(notification)
+                text = if (!notification.subjectRich.isNullOrEmpty()) {
+                    formatSubjectRich(notification)
                 } else {
                     notification.getSubject()
                 }
-                if (file?.id?.isNotEmpty() == true) {
-                    setOnClickListener {
-                        val intent = Intent(fragment.requireActivity(), FileDisplayActivity::class.java).apply {
-                            action = Intent.ACTION_VIEW
-                            putExtra(FileDisplayActivity.KEY_FILE_ID, file.id)
-                        }
-                        fragment.requireActivity().startActivity(intent)
-                    }
-                }
+                val fileId = file?.id?.takeIf { it.isNotEmpty() }
+                setOnClickListener(fileId?.let { id -> View.OnClickListener { showFile(id) } })
             }
         }
+    }
+
+    private fun formatSubjectRich(notification: Notification): SpannableStringBuilder =
+        richSubjectFormatter.format(notification.getSubjectRich()) { tag ->
+            notification.subjectRichParameters[tag]?.toRichSubjectParam()
+        }
+
+    private fun RichObject.toRichSubjectParam(): RichSubjectParam {
+        val fileId = id?.takeIf { type == FILE && it.isNotEmpty() }
+            ?: return RichSubjectParam(type, id, name)
+
+        return RichSubjectParam(type, id, name) { showFile(fileId) }
+    }
+
+    private fun showFile(fileId: String) {
+        val intent = Intent(fragment.requireActivity(), FileDisplayActivity::class.java).apply {
+            action = Intent.ACTION_VIEW
+            putExtra(FileDisplayActivity.KEY_FILE_ID, fileId)
+        }
+        fragment.requireActivity().startActivity(intent)
     }
 
     private fun bindMessage(holder: NotificationViewHolder, notification: Notification) {
@@ -139,14 +151,16 @@ class NotificationListAdapter(
 
     private fun colorViewHolder(holder: NotificationViewHolder) {
         viewThemeUtils.platform.run {
-            colorImageView(holder.binding.icon, ColorRole.ON_SURFACE_VARIANT)
-            colorImageView(holder.binding.dismiss, ColorRole.ON_SURFACE_VARIANT)
-            colorTextView(holder.binding.subject, ColorRole.ON_SURFACE)
-            colorTextView(holder.binding.message, ColorRole.ON_SURFACE_VARIANT)
-            colorTextView(holder.binding.datetime, ColorRole.ON_SURFACE_VARIANT)
+            holder.binding.run {
+                colorImageView(icon, ColorRole.ON_SURFACE_VARIANT)
+                colorTextView(subject, ColorRole.ON_SURFACE)
+                colorTextView(message, ColorRole.ON_SURFACE_VARIANT)
+                colorTextView(datetime, ColorRole.ON_SURFACE_VARIANT)
+            }
         }
-    }
 
+        viewThemeUtils.material.colorMaterialButtonContent(holder.binding.dismiss, ColorRole.ON_SURFACE)
+    }
     // endregion
 
     // region Button binding
@@ -271,7 +285,6 @@ class NotificationListAdapter(
     // endregion
 
     // region Data manipulation
-
     @SuppressLint("NotifyDataSetChanged")
     fun setNotificationItems(notificationItems: List<Notification>) {
         notificationsList.clear()
@@ -279,9 +292,9 @@ class NotificationListAdapter(
         notifyDataSetChanged()
     }
 
-    fun removeNotification(holder: NotificationViewHolder) {
-        val position = holder.bindingAdapterPosition
-        if (position in 0 until notificationsList.size) {
+    fun removeNotification(id: Int) {
+        val position = notificationsList.indexOfFirst { it.notificationId == id }
+        if (position != -1) {
             notificationsList.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, notificationsList.size)
@@ -299,32 +312,7 @@ class NotificationListAdapter(
             holder.binding.buttons.getChildAt(i).isEnabled = enabled
         }
     }
-
     // endregion
-
-    private fun makeSpecialPartsBold(notification: Notification): SpannableStringBuilder {
-        var text = notification.getSubjectRich()
-        val ssb = SpannableStringBuilder(text)
-
-        var openingBrace = text.indexOf('{')
-        var closingBrace: Int
-        var replaceablePart: String?
-        while (openingBrace != -1) {
-            closingBrace = text.indexOf('}', openingBrace) + 1
-            replaceablePart = text.substring(openingBrace + 1, closingBrace - 1)
-            notification.subjectRichParameters[replaceablePart]?.name?.let { name ->
-                ssb.replace(openingBrace, closingBrace, name)
-                text = ssb.toString()
-                closingBrace = openingBrace + name.length
-
-                ssb.setSpan(styleSpanBold, openingBrace, closingBrace, 0)
-                ssb.setSpan(foregroundColorSpanBlack, openingBrace, closingBrace, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
-            openingBrace = text.indexOf('{', closingBrace)
-        }
-
-        return ssb
-    }
 
     class NotificationViewHolder(var binding: NotificationListItemBinding) :
         RecyclerView.ViewHolder(binding.root)

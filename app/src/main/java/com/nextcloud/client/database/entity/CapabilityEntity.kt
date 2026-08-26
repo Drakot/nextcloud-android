@@ -126,6 +126,8 @@ data class CapabilityEntity(
     val dropAccount: Int?,
     @ColumnInfo(name = ProviderTableMeta.CAPABILITIES_SECURITY_GUARD)
     val securityGuard: Int?,
+    @ColumnInfo(name = ProviderTableMeta.CAPABILITIES_GOVERNANCE)
+    val governance: Int?,
     @ColumnInfo(name = ProviderTableMeta.CAPABILITIES_FORBIDDEN_FILENAME_CHARACTERS)
     val forbiddenFileNameCharacters: String?,
     @ColumnInfo(name = ProviderTableMeta.CAPABILITIES_FORBIDDEN_FILENAMES)
@@ -151,7 +153,9 @@ data class CapabilityEntity(
     @ColumnInfo(name = ProviderTableMeta.CAPABILITIES_HAS_VALID_SUBSCRIPTION)
     val hasValidSubscription: Int?,
     @ColumnInfo(name = ProviderTableMeta.CAPABILITIES_CLIENT_INTEGRATION_JSON)
-    val clientIntegrationJson: String?
+    val clientIntegrationJson: String?,
+    @ColumnInfo(name = ProviderTableMeta.CAPABILITIES_MOD_REWRITE_WORKING)
+    val modRewriteWorking: Int?
 )
 
 @Suppress("LongMethod", "ReturnCount")
@@ -220,6 +224,7 @@ fun CapabilityEntity?.toOCCapability(): OCCapability {
     capability.groupfolders = intToBoolean(this.groupfolders)
     capability.dropAccount = intToBoolean(this.dropAccount)
     capability.securityGuard = intToBoolean(this.securityGuard)
+    capability.governance = intToBoolean(this.governance)
     capability.forbiddenFilenameCharactersJson = this.forbiddenFileNameCharacters
     capability.forbiddenFilenamesJson = this.forbiddenFileNames
     capability.forbiddenFilenameExtensionJson = this.forbiddenFileNameExtensions
@@ -232,6 +237,7 @@ fun CapabilityEntity?.toOCCapability(): OCCapability {
     capability.defaultPermissions = this.defaultPermissions ?: 0
     capability.hasValidSubscription = intToBoolean(this.hasValidSubscription)
     capability.clientIntegrationJson = this.clientIntegrationJson
+    capability.modRewriteWorking = intToBoolean(this.modRewriteWorking)
 
     return capability
 }

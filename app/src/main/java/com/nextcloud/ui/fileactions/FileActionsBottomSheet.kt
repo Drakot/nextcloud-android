@@ -20,7 +20,7 @@ import androidx.annotation.IdRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.os.BundleCompat
 import androidx.core.os.bundleOf
-import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResult
@@ -41,13 +41,12 @@ import com.owncloud.android.databinding.FileActionsBottomSheetItemBinding
 import com.owncloud.android.datamodel.FileDataStorageManager
 import com.owncloud.android.datamodel.OCFile
 import com.owncloud.android.datamodel.SyncedFolderProvider
-import com.owncloud.android.datamodel.ThumbnailsCacheManager
 import com.owncloud.android.lib.resources.files.model.FileLockType
 import com.owncloud.android.ui.activity.ComponentsGetter
 import com.owncloud.android.utils.DisplayUtils
 import com.owncloud.android.utils.DisplayUtils.AvatarGenerationListener
 import com.owncloud.android.utils.FileStorageUtils
-import com.owncloud.android.utils.overlay.OverlayManager
+import com.nextcloud.utils.thumbnail.ThumbnailGenerator
 import com.owncloud.android.utils.theme.ViewThemeUtils
 import javax.inject.Inject
 
@@ -71,7 +70,7 @@ class FileActionsBottomSheet :
     lateinit var syncedFolderProvider: SyncedFolderProvider
 
     @Inject
-    lateinit var overlayManager: OverlayManager
+    lateinit var thumbnailGenerator: ThumbnailGenerator
 
     private lateinit var viewModel: FileActionsViewModel
 
@@ -80,8 +79,6 @@ class FileActionsBottomSheet :
         get() = _binding!!
 
     private lateinit var componentsGetter: ComponentsGetter
-
-    private val thumbnailAsyncTasks = mutableListOf<ThumbnailsCacheManager.ThumbnailGenerationTask>()
 
     private var endpoints: List<Endpoint>? = mutableListOf()
 
@@ -126,17 +123,17 @@ class FileActionsBottomSheet :
                 if (state.lockInfo != null) {
                     displayLockInfo(state.lockInfo)
                 }
-                displayActions(state.actions)
+                displayActions(state.titleFile, state.actions)
                 displayTitle(state.titleFile)
             }
 
             is FileActionsViewModel.UiState.LoadedForMultipleFiles -> {
                 setMultipleFilesThumbnail()
-                displayActions(state.actions)
+                displayActions(state.firstFile, state.actions)
                 displayTitle(state.fileCount)
             }
 
-            FileActionsViewModel.UiState.Loading -> {}
+            FileActionsViewModel.UiState.Loading -> Unit
 
             FileActionsViewModel.UiState.Error -> {
                 activity?.let {
@@ -149,18 +146,10 @@ class FileActionsBottomSheet :
 
     private fun loadFileThumbnail(titleFile: OCFile?) {
         titleFile?.let {
-            DisplayUtils.setThumbnail(
+            thumbnailGenerator.setThumbnail(
                 it,
                 binding.thumbnailLayout.thumbnail,
-                currentUserProvider.user,
-                storageManager,
-                thumbnailAsyncTasks,
-                false,
-                context,
-                binding.thumbnailLayout.thumbnailShimmer,
-                syncedFolderProvider.preferences,
-                viewThemeUtils,
-                overlayManager
+                shimmer = binding.thumbnailLayout.thumbnailShimmer
             )
         }
     }
@@ -210,26 +199,32 @@ class FileActionsBottomSheet :
         }
     }
 
-    private fun displayActions(actions: List<FileAction>) {
-        if (binding.fileActionsList.isEmpty()) {
-            actions.forEach { action ->
-                val view = inflateActionView(action)
-                binding.fileActionsList.addView(view)
-            }
+    private fun displayActions(file: OCFile?, actions: List<FileAction>) {
+        if (binding.fileActionsList.isNotEmpty()) {
+            return
+        }
 
-            // add client integration
-            if (endpoints != null) {
-                for (val e in endpoints) {
-                    val ui = clientIntegration.inflateClientIntegrationActionView(
-                        e,
-                        layoutInflater,
-                        binding,
-                        viewModel,
-                        viewThemeUtils
-                    )
-                    binding.fileActionsList.addView(ui)
-                }
-            }
+        actions.forEach { action ->
+            val view = inflateActionView(action)
+            binding.fileActionsList.addView(view)
+        }
+
+        val parentDir = file?.parentId?.let { storageManager.getFileById(it) }
+
+        if (endpoints.isNullOrEmpty() || parentDir?.isEncrypted == true) {
+            return
+        }
+
+        // add client integration
+        endpoints?.forEach {
+            val view = clientIntegration.inflateClientIntegrationActionView(
+                it,
+                layoutInflater,
+                binding,
+                viewModel,
+                viewThemeUtils
+            )
+            binding.fileActionsList.addView(view)
         }
     }
 

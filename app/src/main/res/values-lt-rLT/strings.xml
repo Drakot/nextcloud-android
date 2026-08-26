@@ -10,6 +10,7 @@
     <string name="action_edit">Redaguoti</string>
     <string name="action_empty_notifications">Išvalyti visus pranešimus</string>
     <string name="action_empty_trashbin">Išvalyti šiukšlinę</string>
+    <string name="action_open_in_web_editor">Atidaryti naršyklės redaktoriuje</string>
     <string name="action_send_share">Siųsti/bendrinti</string>
     <string name="action_switch_grid_view">Tinklelio rodinys</string>
     <string name="action_switch_list_view">Sąrašo rodinys</string>
@@ -23,7 +24,7 @@
     <string name="actionbar_send_file">Siųsti</string>
     <string name="actionbar_settings">Nustatymai</string>
     <string name="actionbar_sort">Rikiuoti</string>
-    <string name="active_user">Aktyvus naudotojas</string>
+    <string name="active_user">Aktyvus vartotojas</string>
     <string name="activities_no_results_headline">Kol kas jokių veiksmų</string>
     <string name="activities_no_results_message">Nėra įvykių susijusių su papildymais, pakeitimais ar bendrinimais.</string>
     <string name="activity_chooser_send_file_title">Siųsti</string>
@@ -55,7 +56,6 @@
     <string name="assistant_screen_empty_content_description">Pabandykite išsiųsti žinutę, kad pradėtumėte pokalbį.</string>
     <string name="assistant_screen_empty_content_title">Sveiki! Kuo šiandien galiu jums padėti?</string>
     <string name="assistant_screen_retry_response_generation">Pakartotinio bandymo atsakymo generavimas</string>
-    <string name="assistant_screen_select_task">Pasirinkite užduotį</string>
     <string name="assistant_screen_send_message">Siųsti žinutę</string>
     <string name="assistant_screen_task_bar_open_conversation_list">Atidaryti pokalbių sąrašą
  </string>
@@ -81,8 +81,8 @@
     <string name="associated_account_not_found">Susieta paskyra nerasta!</string>
     <string name="auth_access_failed">Prieiga nepavyko: %1$s</string>
     <string name="auth_account_does_not_exist">Paskyra kol kas šiame įrenginyje nėra pridėta</string>
-    <string name="auth_account_not_new">Šiame įrenginyje jau yra paskyra šiam naudotojui ir serveriui</string>
-    <string name="auth_account_not_the_same">Įvestas naudotojas neatitinka šios paskyros naudotojo</string>
+    <string name="auth_account_not_new">Šiame įrenginyje jau yra paskyra šiam vartotojui ir serveriui</string>
+    <string name="auth_account_not_the_same">Įvestas vartotojas neatitinka šios paskyros vartotojo</string>
     <string name="auth_bad_oc_version_title">Nežinoma serverio versija</string>
     <string name="auth_connection_established">Ryšys užmegztas</string>
     <string name="auth_fail_get_user_name">Jūsų paslaugos  serveris grąžina neteisingą vartotojo ID, susisiekite su administratoriumi.</string>
@@ -100,8 +100,7 @@
     <string name="auth_ssl_unverified_server_title">Nepavyko identifikuoti SSL serveryje</string>
     <string name="auth_testing_connection">Bandomas sujungimas</string>
     <string name="auth_timeout_title">Serveris per ilgai neatsako</string>
-    <string name="auth_trying_to_login">Bandoma prisijungti…</string>
-    <string name="auth_unauthorized">Neteisingas naudotojo vardas arba slaptažodis</string>
+    <string name="auth_unauthorized">Neteisingas vartotojo vardas arba slaptažodis</string>
     <string name="auth_unknown_error_exception_title">Nežinoma klaida: %1$s</string>
     <string name="auth_unknown_error_http_title">Įvyko nežinoma HTTP klaida!</string>
     <string name="auth_unknown_error_title">Įvyko nežinoma klaida!</string>
@@ -118,7 +117,6 @@
     <string name="auto_upload_background_activity_action">Leisti foninę veiklą</string>
     <string name="auto_upload_battery_optimization_reason">„Nextcloud“ foninę veiklą riboja baterijos optimizavimas.</string>
     <string name="auto_upload_battery_saver_action">Atidarykite baterijos tausojimo nustatymus</string>
-    <string name="auto_upload_battery_saver_mode_warning">Automatinis įkėlimas pristabdytas, nes įjungtas akumuliatoriaus tausojimo režimas.</string>
     <string name="auto_upload_battery_saver_reason">Baterijos tausojimo režimas aktyvus ir gali pristabdyti įkėlimus.</string>
     <string name="auto_upload_delete_dialog_description">Tai pašalins aplanką ir automatinio įkėlimo konfigūraciją. Visi nebaigti įkėlimai bus atšaukti.</string>
     <string name="auto_upload_delete_dialog_title">Ištrinti automatinio įkėlimo aplanką?</string>
@@ -136,6 +134,7 @@
     <string name="autoupload_hide_folder">Slėpti aplanką</string>
     <string name="avatar">Avataras</string>
     <string name="away">Atsitraukęs</string>
+    <string name="backup_list_adapter_local_contacts">Vietiniai kontaktai</string>
     <string name="backup_settings">Atsarginių kopijų nustatymai</string>
     <string name="backup_title">Kontaktų ir kalendoriaus atsarginė kopija</string>
     <string name="battery_optimization_close">Užverti</string>
@@ -150,7 +149,7 @@
     <string name="calendar">Kalendorius</string>
     <string name="calendars">Kalendoriai</string>
     <string name="cancel_upload">Atsisakyti</string>
-    <string name="certificate_load_problem">Klaida, įkeliant liudijimą.</string>
+    <string name="certificate_load_problem">Klaida, įkeliant sertifikatą.</string>
     <string name="changelog_dev_version">Pakeitimų žurnalas (kūrėjų versija)</string>
     <string name="check_back_later_or_reload">Patikrinkite vėliau arba įkelkite iš naujo.</string>
     <string name="checkbox">Žymimasis langelis</string>
@@ -209,7 +208,7 @@
     <string name="community_testing_bug_text">Radote klaidą? Netikslumą?</string>
     <string name="community_testing_headline">Pagalba testuojant</string>
     <string name="community_testing_report_text">Pranešti apie problemą per „GitHub“</string>
-    <string name="compose_activity_label">Nextcloud asistentas</string>
+    <string name="compose_activity_label">„Nextcloud Asistentas“</string>
     <string name="configure_new_media_folder_detection_notifications">Konfigūruoti</string>
     <string name="confirm_removal">Šalinti vietinį šifravimą</string>
     <string name="confirmation_remove_file_alert">Ar tikrai norite ištrinti %1$s?</string>
@@ -249,12 +248,15 @@
     <string name="copy_link">Kopijuoti nuorodą</string>
     <string name="copy_move_to_encrypted_folder_not_supported">Kopijavimas/perkėlimas į šifruotą aplanką šiuo metu nėra palaikomas.</string>
     <string name="could_not_download_image">Nepavyko atsisiųsti viso paveikslo</string>
-    <string name="could_not_retrieve_shares">Nepavyko gauti viešinių</string>
+    <string name="could_not_retrieve_shares">Nepavyko gauti bendrinimų</string>
     <string name="could_not_retrieve_url">Nepavyko nuskaityti URL</string>
     <string name="create">Sukurti</string>
     <string name="create_dir_fail_msg">Nepavyko sukurti failo</string>
+    <string name="create_document">Dokumentas</string>
+    <string name="create_encrypted_folder">Užšifruotas aplankas</string>
     <string name="create_end_to_end_encrypted_share">Nuorodos dalijimasis</string>
     <string name="create_end_to_end_encrypted_share_title">Ištisinio šifravimo nuorodų bendrinimas</string>
+    <string name="create_folder">Aplankas</string>
     <string name="create_link">Sukurti nuorodą</string>
     <string name="create_new">Nauja</string>
     <string name="create_new_document">Naujas dokumentas</string>
@@ -262,8 +264,9 @@
     <string name="create_new_folder">Naujas aplankas</string>
     <string name="create_new_presentation">Nauja pateiktis</string>
     <string name="create_new_spreadsheet">Nauja skaičiuoklė</string>
+    <string name="create_presentation">Pateiktis</string>
     <string name="create_rich_workspace">Pridėti aplanko aprašą</string>
-    <string name="creates_rich_workspace">Prideda aplanko aprašą</string>
+    <string name="create_spreadsheet">Skaičiuoklė</string>
     <string name="credentials_disabled">Prisijungimo duomenys išjungti</string>
     <string name="daily_backup">Kasdienės atsarginės kopijos</string>
     <string name="data_to_back_up">Duomenų atsarginės kopijos</string>
@@ -279,6 +282,8 @@
     <string name="dialog_close">Užverti</string>
     <string name="did_not_check_for_dupes">Neieškoti dublikatų.</string>
     <string name="digest_algorithm_not_available">Tavo telefonas nepalaiko digest algoritmo.</string>
+    <string name="direct_login_confirm_message">Ar norite prisijungti prie %2$s naudodami %1$s?</string>
+    <string name="direct_login_confirm_title">Patvirtinti prisijungimą</string>
     <string name="direct_login_failed">Prisijungimas per tiesioginę nuorodą nepavyko!</string>
     <string name="direct_login_text">Prisijunkite į %2$s naudodami %1$s</string>
     <string name="disable_new_media_folder_detection_notifications">Išjungti</string>
@@ -330,7 +335,6 @@
     <string name="drawer_item_on_device">Įrenginyje</string>
     <string name="drawer_item_personal_files">Asmeniniai failai</string>
     <string name="drawer_item_recent_files">Naujausi failai</string>
-    <string name="drawer_item_recently_modified">Paskiausiai modifikuoti</string>
     <string name="drawer_item_shared">Bendrinami</string>
     <string name="drawer_item_trashbin">Ištrinti failai</string>
     <string name="drawer_item_uploads_list">Įkėlimai</string>
@@ -339,7 +343,6 @@
     <string name="drawer_quota">panaudota %1$s iš %2$s</string>
     <string name="drawer_quota_unlimited">panaudota %1$s</string>
     <string name="drawer_synced_folders">Automatinis įkėlimas</string>
-    <string name="due_to_too_many_wrong_attempts">%s dėl per daug neteisingų bandymų</string>
     <string name="e2e_counter_too_old">Skaitiklis per senas</string>
     <string name="e2e_hash_not_found">Maiša nerasta</string>
     <string name="e2e_not_yet_setup">E2E dar nenustatytas</string>
@@ -348,7 +351,7 @@
     <string name="e2e_signature_is_empty">Nepavyko patikrinti metaduomenų, parašas tuščias.</string>
     <string name="ecosystem_apps_display_assistant">Asistentas</string>
     <string name="ecosystem_apps_display_more">Daugiau</string>
-    <string name="ecosystem_apps_more">Daugiau Nextcloud programėlių</string>
+    <string name="ecosystem_apps_more">Daugiau „Nextcloud“ programėlių</string>
     <string name="editor_web_view_cannot_open_file">Nepavyksta atidaryti failų parinkiklio</string>
     <string name="email_pick_failed">Nepavyko pasirinkti el. pašto adreso.</string>
     <string name="encrypted">Nustatyti kaip šifruotą</string>
@@ -398,7 +401,7 @@
     <string name="etm_background_job_name">Užduoties pavadinimas</string>
     <string name="etm_background_job_progress">Eiga</string>
     <string name="etm_background_job_state">Būsena</string>
-    <string name="etm_background_job_user">Naudotojas</string>
+    <string name="etm_background_job_user">Vartotojas</string>
     <string name="etm_background_job_uuid">UUID</string>
     <string name="etm_background_jobs">Foninės užduotys</string>
     <string name="etm_background_jobs_cancel_all">Atšaukti visas užduotis</string>
@@ -434,10 +437,12 @@
     <string name="file_already_exists">Failo pavadinimas jau yra</string>
     <string name="file_delete">Ištrinti</string>
     <string name="file_detail_activity_error">Klaida gaunant failo veiklą</string>
-    <string name="file_detail_share_already_active">Negalite sukurti bendrinimo, šis naudotojas jau bendrina.</string>
+    <string name="file_detail_share_already_active">Negalite sukurti bendrinimo, šis vartotojas jau bendrina.</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Nėra programėlės, kuria būtų galima pasirinkti kontaktus</string>
     <string name="file_details_no_content">Nepavyko įkelti išsamesnės informacijos</string>
     <string name="file_icon">Failas</string>
+    <string name="file_info_governance_section_title">Valdysena</string>
+    <string name="file_info_image_details_section_title">Paveikslo išsamesnė informacija</string>
     <string name="file_keep">Palikti</string>
     <string name="file_list_empty">Įkelkite tam tikrą turinį (medžiagą) arba sinchronizuokite su savo įrenginiais.</string>
     <string name="file_list_empty_favorite_headline">Kol kas nėra mėgstamų</string>
@@ -451,7 +456,6 @@
     <string name="file_list_empty_on_device">Čia bus rodomi parsiųsti failai ir aplankai.</string>
     <string name="file_list_empty_recent_files_description">Čia bus rodomi neseniai modifikuoti failai ir aplankai.</string>
     <string name="file_list_empty_recent_files_headline">Nėra jokių paskiausiai modifikuotų failų</string>
-    <string name="file_list_empty_recently_modified">Nerasta jokių per paskutines 7 dienas modifikuotų failų.</string>
     <string name="file_list_empty_search">Gal tai yra kitame aplanke?</string>
     <string name="file_list_empty_shared">Čia bus rodomi bendrinami failai ir aplankai.</string>
     <string name="file_list_empty_shared_headline">Kol kas nieko nėra bendrinama</string>
@@ -464,6 +468,7 @@
     <string name="file_list_live">GYVAI</string>
     <string name="file_list_loading">Įkeliama…</string>
     <string name="file_list_no_app_for_file_type">Nėra šios programos failo tipui tvarkyti.</string>
+    <string name="file_list_out_of_memory_description">Nepavyko įkelti turinio</string>
     <string name="file_list_seconds_ago">prieš keletą sekundžių</string>
     <string name="file_management_permission_optional">Saugyklos leidimai</string>
     <string name="file_management_permission_optional_text">%1$s geriausiai veikia, kai yra suteikti leidimai prieigai prie saugyklos. Jūs galite pasirinkti pilną prieigą prie visų failų arba tik skaitymo prieigą prie nuotraukų ir vaizdo įrašų.</string>
@@ -472,7 +477,7 @@
     <string name="file_migration_cleaning">Išvaloma…</string>
     <string name="file_migration_dialog_title">Atnaujinamas duomenų saugyklos aplankas</string>
     <string name="file_migration_directory_already_exists">Duomenų aplankas jau yra. Pasirinkite vieną iš šių:</string>
-    <string name="file_migration_failed_dir_already_exists">Nextcloud aplankas jau yra</string>
+    <string name="file_migration_failed_dir_already_exists">„Nextcloud“ aplankas jau yra</string>
     <string name="file_migration_failed_not_enough_space">Reikia daugiau vietos</string>
     <string name="file_migration_failed_not_readable">Nepavyko perskaityti šaltinio failo</string>
     <string name="file_migration_failed_not_writable">Nepavyko rašyti į paskirties failą</string>
@@ -508,6 +513,7 @@
     <string name="filedetails_download">Atsisiųsti</string>
     <string name="filedetails_export">Eksportuoti</string>
     <string name="filedetails_renamed_in_upload_msg">Failas pervadintas kaip %1$s įkėlimo metu</string>
+    <string name="filedetails_sync_all_files">Sinchronizuoti viską</string>
     <string name="filedetails_sync_file">Sinchronizuoti</string>
     <string name="filedisplay_no_file_selected">Neįkeltas joks failas</string>
     <string name="filename_empty">Failo pavadinimas negali būti tuščias</string>
@@ -545,6 +551,11 @@
     <string name="foreign_files_remote_text">Nuotolinis: %1$s</string>
     <string name="forward">Persiųsti</string>
     <string name="fourHours">4 valandos</string>
+    <string name="governance_file_retention_label">Failų saugojimas</string>
+    <string name="governance_legal_hold_label">Teisinis informacijos išsaugojimas</string>
+    <string name="governance_no_label">Nėra</string>
+    <string name="governance_permission_denied">Neturite teisės keisti šios etiketės.</string>
+    <string name="governance_sensitivity_label">Jautrumo žyma</string>
     <string name="gplay_restriction">„Google“ apribojo APK/AAB failų atsisiuntimą!</string>
     <string name="grid_file_features_live_photo_content_description">Ši piktograma rodo tiesioginės nuotraukos prieinamumą</string>
     <string name="hidden_file_name_warning">Pasirinktas pavadinimo tipas sukurs paslėptą failą</string>
@@ -638,6 +649,7 @@
     <string name="menu_item_sort_by_size_biggest_first">Didžiausi pirma</string>
     <string name="menu_item_sort_by_size_smallest_first">Mažiausi pirma</string>
     <string name="more">Daugiau</string>
+    <string name="more_documents">Daugiau dokumentų</string>
     <string name="move_file_error">Klaida perkeliant failą ar aplanką</string>
     <string name="move_file_invalid_into_descendent">Neįmanoma perkelti aplanko į poaplankį</string>
     <string name="move_file_invalid_overwrite">Failas jau yra paskirties aplanke</string>
@@ -784,13 +796,14 @@
     <string name="prefs_recommend">Rekomenduoti draugui</string>
     <string name="prefs_remove_e2e">Pašalinkite šifravimą vietoje</string>
     <string name="prefs_remove_e2e_keys_and_files">Pašalinti užšifruotus failus ir raktus</string>
+    <string name="prefs_renew_e2e_certificate">Atnaujinti šifravimo sertifikatą</string>
     <string name="prefs_setup_e2e">Nustatyti ištisinį šifravimą</string>
     <string name="prefs_show_ecosystem_apps">Rodyti programėllių perjungiklį</string>
     <string name="prefs_show_ecosystem_apps_summary">„Nextcloud“ programėlės pasiūlymai naršymo antraštėje</string>
     <string name="prefs_show_hidden_files">Rodyti paslėptus failus</string>
     <string name="prefs_sourcecode">Gauti pirminį kodą</string>
     <string name="prefs_sycned_folders_summary">Tvarkykite automatinio įkėlimo aplankus</string>
-    <string name="prefs_synced_folders_local_path_title">Aplankas vietinis</string>
+    <string name="prefs_synced_folders_local_path_title">Vietinis aplankas</string>
     <string name="prefs_synced_folders_remote_path_title">Nuotolinis aplankas</string>
     <string name="prefs_theme_title">Apipavidalinimas</string>
     <string name="prefs_two_way_sync_interval">Intervalas</string>
@@ -804,7 +817,7 @@
     <string name="preview_image_error_no_local_file">Nėra vietinio failo peržiūrai</string>
     <string name="preview_image_error_unknown_format">Nepavyko parodyti paveikslo</string>
     <string name="preview_image_file_is_not_downloaded">Failas nėra atsisiųstas</string>
-    <string name="preview_media_unhandled_http_code_message">Failas šiuo metu užrakintas kito naudotojo arba proceso, todėl jo negalima ištrinti. Bandykite dar kartą vėliau.</string>
+    <string name="preview_media_unhandled_http_code_message">Failas šiuo metu užrakintas kito vartotojo arba proceso, todėl jo negalima ištrinti. Bandykite dar kartą vėliau.</string>
     <string name="preview_sorry">Atsiprašome</string>
     <string name="preview_text_string_fragment_open_rich_text_editor_error_message">Nepavyko atverti teksto redaktoriaus</string>
     <string name="privacy">Privatumas</string>
@@ -834,6 +847,12 @@
     <string name="rename_dialog_title">Įveskite naują pavadinimą</string>
     <string name="rename_local_fail_msg">Nepavyko pervadinti vietinės kopijos, pabandykite kitą pavadinimą</string>
     <string name="rename_server_fail_msg">Pervadinimas neįmanomas, pavadinimas jau užimtas</string>
+    <string name="renew_e2e_certificate_dialog_message">Tai atnaujins jūsų ištisinio šifravimo sertifikatą. Esami raktai ir užšifruoti failai liks nepakeisti. Tęsti?</string>
+    <string name="renew_e2e_certificate_error">Nepavyko atnaujinti šifravimo sertifikato</string>
+    <string name="renew_e2e_certificate_private_key_missing">Šifravimo privatusis raktas nerastas</string>
+    <string name="renew_e2e_certificate_success">Šifravimo sertifikatas atnaujintas</string>
+    <string name="renew_e2e_certificate_summary">Atnaujinkite ištisinio šifravimo sertifikatą, išlaikydami turimus raktus</string>
+    <string name="renew_e2e_certificate_valid_until">Galioja iki %1$s. Bakstelėkite, kad pratęstumėte ir išsaugotumėte turimus raktus.</string>
     <string name="request_account_deletion">Užklausti paskyros ištrynimo</string>
     <string name="request_account_deletion_button">Prašyti ištrinti</string>
     <string name="request_account_deletion_details">Prašyti paslaugų teikėjo visam laikui ištrinti paskyrą</string>
@@ -870,7 +889,6 @@
     <string name="send">Siųsti</string>
     <string name="send_copy_to">Siųsti kopiją į</string>
     <string name="send_share">Siųsti pasidalinimą</string>
-    <string name="sendbutton_description">Siuntimo mygtuko priktograma</string>
     <string name="server_not_reachable">Nepavyko įkelti turinio</string>
     <string name="server_not_reachable_content">Įrenginys greičiausiai neprijungtas prie interneto</string>
     <string name="set_as">Nustatyti kaip</string>
@@ -895,8 +913,8 @@
     <string name="share_file">Bendrinti %1$s</string>
     <string name="share_group_clarification">%1$s (grupė)</string>
     <string name="share_internal_link">Bendrinkite vidinę nuorodą</string>
-    <string name="share_internal_link_to_file_text">Vidinė viešinio nuoroda veikia tik tiems naudotojams, kurie turi prieigą prie šio failo</string>
-    <string name="share_internal_link_to_folder_text">Vidinė viešinio nuoroda veikia tik tiems naudotojams, kurie turi prieigą prie šio aplanko</string>
+    <string name="share_internal_link_to_file_text">Vidinė bendrinimo nuoroda veikia tik tiems vartotojams, kurie turi prieigą prie šio failo</string>
+    <string name="share_internal_link_to_folder_text">Vidinė bendrinimo nuoroda veikia tik tiems vartotojams, kurie turi prieigą prie šio aplanko</string>
     <string name="share_known_remote_on_clarification"> %1$s</string>
     <string name="share_link">Bendrinimo nuoroda</string>
     <string name="share_link_empty_password">Privalote įvesti slaptažodį</string>
@@ -912,14 +930,13 @@
     <string name="share_option_required">Prieš tęsdami pasirinkite bent vieną bendrinimo parinktį.</string>
     <string name="share_permission_can_edit">Galima redaguoti</string>
     <string name="share_permission_file_request">Užklausa dėl failo</string>
-    <string name="share_permission_secure_file_drop">Saugus failų įkėlimas</string>
     <string name="share_permission_view_only">Tik peržiūrėti</string>
     <string name="share_permissions">Bendrinti leidimus</string>
     <string name="share_re_share_permission">Bendrinti</string>
     <string name="share_read_permission">Skaityti</string>
     <string name="share_remote_clarification">%1$s (nuotolinis)</string>
     <string name="share_room_clarification">%1$s (pokalbis)</string>
-    <string name="share_search">Vardas, „Federated Cloud“ ID arba el. pašto adresas…</string>
+    <string name="share_search">Vardas, federacinės debesijos ID arba el. pašto adresas…</string>
     <string name="share_search_internal">Pridėkite vartotojų ir komandų</string>
     <string name="share_send_new_email">Siųsti naują elektroninį laišką</string>
     <string name="share_send_note">Pastaba gavėjui</string>
@@ -928,7 +945,7 @@
     <string name="share_via_link_section_title">Bendrinimo nuoroda</string>
     <string name="share_via_link_send_link_label">Siųsti nuorodą</string>
     <string name="share_via_link_unset_password">Nenustatyta</string>
-    <string name="shared_avatar_desc">Bendrinamo naudotojo avataras</string>
+    <string name="shared_avatar_desc">Bendrinamo vartotojo avataras</string>
     <string name="shared_icon_share">bendrinti</string>
     <string name="shared_icon_shared">bendrinama</string>
     <string name="shared_icon_shared_via_link">bendrinama per nuorodą</string>
@@ -941,7 +958,7 @@
     <string name="show_video">Rodyti vaizdo įrašus</string>
     <string name="sign_tos_failed">Prašome rankiniu būdu patikrinti paslaugų teikimo sąlygas!</string>
     <string name="signup_with_provider">Registruotis su tiekėju</string>
-    <string name="single_sign_on_request_token" formatted="true">Leisti %1$s gauti prieigą prie jūsų Nextcloud paskyros %2$s?</string>
+    <string name="single_sign_on_request_token" formatted="true">Leisti %1$s gauti prieigą prie jūsų „Nextcloud“ paskyros %2$s?</string>
     <string name="sort_by">Rikiuoti pagal</string>
     <string name="sort_favorites_first">Pirmiausia rūšiuoti mėgstamiausius</string>
     <string name="sort_folders_before_files">Rūšiuoti aplankus prieš failus</string>
@@ -964,12 +981,12 @@
     <string name="ssl_validator_label_validity_to">Iki:</string>
     <string name="ssl_validator_no_info_about_error">- Nėra informacijos apie klaidą</string>
     <string name="ssl_validator_not_saved">Nepavyko sukurti failo</string>
-    <string name="ssl_validator_null_cert">Liudijimas negali būti parodytas.</string>
-    <string name="ssl_validator_question">Ar vis tiek norite pasitikėti šiuo liudijimu?</string>
-    <string name="ssl_validator_reason_cert_expired">- Serverio liudijimo galiojimo laikas pasibaigęs</string>
-    <string name="ssl_validator_reason_cert_not_trusted">- Nepatikimas serverio liudijimas</string>
-    <string name="ssl_validator_reason_cert_not_yet_valid">- Serverio liudijimas yra pernelyg naujas</string>
-    <string name="ssl_validator_reason_hostname_not_verified">- URL neatitinka adreso, kuris yra nurodytas liudijime</string>
+    <string name="ssl_validator_null_cert">Sertifikatas negali būti parodytas.</string>
+    <string name="ssl_validator_question">Ar vis tiek norite pasitikėti šiuo sertifikatu?</string>
+    <string name="ssl_validator_reason_cert_expired">- Serverio sertifikato galiojimo laikas pasibaigęs</string>
+    <string name="ssl_validator_reason_cert_not_trusted">- Nepatikimas serverio sertifikatas</string>
+    <string name="ssl_validator_reason_cert_not_yet_valid">- Serverio sertifikato galiojimo datos yra ateityje</string>
+    <string name="ssl_validator_reason_hostname_not_verified">- URL neatitinka adreso, kuris yra nurodytas sertifikate</string>
     <string name="status_message">Būsenos pranešimas</string>
     <string name="storage_camera">Kamera</string>
     <string name="storage_choose_location">Pasirinkti saugyklos vietą</string>
@@ -986,8 +1003,8 @@
     <string name="storage_permission_dont_ask">Neklausk</string>
     <string name="storage_permission_media_read_only">Medija tik skaitymui</string>
     <string name="storage_pictures">Paveikslėliai</string>
-    <string name="store_full_desc">Nuolat talpinama produktyvumo platforma, leidžianti jums viską kontroliuoti.\n\nFunkcijos:\n* Paprasta, moderni sąsaja, pritaikyta prie jūsų serverio temos\n* Failų įkėlimas į jūsų „Nextcloud“ serverį\n* Bendrinimas su kitais\n* Mėgstamiausių failų ir aplankų sinchronizavimas\n* Ieškoti visuose serverio aplankuose\n* Automatinis jūsų įrenginiu padarytų nuotraukų ir vaizdo įrašų įkėlimas\n* Gaukite naujausią informaciją gavę pranešimus\n* Kelių paskyrų palaikymas\n* Saugi prieiga prie duomenų naudojant piršto atspaudą arba PIN kodą\n* Integracija su „DAVx⁵“ (anksčiau žinomu kaip „DAVdroid“), kad būtų lengva nustatyti kalendoriaus ir kontaktų sinchronizavimą\n\nPraneškite apie visas problemas adresu https://github.com/nextcloud/android/issues ir aptarkite šią programėlę adresu https://help.nextcloud.com/c/clients/android\n\nEsate naujokas „Nextcloud“? „Nextcloud“ yra privatus failų sinchronizavimo, bendrinimo ir komunikacijos serveris. Tai nemokama programinė įranga, kurią galite talpinti patys arba sumokėti įmonei, kad tai padarytų už jus. Tokiu būdu jūs kontroliuojate savo nuotraukas, kalendorių ir kontaktų duomenis, dokumentus ir visa kita.\n\nPeržiūrėkite „Nextcloud“ adresu https://nextcloud.com</string>
-    <string name="store_full_dev_desc">Savarankiška platforma.\nTai yra oficiali vystoma versija, turinti neišbandytų funkcijų, kurios gali sukelti nestabilumą ar duomenų praradimą. Programėlė skirta vartotojams, norintiems išbandyti naujausią versiją ir pranešti apie aptiktas klaidas ar neatitiktis. Nenaudokite jo produktyviam darbui!\n\n Tiek oficialią „dev“ versiją, tiek įprastinę versija „F-droid“ galima įdiegti tuo pačiu metu.</string>
+    <string name="store_full_desc">Savarankiškai talpinama produktyvumo platforma, leidžianti jums viską kontroliuoti.\n\nFunkcijos:\n* Paprasta, moderni sąsaja, pritaikyta prie jūsų serverio temos\n* Failų įkėlimas į jūsų „Nextcloud“ serverį\n* Bendrinimas su kitais\n* Mėgstamiausių failų ir aplankų sinchronizavimas\n* Ieškoti visuose serverio aplankuose\n* Automatinis jūsų įrenginiu padarytų nuotraukų ir vaizdo įrašų įkėlimas\n* Gaukite naujausią informaciją gavę pranešimus\n* Kelių paskyrų palaikymas\n* Saugi prieiga prie duomenų naudojant piršto atspaudą arba PIN kodą\n* Integracija su „DAVx⁵“ (anksčiau žinomu kaip „DAVdroid“), kad būtų lengva nustatyti kalendoriaus ir kontaktų sinchronizavimą\n\nPraneškite apie visas problemas adresu https://github.com/nextcloud/android/issues ir aptarkite šią programėlę adresu https://help.nextcloud.com/c/clients/android\n\nEsate naujokas „Nextcloud“? „Nextcloud“ yra privatus failų sinchronizavimo, bendrinimo ir komunikacijos serveris. Tai nemokama programinė įranga, kurią galite talpinti patys arba sumokėti įmonei, kad tai padarytų už jus. Tokiu būdu jūs kontroliuojate savo nuotraukas, kalendorių ir kontaktų duomenis, dokumentus ir visa kita.\n\nPeržiūrėkite „Nextcloud“ adresu https://nextcloud.com</string>
+    <string name="store_full_dev_desc">Savarankiškai taplinama produktyvumo platforma, leidžianti jums išlaikyti visą kontrolę.\nTai yra oficiali vystoma versija, turinti neišbandytų funkcijų, kurios gali sukelti nestabilumą ar duomenų praradimą. Programėlė skirta vartotojams, norintiems išbandyti naujausią versiją ir pranešti apie aptiktas klaidas ar neatitiktis. Nenaudokite jo produktyviam darbui!\n\n Tiek oficialią „dev“ versiją, tiek įprastinę versija „F-droid“ galima įdiegti tuo pačiu metu.</string>
     <string name="store_short_desc">Savarankiškai talpinama produktyvumo platforma, kurioje galite kontroliuoti savo veiklą</string>
     <string name="store_short_dev_desc">Savarankiškai talpinama produktyvumo platforma, kurioje galite kontroliuoti savo darbą (dev versija)</string>
     <string name="stream">Transliuoti naudojant…</string>
@@ -1003,6 +1020,8 @@
     <string name="subtitle_videos_only">Tik vaizdo įrašai</string>
     <string name="suggest">Siūlyti</string>
     <string name="sync">Sinchronizuoti</string>
+    <string name="sync_all_action_dialog_description">Bus atsisiųsti visi esantys failai ir aplankai. Tam gali prireikti daug vietos saugykloje ir tai gali užtrukti, priklausomai nuo jūsų ryšio.</string>
+    <string name="sync_all_action_dialog_title">Sinchronizuoti visą aplanką?</string>
     <string name="sync_anyway">Vis tiek sinchronizuoti</string>
     <string name="sync_conflict_notification_action_title">Išspręsti konfliktus</string>
     <string name="sync_conflict_notification_description">Aptikti įkėlimo nesuderinamumai. Atidarykite įkėlimus, kad juos išspręstumėte.</string>
@@ -1051,7 +1070,6 @@
     <string name="translation_screen_start_to_translate_task">Paspauskite mygtuką, kad išverstumėte</string>
     <string name="translation_screen_task_processing">Vertimas trunka ilgiau nei tikėtasi.</string>
     <string name="translation_screen_translating">Verčiama...</string>
-    <string name="trashbin_activity_title">Ištrinti failai</string>
     <string name="trashbin_empty_headline">Ištrintų failų nėra</string>
     <string name="trashbin_empty_message">Čia galėsite atkurti ištrintus failus.</string>
     <string name="trashbin_file_not_deleted">Nepavyko ištrinti failo %1$s!</string>
@@ -1068,6 +1086,7 @@
     <string name="unified_search_fragment_contact_not_found">Kontaktas nerastas, visada galite sinchronizuoti, kad atnaujintumėte. Peradresuojama į žiniatinklį…</string>
     <string name="unified_search_fragment_permission_needed">Norint atidaryti paieškos rezultatus, reikalingi leidimai, kitaip jie bus nukreipti į žiniatinklį…</string>
     <string name="unified_search_fragment_search_in_this_folder">Šiame aplanke</string>
+    <string name="unified_search_fragment_search_takes_long">Paieška užtrunka ilgiau nei įprastai. Rezultatai pasirodys, kai tik serveris atsakys.</string>
     <string name="unknown">Nežinoma</string>
     <string name="unlock_file">Atrakinti failą</string>
     <string name="unread_comments">Yra neskaitytų komentarų</string>
@@ -1081,8 +1100,8 @@
     <string name="untrusted_domain">Prieiga per nepatikimą domeną. Norėdami gauti daugiau informacijos, žiūrėkite dokumentaciją.</string>
     <string name="update_link_file_error">Bandant atnaujinti bendrinimą įvyko klaida.</string>
     <string name="update_link_file_no_exist">Nepavyko atnaujinti. Patikrinkite, ar failas egzistuoja.</string>
-    <string name="update_link_forbidden_permissions">atnaujinti šį viešinį</string>
-    <string name="updating_share_failed">Viešinio atnaujinimas nepavyko</string>
+    <string name="update_link_forbidden_permissions">atnaujinti šį bendrinimą</string>
+    <string name="updating_share_failed">Bendrinimo atnaujinimas nepavyko</string>
     <string name="upload_action_cancelled_clear">Išvalyti atšauktus įkėlimus</string>
     <string name="upload_action_cancelled_resume">Pratęsti atšauktus įkėlimus</string>
     <string name="upload_action_failed_clear">Išvalyti nepavykusius įkėlimus</string>
@@ -1127,7 +1146,6 @@
     <string name="upload_query_move_foreign_files">Nepakankamas vietos kiekis neleidžia kopijuoti pasirinktų failų į %1$s aplanką. Ar norėtumėte vietoje to juos perkelti?</string>
     <string name="upload_quota_exceeded">Viršyta saugyklos kvota</string>
     <string name="upload_scan_doc_upload">Nuskaityti dokumentą iš fotoaparato</string>
-    <string name="upload_sync_conflict">Sinchronizavimo konfliktas, išspręskite rankiniu būdu</string>
     <string name="upload_sync_conflict_check">Gali būti, kad dėl paskutinio įkėlimo yra konfliktas. Palieskite, kad patikrintumėte.</string>
     <string name="upload_sync_conflict_check_error">Nepavyko patikrinti, ar nėra įkėlimo konfliktų. Bandykite dar kartą.</string>
     <string name="upload_sync_conflict_checking">Tikrinama, ar nėra įkėlimo konfliktų…</string>
@@ -1178,8 +1196,7 @@
     <string name="uploads_view_upload_status_failed_folder_error">Aplanko klaida</string>
     <string name="uploads_view_upload_status_failed_localfile_error">Vietinis failas nerastas</string>
     <string name="uploads_view_upload_status_failed_permission_error">Leidimo klaida</string>
-    <string name="uploads_view_upload_status_failed_ssl_certificate_not_trusted">Nepatikimas serverio liudijimas</string>
-    <string name="uploads_view_upload_status_fetching_server_version">Gaunama serverio versija…</string>
+    <string name="uploads_view_upload_status_failed_ssl_certificate_not_trusted">Nepatikimas serverio sertifikatas</string>
     <string name="uploads_view_upload_status_service_interrupted">Programėlės veikimas nutrauktas</string>
     <string name="uploads_view_upload_status_skip">Praleistas</string>
     <string name="uploads_view_upload_status_skip_reason">Failas tokiu pačiu pavadinimu jau yra.</string>
@@ -1190,7 +1207,7 @@
     <string name="uploads_view_upload_status_waiting_exit_power_save_mode">Laukiama išeiti iš energijos taupymo režimo</string>
     <string name="uploads_view_upload_status_waiting_for_charging">Laukiama mokėjimo </string>
     <string name="uploads_view_upload_status_waiting_for_wifi">Laukiama neriboto Wi-Fi</string>
-    <string name="user_icon">Naudotojas</string>
+    <string name="user_icon">Vartotojas</string>
     <string name="user_info_address">Adresas</string>
     <string name="user_info_email">El. paštas</string>
     <string name="user_info_groups">Grupės</string>
@@ -1199,15 +1216,17 @@
     <string name="user_info_twitter">Twitter</string>
     <string name="user_info_website">Svetainė</string>
     <string name="user_information_retrieval_error">Klaida gaunant vartotojo informaciją</string>
+    <string name="user_information_retrieval_error_message">Prašome dar kartą patikrinti interneto ryšį arba serverio būseną.</string>
     <string name="userinfo_no_info_headline">Asmeninės informacijos nėra</string>
     <string name="userinfo_no_info_text">Pridėkite vardą, nuotrauką ir kontaktinę informaciją savo profilio puslapyje.</string>
-    <string name="username">Naudotojo vardas</string>
+    <string name="username">Vartotojo vardas</string>
     <string name="version_dev_download">Atsisiųsti</string>
     <string name="video_overlay_icon">Vaizdo įrašo persidengimo piktograma</string>
     <string name="wait_a_moment">Palaukite…</string>
     <string name="wait_checking_credentials">Dekriptuojami prisijungimo duomenys</string>
     <string name="wait_for_tmp_copy_from_private_storage">Kopijuojamas failas iš privačios saugyklos</string>
     <string name="warn_rename_extension">Pakeitus plėtinį, šis failas gali būti atidarytas kitoje programėlėje</string>
+    <string name="webview_not_available">Šiame įrenginyje „Android System WebView“ trūksta arba ji išjungta</string>
     <string name="what_s_new_image">Koks naujas paveikslėlis</string>
     <string name="whats_new_skip">Praleisti</string>
     <string name="whats_new_title">Naujas %1$s</string>

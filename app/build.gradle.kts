@@ -1,6 +1,7 @@
 /*
  * Nextcloud - Android Client
  *
+ * SPDX-FileCopyrightText: 2026 Alper Ozturk <alper.ozturk@nextcloud.com>
  * SPDX-FileCopyrightText: 2025 Jimly Asshiddiqy <jimly.asshiddiqy@accenture.com>
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
@@ -43,26 +44,35 @@ configurations.configureEach {
     exclude(group = "org.jetbrains", module = "annotations-java5")
 
     resolutionStrategy {
-        force(libs.objenesis)
-
         eachDependency {
-            if (requested.group == "org.checkerframework" && requested.name != "checker-compat-qual") {
-                useVersion(libs.versions.checker.get())
-                because("https://github.com/google/ExoPlayer/issues/10007")
-            } else if (requested.group == "org.jacoco") {
-                useVersion(libs.versions.jacoco.get())
-            } else if (requested.group == "commons-logging" && requested.name == "commons-logging") {
-                useTarget(libs.slfj)
+            when (requested.group) {
+                "org.checkerframework" if requested.name != "checker-compat-qual" -> {
+                    useVersion(libs.versions.checker.get())
+                    because("https://github.com/google/ExoPlayer/issues/10007")
+                }
+                "org.jacoco" -> {
+                    useVersion(libs.versions.jacoco.get())
+                }
+                "commons-logging" if requested.name == "commons-logging" -> {
+                    useTarget(libs.slfj)
+                }
+                "org.hamcrest" -> {
+                    useVersion("2.2")
+                    because(
+                        "Align hamcrest on compile and runtime. 1.3 (via junit) exposes fixed-arity " +
+                            "anyOf/allOf overloads that 2.2 (via androidx.test) removed, causing NoSuchMethodError."
+                    )
+                }
             }
         }
     }
 }
 
 // semantic versioning for version code
-val versionMajor = 33
-val versionMinor = 2
+val versionMajor = 35
+val versionMinor = 0
 val versionPatch = 0
-val versionBuild = 0 // 0-50=Alpha / 51-98=RC / 90-99=stable
+val versionBuild = 50 // 0-50=Alpha / 51-98=RC / 90-99=stable
 
 val ndkEnv = buildMap {
     file("${project.rootDir}/ndk.env").readLines().forEach {
@@ -105,7 +115,7 @@ android {
         applicationId = "com.nextcloud.client"
         minSdk = 28
         targetSdk = 36
-        compileSdk = 36
+        compileSdk = 37
 
         ndk {
             abiFilters += listOf("arm64-v8a", "x86_64")
@@ -266,6 +276,7 @@ spotbugs {
 }
 
 tasks.register<Checkstyle>("checkstyle") {
+    description = "Runs Checkstyle static analysis on the Java sources to enforce the project's coding style."
     configFile = file("${rootProject.projectDir}/checkstyle.xml")
     setConfigProperties(
         "checkstyleSuppressionsPath" to file("${rootProject.rootDir}/suppressions.xml").absolutePath
@@ -277,6 +288,7 @@ tasks.register<Checkstyle>("checkstyle") {
 }
 
 tasks.register<Pmd>("pmd") {
+    description = "Runs PMD static analysis on the Java sources to detect common programming flaws and bad practices."
     ruleSetFiles = files("${rootProject.rootDir}/ruleset.xml")
     ignoreFailures = true // should continue checking
     ruleSets = emptyList()
@@ -332,6 +344,17 @@ tasks.named("check").configure {
     dependsOn("checkstyle", "spotbugsGplayDebug", "pmd", "lint", "spotlessKotlinCheck", "detekt")
 }
 
+val kspConfiguration = "ksp"
+val kspAndroidTestConfiguration = "kspAndroidTest"
+val gplayImplementationConfiguration = "gplayImplementation"
+val huaweiImplementationConfiguration = "huaweiImplementation"
+val qaImplementationConfiguration = "qaImplementation"
+val appScanConfigurations = listOf(
+    gplayImplementationConfiguration,
+    huaweiImplementationConfiguration,
+    qaImplementationConfiguration
+)
+
 dependencies {
     // region Nextcloud library
     implementation(libs.android.library) {
@@ -376,6 +399,7 @@ dependencies {
 
     // region UI
     implementation(libs.bundles.ui)
+    implementation(libs.browser)
     // endregion
 
     // region Worker
@@ -394,9 +418,12 @@ dependencies {
     androidTestImplementation(libs.rules)
     androidTestImplementation(libs.runner)
     androidTestUtil(libs.orchestrator)
+    androidTestImplementation(libs.test.core)
     androidTestImplementation(libs.core.ktx)
     androidTestImplementation(libs.core.testing)
     // endregion
+
+    testImplementation(libs.kotlinx.coroutines.test)
 
     // region other libraries
     compileOnly(libs.org.jbundle.util.osgi.wrapped.org.apache.http.client)
@@ -425,10 +452,10 @@ dependencies {
     // endregion
 
     // region AppScan, document scanner not available on FDroid (generic) due to OpenCV binaries
-    // To enable the feature for another variant, add it here.
-    "gplayImplementation"(project(":appscan"))
-    "huaweiImplementation"(project(":appscan"))
-    "qaImplementation"(project(":appscan"))
+    // To enable the feature for another variant, add its "<variant>Implementation" here.
+    appScanConfigurations.forEach { configuration ->
+        add(configuration, project(":appscan"))
+    }
     // endregion
 
     // region SpotBugs
@@ -440,14 +467,15 @@ dependencies {
     implementation(libs.dagger)
     implementation(libs.dagger.android)
     implementation(libs.dagger.android.support)
-    ksp(libs.dagger.compiler)
     ksp(libs.dagger.processor)
-    kspAndroidTest(libs.dagger.compiler)
+    listOf(kspConfiguration, kspAndroidTestConfiguration).forEach { configuration ->
+        add(configuration, libs.dagger.compiler)
+    }
     // endregion
 
     // region Crypto
     implementation(libs.conscrypt.android)
-    implementation(libs.openssl)
+    implementation(libs.android.openssl)
     // endregion
 
     // region Library
@@ -472,7 +500,7 @@ dependencies {
 
     // region iCal4j
     implementation(libs.ical4j) {
-        listOf("org.apache.commons", "commons-logging").forEach { groupName -> exclude(group = groupName) }
+        exclude(group = "commons-logging")
     }
     // endregion
 
@@ -505,7 +533,7 @@ dependencies {
     // endregion
 
     // region Google Play dependencies, upon each update first test: new registration, receive push
-    "gplayImplementation"(libs.bundles.gplay)
+    add(gplayImplementationConfiguration, libs.bundles.gplay)
     // endregion
 
     // region common

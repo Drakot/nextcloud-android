@@ -68,7 +68,7 @@ import com.owncloud.android.ui.activity.FileDisplayActivity
 import com.owncloud.android.ui.activity.FolderPickerActivity
 import com.owncloud.android.ui.activity.OnEnforceableRefreshListener
 import com.owncloud.android.ui.activity.UploadFilesActivity
-import com.owncloud.android.ui.adapter.LocalFileListAdapter
+import com.owncloud.android.ui.adapter.localFileList.LocalFileListAdapter
 import com.owncloud.android.ui.adapter.OCFileListAdapter
 import com.owncloud.android.ui.events.SearchEvent
 import com.owncloud.android.utils.theme.ViewThemeUtils
@@ -724,6 +724,15 @@ open class ExtendedListFragment :
                     R.string.file_list_error_headline,
                     R.string.file_list_error_description,
                     R.drawable.ic_no_internet,
+                    false
+                )
+            }
+
+            EmptyListState.OUT_OF_MEMORY -> {
+                setMessageForEmptyList(
+                    R.string.common_error_out_memory,
+                    R.string.file_list_out_of_memory_description,
+                    R.drawable.ic_list_empty_error,
                     false
                 )
             }

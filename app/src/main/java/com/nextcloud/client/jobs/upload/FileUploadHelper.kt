@@ -19,13 +19,14 @@ import com.nextcloud.client.database.entity.toOCUpload
 import com.nextcloud.client.database.entity.toUploadEntity
 import com.nextcloud.client.device.BatteryStatus
 import com.nextcloud.client.device.PowerManagementService
+import com.nextcloud.client.di.ApplicationScope
 import com.nextcloud.client.jobs.BackgroundJobManager
 import com.nextcloud.client.network.Connectivity
 import com.nextcloud.client.network.ConnectivityService
 import com.nextcloud.client.notifications.AppWideNotificationManager
 import com.nextcloud.utils.extensions.checkWCFRestrictions
+import com.nextcloud.utils.extensions.createOwncloudClient
 import com.nextcloud.utils.extensions.getUploadIds
-import com.nextcloud.utils.extensions.isAnonymous
 import com.nextcloud.utils.extensions.isLastResultConflictError
 import com.nextcloud.utils.extensions.isSame
 import com.owncloud.android.MainApp
@@ -38,7 +39,6 @@ import com.owncloud.android.db.OCUpload
 import com.owncloud.android.db.UploadResult
 import com.owncloud.android.files.services.NameCollisionPolicy
 import com.owncloud.android.lib.common.OwnCloudClient
-import com.owncloud.android.lib.common.OwnCloudClientFactory
 import com.owncloud.android.lib.common.network.OnDatatransferProgressListener
 import com.owncloud.android.lib.common.operations.RemoteOperationResult
 import com.owncloud.android.lib.common.utils.Log_OC
@@ -56,7 +56,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.util.concurrent.Semaphore
+import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
@@ -74,11 +74,15 @@ class FileUploadHelper {
     @Inject
     lateinit var fileStorageManager: FileDataStorageManager
 
-    private val ioScope = CoroutineScope(Dispatchers.IO)
+    @Inject
+    @ApplicationScope
+    lateinit var appScope: CoroutineScope
 
     init {
         MainApp.getAppComponent().inject(this)
     }
+
+    private val uploadActionHandler = UploadListAdapterActionHandler()
 
     companion object {
         private val TAG = FileUploadWorker::class.java.simpleName
@@ -87,13 +91,11 @@ class FileUploadHelper {
 
         val mBoundListeners = HashMap<String, OnDatatransferProgressListener>()
 
-        private var instance: FileUploadHelper? = null
+        private val retryInProgress = AtomicBoolean(false)
 
-        private val retryFailedUploadsSemaphore = Semaphore(1)
+        private val sharedInstance: FileUploadHelper by lazy { FileUploadHelper() }
 
-        fun instance(): FileUploadHelper = instance ?: synchronized(this) {
-            instance ?: FileUploadHelper().also { instance = it }
-        }
+        fun instance(): FileUploadHelper = sharedInstance
 
         fun buildRemoteName(accountName: String, remotePath: String): String = accountName + remotePath
     }
@@ -122,21 +124,26 @@ class FileUploadHelper {
         connectivityService: ConnectivityService,
         accountManager: UserAccountManager,
         powerManagementService: PowerManagementService
-    ): Boolean {
-        if (!retryFailedUploadsSemaphore.tryAcquire()) {
+    ) {
+        if (!retryInProgress.compareAndSet(false, true)) {
             Log_OC.d(TAG, "skipping retryFailedUploads, already running")
-            return true
+            return
         }
 
-        var isUploadStarted = false
         val capability = fileStorageManager.getCapability(accountManager.user)
 
-        try {
-            ioScope.launch {
-                val uploads = getUploadsByStatus(null, UploadStatus.UPLOAD_FAILED, capability)
-                if (uploads.isNotEmpty()) {
-                    isUploadStarted = true
-                }
+        appScope.launch {
+            try {
+                /**
+                 * Rows are marked `UPLOAD_IN_PROGRESS` before upload starts.
+                 * Only `updateDatabaseUploadResult()` writes status.
+                 * If the process dies first, the row remains `UPLOAD_IN_PROGRESS`
+                 * and is treated as a failed upload eligible for retry.
+                 *
+                 * e.g. AutoUploadWorker killed before completed
+                 */
+                val uploads = getUploadsByStatus(null, UploadStatus.UPLOAD_FAILED, capability) +
+                    getUploadsByStatus(null, UploadStatus.UPLOAD_IN_PROGRESS, capability)
 
                 retryUploads(
                     uploadsStorageManager,
@@ -145,12 +152,12 @@ class FileUploadHelper {
                     powerManagementService,
                     uploads
                 )
+            } finally {
+                // Reset only after retry processing has completely finished so the guard covers
+                // coroutine execution, not just its launch. This keeps a single retry running at a time.
+                retryInProgress.set(false)
             }
-        } finally {
-            retryFailedUploadsSemaphore.release()
         }
-
-        return isUploadStarted
     }
 
     suspend fun retryCancelledUploads(
@@ -185,21 +192,17 @@ class FileUploadHelper {
         val batteryStatus = powerManagementService.battery
 
         val uploadsToRetry = mutableListOf<Long>()
-
-        val currentAccount = accountManager.currentAccount
-        val context = MainApp.getAppContext()
-        var ownCloudClient: OwnCloudClient? = null
-        if (!currentAccount.isAnonymous(context)) {
-            ownCloudClient =
-                OwnCloudClientFactory.createOwnCloudClient(accountManager.currentAccount, MainApp.getAppContext())
-        }
-        val uploadActionHandler = UploadListAdapterActionHandler()
+        val client = accountManager.createOwncloudClient()
 
         for (upload in uploads) {
+            if (FileUploadWorker.isUploading(upload.remotePath, upload.accountName)) {
+                continue
+            }
+
             if (upload.isLastResultConflictError()) {
-                ownCloudClient?.let {
+                client?.let {
                     conflictHandlingResult =
-                        uploadActionHandler.handleConflict(upload, ownCloudClient, uploadsStorageManager)
+                        uploadActionHandler.handleConflict(upload, client = it, uploadsStorageManager)
                 }
                 continue
             }
@@ -214,7 +217,7 @@ class FileUploadHelper {
 
             if (uploadResult != UploadResult.UPLOADED) {
                 if (upload.lastResult != uploadResult) {
-                    // Setting Upload status else cancelled uploads will behave wrong, when retrying
+                    // Setting Upload status else canceled uploads will behave wrong, when retrying
                     // Needs to happen first since lastResult wil be overwritten by setter
                     upload.uploadStatus = UploadStatus.UPLOAD_FAILED
 
@@ -286,13 +289,21 @@ class FileUploadHelper {
                 remotePath = remotePaths[index]
             )
             if (entity != null) {
-                val capability = fileStorageManager.getCapability(user)
-                entity.toOCUpload(capability) ?: createOCUpload()
+                reusePendingUpload(entity, user) ?: createOCUpload()
             } else {
                 createOCUpload()
             }
         }
         backgroundJobManager.startFilesUploadJob(user, uploads.getUploadIds(), showSameFileAlreadyExistsNotification)
+    }
+
+    private fun reusePendingUpload(entity: UploadEntity, user: User): OCUpload? {
+        val capability = fileStorageManager.getCapability(user)
+        val upload = entity.toOCUpload(capability) ?: return null
+
+        upload.uploadStatus = UploadStatus.UPLOAD_IN_PROGRESS
+        uploadsStorageManager.updateUpload(upload)
+        return upload
     }
 
     @Suppress("ReturnCount")
@@ -345,7 +356,7 @@ class FileUploadHelper {
         status: UploadStatus,
         onCompleted: () -> Unit = {}
     ) {
-        ioScope.launch {
+        appScope.launch {
             uploadsStorageManager.uploadDao.updateStatus(remotePath, accountName, status.value)
             onCompleted()
         }
@@ -407,7 +418,7 @@ class FileUploadHelper {
 
     private fun checkConnectivity(connectivityService: ConnectivityService): Boolean {
         // check that connection isn't walled off and that the server is reachable
-        return connectivityService.getConnectivity().isConnected && !connectivityService.isInternetWalled()
+        return connectivityService.connectivity.isConnected && !connectivityService.isInternetWalled()
     }
 
     /**
@@ -504,8 +515,7 @@ class FileUploadHelper {
                         )
                     }
                 if (entity != null) {
-                    val capability = fileStorageManager.getCapability(user)
-                    entity.toOCUpload(capability) ?: createOCUpload()
+                    reusePendingUpload(entity, user) ?: createOCUpload()
                 } else {
                     createOCUpload()
                 }
@@ -531,7 +541,7 @@ class FileUploadHelper {
      * @param user Needed for creating client
      */
     fun removeDuplicatedFile(duplicatedFile: OCFile, client: OwnCloudClient, user: User, onCompleted: () -> Unit) {
-        ioScope.launch {
+        appScope.launch {
             val removeFileOperation = RemoveFileOperation(
                 duplicatedFile,
                 false,

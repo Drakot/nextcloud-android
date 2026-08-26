@@ -55,7 +55,6 @@
     <string name="assistant_screen_empty_content_description">Spróbuj wysłać wiadomość, aby rozpocząć rozmowę.</string>
     <string name="assistant_screen_empty_content_title">Cześć! W czym mogę Ci dziś pomóc?</string>
     <string name="assistant_screen_retry_response_generation">Ponów generowanie odpowiedzi</string>
-    <string name="assistant_screen_select_task">Wybierz zadanie</string>
     <string name="assistant_screen_send_message">Wyślij wiadomość</string>
     <string name="assistant_screen_task_bar_open_conversation_list">Otwórz listę rozmowy</string>
     <string name="assistant_screen_task_create_fail_message">Wystąpił błąd podczas tworzenia zadania</string>
@@ -99,7 +98,6 @@
     <string name="auth_ssl_unverified_server_title">Nie udało się zweryfikować tożsamości serwera SSL</string>
     <string name="auth_testing_connection">Testowanie połączenia</string>
     <string name="auth_timeout_title">Serwer zbyt długo nie odpowiadał</string>
-    <string name="auth_trying_to_login">Próba logowania…</string>
     <string name="auth_unauthorized">Zła nazwa użytkownika lub hasło</string>
     <string name="auth_unknown_error_exception_title">Nieznany błąd: %1$s</string>
     <string name="auth_unknown_error_http_title">Wystąpił nieznany błąd HTTP!</string>
@@ -116,7 +114,6 @@
     <string name="auto_upload_background_activity_action">Pozwól działać w tle</string>
     <string name="auto_upload_battery_optimization_reason">Działanie w tle jest ograniczone przez optymalizację baterii.</string>
     <string name="auto_upload_battery_saver_action">Otwórz ustawienia oszczędzania baterii</string>
-    <string name="auto_upload_battery_saver_mode_warning">Automatyczna aktualizacja jest wstrzymana, ponieważ tryb oszczędzania baterii jest włączony.</string>
     <string name="auto_upload_battery_saver_reason">Oszczędzanie baterii jest aktywne i może zatrzymywać wysyłanie.</string>
     <string name="auto_upload_delete_dialog_description">Spowoduje to usunięcie folderu i konfiguracji automatycznego przesyłania. Niezakończone przesyłania zostaną anulowane.</string>
     <string name="auto_upload_delete_dialog_title">Usunąć folder automatycznego przesyłania?</string>
@@ -251,8 +248,10 @@
     <string name="could_not_retrieve_url">Nie można pobrać adresu URL</string>
     <string name="create">Utwórz</string>
     <string name="create_dir_fail_msg">Nie udało się utworzyć katalogu</string>
+    <string name="create_document">Dokument</string>
     <string name="create_end_to_end_encrypted_share">Udostępnianie linkiem</string>
     <string name="create_end_to_end_encrypted_share_title">Udostępnianie linków szyfrowanych end-to-end</string>
+    <string name="create_folder">Katalog</string>
     <string name="create_link">Utwórz link</string>
     <string name="create_new">Nowy</string>
     <string name="create_new_document">Nowy dokument</string>
@@ -260,8 +259,9 @@
     <string name="create_new_folder">Nowy katalog</string>
     <string name="create_new_presentation">Nowa prezentacja</string>
     <string name="create_new_spreadsheet">Nowy arkusz kalkulacyjny</string>
+    <string name="create_presentation">Prezentacja</string>
     <string name="create_rich_workspace">Dodaj opis katalogu</string>
-    <string name="creates_rich_workspace">Dodaj opis katalogu</string>
+    <string name="create_spreadsheet">Arkusz kalkulacyjny</string>
     <string name="credentials_disabled">Poświadczenia wyłączone</string>
     <string name="daily_backup">Codzienna kopia zapasowa</string>
     <string name="data_to_back_up">Dane dla kopii zapasowej</string>
@@ -328,7 +328,6 @@
     <string name="drawer_item_on_device">Na urządzeniu</string>
     <string name="drawer_item_personal_files">Pliki osobiste</string>
     <string name="drawer_item_recent_files">Ostatnie pliki</string>
-    <string name="drawer_item_recently_modified">Ostatnio modyfikowane</string>
     <string name="drawer_item_shared">Udostępnione</string>
     <string name="drawer_item_trashbin">Usunięte pliki</string>
     <string name="drawer_item_uploads_list">Wysłane</string>
@@ -337,7 +336,6 @@
     <string name="drawer_quota">Wykorzystane: %1$s z %2$s</string>
     <string name="drawer_quota_unlimited">Wykorzystane: %1$s</string>
     <string name="drawer_synced_folders">Automatyczne wysyłanie</string>
-    <string name="due_to_too_many_wrong_attempts">%s z powodu zbyt wielu błędnych prób</string>
     <string name="e2e_counter_too_old">Licznik jest za stary</string>
     <string name="e2e_hash_not_found">Nie znaleziono hasza</string>
     <string name="e2e_not_yet_setup">E2E jeszcze nie skonfigurowane</string>
@@ -449,7 +447,6 @@
     <string name="file_list_empty_on_device">Tutaj pojawią się pobrane pliki i katalogi.</string>
     <string name="file_list_empty_recent_files_description">Tutaj pojawią się pliki i katalogi, które ostatnio zmodyfikowałeś.</string>
     <string name="file_list_empty_recent_files_headline">Brak ostatnio zmodyfikowanych plików</string>
-    <string name="file_list_empty_recently_modified">Nie znaleziono żadnych plików modyfikowanych w ciągu ostatnich 7 dni</string>
     <string name="file_list_empty_search">Może jest w innym katalogu?</string>
     <string name="file_list_empty_shared">Tutaj pojawią się pliki i katalogi, które udostępnisz.</string>
     <string name="file_list_empty_shared_headline">Nic nie udostępniasz</string>
@@ -462,6 +459,7 @@
     <string name="file_list_live">NA ŻYWO</string>
     <string name="file_list_loading">Wczytywanie…</string>
     <string name="file_list_no_app_for_file_type">Brak aplikacji dla tego typu plików.</string>
+    <string name="file_list_out_of_memory_description">Nie można załadować zawartości</string>
     <string name="file_list_seconds_ago">przed chwilą</string>
     <string name="file_management_permission_optional">Uprawnienia do pamięci</string>
     <string name="file_management_permission_optional_text">%1$s działa najlepiej z uprawnieniami dostępu do pamięci. Możesz wybrać pełny dostęp do wszystkich plików lub dostęp tylko do odczytu dla zdjęć i filmów.</string>
@@ -543,6 +541,8 @@
     <string name="foreign_files_remote_text">Zdalnie: %1$s</string>
     <string name="forward">Prześlij dalej</string>
     <string name="fourHours">4 godziny</string>
+    <string name="governance_file_retention_label">Przechowywanie pliku</string>
+    <string name="governance_no_label">Brak</string>
     <string name="gplay_restriction">Google ograniczyło możliwość pobierania plików APK/AAB!</string>
     <string name="grid_file_features_live_photo_content_description">Ta ikona wskazuje dostępność zdjęcia na żywo</string>
     <string name="hidden_file_name_warning">Nazwa spowoduje ukrycie pliku</string>
@@ -635,6 +635,7 @@
     <string name="menu_item_sort_by_size_biggest_first">Od największych</string>
     <string name="menu_item_sort_by_size_smallest_first">Od najmniejszych</string>
     <string name="more">Więcej</string>
+    <string name="more_documents">Więcej dokumentów</string>
     <string name="move_file_error">Wystąpił błąd podczas próby przeniesienia tego pliku lub katalogu</string>
     <string name="move_file_invalid_into_descendent">Nie można przenieść katalogu do jednego z jego podkatalogów</string>
     <string name="move_file_invalid_overwrite">Plik już istnieje w katalogu docelowym</string>
@@ -867,7 +868,6 @@
     <string name="send">Wyślij</string>
     <string name="send_copy_to">Wyślij kopię do</string>
     <string name="send_share">Wyślij udostępnienie</string>
-    <string name="sendbutton_description">Ikona przycisku wysyłania</string>
     <string name="server_not_reachable">Nie można załadować zawartości</string>
     <string name="server_not_reachable_content">Urządzenie prawdopodobnie nie jest połączone z Internetem</string>
     <string name="set_as">Ustaw jako</string>
@@ -909,7 +909,6 @@
     <string name="share_option_required">Wybierz co najmniej jedną opcję udostępniania przed kontynuacją.</string>
     <string name="share_permission_can_edit">Może modyfikować</string>
     <string name="share_permission_file_request">Prośba o plik</string>
-    <string name="share_permission_secure_file_drop">Bezpieczne upuszczenie pliku</string>
     <string name="share_permission_view_only">Tylko podgląd</string>
     <string name="share_permissions">Uprawnienia udostępniania</string>
     <string name="share_re_share_permission">Udostępnij</string>
@@ -1048,7 +1047,6 @@
     <string name="translation_screen_start_to_translate_task">Naciśnij przycisk, aby przetłumaczyć</string>
     <string name="translation_screen_task_processing">Tłumaczenie trwa dłużej niż oczekiwano.</string>
     <string name="translation_screen_translating">Tłumaczenie...</string>
-    <string name="trashbin_activity_title">Usunięte pliki</string>
     <string name="trashbin_empty_headline">Brak usuniętych plików</string>
     <string name="trashbin_empty_message">Tutaj będziesz mógł odzyskać usunięte pliki.</string>
     <string name="trashbin_file_not_deleted">Plik %1$s nie może zostać usunięty!</string>
@@ -1124,7 +1122,6 @@
     <string name="upload_query_move_foreign_files">Brak wystarczającego miejsca, aby skopiować wybrane pliki do katalogu %1$s. Czy chcesz je tam przenieść?</string>
     <string name="upload_quota_exceeded">Limit przekroczony</string>
     <string name="upload_scan_doc_upload">Zeskanuj dokument z aparatu</string>
-    <string name="upload_sync_conflict">Konflikt synchronizacji, proszę rozwiązać ręcznie</string>
     <string name="upload_sync_conflict_check">Może występować konflikt z ostatniego przesyłania. Dotknij, aby sprawdzić.</string>
     <string name="upload_sync_conflict_check_error">Nie udało się sprawdzić konfliktów przesyłania. Spróbuj ponownie.</string>
     <string name="upload_sync_conflict_checking">Sprawdzanie konfliktów przesyłania...</string>
@@ -1176,7 +1173,6 @@
     <string name="uploads_view_upload_status_failed_localfile_error">Nie odnaleziono pliku lokalnego</string>
     <string name="uploads_view_upload_status_failed_permission_error">Błąd uprawnień</string>
     <string name="uploads_view_upload_status_failed_ssl_certificate_not_trusted">Certyfikat serwera nie jest zaufany</string>
-    <string name="uploads_view_upload_status_fetching_server_version">Pobieram wersję serwera…</string>
     <string name="uploads_view_upload_status_service_interrupted">Aplikacja została zatrzymana</string>
     <string name="uploads_view_upload_status_skip">Pominięto</string>
     <string name="uploads_view_upload_status_skip_reason">Plik o tej samej nazwie już istnieje.</string>

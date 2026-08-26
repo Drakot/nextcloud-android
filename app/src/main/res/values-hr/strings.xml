@@ -55,7 +55,6 @@
     <string name="assistant_screen_empty_content_description">Pošaljite poruku kako biste započeli razgovor.</string>
     <string name="assistant_screen_empty_content_title">Bok! Kako vam mogu pomoći danas?</string>
     <string name="assistant_screen_retry_response_generation">Pokušaj ponovno generirati odgovor</string>
-    <string name="assistant_screen_select_task">Odaberite zadatak</string>
     <string name="assistant_screen_send_message">Pošalji poruku</string>
     <string name="assistant_screen_task_bar_open_conversation_list">Otvori popis razgovora</string>
     <string name="assistant_screen_task_create_fail_message">Došlo je do pogreške pri stvaranju zadatka</string>
@@ -99,7 +98,6 @@
     <string name="auth_ssl_unverified_server_title">Nije moguće provjeriti identitet SSL poslužitelja</string>
     <string name="auth_testing_connection">Ispitivanje veze</string>
     <string name="auth_timeout_title">Poslužitelj se nije odazvao na vrijeme</string>
-    <string name="auth_trying_to_login">Pokušaj prijave...</string>
     <string name="auth_unauthorized">Pogrešno korisničko ime ili zaporka</string>
     <string name="auth_unknown_error_exception_title">Nepoznata pogreška: %1$s</string>
     <string name="auth_unknown_error_http_title">Došlo je do nepoznate HTTP pogreške!</string>
@@ -113,7 +111,6 @@
     <string name="authenticator_activity_login_error">Došlo je do problema pri obradi zahtjeva za prijavu. Pokušajte ponovno kasnije.</string>
     <string name="authenticator_activity_no_web_browser_found">Nema dostupnog preglednika za otvaranje ove poveznice.</string>
     <string name="authenticator_activity_please_complete_login_process">Dovršite postupak prijave u pregledniku</string>
-    <string name="auto_upload_battery_saver_mode_warning">Automatski prijenos je pauziran jer je uključen štedni način rada baterije.</string>
     <string name="auto_upload_file_behaviour_kept_in_folder">nalazi se u izvornoj mapi jer je samo za čitanje</string>
     <string name="auto_upload_low_battery_warning_info">Slaba baterija, prijenos bi mogao potrajati dulje</string>
     <string name="auto_upload_on_wifi">Otpremite samo putem nemjerene bežične (Wi-Fi) mreže</string>
@@ -245,6 +242,8 @@
     <string name="could_not_retrieve_url">Nije moguće dohvatiti URL</string>
     <string name="create">Stvori</string>
     <string name="create_dir_fail_msg">Nije moguće stvoriti mapu</string>
+    <string name="create_document">Dokument</string>
+    <string name="create_folder">Mapa</string>
     <string name="create_link">Stvori poveznicu</string>
     <string name="create_new">Novo</string>
     <string name="create_new_document">Novi dokument</string>
@@ -252,8 +251,9 @@
     <string name="create_new_folder">Nova mapa</string>
     <string name="create_new_presentation">Nova prezentacija</string>
     <string name="create_new_spreadsheet">Nova proračunska tablica</string>
+    <string name="create_presentation">Prezentacija</string>
     <string name="create_rich_workspace">Dodaj opis mape</string>
-    <string name="creates_rich_workspace">Dodaje opis mape</string>
+    <string name="create_spreadsheet">Proračunska tablica</string>
     <string name="credentials_disabled">Vjerodajnice onemogućene</string>
     <string name="daily_backup">Svakodnevno sigurnosno kopiranje</string>
     <string name="data_to_back_up">Podaci za sigurnosno kopiranje</string>
@@ -320,7 +320,6 @@
     <string name="drawer_item_on_device">Na uređaju</string>
     <string name="drawer_item_personal_files">Osobne datoteke</string>
     <string name="drawer_item_recent_files">Nedavne datoteke</string>
-    <string name="drawer_item_recently_modified">Nedavno izmijenjeno</string>
     <string name="drawer_item_shared">Dijeljeno</string>
     <string name="drawer_item_trashbin">Izbrisane datoteke</string>
     <string name="drawer_item_uploads_list">Otpreme</string>
@@ -329,7 +328,6 @@
     <string name="drawer_quota">Iskorišteno %1$s od %2$s</string>
     <string name="drawer_quota_unlimited">Upotrijebljeno %1$s</string>
     <string name="drawer_synced_folders">Automatsko otpremanje</string>
-    <string name="due_to_too_many_wrong_attempts">%s zbog previše pogrešnih pokušaja</string>
     <string name="e2e_counter_too_old">Brojač je prestar</string>
     <string name="e2e_hash_not_found">Hash nije pronađen</string>
     <string name="e2e_not_yet_setup">E2E još nije postavljen</string>
@@ -441,7 +439,6 @@
     <string name="file_list_empty_on_device">Ovdje će se prikazati preuzete datoteke i mape.</string>
     <string name="file_list_empty_recent_files_description">Ovdje će se prikazati datoteke i mape koje ste nedavno izmijenili.</string>
     <string name="file_list_empty_recent_files_headline">Nema nedavno izmijenjenih datoteka.</string>
-    <string name="file_list_empty_recently_modified">Nije pronađena nijedna datoteka izmijenjena u posljednjih 7 dana</string>
     <string name="file_list_empty_search">Možda je u drugoj mapi?</string>
     <string name="file_list_empty_shared">Ovdje će se prikazati datoteke i mape koje dijelite.</string>
     <string name="file_list_empty_shared_headline">Još ništa nije dijeljeno</string>
@@ -454,6 +451,7 @@
     <string name="file_list_live">UŽIVO</string>
     <string name="file_list_loading">Učitavanje…</string>
     <string name="file_list_no_app_for_file_type">Nije postavljena nijedna aplikacija za obrađivanje ove vrste datoteka.</string>
+    <string name="file_list_out_of_memory_description">Poslužitelj nije dostupan</string>
     <string name="file_list_seconds_ago">prije nekoliko sekundi</string>
     <string name="file_management_permission_optional">Dopuštenja za pohranu</string>
     <string name="file_management_permission_optional_text">%1$sradi najbolje s dozvoljenim pristupom prostoru za pohranu. Možete odabrati potpuni pristup svim datotekama ili samo mogućnost \"čitanja\" za fotografije i video materijale.</string>
@@ -536,6 +534,8 @@
     <string name="foreign_files_remote_text">Udaljeno: %1$s</string>
     <string name="forward">Naprijed</string>
     <string name="fourHours">4 sata</string>
+    <string name="governance_file_retention_label">Zadržavanje datoteka</string>
+    <string name="governance_no_label">Nema</string>
     <string name="gplay_restriction">Google je ograničio preuzimanje APK/AAB datoteka!</string>
     <string name="grid_file_features_live_photo_content_description">Ova ikona označava dostupnost live fotografije</string>
     <string name="hidden_file_name_warning">Datoteka s ovakvim nazivom će biti skrivena </string>
@@ -855,7 +855,6 @@
     <string name="send">Pošalji</string>
     <string name="send_copy_to">Pošalji kopiju u</string>
     <string name="send_share">Pošalji dijeljenje</string>
-    <string name="sendbutton_description">Ikona gumba za slanje</string>
     <string name="server_not_reachable">Poslužitelj nije dostupan</string>
     <string name="server_not_reachable_content">Nije moguće uspostaviti vezu s poslužiteljem. Provjerite internetsku vezu i pokušajte ponovno.</string>
     <string name="set_as">Postavi kao</string>
@@ -897,7 +896,6 @@
     <string name="share_option_required">Potrebno je odabrati opciju dijeljenja</string>
     <string name="share_permission_can_edit">Uređivanje moguće</string>
     <string name="share_permission_file_request">Zahtjev za datotekom</string>
-    <string name="share_permission_secure_file_drop">Siguran prijenos datoteka</string>
     <string name="share_permission_view_only">Samo za gledanje</string>
     <string name="share_permissions">Dopuštenja dijeljenja</string>
     <string name="share_re_share_permission">Dijeli</string>
@@ -1037,7 +1035,6 @@
     <string name="translation_screen_start_to_translate_task">Započni prijevod</string>
     <string name="translation_screen_task_processing">Prijevod traje duže nego što se očekivalo.</string>
     <string name="translation_screen_translating">Prevođenje…</string>
-    <string name="trashbin_activity_title">Izbrisane datoteke</string>
     <string name="trashbin_empty_headline">Nema izbrisanih datoteka</string>
     <string name="trashbin_empty_message">Ovdje ćete moći vratiti izbrisane datoteke.</string>
     <string name="trashbin_file_not_deleted">Datoteku %1$s nije moguće izbrisati!</string>
@@ -1111,7 +1108,6 @@
     <string name="upload_query_move_foreign_files">Nedostatak prostora sprječava kopiranje odabranih datoteka u mapu %1$s. Želite li ih premjestiti tamo?</string>
     <string name="upload_quota_exceeded">Kvote je premašena</string>
     <string name="upload_scan_doc_upload">Skeniraj dokument pomoću kamere</string>
-    <string name="upload_sync_conflict">Nepodudaranje tijekom sinkronizacije, ručno otklonite poteškoću</string>
     <string name="upload_unknown_error">Nepoznata pogreška</string>
     <string name="uploader_btn_alternative_text">Odaberite</string>
     <string name="uploader_btn_upload_text">Otpremi</string>
@@ -1158,7 +1154,6 @@
     <string name="uploads_view_upload_status_failed_localfile_error">Lokalna datoteka nije pronađena</string>
     <string name="uploads_view_upload_status_failed_permission_error">Pogreška dopuštenja</string>
     <string name="uploads_view_upload_status_failed_ssl_certificate_not_trusted">Nepouzdana vjerodajnica poslužitelja</string>
-    <string name="uploads_view_upload_status_fetching_server_version">Dohvaćanje inačice poslužitelja...</string>
     <string name="uploads_view_upload_status_service_interrupted">Prekinut rad aplikacije</string>
     <string name="uploads_view_upload_status_skip">Preskočeno</string>
     <string name="uploads_view_upload_status_skip_reason">Razlog preskakanja</string>
