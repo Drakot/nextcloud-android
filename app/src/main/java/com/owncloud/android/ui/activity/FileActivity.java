@@ -246,7 +246,7 @@ public abstract class FileActivity extends DrawerActivity
         bindService(new Intent(this, OperationsService.class), mOperationsServiceConnection,
                     Context.BIND_AUTO_CREATE);
 
-        filesRepository = new RemoteFilesRepository(getClientRepository(), this);
+        filesRepository = new RemoteFilesRepository(getClientRepository(), getAppPreferences(),this);
     }
 
     @Override
