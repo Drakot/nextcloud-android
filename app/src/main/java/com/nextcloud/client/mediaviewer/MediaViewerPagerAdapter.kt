@@ -31,7 +31,6 @@ import com.owncloud.android.utils.FileStorageUtils
  */
 class MediaViewerPagerAdapter : FragmentStateAdapter {
 
-    private var selectedFile: OCFile? = null
     private var imageFiles: MutableList<OCFile> = mutableListOf()
     private val user: User
     private val mObsoleteFragments: MutableSet<Any>
@@ -51,7 +50,6 @@ class MediaViewerPagerAdapter : FragmentStateAdapter {
     @Suppress("LongParameterList")
     constructor(
         fragmentActivity: FragmentActivity,
-        selectedFile: OCFile?,
         parentFolder: OCFile?,
         user: User,
         storageManager: FileDataStorageManager,
@@ -61,9 +59,8 @@ class MediaViewerPagerAdapter : FragmentStateAdapter {
         requireNotNull(parentFolder) { "NULL parent folder" }
 
         this.user = user
-        this.selectedFile = selectedFile
         mStorageManager = storageManager
-        imageFiles = mStorageManager.getFolderImagesAndVideos(parentFolder, onlyOnDevice)
+        imageFiles = MediaViewerFiles.prepare(mStorageManager.getFolderImagesAndVideos(parentFolder, onlyOnDevice))
 
         val sortOrder = preferences.getSortOrderByFolder(parentFolder)
         val foldersBeforeFiles = preferences.isSortFoldersBeforeFiles()
@@ -98,10 +95,10 @@ class MediaViewerPagerAdapter : FragmentStateAdapter {
         mStorageManager = storageManager
 
         if (type == VirtualFolderType.GALLERY) {
-            imageFiles = mStorageManager.allGalleryItems
+            imageFiles = MediaViewerFiles.prepare(mStorageManager.allGalleryItems)
             imageFiles = FileStorageUtils.sortOcFolderDescDateModifiedWithoutFavoritesFirst(imageFiles)
         } else {
-            imageFiles = mStorageManager.getVirtualFolderContent(type, true)
+            imageFiles = MediaViewerFiles.prepare(mStorageManager.getVirtualFolderContent(type, true))
         }
 
         if (type == VirtualFolderType.FAVORITE) {
@@ -142,10 +139,6 @@ class MediaViewerPagerAdapter : FragmentStateAdapter {
         null
     }
 
-    private fun addVideoOfLivePhoto(file: OCFile) {
-        file.livePhotoVideo = selectedFile
-    }
-
     fun getItem(i: Int): Fragment {
         val fragment = fragmentFor(getFileAt(i), i, mObsoletePositions.contains(i))
         mObsoletePositions.remove(i)
@@ -165,22 +158,18 @@ class MediaViewerPagerAdapter : FragmentStateAdapter {
             MediaViewerImageFragment.newInstance(file, ignoreFirstSavedState, false)
         }
 
-    private fun fragmentForNotDownloaded(file: OCFile, position: Int, ignoreFirstSavedState: Boolean): Fragment {
-        addVideoOfLivePhoto(file)
+    private fun fragmentForNotDownloaded(file: OCFile, position: Int, ignoreFirstSavedState: Boolean): Fragment = when {
+        mDownloadErrors.remove(position) ->
+            FileDownloadFragment.newInstance(file, user, true).apply { setError(true) }
 
-        return when {
-            mDownloadErrors.remove(position) ->
-                FileDownloadFragment.newInstance(file, user, true).apply { setError(true) }
+        // The FileDownloadFragment is used exclusively for encrypted files, as they cannot be previewed
+        // without first being downloaded.
+        file.isEncrypted -> FileDownloadFragment.newInstance(file, user, ignoreFirstSavedState)
 
-            // The FileDownloadFragment is used exclusively for encrypted files, as they cannot be previewed
-            // without first being downloaded.
-            file.isEncrypted -> FileDownloadFragment.newInstance(file, user, ignoreFirstSavedState)
+        MediaViewerVideoFragment.isAudioOrVideo(file) ->
+            MediaViewerVideoFragment.newInstance(file, user)
 
-            MediaViewerVideoFragment.isAudioOrVideo(file) ->
-                MediaViewerVideoFragment.newInstance(file, user)
-
-            else -> MediaViewerImageFragment.newInstance(file, ignoreFirstSavedState, true)
-        }
+        else -> MediaViewerImageFragment.newInstance(file, ignoreFirstSavedState, true)
     }
 
     fun getFilePosition(file: OCFile): Int = imageFiles.indexOf(file)

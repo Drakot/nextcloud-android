@@ -81,7 +81,6 @@ class MediaViewerActivity :
     OnFilesRemovedListener,
     SendShareDialog.SendShareDialogDownloader,
     Injectable {
-    private var livePhotoFile: OCFile? = null
     private var viewPager: ViewPager2? = null
     private var pagerAdapter: MediaViewerPagerAdapter? = null
     private var savedPosition: Int? = null
@@ -130,8 +129,6 @@ class MediaViewerActivity :
 
         setContentView(R.layout.preview_image_activity)
         windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-
-        livePhotoFile = intent.getParcelableArgument(EXTRA_LIVE_PHOTO_FILE, OCFile::class.java)
 
         setupDrawer(menuItemId)
 
@@ -256,7 +253,6 @@ class MediaViewerActivity :
 
             pagerAdapter = MediaViewerPagerAdapter(
                 this,
-                livePhotoFile,
                 parentFolder,
                 user,
                 storageManager,
