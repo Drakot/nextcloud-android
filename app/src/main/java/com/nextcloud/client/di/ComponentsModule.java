@@ -12,6 +12,9 @@ import com.nextcloud.client.editimage.EditImageActivity;
 import com.nextcloud.client.etm.EtmActivity;
 import com.nextcloud.client.etm.pages.EtmBackgroundJobsFragment;
 import com.nextcloud.client.jobs.BackgroundJobManagerImpl;
+import com.nextcloud.client.mediaviewer.MediaViewerActivity;
+import com.nextcloud.client.mediaviewer.MediaViewerImageFragment;
+import com.nextcloud.client.mediaviewer.MediaViewerVideoFragment;
 import com.nextcloud.client.jobs.NotificationWork;
 import com.nextcloud.client.jobs.TestJob;
 import com.nextcloud.client.jobs.transfer.FileTransferService;
@@ -207,6 +210,9 @@ abstract class ComponentsModule {
     abstract PreviewImageActivity previewImageActivity();
 
     @ContributesAndroidInjector
+    abstract MediaViewerActivity mediaViewerActivity();
+
+    @ContributesAndroidInjector
     abstract PreviewMediaActivity previewMediaActivity();
 
     @ContributesAndroidInjector
@@ -288,10 +294,16 @@ abstract class ComponentsModule {
     abstract PreviewImageFragment previewImageFragment();
 
     @ContributesAndroidInjector
+    abstract MediaViewerImageFragment mediaViewerImageFragment();
+
+    @ContributesAndroidInjector
     abstract BackupListFragment chooseContactListFragment();
 
     @ContributesAndroidInjector
     abstract PreviewMediaFragment previewMediaFragment();
+
+    @ContributesAndroidInjector
+    abstract MediaViewerVideoFragment mediaViewerVideoFragment();
 
     @ContributesAndroidInjector
     abstract PreviewTextFragment previewTextFragment();

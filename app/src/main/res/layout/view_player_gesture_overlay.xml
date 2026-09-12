@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <TextView
+        android:id="@+id/seek_backward_indicator"
+        android:layout_width="@dimen/player_seek_indicator_size"
+        android:layout_height="@dimen/player_seek_indicator_size"
+        android:layout_gravity="center_vertical|start"
+        android:layout_marginStart="@dimen/player_seek_indicator_margin"
+        android:background="@drawable/player_seek_indicator_background"
+        android:drawablePadding="@dimen/standard_quarter_margin"
+        android:gravity="center"
+        android:importantForAccessibility="no"
+        android:padding="@dimen/standard_margin"
+        android:textColor="@color/white"
+        android:textSize="@dimen/player_seek_indicator_text_size"
+        android:visibility="gone"
+        app:drawableTint="@color/white"
+        app:drawableTopCompat="@drawable/ic_fast_rewind"
+        tools:text="−10 s"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/seek_forward_indicator"
+        android:layout_width="@dimen/player_seek_indicator_size"
+        android:layout_height="@dimen/player_seek_indicator_size"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="@dimen/player_seek_indicator_margin"
+        android:background="@drawable/player_seek_indicator_background"
+        android:drawablePadding="@dimen/standard_quarter_margin"
+        android:gravity="center"
+        android:importantForAccessibility="no"
+        android:padding="@dimen/standard_margin"
+        android:textColor="@color/white"
+        android:textSize="@dimen/player_seek_indicator_text_size"
+        android:visibility="gone"
+        app:drawableTint="@color/white"
+        app:drawableTopCompat="@drawable/ic_fast_forward"
+        tools:text="+10 s"
+        tools:visibility="visible" />
+
+</merge>

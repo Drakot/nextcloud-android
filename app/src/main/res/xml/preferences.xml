@@ -53,6 +53,11 @@
             android:defaultValue="true"
             android:title="@string/prefs_show_recommendations"
             android:key="show_recommendations" />
+        <com.owncloud.android.ui.ThemeableSwitchPreference
+            android:defaultValue="true"
+            android:key="custom_media_viewer"
+            android:summary="@string/prefs_custom_media_viewer_summary"
+            android:title="@string/prefs_custom_media_viewer" />
     </PreferenceCategory>
 
 	<PreferenceCategory android:title="@string/prefs_category_details" android:key="details">

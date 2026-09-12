@@ -72,6 +72,8 @@ import com.nextcloud.client.jobs.upload.FileUploadEventBroadcaster
 import com.nextcloud.client.jobs.upload.FileUploadHelper
 import com.nextcloud.client.jobs.upload.FileUploadWorker
 import com.nextcloud.client.media.PlayerServiceConnection
+import com.nextcloud.client.mediaviewer.MediaViewerActivity
+import com.nextcloud.client.mediaviewer.MediaViewerSettings
 import com.nextcloud.client.network.ClientFactory.CreationException
 import com.nextcloud.client.preferences.AppPreferences
 import com.nextcloud.client.utils.IntentUtil
@@ -2674,7 +2676,12 @@ class FileDisplayActivity :
             return
         }
 
-        val intent = Intent(this, PreviewImageActivity::class.java).apply {
+        val previewActivity = if (MediaViewerSettings.isEnabled(this)) {
+            MediaViewerActivity::class.java
+        } else {
+            PreviewImageActivity::class.java
+        }
+        val intent = Intent(this, previewActivity).apply {
             putExtra(EXTRA_FILE, file)
             putExtra(EXTRA_LIVE_PHOTO_FILE, file.livePhotoVideo)
             putExtra(EXTRA_USER, user.get())
