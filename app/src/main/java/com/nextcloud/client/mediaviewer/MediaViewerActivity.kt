@@ -281,6 +281,11 @@ class MediaViewerActivity :
         position = position?.toDouble()?.let { max(it, 0.0).toInt() }
 
         viewPager?.adapter = pagerAdapter
+        viewPager?.offscreenPageLimit = if (isComicMode) {
+            COMIC_PRELOAD_PAGES
+        } else {
+            ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
+        }
         pagerAdapter?.let { applyReaderMode(it, isRealFolder) }
         viewPager?.unregisterOnPageChangeCallback(pageChangeCallback)
         viewPager?.registerOnPageChangeCallback(pageChangeCallback)
@@ -547,6 +552,22 @@ class MediaViewerActivity :
         }
         updatePageCounter(position)
         saveComicProgress(position)
+        preloadComicPages(position)
+    }
+
+    /**
+     * Reading a comic means swiping forward page after page, so the following pages are fetched while the current
+     * one is on screen. Pages already on the device are decoded by their own fragments thanks to the offscreen limit.
+     */
+    private fun preloadComicPages(position: Int) {
+        val adapter = pagerAdapter ?: return
+        if (!isComicMode) {
+            return
+        }
+        PagePreloadWindow.nextPositions(position, adapter.itemCount, COMIC_PRELOAD_PAGES)
+            .mapNotNull { adapter.getFileAt(it) }
+            .filter { !it.isDown }
+            .forEach { requestForDownload(it) }
     }
 
     private fun setupComicProgress(user: User, parentFolder: OCFile?) {
@@ -672,6 +693,7 @@ class MediaViewerActivity :
     companion object {
         val TAG: String = MediaViewerActivity::class.java.simpleName
         const val EXTRA_COMIC_MODE = "COMIC_MODE"
+        private const val COMIC_PRELOAD_PAGES = 2
         private const val KEY_WAITING_FOR_BINDER = "WAITING_FOR_BINDER"
         private const val KEY_SYSTEM_VISIBLE = "TRUE"
     }
