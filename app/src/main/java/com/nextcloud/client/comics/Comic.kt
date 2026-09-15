@@ -10,9 +10,15 @@ import com.owncloud.android.datamodel.OCFile
 
 /**
  * One entry of the shelf: a folder whose images are the pages, ordered by file name. [lastReadPage] is
- * zero-based and always points to an existing page.
+ * zero-based and always points to an existing page. [isCoverOnDevice] is captured when the shelf is built because
+ * [OCFile.isDown] looks at the file system, so two snapshots would otherwise compare equal once the download lands.
  */
-data class Comic(val folder: OCFile, val pages: List<OCFile>, val lastReadPage: Int) {
+data class Comic(
+    val folder: OCFile,
+    val pages: List<OCFile>,
+    val lastReadPage: Int,
+    val isCoverOnDevice: Boolean = pages.first().isDown
+) {
     val title: String get() = folder.fileName
     val cover: OCFile get() = pages.first()
     val pageCount: Int get() = pages.size

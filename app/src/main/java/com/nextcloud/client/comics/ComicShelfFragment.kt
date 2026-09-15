@@ -6,6 +6,10 @@
  */
 package com.nextcloud.client.comics
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Spannable
@@ -29,11 +33,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import com.nextcloud.client.account.UserAccountManager
 import com.nextcloud.client.di.Injectable
+import com.nextcloud.client.jobs.download.FileDownloadEventBroadcaster
 import com.nextcloud.utils.extensions.getParcelableArgument
 import com.nextcloud.utils.thumbnail.ThumbnailGenerator
 import com.owncloud.android.R
@@ -102,10 +108,32 @@ class ComicShelfFragment :
         observeSync()
     }
 
+    override fun onStart() {
+        super.onStart()
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(
+            coverDownloadedReceiver,
+            IntentFilter(FileDownloadEventBroadcaster.ACTION_DOWNLOAD_COMPLETED)
+        )
+    }
+
     override fun onResume() {
         super.onResume()
         loadComics()
         ComicLibrarySync.start(requireContext(), accountManager.user, library, ignoreEtags = false)
+    }
+
+    override fun onStop() {
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(coverDownloadedReceiver)
+        super.onStop()
+    }
+
+    private val coverDownloadedReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val remotePath = intent?.getStringExtra(FileDownloadEventBroadcaster.EXTRA_REMOTE_PATH) ?: return
+            if (remotePath.startsWith(library.remotePath)) {
+                loadComics()
+            }
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -164,6 +192,7 @@ class ComicShelfFragment :
             adapter.submitList(comics)
             binding?.comicShelfEmpty?.isVisible = comics.isEmpty()
             updateSubtitle(comics.size)
+            ComicCoverDownloads.requestMissing(accountManager.user, comics)
         }
     }
 

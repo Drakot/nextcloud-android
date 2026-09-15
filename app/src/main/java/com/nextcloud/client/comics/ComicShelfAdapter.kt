@@ -37,6 +37,6 @@ class ComicShelfAdapter(
             oldItem.lastReadPage == newItem.lastReadPage &&
                 oldItem.pageCount == newItem.pageCount &&
                 oldItem.cover.remotePath == newItem.cover.remotePath &&
-                oldItem.cover.isDown == newItem.cover.isDown
+                oldItem.isCoverOnDevice == newItem.isCoverOnDevice
     }
 }
