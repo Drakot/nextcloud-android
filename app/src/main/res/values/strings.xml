@@ -595,6 +595,34 @@
     <string name="preview_image_error_unknown_format">Unable to show image</string>
     <string name="preview_image_error_no_local_file">There is no local file to preview</string>
     <string name="preview_image_page_counter" translatable="false">%1$d / %2$d</string>
+    <string name="comic_library_use_folder">Use as comic library</string>
+    <string name="comic_library_stop_using">Stop using as comic library</string>
+    <string name="comic_library_show_shelf">Show as comic library</string>
+    <string name="comic_library_show_folder">Show as folder</string>
+    <string name="comic_library_sync">Sync comic library</string>
+    <string name="comic_library_empty">No comics yet. Every folder with images inside this library shows up here once it is synced.</string>
+    <string name="comic_library_marker_failed">Could not update the comic library</string>
+    <string name="comic_read">Read</string>
+    <string name="comic_start_over">Start from the beginning</string>
+    <string name="comic_mark_as_read">Mark as read</string>
+    <string name="comic_open_folder">Open folder</string>
+    <string name="comic_progress" translatable="false">%1$d / %2$d</string>
+    <plurals name="comic_library_syncing">
+        <item quantity="one">Syncing comic library, %d folder checked</item>
+        <item quantity="other">Syncing comic library, %d folders checked</item>
+    </plurals>
+    <plurals name="comic_library_sync_failed">
+        <item quantity="one">%d folder could not be synced</item>
+        <item quantity="other">%d folders could not be synced</item>
+    </plurals>
+    <plurals name="comic_library_count">
+        <item quantity="one">%d comic</item>
+        <item quantity="other">%d comics</item>
+    </plurals>
+    <plurals name="comic_pages">
+        <item quantity="one">%d page</item>
+        <item quantity="other">%d pages</item>
+    </plurals>
 
     <string name="error__upload__local_file_not_copied">%1$s could not be copied to %2$s local folder</string>
     <string name="prefs_synced_folders_local_path_title">Local folder</string>

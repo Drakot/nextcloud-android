@@ -1,0 +1,104 @@
+<!--
+  ~ Nextcloud - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/comic_item_padding">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/comic_cover_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/comic_cover_corner_radius"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/comic_cover"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:importantForAccessibility="no"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="H,2:3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/file_image" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/comic_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/comic_read"
+                android:src="@drawable/ic_play_arrow"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="@id/comic_cover"
+                app:layout_constraintEnd_toEndOf="@id/comic_cover"
+                app:layout_constraintStart_toStartOf="@id/comic_cover"
+                app:layout_constraintTop_toTopOf="@id/comic_cover" />
+
+            <TextView
+                android:id="@+id/comic_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/comic_badge_margin"
+                android:background="@drawable/comic_badge_background"
+                android:paddingHorizontal="@dimen/comic_badge_padding_horizontal"
+                android:paddingVertical="@dimen/comic_badge_padding_vertical"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/comic_badge_text_size"
+                app:layout_constraintBottom_toBottomOf="@id/comic_cover"
+                app:layout_constraintEnd_toEndOf="@id/comic_cover"
+                tools:text="12 / 93" />
+
+            <ImageView
+                android:id="@+id/comic_finished"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/comic_badge_margin"
+                android:background="@drawable/comic_badge_background"
+                android:importantForAccessibility="no"
+                android:padding="@dimen/comic_badge_padding_vertical"
+                android:src="@drawable/ic_check"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/comic_cover"
+                app:layout_constraintTop_toTopOf="@id/comic_cover"
+                app:tint="@android:color/white"
+                tools:visibility="visible" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/comic_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/comic_title_margin_top"
+        android:visibility="invisible"
+        app:trackThickness="@dimen/comic_progress_thickness"
+        tools:progress="40"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/comic_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/comic_title_margin_top"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:maxLines="2"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        tools:text="Batman: Year One" />
+</LinearLayout>

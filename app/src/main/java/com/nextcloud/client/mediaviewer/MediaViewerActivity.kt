@@ -31,6 +31,7 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.nextcloud.client.account.User
 import com.nextcloud.client.database.entity.SyncedFolderEntity
+import com.nextcloud.client.comics.ComicProgressStore
 import com.nextcloud.client.di.Injectable
 import com.nextcloud.client.editimage.EditImageActivity
 import com.nextcloud.client.jobs.download.FileDownloadEventBroadcaster
@@ -45,6 +46,7 @@ import com.nextcloud.utils.extensions.observeWorker
 import com.owncloud.android.MainApp
 import com.owncloud.android.R
 import com.owncloud.android.datamodel.FileDataStorageManager
+import com.owncloud.android.datamodel.ArbitraryDataProviderImpl
 import com.owncloud.android.datamodel.OCFile
 import com.owncloud.android.datamodel.VirtualFolderType
 import com.owncloud.android.lib.common.operations.OnRemoteOperationListener
@@ -100,6 +102,10 @@ class MediaViewerActivity :
 
     var isReaderModeEnabled = false
         private set
+
+    private val isComicMode: Boolean get() = intent.getBooleanExtra(EXTRA_COMIC_MODE, false)
+    private var comicProgress: ComicProgressStore? = null
+    private var comicFolder: OCFile? = null
 
     private val pageChangeCallback = object : OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
@@ -223,7 +229,7 @@ class MediaViewerActivity :
     }
 
     private fun applyReaderMode(adapter: MediaViewerPagerAdapter, isRealFolder: Boolean) {
-        isReaderModeEnabled = ReaderMode.isEnabled(adapter.itemCount, isRealFolder)
+        isReaderModeEnabled = isComicMode || ReaderMode.isEnabled(adapter.itemCount, isRealFolder)
         if (isReaderModeEnabled) {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         } else {
@@ -257,8 +263,10 @@ class MediaViewerActivity :
                 user,
                 storageManager,
                 MainApp.isOnlyOnDevice(),
-                preferences
+                preferences,
+                isComicMode
             )
+            setupComicProgress(user, parentFolder)
         }
 
         viewPager = findViewById(R.id.fragmentPager)
@@ -538,6 +546,20 @@ class MediaViewerActivity :
             setDrawerIndicatorEnabled(false)
         }
         updatePageCounter(position)
+        saveComicProgress(position)
+    }
+
+    private fun setupComicProgress(user: User, parentFolder: OCFile?) {
+        if (!isComicMode || parentFolder == null) {
+            return
+        }
+        comicFolder = parentFolder
+        comicProgress = ComicProgressStore(ArbitraryDataProviderImpl(this), user.accountName)
+    }
+
+    private fun saveComicProgress(position: Int) {
+        val folder = comicFolder ?: return
+        comicProgress?.saveLastReadPage(folder, position)
     }
 
     private fun updateActionBarTitle(title: String?) {
@@ -638,6 +660,7 @@ class MediaViewerActivity :
 
     companion object {
         val TAG: String = MediaViewerActivity::class.java.simpleName
+        const val EXTRA_COMIC_MODE = "COMIC_MODE"
         private const val KEY_WAITING_FOR_BINDER = "WAITING_FOR_BINDER"
         private const val KEY_SYSTEM_VISIBLE = "TRUE"
     }

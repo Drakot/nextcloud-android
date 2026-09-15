@@ -12,6 +12,7 @@ import com.nextcloud.client.editimage.EditImageActivity;
 import com.nextcloud.client.etm.EtmActivity;
 import com.nextcloud.client.etm.pages.EtmBackgroundJobsFragment;
 import com.nextcloud.client.jobs.BackgroundJobManagerImpl;
+import com.nextcloud.client.comics.ComicShelfFragment;
 import com.nextcloud.client.mediaviewer.MediaViewerActivity;
 import com.nextcloud.client.mediaviewer.MediaViewerImageFragment;
 import com.nextcloud.client.mediaviewer.MediaViewerVideoFragment;
@@ -208,6 +209,9 @@ abstract class ComponentsModule {
 
     @ContributesAndroidInjector
     abstract PreviewImageActivity previewImageActivity();
+
+    @ContributesAndroidInjector
+    abstract ComicShelfFragment comicShelfFragment();
 
     @ContributesAndroidInjector
     abstract MediaViewerActivity mediaViewerActivity();

@@ -54,7 +54,8 @@ class MediaViewerPagerAdapter : FragmentStateAdapter {
         user: User,
         storageManager: FileDataStorageManager,
         onlyOnDevice: Boolean,
-        preferences: AppPreferences
+        preferences: AppPreferences,
+        forceNameOrder: Boolean = false
     ) : super(fragmentActivity) {
         requireNotNull(parentFolder) { "NULL parent folder" }
 
@@ -62,9 +63,13 @@ class MediaViewerPagerAdapter : FragmentStateAdapter {
         mStorageManager = storageManager
         imageFiles = MediaViewerFiles.prepare(mStorageManager.getFolderImagesAndVideos(parentFolder, onlyOnDevice))
 
-        val sortOrder = preferences.getSortOrderByFolder(parentFolder)
+        val sortOrder = if (forceNameOrder) {
+            FileSortOrder.SORT_A_TO_Z
+        } else {
+            preferences.getSortOrderByFolder(parentFolder)
+        }
         val foldersBeforeFiles = preferences.isSortFoldersBeforeFiles()
-        val favoritesFirst = preferences.isSortFavoritesFirst()
+        val favoritesFirst = if (forceNameOrder) false else preferences.isSortFavoritesFirst()
         imageFiles = sortOrder.sortCloudFiles(imageFiles.toMutableList(), foldersBeforeFiles, favoritesFirst)
 
         mObsoleteFragments = HashSet()

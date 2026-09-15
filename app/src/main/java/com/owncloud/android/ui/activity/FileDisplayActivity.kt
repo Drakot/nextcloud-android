@@ -72,6 +72,9 @@ import com.nextcloud.client.jobs.upload.FileUploadEventBroadcaster
 import com.nextcloud.client.jobs.upload.FileUploadHelper
 import com.nextcloud.client.jobs.upload.FileUploadWorker
 import com.nextcloud.client.media.PlayerServiceConnection
+import com.nextcloud.client.comics.ComicLibraryMenuProvider
+import com.nextcloud.client.comics.ComicLibraryNavigation
+import com.nextcloud.client.comics.ComicShelfFragment
 import com.nextcloud.client.mediaviewer.MediaViewerActivity
 import com.nextcloud.client.mediaviewer.MediaViewerSettings
 import com.nextcloud.client.network.ClientFactory.CreationException
@@ -311,6 +314,7 @@ class FileDisplayActivity :
         observeWorkerState()
         startMetadataSyncForRoot()
         handleBackPress()
+        addMenuProvider(ComicLibraryMenuProvider(this), this)
         setupDrawer(menuItemId)
     }
 
@@ -1254,6 +1258,12 @@ class FileDisplayActivity :
                 after()
             }
 
+            leftFragment is ComicShelfFragment -> {
+                before()
+                exitComicShelf(browseUp = true)
+                after()
+            }
+
             leftFragment is OCFileListFragment -> {
                 before()
                 handleOCFileListFragmentBackPress()
@@ -1321,6 +1331,7 @@ class FileDisplayActivity :
 
         resetScrollingAndUpdateActionBar()
         startMetadataSyncForCurrentDir()
+        ComicLibraryNavigation.showShelfIfPreferred(this, currentFile)
     }
 
     private fun resetSearchAction() {
@@ -1583,6 +1594,9 @@ class FileDisplayActivity :
             currentFile = handleRemovedFileFromServer(currentFile, currentDir)
             updateFileList(fileListFragment, currentDir, syncFolderRemotePath)
             file = currentFile
+            if (leftFragment is OCFileListFragment) {
+                ComicLibraryNavigation.showShelfIfPreferred(this, currentDir)
+            }
         }
 
         handleSyncResult(event, syncResult)
@@ -1950,6 +1964,34 @@ class FileDisplayActivity :
         resetScrollingAndUpdateActionBar()
         startSyncFolderOperation(directory, false)
         startMetadataSyncForCurrentDir()
+        ComicLibraryNavigation.showShelfIfPreferred(this, directory)
+    }
+
+    fun showComicShelf(library: OCFile) {
+        supportFragmentManager.executePendingTransactions()
+        if (leftFragment is ComicShelfFragment) {
+            return
+        }
+        listOfFilesFragment?.setFabVisible(false)
+        setLeftFragment(ComicShelfFragment.newInstance(library), false)
+    }
+
+    fun exitComicShelf(browseUp: Boolean) {
+        popBack()
+        supportFragmentManager.executePendingTransactions()
+        val listOfFiles = listOfFilesFragment ?: return
+        if (browseUp) {
+            browseUp(listOfFiles)
+            return
+        }
+        listOfFiles.setFabVisible(getCurrentDir()?.canCreateFileAndFolder() == true)
+    }
+
+    fun openComicFolder(folder: OCFile, library: OCFile) {
+        exitComicShelf(browseUp = false)
+        if (folder.remotePath != library.remotePath) {
+            listOfFilesFragment?.onItemClicked(folder)
+        }
     }
 
     /**
