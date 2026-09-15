@@ -21,10 +21,19 @@ object ComicPageDownloads {
         if (page.isDown) {
             return
         }
-        if (!page.storagePath.isNullOrEmpty()) {
-            page.storagePath = null
-            storageManager.saveFile(page)
-        }
+        forgetStalePath(storageManager, page)
         FileDownloadHelper.instance().downloadFileIfNotStartedBefore(user, page)
+    }
+
+    fun forgetStalePaths(storageManager: FileDataStorageManager, pages: List<OCFile>) {
+        pages.filter { !it.isDown }.forEach { forgetStalePath(storageManager, it) }
+    }
+
+    private fun forgetStalePath(storageManager: FileDataStorageManager, page: OCFile) {
+        if (page.storagePath.isNullOrEmpty()) {
+            return
+        }
+        page.storagePath = null
+        storageManager.saveFile(page)
     }
 }

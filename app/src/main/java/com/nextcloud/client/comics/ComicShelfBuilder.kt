@@ -12,8 +12,8 @@ import java.util.ArrayDeque
 
 /**
  * Walks the library tree already present in the local database. Every folder holding images is a comic, folders
- * without images only group other folders and are never shown. Images lying directly in the library become a
- * comic named after the library itself.
+ * without images only group other folders. Images lying directly in the library become a comic named after the
+ * library itself. [build] flattens the whole tree; [buildLevel] keeps one folder level, listing its groups first.
  */
 class ComicShelfBuilder(
     private val folderContent: (OCFile) -> List<OCFile>,
@@ -31,8 +31,28 @@ class ComicShelfBuilder(
             content.filter { it.isFolder && !it.isEncrypted }.forEach { pending.add(it) }
         }
 
-        return comics.sortedWith { first, second -> AlphanumericComparator.compare(first.folder, second.folder) }
+        return comics.sortedByFolderName()
     }
+
+    fun buildLevel(folder: OCFile): List<ComicShelfItem> {
+        val content = folderContent(folder)
+        val subfolders = content.filter { it.isFolder && !it.isEncrypted }
+        val groups = subfolders.mapNotNull { groupOf(it) }.sortedByFolderName()
+        val ownComic = listOfNotNull(comicOf(folder, content))
+        val comics = (ownComic + subfolders.mapNotNull { comicOf(it, folderContent(it)) }).sortedByFolderName()
+        return groups + comics
+    }
+
+    private fun groupOf(folder: OCFile): ComicGroup? {
+        val comicsBelow = build(folder).filter { it.folder.remotePath != folder.remotePath }
+        if (comicsBelow.isEmpty()) {
+            return null
+        }
+        return ComicGroup(folder, comicsBelow.size, comicsBelow.first().cover)
+    }
+
+    private fun <T : ComicShelfItem> List<T>.sortedByFolderName(): List<T> =
+        sortedWith { first, second -> AlphanumericComparator.compare(first.folder, second.folder) }
 
     private fun comicOf(folder: OCFile, content: List<OCFile>): Comic? {
         val pages = ComicPages.of(content)

@@ -6,12 +6,10 @@
  */
 package com.nextcloud.client.comics
 
-import android.view.View
+import com.owncloud.android.datamodel.OCFile
 
-interface ComicShelfListener {
-    fun onReadComic(comic: Comic)
-
-    fun onOpenGroup(group: ComicGroup)
-
-    fun onComicLongPressed(comic: Comic, anchor: View)
+sealed interface ComicShelfItem {
+    val folder: OCFile
+    val cover: OCFile
+    val isCoverOnDevice: Boolean
 }

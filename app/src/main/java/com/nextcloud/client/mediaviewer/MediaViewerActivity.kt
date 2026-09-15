@@ -561,10 +561,7 @@ class MediaViewerActivity :
      * one is on screen. Pages already on the device are decoded by their own fragments thanks to the offscreen limit.
      */
     private fun preloadComicPages(position: Int) {
-        val adapter = pagerAdapter ?: return
-        if (!isComicMode) {
-            return
-        }
+        val adapter = pagerAdapter?.takeIf { isComicMode } ?: return
         val user = user.orElse(null) ?: return
         PagePreloadWindow.nextPositions(position, adapter.itemCount, COMIC_PRELOAD_PAGES)
             .mapNotNull { adapter.getFileAt(it) }

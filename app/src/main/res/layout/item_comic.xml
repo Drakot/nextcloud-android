@@ -38,18 +38,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/file_image" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/comic_play"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/comic_read"
-                android:src="@drawable/ic_play_arrow"
-                app:fabSize="mini"
-                app:layout_constraintBottom_toBottomOf="@id/comic_cover"
-                app:layout_constraintEnd_toEndOf="@id/comic_cover"
-                app:layout_constraintStart_toStartOf="@id/comic_cover"
-                app:layout_constraintTop_toTopOf="@id/comic_cover" />
-
             <TextView
                 android:id="@+id/comic_badge"
                 android:layout_width="wrap_content"
@@ -63,6 +51,21 @@
                 app:layout_constraintBottom_toBottomOf="@id/comic_cover"
                 app:layout_constraintEnd_toEndOf="@id/comic_cover"
                 tools:text="12 / 93" />
+
+            <ImageView
+                android:id="@+id/comic_group_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/comic_badge_margin"
+                android:background="@drawable/comic_badge_background"
+                android:importantForAccessibility="no"
+                android:padding="@dimen/comic_badge_padding_vertical"
+                android:src="@drawable/folder"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/comic_cover"
+                app:layout_constraintTop_toTopOf="@id/comic_cover"
+                app:tint="@android:color/white"
+                tools:visibility="visible" />
 
             <ImageView
                 android:id="@+id/comic_finished"

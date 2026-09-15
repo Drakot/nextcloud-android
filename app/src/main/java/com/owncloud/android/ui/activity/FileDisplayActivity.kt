@@ -1997,13 +1997,18 @@ class FileDisplayActivity :
         ComicLibraryNavigation.showShelfIfPreferred(this, directory)
     }
 
-    fun showComicShelf(library: OCFile) {
+    fun showComicShelf(library: OCFile, folder: OCFile = library) {
         supportFragmentManager.executePendingTransactions()
-        if (leftFragment is ComicShelfFragment) {
+        val shelf = leftFragment as? ComicShelfFragment
+        if (shelf != null && shelf.folderPath == folder.remotePath) {
             return
         }
+        if (shelf != null) {
+            // one shelf on the back stack at a time, so leaving the library returns to the file list
+            supportFragmentManager.popBackStackImmediate()
+        }
         listOfFilesFragment?.setFabVisible(false)
-        setLeftFragment(ComicShelfFragment.newInstance(library), false)
+        setLeftFragment(ComicShelfFragment.newInstance(library, folder), false)
     }
 
     fun exitComicShelf(browseUp: Boolean) {

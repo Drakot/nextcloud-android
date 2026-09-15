@@ -15,16 +15,16 @@ import java.io.File
  * [OCFile.isDown] looks at the file system, so two snapshots would otherwise compare equal once the download lands.
  */
 data class Comic(
-    val folder: OCFile,
+    override val folder: OCFile,
     val pages: List<OCFile>,
     val lastReadPage: Int,
-    val isCoverOnDevice: Boolean = pages.first().isOnDevice()
-) {
+    override val isCoverOnDevice: Boolean = pages.first().isOnDevice()
+) : ComicShelfItem {
     val title: String get() = folder.fileName
-    val cover: OCFile get() = pages.first()
+    override val cover: OCFile get() = pages.first()
     val pageCount: Int get() = pages.size
     val isFinished: Boolean get() = lastReadPage >= pageCount - 1 && pageCount > 0
     val isStarted: Boolean get() = lastReadPage > 0
 }
 
-private fun OCFile.isOnDevice(): Boolean = storagePath?.takeIf { it.isNotEmpty() }?.let { File(it).exists() } == true
+internal fun OCFile.isOnDevice(): Boolean = storagePath?.takeIf { it.isNotEmpty() }?.let { File(it).exists() } == true

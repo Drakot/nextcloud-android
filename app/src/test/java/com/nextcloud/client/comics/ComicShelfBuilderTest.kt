@@ -76,4 +76,22 @@ class ComicShelfBuilderTest {
 
         assertTrue(builder().build(library).isEmpty())
     }
+
+    @Test
+    fun `one folder level lists groups before comics and counts the comics below each group`() {
+        val library = folder("/Comics/")
+        tree["/Comics/"] = listOf(folder("/Comics/Zorro/"), folder("/Comics/Marvel/"), folder("/Comics/Empty/"))
+        tree["/Comics/Marvel/"] = listOf(folder("/Comics/Marvel/Hulk 2/"), folder("/Comics/Marvel/Hulk 10/"))
+        tree["/Comics/Marvel/Hulk 2/"] = listOf(image("/Comics/Marvel/Hulk 2/1.jpg"))
+        tree["/Comics/Marvel/Hulk 10/"] = listOf(image("/Comics/Marvel/Hulk 10/1.jpg"))
+        tree["/Comics/Zorro/"] = listOf(image("/Comics/Zorro/a.jpg"))
+
+        val items = builder().buildLevel(library)
+
+        assertEquals(listOf("Marvel", "Zorro"), items.map { it.folder.fileName })
+        val group = items.first() as ComicGroup
+        assertEquals(2, group.comicCount)
+        assertEquals("/Comics/Marvel/Hulk 2/1.jpg", group.cover.remotePath)
+        assertTrue(items.last() is Comic)
+    }
 }

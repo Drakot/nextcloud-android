@@ -6,12 +6,7 @@
  */
 package com.nextcloud.client.comics
 
-import android.view.View
-
-interface ComicShelfListener {
-    fun onReadComic(comic: Comic)
-
-    fun onOpenGroup(group: ComicGroup)
-
-    fun onComicLongPressed(comic: Comic, anchor: View)
+enum class ComicShelfLayout {
+    FLAT,
+    FOLDERS
 }

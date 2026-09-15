@@ -25,7 +25,6 @@ class ComicViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     init {
-        viewThemeUtils.material.themeFAB(binding.comicPlay)
         viewThemeUtils.material.colorProgressBar(binding.comicProgress, ColorRole.PRIMARY)
     }
 
@@ -44,6 +43,7 @@ class ComicViewHolder(
         } else {
             resources.getQuantityString(R.plurals.comic_pages, comic.pageCount, comic.pageCount)
         }
+        binding.comicGroupIcon.isVisible = false
         binding.comicFinished.isVisible = comic.isFinished
         binding.comicProgress.isInvisible = !comic.isStarted
         binding.comicProgress.max = comic.pageCount
@@ -51,8 +51,7 @@ class ComicViewHolder(
     }
 
     private fun bindClicks(comic: Comic) {
-        binding.comicPlay.setOnClickListener { listener.onReadComic(comic) }
-        binding.comicCoverCard.setOnClickListener { listener.onOpenComicFolder(comic) }
+        binding.comicCoverCard.setOnClickListener { listener.onReadComic(comic) }
         binding.comicCoverCard.setOnLongClickListener { view: View ->
             listener.onComicLongPressed(comic, view)
             true

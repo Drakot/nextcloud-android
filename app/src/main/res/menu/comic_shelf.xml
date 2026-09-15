@@ -11,4 +11,9 @@
         android:icon="@drawable/ic_sync"
         android:title="@string/comic_library_sync"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_comic_keep_folders"
+        android:checkable="true"
+        android:title="@string/comic_library_keep_folders"
+        app:showAsAction="never" />
 </menu>

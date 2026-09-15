@@ -17,8 +17,8 @@ import com.owncloud.android.datamodel.FileDataStorageManager
 object ComicCoverDownloads {
     private const val MAX_DOWNLOADS_PER_PASS = 12
 
-    fun requestMissing(user: User, storageManager: FileDataStorageManager, comics: List<Comic>) {
-        comics.asSequence()
+    fun requestMissing(user: User, storageManager: FileDataStorageManager, items: List<ComicShelfItem>) {
+        items.asSequence()
             .map { it.cover }
             .filter { !it.isDown }
             .take(MAX_DOWNLOADS_PER_PASS)
