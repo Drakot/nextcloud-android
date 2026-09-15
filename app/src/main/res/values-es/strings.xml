@@ -32,7 +32,11 @@
     <string name="activity_icon">Actividad</string>
     <string name="add_new_public_share">Añadir un nuevo enlace público</string>
     <string name="add_new_secure_file_drop">Añadir una nueva entrega de archivos segura</string>
-    <string name="add_to_cloud">Añadir a %1$s</string>
+    <string name="add_to_album">Añadir al álbum</string>
+    <string name="album_delete">Eliminar álbum</string>
+    <string name="album_rename_conflict">Este nombre ya está en uso.</string>
+    <string name="album_share">Compartir álbum</string>
+    <string name="album_stop_sharing">Dejar de compatir</string>
     <string name="app_config_base_url_title">URL base</string>
     <string name="app_config_disable_clipboard_title">Deshabilitar el portapapeles</string>
     <string name="app_config_disable_intro_title">Deshabilitar la introducción</string>
@@ -249,6 +253,7 @@
     <string name="could_not_retrieve_shares">No se han podido recuperar los recursos compartidos</string>
     <string name="could_not_retrieve_url">No se ha podido recuperar la URL</string>
     <string name="create">Crear</string>
+    <string name="create_album_dialog_title">Nuevo álbum</string>
     <string name="create_dir_fail_msg">No se ha podido crear la carpeta</string>
     <string name="create_document">Documento</string>
     <string name="create_encrypted_folder">Carpeta cifrada</string>
@@ -258,8 +263,6 @@
     <string name="create_link">Crear enlace</string>
     <string name="create_new">Nuevo</string>
     <string name="create_new_document">Nuevo documento</string>
-    <string name="create_new_encrypted_folder">Nueva carpeta cifrada</string>
-    <string name="create_new_folder">Nueva carpeta</string>
     <string name="create_new_presentation">Nueva presentación</string>
     <string name="create_new_spreadsheet">Nueva hoja de cálculo</string>
     <string name="create_presentation">Presentación</string>
@@ -323,6 +326,7 @@
     <string name="drawer_community">Comunidad</string>
     <string name="drawer_header_background">Imagen de fondo del encabezado del cajón</string>
     <string name="drawer_item_activities">Actividades</string>
+    <string name="drawer_item_album">Álbumes</string>
     <string name="drawer_item_all_files">Todos los archivos</string>
     <string name="drawer_item_assistant">Asistente</string>
     <string name="drawer_item_favorites">Favoritos</string>
@@ -424,6 +428,7 @@
     <string name="fab_label">Añadir o subir</string>
     <string name="failed_to_create_conflict_dialog">Fallo al crear el diálogo de conflicto</string>
     <string name="failed_to_download">Error al enviar el fichero al gestor de descargas</string>
+    <string name="failed_to_load_tags">Fallo al cargar etiquetas</string>
     <string name="failed_to_print">Fallo al imprimir el archivo</string>
     <string name="failed_to_start_action">¡Fallo al iniciar la acción!</string>
     <string name="failed_to_start_editor">Fallo al inicial el editor</string>
@@ -623,22 +628,7 @@
     <string name="manage_space_clear_data">Limpiar datos</string>
     <string name="manage_space_description">Las opciones, certificados y bases de datos de %1$s serán borrados permanentemente.\n\nLos archivos bajados no se tocarán.\n\nEste proceso tardará algún tiempo.</string>
     <string name="manage_space_title">Gestionar espacio</string>
-    <string name="media_err_invalid_progressive_playback">El archivo multimedia no puede ser transmitido</string>
-    <string name="media_err_io">El archivo de medios no se ha podido leer</string>
-    <string name="media_err_malformed">El archivo de medios tiene una codificación incorrecta</string>
-    <string name="media_err_timeout">Tiempo de espera agotado en el intento de reproducción</string>
-    <string name="media_err_unknown">El reproductor de medios incorporado no puede reproducir el archivo</string>
-    <string name="media_err_unsupported">Códec de medios no soportado</string>
-    <string name="media_forward_description">Botón de avance rápido</string>
-    <string name="media_notif_ticker">Reproductor de música %1$s</string>
-    <string name="media_play_pause_description">Botón de reproducción o pausa </string>
-    <string name="media_player_pause">Pausar</string>
-    <string name="media_player_play">Reproducir</string>
-    <string name="media_player_playing">Reproduciendo multimedia</string>
-    <string name="media_player_seek_backward">Buscar hacia atrás</string>
-    <string name="media_player_seek_forward">Buscar hacia delante</string>
-    <string name="media_rewind_description">Botón de rebobinado</string>
-    <string name="media_state_playing">%1$s (reproduciendo)</string>
+    <string name="manage_tags">Gestionar etiquetas</string>
     <string name="menu_item_sort_by_date_newest_first">El más reciente primero</string>
     <string name="menu_item_sort_by_date_oldest_first">El más viejo primero</string>
     <string name="menu_item_sort_by_name_a_z">A - Z</string>
@@ -733,8 +723,7 @@
     <string name="picture_set_as_no_app">No se ha encontrado una app para establecer con ella la imagen</string>
     <string name="pin_home">Anclar a la pantalla de inicio</string>
     <string name="pin_shortcut_label">Abrir %1$s</string>
-    <string name="player_stop">parar</string>
-    <string name="player_toggle">cambiar</string>
+    <string name="player_media_controls_close_action_title">Cerrar</string>
     <string name="please_select_a_server">Por favor, seleccione un servidor…</string>
     <string name="power_save_check_dialog_message">Desactivar la comprobación de ahorro de energía puede causar que se suban ficheros aun estando en modo de baja batería</string>
     <string name="pref_behaviour_entries_delete_file">borrado</string>
@@ -833,6 +822,7 @@
     <string name="reload">Volver a cargar</string>
     <string name="remote">(remoto)</string>
     <string name="remote_file_fetch_failed">¡No se pudo encontrar el archivo!</string>
+    <string name="remove">Quitar</string>
     <string name="remove_e2e">Puede eliminar el cifrado de extremo a extremo localmente en este cliente</string>
     <string name="remove_e2e_keys_and_files_dialog_warning">Esta operación eliminará todos los archivos cifrados y las claves privadas y públicas. ¿Estás seguro?</string>
     <string name="remove_e2e_message">Puede quitar el cifrado de un extremo a otro localmente en este cliente. Los archivos cifrados permanecerán en el servidor, pero ya no se sincronizarán con esta computadora.</string>
@@ -842,6 +832,7 @@
     <string name="remove_notification_failed">Fallo al quitar notificación.</string>
     <string name="remove_push_notification">Quitar</string>
     <string name="remove_success_msg">Eliminado</string>
+    <string name="rename_dialog_button">Renombrar</string>
     <string name="rename_dialog_title">Introduce un nombre nuevo</string>
     <string name="rename_local_fail_msg">No se ha podido cambiar el nombre de la copia local, prueba un nombre diferente</string>
     <string name="rename_server_fail_msg">No se ha podido dar un nombre nuevo, el nombre ya está tomado</string>
@@ -878,6 +869,7 @@
     <string name="screenshot_06_davdroid_heading">Calendario y contactos</string>
     <string name="screenshot_06_davdroid_subline">Sincronizar con DAVx⁵</string>
     <string name="search_error">Error al cargar resultados de búsqueda</string>
+    <string name="search_tags">Buscar etiquetas</string>
     <string name="secure_share_not_set_up">Compartir en modo seguro no está configurado para este usuario</string>
     <string name="secure_share_search">Asegurar recurso compartido...</string>
     <string name="select_all">Seleccionar todo</string>
@@ -1007,7 +999,6 @@
     <string name="store_short_dev_desc">La plataforma de productividad auto-hospedada que te mantiene al mando (versión de prueba para desarrolladores)</string>
     <string name="stream">Retransmisión con...</string>
     <string name="stream_not_possible_headline">La retransmisión interna no es posible</string>
-    <string name="stream_not_possible_message">Por favor, descarga el medio o usa una app externa</string>
     <string name="sub_folder_rule_day">Año/Mes/Día</string>
     <string name="sub_folder_rule_month">Año/Mes</string>
     <string name="sub_folder_rule_year">Año</string>
@@ -1355,4 +1346,4 @@
         <item quantity="many">Quedan %1$d descargas</item>
         <item quantity="other">Quedan %1$d descargas</item>
     </plurals>
-</resources>
+    </resources>
