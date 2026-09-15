@@ -7,6 +7,7 @@
 package com.nextcloud.client.comics
 
 import com.owncloud.android.datamodel.OCFile
+import java.io.File
 
 /**
  * One entry of the shelf: a folder whose images are the pages, ordered by file name. [lastReadPage] is
@@ -17,7 +18,7 @@ data class Comic(
     val folder: OCFile,
     val pages: List<OCFile>,
     val lastReadPage: Int,
-    val isCoverOnDevice: Boolean = pages.first().isDown
+    val isCoverOnDevice: Boolean = pages.first().isOnDevice()
 ) {
     val title: String get() = folder.fileName
     val cover: OCFile get() = pages.first()
@@ -25,3 +26,5 @@ data class Comic(
     val isFinished: Boolean get() = lastReadPage >= pageCount - 1 && pageCount > 0
     val isStarted: Boolean get() = lastReadPage > 0
 }
+
+private fun OCFile.isOnDevice(): Boolean = storagePath?.takeIf { it.isNotEmpty() }?.let { File(it).exists() } == true

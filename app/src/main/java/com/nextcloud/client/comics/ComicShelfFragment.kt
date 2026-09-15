@@ -192,7 +192,7 @@ class ComicShelfFragment :
             adapter.submitList(comics)
             binding?.comicShelfEmpty?.isVisible = comics.isEmpty()
             updateSubtitle(comics.size)
-            ComicCoverDownloads.requestMissing(accountManager.user, comics)
+            ComicCoverDownloads.requestMissing(accountManager.user, storageManager, comics)
         }
     }
 

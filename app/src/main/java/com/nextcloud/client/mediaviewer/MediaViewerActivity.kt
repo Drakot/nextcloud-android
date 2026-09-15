@@ -32,6 +32,7 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.nextcloud.client.account.User
 import com.nextcloud.client.database.entity.SyncedFolderEntity
+import com.nextcloud.client.comics.ComicPageDownloads
 import com.nextcloud.client.comics.ComicProgressStore
 import com.nextcloud.client.di.Injectable
 import com.nextcloud.client.editimage.EditImageActivity
@@ -564,10 +565,10 @@ class MediaViewerActivity :
         if (!isComicMode) {
             return
         }
+        val user = user.orElse(null) ?: return
         PagePreloadWindow.nextPositions(position, adapter.itemCount, COMIC_PRELOAD_PAGES)
             .mapNotNull { adapter.getFileAt(it) }
-            .filter { !it.isDown }
-            .forEach { requestForDownload(it) }
+            .forEach { ComicPageDownloads.requestIfMissing(user, storageManager, it) }
     }
 
     private fun setupComicProgress(user: User, parentFolder: OCFile?) {
