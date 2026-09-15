@@ -17,7 +17,6 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerControlView
 import androidx.media3.ui.PlayerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.nextcloud.client.media.ErrorFormat
 import com.owncloud.android.R
 import com.owncloud.android.lib.common.utils.Log_OC
 
@@ -63,7 +62,7 @@ class MediaViewerPlayerListener(
     override fun onPlayerError(error: PlaybackException) {
         super.onPlayerError(error)
         Log_OC.e(TAG, "Exoplayer error", error)
-        val message = ErrorFormat.toString(context, error)
+        val message = MediaViewerErrorFormat.toString(context, error)
         MaterialAlertDialogBuilder(context)
             .setMessage(message)
             .setPositiveButton(R.string.common_ok) { _: DialogInterface?, _: Int ->

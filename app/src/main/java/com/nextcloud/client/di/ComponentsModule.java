@@ -12,10 +12,6 @@ import com.nextcloud.client.editimage.EditImageActivity;
 import com.nextcloud.client.etm.EtmActivity;
 import com.nextcloud.client.etm.pages.EtmBackgroundJobsFragment;
 import com.nextcloud.client.jobs.BackgroundJobManagerImpl;
-import com.nextcloud.client.comics.ComicShelfFragment;
-import com.nextcloud.client.mediaviewer.MediaViewerActivity;
-import com.nextcloud.client.mediaviewer.MediaViewerImageFragment;
-import com.nextcloud.client.mediaviewer.MediaViewerVideoFragment;
 import com.nextcloud.client.jobs.NotificationWork;
 import com.nextcloud.client.jobs.TestJob;
 import com.nextcloud.client.jobs.transfer.FileTransferService;
@@ -215,12 +211,6 @@ abstract class ComponentsModule {
     abstract PreviewImageActivity previewImageActivity();
 
     @ContributesAndroidInjector
-    abstract ComicShelfFragment comicShelfFragment();
-
-    @ContributesAndroidInjector
-    abstract MediaViewerActivity mediaViewerActivity();
-
-    @ContributesAndroidInjector
     abstract ReceiveExternalFilesActivity receiveExternalFilesActivity();
 
     @ContributesAndroidInjector
@@ -297,9 +287,6 @@ abstract class ComponentsModule {
 
     @ContributesAndroidInjector
     abstract PreviewImageFragment previewImageFragment();
-
-    @ContributesAndroidInjector
-    abstract MediaViewerImageFragment mediaViewerImageFragment();
 
     @ContributesAndroidInjector
     abstract BackupListFragment chooseContactListFragment();

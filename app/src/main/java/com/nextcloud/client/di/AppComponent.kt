@@ -22,6 +22,7 @@ import com.nextcloud.client.network.NetworkModule
 import com.nextcloud.client.onboarding.OnboardingModule
 import com.nextcloud.client.player.PlayerModule
 import com.nextcloud.client.preferences.PreferencesModule
+import com.nextcloud.client.mediaviewer.MediaViewerInjectionModule
 import com.owncloud.android.MainApp
 import com.owncloud.android.ui.ThemeableSwitchPreference
 import com.owncloud.android.ui.whatsnew.ProgressIndicator
@@ -47,7 +48,8 @@ import javax.inject.Singleton
         DatabaseModule::class,
         DispatcherModule::class,
         VariantModule::class,
-        PlayerModule::class
+        PlayerModule::class,
+        MediaViewerInjectionModule::class
     ]
 )
 @Singleton

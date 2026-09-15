@@ -1,0 +1,61 @@
+<!--
+  ~ Nextcloud - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/exoplayer_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:show_buffering="always" />
+
+    <ImageButton
+        android:id="@+id/rotate_screen_button"
+        android:layout_width="@dimen/player_rotate_button_size"
+        android:layout_height="@dimen/player_rotate_button_size"
+        android:layout_gravity="top|end"
+        android:layout_margin="@dimen/player_rotate_button_margin"
+        android:background="@drawable/player_seek_indicator_background"
+        android:contentDescription="@string/media_viewer_rotate_screen"
+        android:padding="@dimen/standard_half_padding"
+        android:src="@drawable/ic_screen_rotation"
+        android:visibility="gone"
+        app:tint="@color/white" />
+
+    <FrameLayout
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.elyeproj.loaderviewlibrary.LoaderImageView
+            android:layout_width="@dimen/empty_list_icon_layout_width"
+            android:layout_height="@dimen/empty_list_icon_layout_width"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            app:corners="24" />
+
+        <ImageView
+            android:layout_width="@dimen/empty_list_icon_layout_width"
+            android:layout_height="@dimen/empty_list_icon_layout_height"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:padding="@dimen/standard_half_padding"
+            android:src="@drawable/file_movie"
+            app:tint="@color/bg_default" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/empty_view"
+            layout="@layout/empty_list" />
+    </FrameLayout>
+</FrameLayout>

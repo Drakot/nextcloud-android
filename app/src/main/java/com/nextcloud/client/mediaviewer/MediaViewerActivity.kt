@@ -11,6 +11,7 @@ package com.nextcloud.client.mediaviewer
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.IntentFilter
 import android.os.Bundle
 import android.text.SpannableString
@@ -63,7 +64,6 @@ import com.owncloud.android.ui.fragment.FileFragment
 import com.owncloud.android.ui.fragment.GalleryFragment
 import com.owncloud.android.ui.preview.FileDownloadFragment
 import com.owncloud.android.ui.preview.PreviewImageActivity
-import com.owncloud.android.ui.preview.model.PreviewImageActivityState
 import com.owncloud.android.utils.DisplayUtils
 import com.owncloud.android.utils.MimeTypeUtil
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings
@@ -97,7 +97,7 @@ class MediaViewerActivity :
     }
 
     private var isDownloadWorkStarted = false
-    private var screenState = PreviewImageActivityState.Idle
+    private var screenState = MediaViewerScreenState.Idle
     private var isChromeVisible = true
 
     var isReaderModeEnabled = false
@@ -151,7 +151,7 @@ class MediaViewerActivity :
 
         val requestWaitingForBinder = savedInstanceState?.getBoolean(KEY_WAITING_FOR_BINDER) ?: false
         if (requestWaitingForBinder) {
-            screenState = PreviewImageActivityState.WaitingForBinder
+            screenState = MediaViewerScreenState.WaitingForBinder
         }
 
         observeWorkerState()
@@ -291,7 +291,7 @@ class MediaViewerActivity :
         if (position == 0 && file?.isDown == false) {
             // this is necessary because mViewPager.setCurrentItem(0) just after setting the
             // adapter does not result in a call to #onPageSelected(0)
-            screenState = PreviewImageActivityState.WaitingForBinder
+            screenState = MediaViewerScreenState.WaitingForBinder
         }
     }
 
@@ -384,7 +384,7 @@ class MediaViewerActivity :
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean(KEY_WAITING_FOR_BINDER, screenState == PreviewImageActivityState.WaitingForBinder)
+        outState.putBoolean(KEY_WAITING_FOR_BINDER, screenState == MediaViewerScreenState.WaitingForBinder)
         outState.putBoolean(KEY_SYSTEM_VISIBLE, isSystemUIVisible)
         sendShareDownloader.saveState(outState)
     }
@@ -449,7 +449,7 @@ class MediaViewerActivity :
         .firstOrNull { it.file?.fileId == fileId }
 
     private fun selectPageOnDownload() {
-        screenState = PreviewImageActivityState.Idle
+        screenState = MediaViewerScreenState.Idle
         Log_OC.d(
             TAG,
             "Simulating reselection of current page after connection " +
@@ -460,7 +460,7 @@ class MediaViewerActivity :
 
     private fun onImageDownloadComplete(downloadedFile: OCFile?) {
         dismissLoadingDialog()
-        screenState = PreviewImageActivityState.Idle
+        screenState = MediaViewerScreenState.Idle
         file = downloadedFile
         file?.let {
             startEditImageActivity(it)
@@ -529,7 +529,7 @@ class MediaViewerActivity :
         val currentFile = pagerAdapter?.getFileAt(position)
 
         if (!isDownloadWorkStarted) {
-            screenState = PreviewImageActivityState.WaitingForBinder
+            screenState = MediaViewerScreenState.WaitingForBinder
         } else {
             if (currentFile != null) {
                 if (currentFile.isEncrypted &&
@@ -607,7 +607,7 @@ class MediaViewerActivity :
             }
             val file = storageManager.getFileByEncryptedRemotePath(downloadedRemotePath) ?: return
 
-            if (screenState == PreviewImageActivityState.Edit) {
+            if (screenState == MediaViewerScreenState.Edit) {
                 onImageDownloadComplete(file)
             } else {
                 showDownloadedFile(file)
@@ -620,7 +620,7 @@ class MediaViewerActivity :
             Log_OC.d(TAG, "Download worker started")
             isDownloadWorkStarted = true
 
-            if (screenState == PreviewImageActivityState.WaitingForBinder) {
+            if (screenState == MediaViewerScreenState.WaitingForBinder) {
                 selectPageOnDownload()
             }
         }
@@ -628,6 +628,17 @@ class MediaViewerActivity :
 
     val isSystemUIVisible: Boolean
         get() = isChromeVisible
+
+    fun toggleLandscape() {
+        requestedOrientation = if (isLandscapeForced) {
+            ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        } else {
+            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+        }
+    }
+
+    val isLandscapeForced: Boolean
+        get() = requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
 
     fun toggleFullScreen() {
         setChromeVisible(!isChromeVisible)
@@ -638,7 +649,7 @@ class MediaViewerActivity :
             startEditImageActivity(file)
         } else {
             showLoadingDialog(getString(R.string.preview_image_downloading_image_for_edit))
-            screenState = PreviewImageActivityState.Edit
+            screenState = MediaViewerScreenState.Edit
             requestForDownload(file)
         }
     }

@@ -33,6 +33,7 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -47,18 +48,15 @@ import com.nextcloud.client.account.UserAccountManager
 import com.nextcloud.client.di.Injectable
 import com.nextcloud.client.jobs.BackgroundJobManager
 import com.nextcloud.client.jobs.download.FileDownloadHelper.Companion.instance
-import com.nextcloud.client.media.BackgroundPlayerService
 import com.nextcloud.client.network.ClientFactory
 import com.nextcloud.client.network.ClientFactory.CreationException
 import com.nextcloud.common.NextcloudClient
 import com.nextcloud.ui.fileactions.FileAction
 import com.nextcloud.ui.fileactions.FileActionsBottomSheet.Companion.newInstance
-import com.nextcloud.utils.extensions.applyControlsInsets
 import com.nextcloud.utils.extensions.getParcelableArgument
 import com.nextcloud.utils.extensions.getTypedActivity
-import com.nextcloud.utils.extensions.setFullscreenButton
 import com.owncloud.android.R
-import com.owncloud.android.databinding.FragmentPreviewMediaBinding
+import com.owncloud.android.databinding.FragmentMediaViewerVideoBinding
 import com.owncloud.android.datamodel.OCFile
 import com.owncloud.android.files.StreamMediaFileOperation
 import com.owncloud.android.lib.common.OwnCloudClient
@@ -112,10 +110,10 @@ class MediaViewerVideoFragment :
     @Inject
     lateinit var backgroundJobManager: BackgroundJobManager
 
-    lateinit var binding: FragmentPreviewMediaBinding
+    lateinit var binding: FragmentMediaViewerVideoBinding
 
     private val exoplayerView: PlayerView
-        get() = binding.exoplayerView.root
+        get() = binding.exoplayerView
 
     private var emptyListView: ViewGroup? = null
     private var exoPlayer: ExoPlayer? = null
@@ -135,12 +133,6 @@ class MediaViewerVideoFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // release any background media session if exists
-        val intent = Intent(BackgroundPlayerService.RELEASE_MEDIA_SESSION_BROADCAST_ACTION).apply {
-            setPackage(requireActivity().packageName)
-        }
-        requireActivity().sendBroadcast(intent)
-
         arguments?.let {
             initArguments(it)
         }
@@ -150,7 +142,7 @@ class MediaViewerVideoFragment :
         super.onCreateView(inflater, container, savedInstanceState)
         Log_OC.v(TAG, "onCreateView")
 
-        binding = FragmentPreviewMediaBinding.inflate(inflater, container, false)
+        binding = FragmentMediaViewerVideoBinding.inflate(inflater, container, false)
         emptyListView = binding.emptyView.emptyListView
         setLoadingView()
 
@@ -214,7 +206,10 @@ class MediaViewerVideoFragment :
         binding.emptyView.emptyListView.visibility = View.GONE
     }
 
-    private fun setVideoErrorMessage(headline: String, @StringRes message: Int = R.string.stream_not_possible_message) {
+    private fun setVideoErrorMessage(
+        headline: String,
+        @StringRes message: Int = R.string.media_viewer_stream_not_possible_message
+    ) {
         binding.emptyView.run {
             emptyListViewHeadline.text = headline
             emptyListViewText.setText(message)
@@ -317,7 +312,8 @@ class MediaViewerVideoFragment :
             setShowNextButton(false)
             setShowPreviousButton(false)
             setControllerVisibilityListener(
-                PlayerView.ControllerVisibilityListener {
+                PlayerView.ControllerVisibilityListener { visibility ->
+                    binding.rotateScreenButton.isVisible = screenMode.isFullscreen && visibility == View.VISIBLE
                     if (screenMode.isFullscreen) {
                         return@ControllerVisibilityListener
                     }
@@ -328,6 +324,7 @@ class MediaViewerVideoFragment :
             attachGestureOverlay()
             showController()
         }
+        binding.rotateScreenButton.setOnClickListener { hostActivity?.toggleLandscape() }
         applyScreenMode()
     }
 
@@ -351,10 +348,18 @@ class MediaViewerVideoFragment :
         exitFullscreenOnBack.isEnabled = isFullscreen
         exoplayerView.setFullscreenButton(isFullscreen) { setScreenMode(screenMode.toggled()) }
         hostActivity?.setPagingEnabled(!isFullscreen)
+        binding.rotateScreenButton.isVisible = isFullscreen && isControllerShown()
         if (isFullscreen) {
             hostActivity?.setChromeVisible(false)
         }
     }
+
+    /**
+     * media3 animates its controls in two stages, so [PlayerView.isControllerFullyVisible] is false while the bars
+     * are still sliding in. The plain view visibility is enough to decide whether the rotate button belongs on screen.
+     */
+    private fun isControllerShown(): Boolean =
+        exoplayerView.findViewById<View>(androidx.media3.ui.R.id.exo_controller)?.isVisible == true
 
     private fun addMenuHost() {
         val menuHost: MenuHost = requireActivity()
@@ -363,11 +368,17 @@ class MediaViewerVideoFragment :
             object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                     menu.removeItem(R.id.action_search)
+                    menuInflater.inflate(R.menu.media_viewer_video, menu)
                     menuInflater.inflate(R.menu.custom_menu_placeholder, menu)
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     return when (menuItem.itemId) {
+                        R.id.action_rotate_screen -> {
+                            hostActivity?.toggleLandscape()
+                            true
+                        }
+
                         R.id.custom_menu_placeholder_item -> {
                             if (containerActivity.storageManager == null || file == null) return false
 

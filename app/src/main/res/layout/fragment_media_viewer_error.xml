@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/standard_margin"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/standard_double_margin"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+        android:layout_width="@dimen/preview_error_image_layout_width"
+        android:layout_height="@dimen/preview_error_image_layout_height"
+        android:layout_gravity="center"
+        android:contentDescription="@string/file_icon"
+        android:src="@drawable/file_image" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/preview_sorry"
+        android:textSize="@dimen/preview_error_text_size" />
+</LinearLayout>

@@ -22,7 +22,6 @@ import com.owncloud.android.datamodel.OCFile
 import com.owncloud.android.datamodel.VirtualFolderType
 import com.owncloud.android.ui.fragment.FileFragment
 import com.owncloud.android.ui.preview.FileDownloadFragment
-import com.owncloud.android.ui.preview.PreviewImageErrorFragment
 import com.owncloud.android.utils.FileSortOrder
 import com.owncloud.android.utils.FileStorageUtils
 
@@ -151,7 +150,7 @@ class MediaViewerPagerAdapter : FragmentStateAdapter {
     }
 
     private fun fragmentFor(file: OCFile?, position: Int, ignoreFirstSavedState: Boolean): Fragment = when {
-        file == null -> PreviewImageErrorFragment.newInstance()
+        file == null -> MediaViewerErrorFragment.newInstance()
         file.isDown -> fragmentForDownloaded(file, ignoreFirstSavedState)
         else -> fragmentForNotDownloaded(file, position, ignoreFirstSavedState)
     }

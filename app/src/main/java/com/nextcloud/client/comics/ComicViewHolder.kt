@@ -11,6 +11,7 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
+import com.nextcloud.utils.thumbnail.ThumbnailArguments
 import com.nextcloud.utils.thumbnail.ThumbnailGenerator
 import com.owncloud.android.R
 import com.owncloud.android.databinding.ItemComicBinding
@@ -31,7 +32,7 @@ class ComicViewHolder(
     fun bind(comic: Comic) {
         binding.comicTitle.text = comic.title
         binding.comicCover.setImageResource(R.drawable.file_image)
-        thumbnailGenerator.setThumbnail(comic.cover, binding.comicCover, isGrid = true)
+        thumbnailGenerator.setThumbnail(comic.cover, binding.comicCover, ThumbnailArguments.none.copy(isGrid = true))
         bindProgress(comic)
         bindClicks(comic)
     }

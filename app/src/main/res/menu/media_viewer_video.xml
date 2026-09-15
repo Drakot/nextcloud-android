@@ -1,0 +1,15 @@
+<!--
+  ~ Nextcloud - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_rotate_screen"
+        android:icon="@drawable/ic_screen_rotation"
+        android:orderInCategory="0"
+        android:title="@string/media_viewer_rotate_screen"
+        app:showAsAction="always" />
+</menu>

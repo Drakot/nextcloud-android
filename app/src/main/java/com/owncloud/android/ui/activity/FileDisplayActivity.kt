@@ -58,6 +58,8 @@ import com.nextcloud.android.common.core.utils.ecosystem.AccountReceiverCallback
 import com.nextcloud.appReview.InAppReviewHelper
 import com.nextcloud.client.account.User
 import com.nextcloud.client.appinfo.AppInfo
+import com.nextcloud.client.comics.ComicLibraryMenuProvider
+import com.nextcloud.client.comics.ComicLibraryNavigation
 import com.nextcloud.client.comics.ComicShelfFragment
 import com.nextcloud.client.core.AsyncRunner
 import com.nextcloud.client.core.Clock
@@ -72,7 +74,8 @@ import com.nextcloud.client.jobs.folderDownload.FolderDownloadEventBroadcaster
 import com.nextcloud.client.jobs.upload.FileUploadEventBroadcaster
 import com.nextcloud.client.jobs.upload.FileUploadHelper
 import com.nextcloud.client.jobs.upload.FileUploadWorker
-import com.nextcloud.client.media.PlayerServiceConnection
+import com.nextcloud.client.mediaviewer.MediaViewerActivity
+import com.nextcloud.client.mediaviewer.MediaViewerSettings
 import com.nextcloud.client.network.ClientFactory.CreationException
 import com.nextcloud.client.player.model.file.toPlaybackCollection
 import com.nextcloud.client.player.ui.PlayerLauncher
@@ -1271,14 +1274,17 @@ class FileDisplayActivity :
                 closeDrawer()
                 after()
             }
+
+            // pop back if current fragment is AlbumItemsFragment
             isAlbumItemsFragment -> {
                 before()
                 popBack()
                 after()
             }
-            leftFragment is ComicShelfFragment -> {
+
+            leftFragment is OCFileListFragment -> {
                 before()
-                exitComicShelf(browseUp = true)
+                handleOCFileListFragmentBackPress()
                 after()
             }
 

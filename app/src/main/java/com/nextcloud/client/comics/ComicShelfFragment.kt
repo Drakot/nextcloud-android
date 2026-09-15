@@ -17,6 +17,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
@@ -95,6 +96,9 @@ class ComicShelfFragment :
             viewThemeUtils.material.colorProgressBar(comicSyncProgress, ColorRole.PRIMARY)
         }
         requireActivity().addMenuProvider(shelfMenuProvider, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            (activity as? FileDisplayActivity)?.exitComicShelf(browseUp = true)
+        }
         observeSync()
     }
 

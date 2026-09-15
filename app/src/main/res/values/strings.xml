@@ -170,9 +170,6 @@
     <string name="prefs_lock_device_credentials_enabled">Device credentials enabled</string>
     <string name="prefs_lock_device_credentials_not_setup">No device credentials have been set up.</string>
     <string name="prefs_show_hidden_files">Show hidden files</string>
-    <string name="prefs_custom_media_viewer">Enhanced image and video viewer</string>
-    <string name="prefs_custom_media_viewer_summary">Reader mode for folders with many images, double tap to seek and fullscreen video</string>
-    <string name="prefs_show_recommendations">Show recommendations</string>
     <string name="prefs_show_ecosystem_apps">Show app switcher</string>
     <string name="prefs_show_ecosystem_apps_summary">Nextcloud app suggestions in navigation heading</string>
     <string name="prefs_enable_media_scan_notifications">Show media scan notifications</string>
@@ -503,14 +500,6 @@
     <string name="ssl_validator_reason_hostname_not_verified">- The URL does not match the hostname in the certificate</string>
     <string name="ssl_validator_question">Do you want to trust this certificate anyway?</string>
     <string name="ssl_validator_not_saved">Could not save certificate</string>
-    <string name="media_player_seek_forward">Seek forward</string>
-    <string name="media_player_seek_backward">Seek backward</string>
-    <string name="media_player_play">Play</string>
-    <string name="media_player_pause">Pause</string>
-    <string name="media_player_playing">Playing media</string>
-    <string name="media_player_seek_forward_seconds">+%1$d s</string>
-    <string name="media_player_seek_backward_seconds">−%1$d s</string>
-
     <string name="ssl_validator_btn_details_see">Details</string>
     <string name="ssl_validator_btn_details_hide">Hide</string>
     <string name="ssl_validator_label_subject">Issued to:</string>
@@ -613,35 +602,6 @@
     <string name="preview_image_description">Image preview</string>
     <string name="preview_image_error_unknown_format">Unable to show image</string>
     <string name="preview_image_error_no_local_file">There is no local file to preview</string>
-    <string name="preview_image_page_counter" translatable="false">%1$d / %2$d</string>
-    <string name="comic_library_use_folder">Use as comic library</string>
-    <string name="comic_library_stop_using">Stop using as comic library</string>
-    <string name="comic_library_show_shelf">Show as comic library</string>
-    <string name="comic_library_show_folder">Show as folder</string>
-    <string name="comic_library_sync">Sync comic library</string>
-    <string name="comic_library_empty">No comics yet. Every folder with images inside this library shows up here once it is synced.</string>
-    <string name="comic_library_marker_failed">Could not update the comic library</string>
-    <string name="comic_read">Read</string>
-    <string name="comic_start_over">Start from the beginning</string>
-    <string name="comic_mark_as_read">Mark as read</string>
-    <string name="comic_open_folder">Open folder</string>
-    <string name="comic_progress" translatable="false">%1$d / %2$d</string>
-    <plurals name="comic_library_syncing">
-        <item quantity="one">Syncing comic library, %d folder checked</item>
-        <item quantity="other">Syncing comic library, %d folders checked</item>
-    </plurals>
-    <plurals name="comic_library_sync_failed">
-        <item quantity="one">%d folder could not be synced</item>
-        <item quantity="other">%d folders could not be synced</item>
-    </plurals>
-    <plurals name="comic_library_count">
-        <item quantity="one">%d comic</item>
-        <item quantity="other">%d comics</item>
-    </plurals>
-    <plurals name="comic_pages">
-        <item quantity="one">%d page</item>
-        <item quantity="other">%d pages</item>
-    </plurals>
 
     <string name="error__upload__local_file_not_copied">%1$s could not be copied to %2$s local folder</string>
     <string name="prefs_synced_folders_local_path_title">Local folder</string>
@@ -1679,4 +1639,46 @@
     <string name="player_control_view_next_button_content_description">Next button</string>
     <string name="player_control_view_random_button_content_description">Random button</string>
     <string name="server_not_allowed">Server not allowed</string>
+
+    <string name="prefs_custom_media_viewer">Enhanced image and video viewer</string>
+    <string name="prefs_custom_media_viewer_summary">Reader mode for folders with many images, double tap to seek and fullscreen video</string>
+    <string name="prefs_show_recommendations">Show recommendations</string>
+    <string name="media_player_seek_forward_seconds">+%1$d s</string>
+    <string name="media_player_seek_backward_seconds">−%1$d s</string>
+    <string name="preview_image_page_counter" translatable="false">%1$d / %2$d</string>
+    <string name="comic_library_use_folder">Use as comic library</string>
+    <string name="comic_library_stop_using">Stop using as comic library</string>
+    <string name="comic_library_show_shelf">Show as comic library</string>
+    <string name="comic_library_show_folder">Show as folder</string>
+    <string name="comic_library_sync">Sync comic library</string>
+    <string name="comic_library_empty">No comics yet. Every folder with images inside this library shows up here once it is synced.</string>
+    <string name="comic_library_marker_failed">Could not update the comic library</string>
+    <string name="comic_read">Read</string>
+    <string name="comic_start_over">Start from the beginning</string>
+    <string name="comic_mark_as_read">Mark as read</string>
+    <string name="comic_open_folder">Open folder</string>
+    <string name="media_viewer_rotate_screen">Rotate screen</string>
+    <string name="media_viewer_stream_not_possible_message">Please download media instead or use external app.</string>
+    <string name="media_viewer_err_unsupported">Unsupported media codec</string>
+    <string name="media_viewer_err_io">Could not read the media file</string>
+    <string name="media_viewer_err_malformed">The media file has incorrect encoding</string>
+    <string name="media_viewer_err_timeout">Attempt to play file timed out</string>
+    <string name="media_viewer_err_unknown">The built-in media player is unable to play the media file</string>
+    <string name="comic_progress" translatable="false">%1$d / %2$d</string>
+    <plurals name="comic_library_syncing">
+        <item quantity="one">Syncing comic library, %d folder checked</item>
+        <item quantity="other">Syncing comic library, %d folders checked</item>
+    </plurals>
+    <plurals name="comic_library_sync_failed">
+        <item quantity="one">%d folder could not be synced</item>
+        <item quantity="other">%d folders could not be synced</item>
+    </plurals>
+    <plurals name="comic_library_count">
+        <item quantity="one">%d comic</item>
+        <item quantity="other">%d comics</item>
+    </plurals>
+    <plurals name="comic_pages">
+        <item quantity="one">%d page</item>
+        <item quantity="other">%d pages</item>
+    </plurals>
 </resources>

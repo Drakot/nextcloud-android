@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<resources>
+    <dimen name="player_seek_indicator_size">96dp</dimen>
+    <dimen name="player_seek_indicator_margin">40dp</dimen>
+    <dimen name="player_seek_indicator_text_size">14sp</dimen>
+    <dimen name="comic_cover_corner_radius">8dp</dimen>
+    <dimen name="comic_shelf_padding">8dp</dimen>
+    <dimen name="comic_item_padding">6dp</dimen>
+    <dimen name="comic_progress_thickness">3dp</dimen>
+    <dimen name="comic_badge_margin">6dp</dimen>
+    <dimen name="comic_badge_padding_horizontal">6dp</dimen>
+    <dimen name="comic_badge_padding_vertical">2dp</dimen>
+    <dimen name="comic_badge_corner_radius">4dp</dimen>
+    <dimen name="comic_badge_text_size">12sp</dimen>
+    <dimen name="comic_title_margin_top">4dp</dimen>
+    <dimen name="player_rotate_button_size">44dp</dimen>
+    <dimen name="player_rotate_button_margin">12dp</dimen>
+</resources>
